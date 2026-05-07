@@ -1,5 +1,19 @@
 # Logs
 *.log
 
-# Misc
+# macOS
 .DS_Store
+.AppleDouble
+._*
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.orig
