@@ -1,0 +1,858 @@
+/* ============================================================
+ * TokyoNight — Obsidian Theme
+ * Palette: github.com/folke/tokyonight.nvim
+ * Variants: Storm · Night · Moon · Day
+ * Requires: Style Settings plugin for variant switching
+ * ============================================================ */
+
+/* @settings
+
+name: TokyoNight
+id: tokyonight
+settings:
+  -
+    id: tn-dark-scheme
+    title: Dark Mode Scheme
+    description: Color variant used when Obsidian is in dark mode
+    type: class-select
+    default: tn-storm
+    options:
+      -
+        label: Storm
+        value: tn-storm
+      -
+        label: Night
+        value: tn-night
+      -
+        label: Moon
+        value: tn-moon
+  -
+    id: tn-light-scheme
+    title: Light Mode Scheme
+    description: Color variant used when Obsidian is in light mode
+    type: class-select
+    default: tn-day
+    options:
+      -
+        label: Day
+        value: tn-day
+
+*/
+
+/* ============================================================
+ * Palettes
+ *
+ * Dark mode:  body.theme-dark  + tn-{storm|night|moon}
+ * Light mode: body.theme-light + tn-day
+ *
+ * Default dark = Storm; default light = Day.
+ * ============================================================ */
+
+/* --- Dark: Storm (default) --- */
+
+body.theme-dark,
+body.theme-dark.tn-storm {
+    --tn-bg:        #24283b;
+    --tn-bg-dark:   #1f2335;
+    --tn-bg-hl:     #292e42;
+    --tn-gutter:    #3b3d57;
+    --tn-fg:        #c0caf5;
+    --tn-fg-dim:    #a9b1d6;
+    --tn-comment:   #565f89;
+    --tn-blue:      #7aa2f7;
+    --tn-cyan:      #7dcfff;
+    --tn-green:     #9ece6a;
+    --tn-yellow:    #e0af68;
+    --tn-orange:    #ff9e64;
+    --tn-red:       #f7768e;
+    --tn-magenta:   #bb9af7;
+    --tn-teal:      #1abc9c;
+    --tn-selection: #2d3f76;
+    --tn-mark-bg:        rgba(224, 175, 104, 0.20);
+    --tn-tag-bg:         rgba(122, 162, 247, 0.12);
+    --tn-tag-bg-hover:   rgba(122, 162, 247, 0.22);
+    --tn-blue-rgb:    122, 162, 247;
+    --tn-cyan-rgb:    125, 207, 255;
+    --tn-green-rgb:   158, 206, 106;
+    --tn-yellow-rgb:  224, 175, 104;
+    --tn-orange-rgb:  255, 158, 100;
+    --tn-red-rgb:     247, 118, 142;
+    --tn-magenta-rgb: 187, 154, 247;
+    --tn-teal-rgb:     26, 188, 156;
+    --tn-comment-rgb: 86, 95, 137;
+}
+
+/* --- Dark: Night --- */
+
+body.theme-dark.tn-night {
+    --tn-bg:        #1a1b26;
+    --tn-bg-dark:   #16161e;
+    --tn-bg-hl:     #292e42;
+    --tn-gutter:    #3b3d57;
+    --tn-fg:        #c0caf5;
+    --tn-fg-dim:    #a9b1d6;
+    --tn-comment:   #565f89;
+    --tn-blue:      #7aa2f7;
+    --tn-cyan:      #7dcfff;
+    --tn-green:     #9ece6a;
+    --tn-yellow:    #e0af68;
+    --tn-orange:    #ff9e64;
+    --tn-red:       #f7768e;
+    --tn-magenta:   #bb9af7;
+    --tn-teal:      #1abc9c;
+    --tn-selection: #2d3f76;
+    --tn-mark-bg:        rgba(224, 175, 104, 0.20);
+    --tn-tag-bg:         rgba(122, 162, 247, 0.12);
+    --tn-tag-bg-hover:   rgba(122, 162, 247, 0.22);
+    --tn-blue-rgb:    122, 162, 247;
+    --tn-cyan-rgb:    125, 207, 255;
+    --tn-green-rgb:   158, 206, 106;
+    --tn-yellow-rgb:  224, 175, 104;
+    --tn-orange-rgb:  255, 158, 100;
+    --tn-red-rgb:     247, 118, 142;
+    --tn-magenta-rgb: 187, 154, 247;
+    --tn-teal-rgb:     26, 188, 156;
+    --tn-comment-rgb: 86, 95, 137;
+}
+
+/* --- Dark: Moon --- */
+
+body.theme-dark.tn-moon {
+    --tn-bg:        #222436;
+    --tn-bg-dark:   #1e2030;
+    --tn-bg-hl:     #2f334d;
+    --tn-gutter:    #3b4261;
+    --tn-fg:        #c8d3f5;
+    --tn-fg-dim:    #828bb8;
+    --tn-comment:   #636da6;
+    --tn-blue:      #82aaff;
+    --tn-cyan:      #86e1fc;
+    --tn-green:     #c3e88d;
+    --tn-yellow:    #ffc777;
+    --tn-orange:    #ff966c;
+    --tn-red:       #ff757f;
+    --tn-magenta:   #c099ff;
+    --tn-teal:      #4fd6be;
+    --tn-selection: #2d3f76;
+    --tn-mark-bg:        rgba(255, 199, 119, 0.20);
+    --tn-tag-bg:         rgba(130, 170, 255, 0.12);
+    --tn-tag-bg-hover:   rgba(130, 170, 255, 0.22);
+    --tn-blue-rgb:    130, 170, 255;
+    --tn-cyan-rgb:    134, 225, 252;
+    --tn-green-rgb:   195, 232, 141;
+    --tn-yellow-rgb:  255, 199, 119;
+    --tn-orange-rgb:  255, 150, 108;
+    --tn-red-rgb:     255, 117, 127;
+    --tn-magenta-rgb: 192, 153, 255;
+    --tn-teal-rgb:     79, 214, 190;
+    --tn-comment-rgb: 99, 109, 166;
+}
+
+/* --- Light: Day (default) --- */
+
+body.theme-light,
+body.theme-light.tn-day {
+    --tn-bg:        #e1e2e7;
+    --tn-bg-dark:   #c4c8da;
+    --tn-bg-hl:     #d0d5e3;
+    --tn-gutter:    #a8aecb;
+    --tn-fg:        #3760bf;
+    --tn-fg-dim:    #6172b0;
+    --tn-comment:   #848cb5;
+    --tn-blue:      #2e7de9;
+    --tn-cyan:      #007197;
+    --tn-green:     #587539;
+    --tn-yellow:    #8c6c3e;
+    --tn-orange:    #b15c00;
+    --tn-red:       #c64343;
+    --tn-magenta:   #9854f1;
+    --tn-teal:      #118c74;
+    --tn-selection: #b6bfe2;
+    --tn-mark-bg:        rgba(140, 108,  62, 0.15);
+    --tn-tag-bg:         rgba( 46, 125, 233, 0.12);
+    --tn-tag-bg-hover:   rgba( 46, 125, 233, 0.22);
+    --tn-blue-rgb:     46, 125, 233;
+    --tn-cyan-rgb:      0, 113, 151;
+    --tn-green-rgb:    88, 117,  57;
+    --tn-yellow-rgb:  140, 108,  62;
+    --tn-orange-rgb:  177,  92,   0;
+    --tn-red-rgb:     198,  67,  67;
+    --tn-magenta-rgb: 152,  84, 241;
+    --tn-teal-rgb:     17, 140, 116;
+    --tn-comment-rgb: 132, 140, 181;
+    /* Tooltip: dark bg + light text for contrast on Day's light page */
+    --tooltip-background: #3760bf;
+    --tooltip-color:      #e1e2e7;
+}
+
+/* ============================================================
+ * Obsidian Variable Mapping
+ * Maps --tn-* → Obsidian's built-in variables.
+ * ============================================================ */
+
+body.theme-dark,
+body.theme-light {
+    /* --- Backgrounds --- */
+    --background-primary:                   var(--tn-bg);
+    --background-primary-alt:               var(--tn-bg);
+    --background-secondary:                 var(--tn-bg);
+    --background-secondary-alt:             var(--tn-bg);
+    --background-tertiary:                  var(--tn-bg-dark);
+    --background-modifier-hover:            var(--tn-bg-hl);
+    --background-modifier-active-hover:     var(--tn-bg-hl);
+    --background-modifier-border:           var(--tn-gutter);
+    --background-modifier-border-hover:     var(--tn-gutter);
+    --background-modifier-border-focus:     var(--tn-blue);
+    --background-modifier-form-field:       var(--tn-bg-dark);
+    --background-modifier-form-field-highlighted: var(--tn-bg-hl);
+    --background-modifier-error:            rgba(var(--tn-red-rgb), 0.15);
+    --background-modifier-error-hover:      rgba(var(--tn-red-rgb), 0.25);
+    --background-modifier-success:          rgba(var(--tn-green-rgb), 0.15);
+    --background-modifier-message:          var(--tn-bg-hl);
+
+    /* --- Text --- */
+    --text-normal:          var(--tn-fg);
+    --text-muted:           var(--tn-fg-dim);
+    --text-faint:           var(--tn-comment);
+    --text-on-accent:       var(--tn-bg);
+    --text-on-accent-muted: var(--tn-bg-hl);
+    --text-error:           var(--tn-red);
+    --text-warning:         var(--tn-yellow);
+    --text-success:         var(--tn-green);
+    --text-accent:          var(--tn-blue);
+    --text-accent-hover:    var(--tn-cyan);
+    --text-selection:       var(--tn-selection);
+    --text-highlight-bg:        var(--tn-mark-bg);
+    --text-highlight-bg-active: var(--tn-mark-bg);
+
+    /* --- Interactive --- */
+    --interactive-normal:       var(--tn-bg-hl);
+    --interactive-hover:        var(--tn-gutter);
+    --interactive-accent:       var(--tn-blue);
+    --interactive-accent-hover: var(--tn-cyan);
+    --interactive-accent-rgb:   var(--tn-blue-rgb);
+    --interactive-success:      var(--tn-green);
+
+    /* --- Links --- */
+    --link-color:                var(--tn-blue);
+    --link-color-hover:          var(--tn-cyan);
+    --link-external-color:       var(--tn-blue);
+    --link-external-color-hover: var(--tn-cyan);
+    --link-unresolved-color:     var(--tn-comment);
+    --link-unresolved-opacity:   1;
+
+    /* --- Code --- */
+    --code-background:  var(--tn-bg-dark);
+    --code-normal:      var(--tn-fg);
+    --code-comment:     var(--tn-comment);
+    --code-function:    var(--tn-blue);
+    --code-important:   var(--tn-magenta);
+    --code-keyword:     var(--tn-magenta);
+    --code-operator:    var(--tn-cyan);
+    --code-property:    var(--tn-yellow);
+    --code-punctuation: var(--tn-fg-dim);
+    --code-string:      var(--tn-green);
+    --code-tag:         var(--tn-red);
+    --code-value:       var(--tn-orange);
+
+    /* --- Headings --- */
+    --h1-color: var(--tn-blue);
+    --h2-color: var(--tn-cyan);
+    --h3-color: var(--tn-teal);
+    --h4-color: var(--tn-green);
+    --h5-color: var(--tn-yellow);
+    --h6-color: var(--tn-comment);
+
+    /* --- Tags --- */
+    --tag-color:            var(--tn-blue);
+    --tag-background:       var(--tn-tag-bg);
+    --tag-background-hover: var(--tn-tag-bg-hover);
+    --tag-border-color:     transparent;
+    --tag-border-width:     0px;
+    --tag-padding-x:        0.45em;
+    --tag-padding-y:        0.1em;
+    --tag-radius:           4px;
+
+    /* --- Checkboxes --- */
+    --checkbox-color:            var(--tn-blue);
+    --checkbox-color-hover:      var(--tn-cyan);
+    --checkbox-border-color:     var(--tn-gutter);
+    --checkbox-marker-color:     var(--tn-bg);
+    --checklist-done-color:      var(--tn-comment);
+    --checklist-done-decoration: line-through;
+
+    /* --- Callouts --- */
+    --callout-border-width:   0px;
+    --callout-border-opacity: 0;
+    --callout-padding:        0.75rem 1rem;
+    --callout-radius:         6px;
+
+    /* --- Scrollbars --- */
+    --scrollbar-bg:              transparent;
+    --scrollbar-thumb-bg:        var(--tn-gutter);
+    --scrollbar-active-thumb-bg: var(--tn-fg-dim);
+
+    /* --- File explorer nav --- */
+    --nav-item-color:            var(--tn-fg-dim);
+    --nav-item-color-hover:      var(--tn-fg);
+    --nav-item-background-hover: var(--tn-bg-hl);
+    --nav-item-background-active: var(--tn-bg-hl);
+    --nav-item-color-active:     var(--tn-blue);
+    --nav-heading-color:         var(--tn-fg);
+
+    /* --- Graph --- */
+    --graph-color-line:             var(--tn-gutter);
+    --graph-color-text:             var(--tn-fg-dim);
+    --graph-color-fill:             var(--tn-bg);
+    --graph-color-fill-tag:         var(--tn-magenta);
+    --graph-color-fill-attachment:  var(--tn-cyan);
+    --graph-color-fill-unresolved:  var(--tn-comment);
+    --graph-color-fill-focused:     var(--tn-blue);
+    --graph-color-arrow:            var(--tn-gutter);
+    --graph-color-node:             var(--tn-fg-dim);
+
+    /* --- Ribbon (left icon bar) --- */
+    --ribbon-background:           var(--tn-bg);
+    --ribbon-background-collapsed: var(--tn-bg);
+    --ribbon-tab-color:            var(--tn-comment);
+    --ribbon-tab-color-hover:      var(--tn-fg);
+    --ribbon-tab-background-hover: var(--tn-bg-hl);
+
+    /* --- Tooltips --- */
+    --tooltip-background: var(--tn-bg-dark);
+    --tooltip-color:      var(--tn-fg);
+}
+
+/* ============================================================
+ * Typography & Headings
+ * ============================================================ */
+
+body {
+    --font-text-theme:      "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", Georgia, serif;
+    --font-interface-theme: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
+    --font-monospace-theme: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+    --line-height-normal:   1.75;
+    --font-text-size:       16px;
+    --font-interface-size:  14px;
+
+    --h1-size:        2em;
+    --h2-size:        1.5em;
+    --h3-size:        1.25em;
+    --h4-size:        1.1em;
+    --h5-size:        1em;
+    --h6-size:        0.9em;
+    --h1-weight:      600;
+    --h2-weight:      600;
+    --h3-weight:      600;
+    --h4-weight:      600;
+    --h5-weight:      600;
+    --h6-weight:      600;
+    --h1-line-height: 1.3;
+    --h2-line-height: 1.3;
+}
+
+.markdown-rendered h1 {
+    border-bottom: 2px solid var(--tn-gutter);
+    padding-bottom: 0.25em;
+    margin-bottom: 0.75em !important;
+}
+
+.markdown-source-view .cm-line:has(.cm-header-1) {
+    border-bottom: 2px solid var(--tn-gutter);
+    padding-bottom: 0.1em;
+    margin-bottom: 0.5em;
+}
+
+/* ============================================================
+ * Inline emphasis
+ * ============================================================ */
+
+.markdown-rendered strong, .cm-strong { color: inherit; }
+.markdown-rendered em,     .cm-em     { color: inherit; }
+.markdown-rendered del,    .cm-strikethrough { color: var(--tn-comment); }
+
+.markdown-rendered mark {
+    background: var(--tn-mark-bg);
+    color: var(--tn-yellow);
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+/* ============================================================
+ * Links
+ * ============================================================ */
+
+.markdown-rendered a,
+.cm-hmd-internal-link .cm-underline { color: var(--tn-blue); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(var(--tn-blue-rgb), 0.4); }
+.markdown-rendered a:hover           { color: var(--tn-cyan); text-decoration-color: var(--tn-cyan); }
+.cm-hmd-internal-link:hover .cm-underline { color: var(--tn-cyan) !important; }
+a.internal-link                      { color: var(--tn-blue); }
+a.internal-link:hover                { color: var(--tn-cyan); }
+a.external-link                      { color: var(--tn-blue); }
+a.external-link:hover                { color: var(--tn-cyan); }
+a.is-unresolved                      { color: var(--tn-comment); opacity: 1; }
+
+/* ============================================================
+ * Inline Code
+ * ============================================================ */
+
+.markdown-rendered code,
+.cm-inline-code {
+    font-family: var(--font-monospace-theme);
+    color: var(--tn-cyan);
+    background: var(--tn-bg-dark);
+    border: 1px solid var(--tn-gutter);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.875em;
+}
+
+/* ============================================================
+ * Code Blocks
+ * ============================================================ */
+
+.markdown-rendered pre,
+.markdown-source-view pre {
+    background: var(--tn-bg-dark) !important;
+    border: 1px solid var(--tn-gutter);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    line-height: 1.6;
+}
+
+.markdown-rendered pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--tn-fg);
+    font-size: inherit;
+}
+
+/* ============================================================
+ * Blockquotes
+ * ============================================================ */
+
+.markdown-rendered blockquote {
+    border-left: 2px solid var(--tn-blue);
+    border-right: none;
+    background: var(--tn-bg-hl);
+    border-radius: 0 6px 6px 0;
+    padding: 0.75rem 1.25rem;
+    color: var(--tn-fg-dim);
+    margin: 1rem 0;
+}
+
+.markdown-rendered blockquote p { margin: 0.3rem 0; }
+
+
+/* ============================================================
+ * Callouts
+ * ============================================================ */
+
+.callout { border-radius: 8px; overflow: hidden; }
+
+/* Restore padding and title background that Obsidian omits in read mode */
+.callout-title {
+    padding: 0.6rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4em !important;
+}
+.callout-content { padding: 0.5rem 1rem !important; }
+
+/* Dark palette variants: fix mix-blend-mode:darken (set by Obsidian app.css for theme-light)
+   which makes light text invisible on dark backgrounds */
+body.theme-dark .callout {
+    mix-blend-mode: normal !important;
+    background-color: rgba(var(--callout-color), 0.10) !important;
+}
+
+.callout[data-callout="note"],
+.callout[data-callout="info"],
+.callout[data-callout="todo"]             { --callout-color: var(--tn-blue-rgb); }
+.callout[data-callout="abstract"],
+.callout[data-callout="summary"],
+.callout[data-callout="tldr"]             { --callout-color: var(--tn-teal-rgb); }
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="important"]        { --callout-color: var(--tn-cyan-rgb); }
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"]             { --callout-color: var(--tn-green-rgb); }
+.callout[data-callout="question"],
+.callout[data-callout="faq"],
+.callout[data-callout="help"]             { --callout-color: var(--tn-yellow-rgb); }
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"]        { --callout-color: var(--tn-orange-rgb); }
+.callout[data-callout="failure"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"]          { --callout-color: var(--tn-red-rgb); }
+.callout[data-callout="danger"],
+.callout[data-callout="error"],
+.callout[data-callout="bug"]              { --callout-color: var(--tn-red-rgb); }
+.callout[data-callout="example"]          { --callout-color: var(--tn-magenta-rgb); }
+.callout[data-callout="quote"],
+.callout[data-callout="cite"]             { --callout-color: var(--tn-comment-rgb); }
+
+/* ============================================================
+ * Tables
+ * ============================================================ */
+
+.markdown-rendered table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+
+.markdown-rendered th {
+    background: var(--tn-bg-hl);
+    color: var(--tn-blue);
+    font-weight: 600;
+    border-bottom: 2px solid var(--tn-blue);
+    padding: 0.6rem 1rem;
+    text-align: left;
+}
+
+.markdown-rendered td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--tn-gutter);
+    color: var(--tn-fg);
+}
+
+.markdown-rendered tr:nth-child(even) td { background: rgba(var(--tn-blue-rgb), 0.05); }
+.markdown-rendered tr:hover td           { background: var(--tn-bg-hl); }
+
+/* ============================================================
+ * Horizontal Rule
+ * ============================================================ */
+
+.markdown-rendered hr { border: none; border-top: 1px solid var(--tn-gutter); margin: 2rem 0; }
+
+/* ============================================================
+ * Task List
+ * ============================================================ */
+
+/* Base checkbox reset — reading mode & live preview */
+.task-list-item-checkbox,
+input[type="checkbox"].task-list-item-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width:  1.2em;
+    height: 1.2em;
+    border: 1px solid var(--tn-gutter);
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: 0.1em;
+    position: relative;
+    overflow: hidden;
+    margin-right: 0.4em;
+    flex-shrink: 0;
+    cursor: default;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Suppress Obsidian's native ::after mask icon for all task checkboxes */
+.task-list-item-checkbox::after,
+input[type="checkbox"].task-list-item-checkbox::after {
+    display: none !important;
+}
+
+/* ── [x] Checked ── */
+.task-list-item[data-task="x"] .task-list-item-checkbox,
+.task-list-item[data-task="X"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="x"],
+input[type="checkbox"][data-task="X"] {
+    background-color: var(--tn-blue) !important;
+    background-image: none !important;
+    border-color: var(--tn-blue) !important;
+}
+.task-list-item[data-task="x"] .task-list-item-checkbox::before,
+.task-list-item[data-task="X"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="x"]::before,
+input[type="checkbox"][data-task="X"]::before {
+    content: "✓";
+    color: var(--tn-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+.task-list-item[data-task="x"],
+.task-list-item[data-task="X"] {
+    color: var(--tn-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--tn-comment);
+}
+.cm-line:has(input[data-task="x"]),
+.cm-line:has(input[data-task="X"]) {
+    color: var(--tn-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--tn-comment);
+}
+
+/* ── [/] In-progress — left half filled via ::before ── */
+.task-list-item[data-task="/"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="/"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--tn-yellow) !important;
+}
+.task-list-item[data-task="/"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="/"]::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%; height: 100%;
+    background-color: var(--tn-yellow);
+}
+
+/* ── [-] Cancelled ── */
+.task-list-item[data-task="-"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="-"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--tn-comment) !important;
+}
+.task-list-item[data-task="-"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="-"]::before {
+    content: "—";
+    color: var(--tn-comment);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -56%);
+}
+.task-list-item[data-task="-"] {
+    color: var(--tn-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--tn-comment);
+}
+.cm-line:has(input[data-task="-"]) {
+    color: var(--tn-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--tn-comment);
+}
+
+/* ── [>] Rescheduled / Forwarded ── */
+.task-list-item[data-task=">"] .task-list-item-checkbox,
+input[type="checkbox"][data-task=">"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--tn-cyan) !important;
+}
+.task-list-item[data-task=">"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task=">"]::before {
+    content: "▶";
+    color: var(--tn-cyan);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-42%, -50%);
+}
+
+/* ── [?] Questionable ── */
+.task-list-item[data-task="?"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="?"] {
+    background-color: var(--tn-yellow) !important;
+    background-image: none !important;
+    border-color: var(--tn-yellow) !important;
+}
+.task-list-item[data-task="?"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="?"]::before {
+    content: "?";
+    color: var(--tn-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ── [!] Important ── */
+.task-list-item[data-task="!"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="!"] {
+    background-color: var(--tn-red) !important;
+    background-image: none !important;
+    border-color: var(--tn-red) !important;
+}
+.task-list-item[data-task="!"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="!"]::before {
+    content: "!";
+    color: var(--tn-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ============================================================
+ * Tags
+ * ============================================================ */
+
+.tag {
+    color: var(--tn-blue) !important;
+    background: var(--tn-tag-bg);
+    border-radius: var(--tag-radius);
+    padding: var(--tag-padding-y) var(--tag-padding-x);
+    font-size: 0.85em;
+    text-decoration: none;
+}
+.tag:hover { background: var(--tn-tag-bg-hover); color: var(--tn-cyan) !important; }
+
+/* ============================================================
+ * Properties / Frontmatter
+ * ============================================================ */
+
+.metadata-container {
+    background: var(--tn-bg-dark);
+    border: 1px solid var(--tn-gutter);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875em;
+}
+
+.metadata-property-key   { color: var(--tn-cyan); }
+.metadata-property-value { color: var(--tn-fg); }
+
+/* ============================================================
+ * Sidebar / File Explorer
+ * ============================================================ */
+
+.mod-left-split,
+.mod-right-split,
+.mod-left-split .workspace-tabs,
+.mod-left-split .workspace-leaf,
+.mod-right-split .workspace-tabs,
+.mod-right-split .workspace-leaf,
+.workspace-leaf-content[data-type="file-explorer"],
+.nav-files-container {
+    background-color: var(--tn-bg);
+}
+
+/* Indent guide — redrawn via ::before so it paints above active-item backgrounds.
+   Root cause: .nav-file-title has margin-left:-34px, extending into the border area.
+   Positioned children paint after parent borders (CSS stacking order), so the active
+   background covers the border-left guide. ::before with z-index:1 inside a stacking
+   context (z-index:0) draws above all child backgrounds. */
+.nav-folder-children {
+    position: relative;
+    z-index: 0;
+}
+.nav-folder-children::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--tn-gutter);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Folder colors */
+.nav-folder-title {
+    color: var(--tn-fg);
+    font-weight: 500;
+}
+.nav-folder-collapse-indicator { color: var(--tn-yellow); }
+
+/* File items */
+.nav-folder-title,
+.nav-file-title { border-radius: 4px; }
+
+.nav-file-title:hover {
+    background: linear-gradient(90deg, rgba(var(--tn-blue-rgb), 0.08) 0%, transparent 100%);
+}
+
+/* Active file — color via CSS variable; background via --nav-item-background-active */
+.nav-file-title.is-active,
+.tree-item-self.is-active {
+    color: var(--tn-blue);
+    font-weight: 500;
+}
+
+/* ============================================================
+ * Workspace / Tab bar
+ * ============================================================ */
+
+.workspace-tab-header-container,
+.workspace-tab-header-container-inner { background-color: var(--tn-bg) !important; }
+.workspace-tab-header                 { background-color: var(--tn-bg) !important; }
+.workspace-tab-header.is-active       { background-color: var(--tn-bg) !important; color: var(--tn-fg); }
+.workspace-tab-header:hover           { background-color: var(--tn-bg-hl) !important; }
+
+/* ============================================================
+ * Ribbon (left plugin icon bar)
+ * ============================================================ */
+
+.app-container { background-color: var(--tn-bg) !important; }
+
+.workspace-ribbon,
+.workspace-ribbon.mod-left,
+.side-dock-ribbon { background-color: var(--tn-bg) !important; }
+
+/* ============================================================
+ * Status bar (bottom)
+ * ============================================================ */
+
+.status-bar {
+    background-color: var(--tn-bg) !important;
+    border-top: 1px solid var(--tn-gutter);
+    color: var(--tn-comment);
+}
+
+/* ============================================================
+ * Tooltip
+ * ============================================================ */
+
+.tooltip {
+    background-color: var(--tooltip-background) !important;
+    color:            var(--tooltip-color) !important;
+}
+
+/* ============================================================
+ * Search / Quick switcher / Modal
+ * ============================================================ */
+
+.prompt {
+    background: var(--tn-bg-dark);
+    border: 1px solid var(--tn-gutter);
+    border-radius: 8px;
+}
+
+.prompt-input {
+    background: var(--tn-bg-hl);
+    color: var(--tn-fg);
+    border: 1px solid var(--tn-gutter);
+    border-radius: 6px;
+}
+
+.suggestion-item.is-selected { background: var(--tn-bg-hl); color: var(--tn-blue); }
+
+/* ============================================================
+ * Selection & Cursor
+ * ============================================================ */
+
+::selection { background: var(--tn-selection); color: var(--tn-fg); }
+
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground { background: var(--tn-selection) !important; }
+
+.cm-editor .cm-cursor { border-left-color: var(--tn-blue); }

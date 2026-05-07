@@ -1,0 +1,36 @@
+/*
+ * Shared design tokens — reference these in each theme via CSS custom properties.
+ * Override per-theme inside :root in the theme's own CSS.
+ */
+
+:root {
+    /* --- Typography --- */
+    --font-text:    "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", Georgia, serif;
+    --font-mono:    "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    --font-ui:      "PingFang SC", "Hiragino Sans GB", "SF Pro Text", system-ui, sans-serif;
+
+    --text-size-base:   16px;
+    --text-size-sm:     14px;
+    --text-size-xs:     12px;
+
+    --line-height-body: 1.75;
+    --line-height-code: 1.5;
+
+    /* --- Layout --- */
+    --content-width:        780px;
+    --content-width-wide:   960px;
+    --content-padding:      2rem 2.5rem;
+
+    /* --- Spacing scale --- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+
+    /* --- Radius --- */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+}
