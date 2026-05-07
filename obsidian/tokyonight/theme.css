@@ -371,9 +371,10 @@ body {
 .markdown-rendered em,     .cm-em     { color: inherit; }
 .markdown-rendered del,    .cm-strikethrough { color: var(--tn-comment); }
 
-.markdown-rendered mark {
-    background: var(--tn-mark-bg);
-    color: var(--tn-yellow);
+.markdown-rendered mark,
+.cm-highlight {
+    background: var(--tn-mark-bg) !important;
+    color: inherit !important;
     border-radius: 3px;
     padding: 0 3px;
 }
@@ -399,12 +400,16 @@ a.is-unresolved                      { color: var(--tn-comment); opacity: 1; }
 .markdown-rendered code,
 .cm-inline-code {
     font-family: var(--font-monospace-theme);
-    color: var(--tn-cyan);
+    color: var(--tn-fg);
     background: var(--tn-bg-dark);
     border: 1px solid var(--tn-gutter);
     border-radius: 4px;
     padding: 0.1em 0.4em;
     font-size: 0.875em;
+}
+.cm-inline-code {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 /* ============================================================

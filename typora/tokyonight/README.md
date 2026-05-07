@@ -24,7 +24,7 @@ A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvi
 ## Features
 
 - **Four independent variants** — each with its own complete palette, not approximated
-- **Heading hierarchy** — H1–H4 in distinct accent colors (blue → cyan → teal → green), H5–H6 in subdued tones
+- **Heading hierarchy** — H1–H6 in distinct accent colors (blue → cyan → teal → green → yellow → comment)
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC, comfortable line height
 - **Code blocks** — syntax highlighting via both highlight.js and CodeMirror classes
 - **Full element coverage** — blockquotes, tables, task lists, footnotes, math, Mermaid diagrams, YAML front matter, TOC

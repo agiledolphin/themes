@@ -28,10 +28,12 @@ Each variant carries its own full palette — colors are not approximated or sha
 - **Independent scheme selection** for dark mode and light mode
 - **Automatic switching** based on system appearance
 - **Full Obsidian variable mapping** — backgrounds, text, links, code, headings, tags, callouts, checkboxes, graph, ribbon, and more
-- **Heading hierarchy** — H1–H4 in distinct accent colors (blue → cyan → teal → green), H5–H6 in subdued tones
+- **Heading hierarchy** — H1–H6 in distinct accent colors (blue → cyan → teal → green → yellow → comment)
 - **Unified workspace** — editor, file explorer, tab bar, ribbon, and status bar share a consistent background
 - **Readable typography** — Chinese-first font stack (PingFang SC → Hiragino Sans GB → Noto Serif SC), comfortable line height
-- **Callout colors** — each callout type maps to the nearest semantic palette color
+- **Callout colors** — all 13 official Obsidian callout types covered with semantic palette mapping (note/info/todo → blue, tip → cyan, success → green, warning → orange, failure/danger/bug → red, example → magenta, quote → comment, etc.)
+- **Task list** — 7 states with custom circular checkboxes: unchecked, checked, in-progress (`/`), cancelled (`-`), rescheduled (`>`), questionable (`?`), important (`!`); styled in both reading and live preview modes
+- **Consistent inline styles** — highlighted text and inline code render identically in reading and editing modes
 - **File explorer polish** — folder icon coloring, hover gradient, active file highlight
 
 ---
