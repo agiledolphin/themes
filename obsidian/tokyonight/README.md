@@ -35,6 +35,7 @@ Each variant carries its own full palette — colors are not approximated or sha
 - **Task list** — 7 states with custom circular checkboxes: unchecked, checked, in-progress (`/`), cancelled (`-`), rescheduled (`>`), questionable (`?`), important (`!`); styled in both reading and live preview modes
 - **Consistent inline styles** — highlighted text and inline code render identically in reading and editing modes
 - **File explorer polish** — folder icon coloring, hover gradient, active file highlight
+- **Notice styling** — toast notifications styled to match the theme palette
 
 ---
 

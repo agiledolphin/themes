@@ -5,9 +5,15 @@
  * ============================================================ */
 
 :root {
-    --side-bar-bg-color:  #c4c8da;
-    --control-text-color: #848cb5;
-    --bg-color:           #e1e2e7;
+    --side-bar-bg-color:    #c4c8da;
+    --control-text-color:   #848cb5;
+    --bg-color:             #e1e2e7;
+    --active-file-bg-color:      #d0d5e3;
+    --active-file-text-color:    #3760bf;
+    --active-file-border-color:  #2e7de9;
+    --item-hover-bg-color:       #d0d5e3;
+    --item-hover-text-color:     #3760bf;
+    --control-text-hover-color:  #3760bf;
 
     --tn-bg:        #e1e2e7;
     --tn-bg-dark:   #c4c8da;
@@ -33,6 +39,11 @@
 
 .sidebar-tabs   { border-bottom-color: var(--tn-gutter); }
 .sidebar-footer { border-top-color:    var(--tn-gutter); }
+
+.outline-item-active .outline-label { font-weight: 600; }
+.outline-item:hover { background: var(--tn-bg-hl); color: var(--tn-fg); }
+.outline-item:hover .outline-label { text-decoration: underline; }
+
 
 /* ============================================================
  * Base

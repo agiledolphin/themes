@@ -28,6 +28,7 @@ A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvi
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC, comfortable line height
 - **Code blocks** — syntax highlighting via both highlight.js and CodeMirror classes
 - **Full element coverage** — blockquotes, tables, task lists, footnotes, math, Mermaid diagrams, YAML front matter, TOC
+- **Sidebar polish** — file panel active highlight, hover color, and outline panel active (bold) / hover (background + underline) states
 - **Print / PDF export** — optimized layout with page-break hints
 
 ---
