@@ -7,6 +7,8 @@
 - Storm / Night / Moon / Day 四变体全部完成
 - 含完整排版、代码高亮（hljs + CodeMirror）、PDF 导出
 - 侧边栏分隔线修复（`.sidebar-tabs` / `.sidebar-footer`）
+- 侧边栏文件面板：active/hover CSS 变量（`--active-file-*`、`--item-hover-*`）
+- 大纲面板：active 加粗、hover 背景 + 文字色 + 下划线
 - 同步脚本：`scripts/sync-typora.sh`
 
 ### Obsidian 主题（核心）
@@ -19,6 +21,11 @@
 - 工作区 UI 统一背景（编辑区、文件列表、Tab 栏、Ribbon、状态栏）
 - 文件列表：文件夹着色、悬停渐变、活跃文件高亮
 - 缩进线修复（`::before` + 堆叠上下文方案）
+- Callout：全部 13 种官方类型语义化配色，背景区分无标题栏
+- 任务清单：7 种状态（unchecked/checked/`/`/`-`/`>`/`?`/`!`），自定义圆形 checkbox；图标对齐修复
+- 高亮文字与 inline code 阅读/编辑模式一致
+- Unchecked checkbox 边框加深（`--tn-comment`）
+- Notice/Toast 通知样式接入主题调色板
 - 同步脚本：`scripts/sync-obsidian.sh`
 
 ---
@@ -29,11 +36,8 @@
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| Callout 细化 | 左侧彩色边框、标题图标颜色、背景微渐变 | ☐ |
-| 任务清单 | 完成态删除线颜色、checkbox 样式 | ☐ |
 | 搜索高亮 | 搜索结果匹配文字背景色 | ☐ |
 | 右键菜单 | `.menu`、`.menu-item` 背景和悬停色 | ☐ |
-| 弹出提示 | Tooltip 背景和边框 | ☐ |
 
 ### 阶段 2 — 多变体验证
 
@@ -44,8 +48,6 @@
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| Obsidian README | 主题介绍、截图、安装步骤、Style Settings 配置说明 | ☐ |
-| Typora README | 主题介绍、截图、安装步骤 | ☐ |
 | 截图素材 | 各变体效果图（Typora + Obsidian） | ☐ |
 | manifest.json | 补全 `authorUrl`（GitHub 地址） | ☐ |
 | 社区提交 | 按 Obsidian 官方流程提 PR 到 obsidian-releases | ☐ |
@@ -64,13 +66,13 @@ themes/
 ├── obsidian/tokyonight/
 │   ├── theme.css          ✓
 │   ├── manifest.json      ✓（需补 authorUrl）
-│   └── README.md          ☐
+│   └── README.md          ✓
 ├── typora/tokyonight/
 │   ├── tokyonight-storm.css  ✓
 │   ├── tokyonight-night.css  ✓
 │   ├── tokyonight-moon.css   ✓
 │   ├── tokyonight-day.css    ✓
-│   └── README.md             ☐
+│   └── README.md             ✓
 └── scripts/
     ├── sync-typora.sh     ✓
     └── sync-obsidian.sh   ✓
