@@ -541,7 +541,7 @@ input[type="checkbox"].task-list-item-checkbox {
     appearance: none;
     width:  1.2em;
     height: 1.2em;
-    border: 1px solid var(--tn-gutter);
+    border: 1px solid var(--tn-comment);
     border-radius: 50% !important;
     display: inline-flex;
     align-items: center;
@@ -861,3 +861,14 @@ input[type="checkbox"][data-task="!"]::before {
 .cm-editor.cm-focused .cm-selectionBackground { background: var(--tn-selection) !important; }
 
 .cm-editor .cm-cursor { border-left-color: var(--tn-blue); }
+
+/* ============================================================
+ * Notice (toast)
+ * ============================================================ */
+
+.notice {
+    background: var(--tn-bg-hl) !important;
+    color: var(--tn-fg) !important;
+    border: 1px solid var(--tn-gutter);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
