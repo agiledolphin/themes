@@ -11,9 +11,9 @@ name: Catppuccin
 id: catppuccin
 settings:
   -
-    id: cp-dark-variant
-    title: Dark Mode Variant
-    description: Color variant used when Obsidian is in dark mode
+    id: cp-dark-flavor
+    title: Dark Mode Flavor
+    description: Color flavor used when Obsidian is in dark mode
     type: class-select
     default: cp-mocha
     options:
@@ -26,6 +26,16 @@ settings:
       -
         label: Frappé
         value: cp-frappe
+  -
+    id: cp-light-flavor
+    title: Light Mode Flavor
+    description: Color flavor used when Obsidian is in light mode
+    type: class-select
+    default: cp-latte
+    options:
+      -
+        label: Latte
+        value: cp-latte
 
 */
 
@@ -199,7 +209,7 @@ body.theme-light {
     --background-modifier-active-hover:     var(--cp-bg-hl);
     --background-modifier-border:           var(--cp-gutter);
     --background-modifier-border-hover:     var(--cp-gutter);
-    --background-modifier-border-focus:     var(--cp-blue);
+    --background-modifier-border-focus:     var(--cp-lavender);
     --background-modifier-form-field:       var(--cp-bg-dark);
     --background-modifier-form-field-highlighted: var(--cp-bg-hl);
     --background-modifier-error:            rgba(var(--cp-red-rgb), 0.15);
@@ -216,8 +226,8 @@ body.theme-light {
     --text-error:           var(--cp-red);
     --text-warning:         var(--cp-yellow);
     --text-success:         var(--cp-green);
-    --text-accent:          var(--cp-blue);
-    --text-accent-hover:    var(--cp-cyan);
+    --text-accent:          var(--cp-lavender);
+    --text-accent-hover:    var(--cp-magenta);
     --text-selection:       var(--cp-selection);
     --text-highlight-bg:        var(--cp-mark-bg);
     --text-highlight-bg-active: var(--cp-mark-bg);
@@ -225,9 +235,9 @@ body.theme-light {
     /* --- Interactive --- */
     --interactive-normal:       var(--cp-bg-hl);
     --interactive-hover:        var(--cp-gutter);
-    --interactive-accent:       var(--cp-blue);
-    --interactive-accent-hover: var(--cp-cyan);
-    --interactive-accent-rgb:   var(--cp-blue-rgb);
+    --interactive-accent:       var(--cp-lavender);
+    --interactive-accent-hover: var(--cp-magenta);
+    --interactive-accent-rgb:   var(--cp-lavender-rgb);
     --interactive-success:      var(--cp-green);
 
     /* --- Links --- */
@@ -254,16 +264,16 @@ body.theme-light {
 
     /* --- Headings --- */
     --h1-color: var(--cp-lavender);
-    --h2-color: var(--cp-blue);
-    --h3-color: var(--cp-cyan);
+    --h2-color: var(--cp-magenta);
+    --h3-color: var(--cp-blue);
     --h4-color: var(--cp-teal);
     --h5-color: var(--cp-green);
     --h6-color: var(--cp-comment);
 
     /* --- Tags --- */
-    --tag-color:            var(--cp-blue);
-    --tag-background:       var(--cp-tag-bg);
-    --tag-background-hover: var(--cp-tag-bg-hover);
+    --tag-color:            var(--cp-magenta);
+    --tag-background:       rgba(var(--cp-magenta-rgb), 0.12);
+    --tag-background-hover: rgba(var(--cp-magenta-rgb), 0.22);
     --tag-border-color:     transparent;
     --tag-border-width:     0px;
     --tag-padding-x:        0.45em;
@@ -271,8 +281,8 @@ body.theme-light {
     --tag-radius:           4px;
 
     /* --- Checkboxes --- */
-    --checkbox-color:            var(--cp-blue);
-    --checkbox-color-hover:      var(--cp-cyan);
+    --checkbox-color:            var(--cp-lavender);
+    --checkbox-color-hover:      var(--cp-magenta);
     --checkbox-border-color:     var(--cp-gutter);
     --checkbox-marker-color:     var(--cp-bg);
     --checklist-done-color:      var(--cp-comment);
@@ -371,7 +381,7 @@ body {
 .markdown-rendered mark,
 .cm-highlight {
     background: var(--cp-mark-bg) !important;
-    color: inherit !important;
+    color: var(--cp-yellow) !important;
     border-radius: 3px;
     padding: 0 3px;
 }
@@ -549,6 +559,11 @@ input[type="checkbox"].task-list-item-checkbox {
     box-shadow: none !important;
 }
 
+.task-list-item-checkbox:hover,
+input[type="checkbox"].task-list-item-checkbox:hover {
+    border-color: var(--checkbox-color) !important;
+}
+
 .task-list-item-checkbox::after,
 input[type="checkbox"].task-list-item-checkbox::after {
     display: none !important;
@@ -559,9 +574,16 @@ input[type="checkbox"].task-list-item-checkbox::after {
 .task-list-item[data-task="X"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="x"],
 input[type="checkbox"][data-task="X"] {
-    background-color: var(--cp-blue) !important;
+    background-color: var(--checkbox-color) !important;
     background-image: none !important;
-    border-color: var(--cp-blue) !important;
+    border-color: var(--checkbox-color) !important;
+}
+.task-list-item[data-task="x"] .task-list-item-checkbox:hover,
+.task-list-item[data-task="X"] .task-list-item-checkbox:hover,
+input[type="checkbox"][data-task="x"]:hover,
+input[type="checkbox"][data-task="X"]:hover {
+    background-color: var(--checkbox-color-hover) !important;
+    border-color: var(--checkbox-color-hover) !important;
 }
 .task-list-item[data-task="x"] .task-list-item-checkbox::before,
 .task-list-item[data-task="X"] .task-list-item-checkbox::before,
