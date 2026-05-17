@@ -374,7 +374,7 @@ body {
 .markdown-rendered mark,
 .cm-highlight {
     background: var(--tn-mark-bg) !important;
-    color: inherit !important;
+    color: var(--tn-yellow) !important;
     border-radius: 3px;
     padding: 0 3px;
 }
@@ -563,14 +563,26 @@ input[type="checkbox"].task-list-item-checkbox::after {
     display: none !important;
 }
 
+.task-list-item-checkbox:hover,
+input[type="checkbox"].task-list-item-checkbox:hover {
+    border-color: var(--checkbox-color) !important;
+}
+
 /* ── [x] Checked ── */
 .task-list-item[data-task="x"] .task-list-item-checkbox,
 .task-list-item[data-task="X"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="x"],
 input[type="checkbox"][data-task="X"] {
-    background-color: var(--tn-blue) !important;
+    background-color: var(--checkbox-color) !important;
     background-image: none !important;
-    border-color: var(--tn-blue) !important;
+    border-color: var(--checkbox-color) !important;
+}
+.task-list-item[data-task="x"] .task-list-item-checkbox:hover,
+.task-list-item[data-task="X"] .task-list-item-checkbox:hover,
+input[type="checkbox"][data-task="x"]:hover,
+input[type="checkbox"][data-task="X"]:hover {
+    background-color: var(--checkbox-color-hover) !important;
+    border-color: var(--checkbox-color-hover) !important;
 }
 .task-list-item[data-task="x"] .task-list-item-checkbox::before,
 .task-list-item[data-task="X"] .task-list-item-checkbox::before,

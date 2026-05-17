@@ -1,6 +1,7 @@
 /* ============================================================
  * Catppuccin Mocha — Typora Theme
  * Palette: catppuccin.com  variant: mocha
+ * Version: 1.1.0
  * bg: #1e1e2e
  * ============================================================ */
 
@@ -114,8 +115,8 @@ h1 {
     padding-bottom: 0.35em;
 }
 
-h2 { font-size: 1.5em;  color: var(--cp-blue);    }
-h3 { font-size: 1.25em; color: var(--cp-cyan);    }
+h2 { font-size: 1.5em;  color: var(--cp-magenta); }
+h3 { font-size: 1.25em; color: var(--cp-blue);    }
 h4 { font-size: 1.1em;  color: var(--cp-teal);    }
 h5 { font-size: 1em;    color: var(--cp-green);   }
 h6 { font-size: 0.9em;  color: var(--cp-comment); }
@@ -266,7 +267,7 @@ li > ul, li > ol { margin: 0.15rem 0; }
 
 .task-list-item input[type="checkbox"] {
     margin-right: 0.6rem;
-    accent-color: var(--cp-blue);
+    accent-color: var(--cp-lavender);
 }
 
 /* ============================================================
