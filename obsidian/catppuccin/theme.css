@@ -475,6 +475,11 @@ body.theme-dark .callout {
     background-color: rgba(var(--callout-color), 0.10) !important;
 }
 
+body.theme-light .callout {
+    mix-blend-mode: normal !important;
+    background-color: rgba(var(--callout-color), 0.12) !important;
+}
+
 .callout[data-callout="note"],
 .callout[data-callout="info"],
 .callout[data-callout="todo"]             { --callout-color: var(--cp-lavender-rgb); }
@@ -502,6 +507,11 @@ body.theme-dark .callout {
 .callout[data-callout="example"]          { --callout-color: var(--cp-magenta-rgb); }
 .callout[data-callout="quote"],
 .callout[data-callout="cite"]             { --callout-color: var(--cp-comment-rgb); }
+
+body.theme-light .callout[data-callout="quote"],
+body.theme-light .callout[data-callout="cite"] {
+    background-color: rgba(var(--cp-comment-rgb), 0.20) !important;
+}
 
 /* ============================================================
  * Tables
