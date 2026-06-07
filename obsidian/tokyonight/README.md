@@ -1,4 +1,4 @@
-# TokyoNight for Obsidian
+# TokyoNight Mod for Obsidian
 
 A clean, full-featured Obsidian theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvim) color palette by folke. Supports all four variants — Storm, Night, Moon, and Day — independently selectable for dark and light modes via the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin.
 
@@ -44,14 +44,14 @@ Each variant carries its own full palette — colors are not approximated or sha
 ### From Obsidian Community Themes
 
 1. Open **Settings → Appearance → Themes**
-2. Click **Manage** and search for `TokyoNight`
+2. Click **Manage** and search for `TokyoNight Mod`
 3. Click **Install and use**
 
 ### Manual
 
 1. Download `theme.css` and `manifest.json`
-2. Copy both files to `<your-vault>/.obsidian/themes/TokyoNight/`
-3. Open **Settings → Appearance → Themes** and select **TokyoNight**
+2. Copy both files to `<your-vault>/.obsidian/themes/TokyoNight Mod/`
+3. Open **Settings → Appearance → Themes** and select **TokyoNight Mod**
 
 ---
 
@@ -60,7 +60,7 @@ Each variant carries its own full palette — colors are not approximated or sha
 Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin to switch variants independently for each mode.
 
 1. Install **Style Settings** from the Community Plugins list
-2. Open **Settings → Style Settings → TokyoNight**
+2. Open **Settings → Style Settings → TokyoNight Mod**
 3. Set **Dark Mode Scheme** (default: Storm) and **Light Mode Scheme** (default: Day)
 
 Without Style Settings, the theme defaults to **Storm** in dark mode and **Day** in light mode.

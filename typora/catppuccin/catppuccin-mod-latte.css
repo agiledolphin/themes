@@ -1,42 +1,42 @@
 /* ============================================================
- * Catppuccin Macchiato — Typora Theme
- * Palette: catppuccin.com  variant: macchiato
+ * Catppuccin Mod Latte — Typora Theme
+ * Palette: catppuccin.com  variant: latte  (light)
  * Version: 1.1.0
- * bg: #24273a
+ * bg: #eff1f5
  * ============================================================ */
 
 /* --- Typora UI --- */
 :root {
-    --side-bar-bg-color:    #1e2030;
-    --control-text-color:   #8087a2;
-    --bg-color:             #24273a;
-    --active-file-bg-color:      #363a4f;
-    --active-file-text-color:    #cad3f5;
-    --active-file-border-color:  #8aadf4;
-    --item-hover-bg-color:       #363a4f;
-    --item-hover-text-color:     #cad3f5;
-    --control-text-hover-color:  #cad3f5;
+    --side-bar-bg-color:    #e6e9ef;
+    --control-text-color:   #8c8fa1;
+    --bg-color:             #eff1f5;
+    --active-file-bg-color:      #ccd0da;
+    --active-file-text-color:    #4c4f69;
+    --active-file-border-color:  #1e66f5;
+    --item-hover-bg-color:       #ccd0da;
+    --item-hover-text-color:     #4c4f69;
+    --control-text-hover-color:  #4c4f69;
 
     /* palette */
-    --cp-bg:        #24273a;
-    --cp-bg-dark:   #1e2030;
-    --cp-bg-hl:     #363a4f;
-    --cp-gutter:    #494d64;
-    --cp-fg:        #cad3f5;
-    --cp-fg-dim:    #b8c0e0;
-    --cp-comment:   #8087a2;
-    --cp-lavender:  #b7bdf8;
-    --cp-blue:      #8aadf4;
-    --cp-cyan:      #91d7e3;
-    --cp-teal:      #8bd5ca;
-    --cp-green:     #a6da95;
-    --cp-yellow:    #eed49f;
-    --cp-orange:    #f5a97f;
-    --cp-red:       #ed8796;
-    --cp-magenta:   #c6a0f6;
-    --cp-selection: #494d64;
-    --cp-mark-bg:   rgba(238, 212, 159, 0.20);
-    --cp-blue-rgb:  138, 173, 244;
+    --cp-bg:        #eff1f5;
+    --cp-bg-dark:   #e6e9ef;
+    --cp-bg-hl:     #ccd0da;
+    --cp-gutter:    #bcc0cc;
+    --cp-fg:        #4c4f69;
+    --cp-fg-dim:    #5c5f77;
+    --cp-comment:   #8c8fa1;
+    --cp-lavender:  #7287fd;
+    --cp-blue:      #1e66f5;
+    --cp-cyan:      #04a5e5;
+    --cp-teal:      #179299;
+    --cp-green:     #40a02b;
+    --cp-yellow:    #df8e1d;
+    --cp-orange:    #fe640b;
+    --cp-red:       #d20f39;
+    --cp-magenta:   #8839ef;
+    --cp-selection: #bcc0cc;
+    --cp-mark-bg:   rgba(223, 142, 29, 0.20);
+    --cp-blue-rgb:  30, 102, 245;
 }
 
 /* ============================================================
@@ -180,50 +180,22 @@ blockquote {
 blockquote p { margin: 0.3rem 0; }
 blockquote blockquote { border-left-color: var(--cp-magenta); }
 
-hr {
-    border: none;
-    border-top: 1px solid var(--cp-gutter);
-    margin: 2rem 0;
-}
+hr { border: none; border-top: 1px solid var(--cp-gutter); margin: 2rem 0; }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.25rem 0;
-    font-size: 0.9em;
-}
-
-thead tr {
-    background: var(--cp-bg-hl);
-    border-bottom: 2px solid var(--cp-blue);
-}
-
-th {
-    padding: 0.6rem 1rem;
-    text-align: left;
-    color: var(--cp-blue);
-    font-weight: 600;
-    font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
-}
-
-td {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--cp-gutter);
-    color: var(--cp-fg);
-}
-
+table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9em; }
+thead tr { background: var(--cp-bg-hl); border-bottom: 2px solid var(--cp-blue); }
+th { padding: 0.6rem 1rem; text-align: left; color: var(--cp-blue); font-weight: 600; font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif; }
+td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--cp-gutter); color: var(--cp-fg); }
 tr:nth-child(even) td { background: var(--cp-bg-hl); }
 tr:hover td           { background: var(--cp-bg-hl); }
 
 ul, ol { padding-left: 1.75rem; margin: 0.5rem 0; }
 li { margin: 0.3rem 0; }
 li > ul, li > ol { margin: 0.15rem 0; }
-
 .task-list-item { list-style: none; margin-left: -1.5rem; padding-left: 0; }
 .task-list-item input[type="checkbox"] { margin-right: 0.6rem; accent-color: var(--cp-lavender); }
 
 img { max-width: 100%; border-radius: 6px; display: block; margin: 1.25rem auto; }
-
 ::selection { background: var(--cp-selection); color: var(--cp-fg); }
 
 kbd {
@@ -250,14 +222,7 @@ pre.md-meta-block {
     margin-bottom: 2rem;
 }
 
-.footnotes {
-    color: var(--cp-fg-dim);
-    font-size: 0.85em;
-    border-top: 1px solid var(--cp-gutter);
-    margin-top: 3rem;
-    padding-top: 1rem;
-}
-
+.footnotes { color: var(--cp-fg-dim); font-size: 0.85em; border-top: 1px solid var(--cp-gutter); margin-top: 3rem; padding-top: 1rem; }
 .footnotes ol { padding-left: 1.25rem; }
 
 .md-toc { color: var(--cp-fg-dim); }
@@ -267,11 +232,7 @@ pre.md-meta-block {
 .md-math-block, .md-rawblock { overflow-x: auto; }
 .MathJax { color: var(--cp-fg) !important; }
 
-.md-diagram-panel {
-    background: var(--cp-bg-dark);
-    border: 1px solid var(--cp-gutter);
-    border-radius: 8px;
-}
+.md-diagram-panel { background: var(--cp-bg-dark); border: 1px solid var(--cp-gutter); border-radius: 8px; }
 
 .md-tag   { color: var(--cp-comment); }
 .md-link  { color: var(--cp-blue); }
