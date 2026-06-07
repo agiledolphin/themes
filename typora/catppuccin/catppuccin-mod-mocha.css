@@ -1,42 +1,42 @@
 /* ============================================================
- * Catppuccin Latte — Typora Theme
- * Palette: catppuccin.com  variant: latte  (light)
+ * Catppuccin Mod Mocha — Typora Theme
+ * Palette: catppuccin.com  variant: mocha
  * Version: 1.1.0
- * bg: #eff1f5
+ * bg: #1e1e2e
  * ============================================================ */
 
 /* --- Typora UI --- */
 :root {
-    --side-bar-bg-color:    #e6e9ef;
-    --control-text-color:   #8c8fa1;
-    --bg-color:             #eff1f5;
-    --active-file-bg-color:      #ccd0da;
-    --active-file-text-color:    #4c4f69;
-    --active-file-border-color:  #1e66f5;
-    --item-hover-bg-color:       #ccd0da;
-    --item-hover-text-color:     #4c4f69;
-    --control-text-hover-color:  #4c4f69;
+    --side-bar-bg-color:    #181825;
+    --control-text-color:   #7f849c;
+    --bg-color:             #1e1e2e;
+    --active-file-bg-color:      #313244;
+    --active-file-text-color:    #cdd6f4;
+    --active-file-border-color:  #89b4fa;
+    --item-hover-bg-color:       #313244;
+    --item-hover-text-color:     #cdd6f4;
+    --control-text-hover-color:  #cdd6f4;
 
     /* palette */
-    --cp-bg:        #eff1f5;
-    --cp-bg-dark:   #e6e9ef;
-    --cp-bg-hl:     #ccd0da;
-    --cp-gutter:    #bcc0cc;
-    --cp-fg:        #4c4f69;
-    --cp-fg-dim:    #5c5f77;
-    --cp-comment:   #8c8fa1;
-    --cp-lavender:  #7287fd;
-    --cp-blue:      #1e66f5;
-    --cp-cyan:      #04a5e5;
-    --cp-teal:      #179299;
-    --cp-green:     #40a02b;
-    --cp-yellow:    #df8e1d;
-    --cp-orange:    #fe640b;
-    --cp-red:       #d20f39;
-    --cp-magenta:   #8839ef;
-    --cp-selection: #bcc0cc;
-    --cp-mark-bg:   rgba(223, 142, 29, 0.20);
-    --cp-blue-rgb:  30, 102, 245;
+    --cp-bg:        #1e1e2e;
+    --cp-bg-dark:   #181825;
+    --cp-bg-hl:     #313244;
+    --cp-gutter:    #45475a;
+    --cp-fg:        #cdd6f4;
+    --cp-fg-dim:    #bac2de;
+    --cp-comment:   #7f849c;
+    --cp-lavender:  #b4befe;
+    --cp-blue:      #89b4fa;
+    --cp-cyan:      #89dceb;
+    --cp-teal:      #94e2d5;
+    --cp-green:     #a6e3a1;
+    --cp-yellow:    #f9e2af;
+    --cp-orange:    #fab387;
+    --cp-red:       #f38ba8;
+    --cp-magenta:   #cba6f7;
+    --cp-selection: #45475a;
+    --cp-mark-bg:   rgba(249, 226, 175, 0.20);
+    --cp-blue-rgb:  137, 180, 250;
 }
 
 /* ============================================================
@@ -79,6 +79,10 @@ body {
     #write { max-width: 960px; }
 }
 
+/* ============================================================
+ * Links
+ * ============================================================ */
+
 a {
     color: var(--cp-blue);
     text-decoration: underline;
@@ -91,6 +95,10 @@ a:hover {
     color: var(--cp-cyan);
     text-decoration-color: var(--cp-cyan);
 }
+
+/* ============================================================
+ * Headings
+ * ============================================================ */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
@@ -119,7 +127,12 @@ h4 .md-tag, h5 .md-tag, h6 .md-tag {
     font-weight: 400;
 }
 
+/* ============================================================
+ * Inline emphasis
+ * ============================================================ */
+
 p { margin: 0.75rem 0; }
+
 strong { font-weight: 700; }
 em     { font-style: italic; }
 del    { color: var(--cp-comment); text-decoration: line-through; }
@@ -129,6 +142,10 @@ mark   {
     border-radius: 3px;
     padding: 0 3px;
 }
+
+/* ============================================================
+ * Code
+ * ============================================================ */
 
 code {
     font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
@@ -168,6 +185,10 @@ pre code, .md-fences code {
     border-radius: 4px;
 }
 
+/* ============================================================
+ * Blockquote
+ * ============================================================ */
+
 blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1.25rem;
@@ -178,25 +199,100 @@ blockquote {
 }
 
 blockquote p { margin: 0.3rem 0; }
-blockquote blockquote { border-left-color: var(--cp-magenta); }
 
-hr { border: none; border-top: 1px solid var(--cp-gutter); margin: 2rem 0; }
+blockquote blockquote {
+    border-left-color: var(--cp-magenta);
+}
 
-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9em; }
-thead tr { background: var(--cp-bg-hl); border-bottom: 2px solid var(--cp-blue); }
-th { padding: 0.6rem 1rem; text-align: left; color: var(--cp-blue); font-weight: 600; font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif; }
-td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--cp-gutter); color: var(--cp-fg); }
+/* ============================================================
+ * HR
+ * ============================================================ */
+
+hr {
+    border: none;
+    border-top: 1px solid var(--cp-gutter);
+    margin: 2rem 0;
+}
+
+/* ============================================================
+ * Tables
+ * ============================================================ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.9em;
+}
+
+thead tr {
+    background: var(--cp-bg-hl);
+    border-bottom: 2px solid var(--cp-blue);
+}
+
+th {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--cp-blue);
+    font-weight: 600;
+    font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+}
+
+td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--cp-gutter);
+    color: var(--cp-fg);
+}
+
 tr:nth-child(even) td { background: var(--cp-bg-hl); }
 tr:hover td           { background: var(--cp-bg-hl); }
 
-ul, ol { padding-left: 1.75rem; margin: 0.5rem 0; }
+/* ============================================================
+ * Lists
+ * ============================================================ */
+
+ul, ol {
+    padding-left: 1.75rem;
+    margin: 0.5rem 0;
+}
+
 li { margin: 0.3rem 0; }
 li > ul, li > ol { margin: 0.15rem 0; }
-.task-list-item { list-style: none; margin-left: -1.5rem; padding-left: 0; }
-.task-list-item input[type="checkbox"] { margin-right: 0.6rem; accent-color: var(--cp-lavender); }
 
-img { max-width: 100%; border-radius: 6px; display: block; margin: 1.25rem auto; }
-::selection { background: var(--cp-selection); color: var(--cp-fg); }
+.task-list-item {
+    list-style: none;
+    margin-left: -1.5rem;
+    padding-left: 0;
+}
+
+.task-list-item input[type="checkbox"] {
+    margin-right: 0.6rem;
+    accent-color: var(--cp-lavender);
+}
+
+/* ============================================================
+ * Images & Media
+ * ============================================================ */
+
+img {
+    max-width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin: 1.25rem auto;
+}
+
+/* ============================================================
+ * Selection
+ * ============================================================ */
+
+::selection {
+    background: var(--cp-selection);
+    color: var(--cp-fg);
+}
+
+/* ============================================================
+ * Keyboard / Superscript / Subscript
+ * ============================================================ */
 
 kbd {
     font-family: "JetBrains Mono", Menlo, monospace;
@@ -212,6 +308,10 @@ kbd {
 sup { color: var(--cp-blue);  font-size: 0.75em; }
 sub { color: var(--cp-green); font-size: 0.75em; }
 
+/* ============================================================
+ * YAML Front Matter
+ * ============================================================ */
+
 pre.md-meta-block {
     background: var(--cp-bg-dark) !important;
     color: var(--cp-comment) !important;
@@ -222,21 +322,62 @@ pre.md-meta-block {
     margin-bottom: 2rem;
 }
 
-.footnotes { color: var(--cp-fg-dim); font-size: 0.85em; border-top: 1px solid var(--cp-gutter); margin-top: 3rem; padding-top: 1rem; }
+/* ============================================================
+ * Footnotes
+ * ============================================================ */
+
+.footnotes {
+    color: var(--cp-fg-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--cp-gutter);
+    margin-top: 3rem;
+    padding-top: 1rem;
+}
+
 .footnotes ol { padding-left: 1.25rem; }
 
+/* ============================================================
+ * TOC
+ * ============================================================ */
+
 .md-toc { color: var(--cp-fg-dim); }
-.md-toc-item a { color: var(--cp-blue); border-bottom: none; }
+.md-toc-item a {
+    color: var(--cp-blue);
+    border-bottom: none;
+}
 .md-toc-item a:hover { color: var(--cp-cyan); }
 
-.md-math-block, .md-rawblock { overflow-x: auto; }
+/* ============================================================
+ * Math
+ * ============================================================ */
+
+.md-math-block, .md-rawblock {
+    overflow-x: auto;
+}
+
 .MathJax { color: var(--cp-fg) !important; }
 
-.md-diagram-panel { background: var(--cp-bg-dark); border: 1px solid var(--cp-gutter); border-radius: 8px; }
+/* ============================================================
+ * Mermaid / Diagrams
+ * ============================================================ */
+
+.md-diagram-panel {
+    background: var(--cp-bg-dark);
+    border: 1px solid var(--cp-gutter);
+    border-radius: 8px;
+}
+
+/* ============================================================
+ * Source / Edit mode markers
+ * ============================================================ */
 
 .md-tag   { color: var(--cp-comment); }
 .md-link  { color: var(--cp-blue); }
 .md-image { color: var(--cp-green); }
+
+/* ============================================================
+ * Syntax Highlighting (highlight.js)
+ * ============================================================ */
 
 .md-fences .hljs                                                        { color: var(--cp-fg); }
 .md-fences .hljs-comment,
@@ -278,6 +419,10 @@ pre.md-meta-block {
 .md-fences .hljs-emphasis                                               { font-style: italic; }
 .md-fences .hljs-strong                                                 { font-weight: bold; }
 
+/* ============================================================
+ * CodeMirror Editor Syntax
+ * ============================================================ */
+
 .md-fences .cm-s-inner                    { color: var(--cp-fg); }
 .md-fences .cm-s-inner .cm-comment       { color: var(--cp-comment); font-style: italic; }
 .md-fences .cm-s-inner .cm-string,
@@ -302,11 +447,18 @@ pre.md-meta-block {
 .md-fences .cm-s-inner .cm-header        { color: var(--cp-blue); font-weight: bold; }
 .md-fences .cm-s-inner .cm-link          { color: var(--cp-blue); text-decoration: underline; }
 
+/* ============================================================
+ * Print / PDF Export
+ * ============================================================ */
+
 @media print {
     body { font-size: 11pt; line-height: 1.7; }
     #write { max-width: 100%; padding: 0; }
+
     a { border-bottom: none; text-decoration: underline; }
+
     h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
     pre, .md-fences, blockquote, img, table { page-break-inside: avoid; break-inside: avoid; }
+
     .md-toc { display: none; }
 }

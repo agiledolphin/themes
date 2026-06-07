@@ -1,42 +1,42 @@
 /* ============================================================
- * Catppuccin Mocha — Typora Theme
- * Palette: catppuccin.com  variant: mocha
+ * Catppuccin Mod Macchiato — Typora Theme
+ * Palette: catppuccin.com  variant: macchiato
  * Version: 1.1.0
- * bg: #1e1e2e
+ * bg: #24273a
  * ============================================================ */
 
 /* --- Typora UI --- */
 :root {
-    --side-bar-bg-color:    #181825;
-    --control-text-color:   #7f849c;
-    --bg-color:             #1e1e2e;
-    --active-file-bg-color:      #313244;
-    --active-file-text-color:    #cdd6f4;
-    --active-file-border-color:  #89b4fa;
-    --item-hover-bg-color:       #313244;
-    --item-hover-text-color:     #cdd6f4;
-    --control-text-hover-color:  #cdd6f4;
+    --side-bar-bg-color:    #1e2030;
+    --control-text-color:   #8087a2;
+    --bg-color:             #24273a;
+    --active-file-bg-color:      #363a4f;
+    --active-file-text-color:    #cad3f5;
+    --active-file-border-color:  #8aadf4;
+    --item-hover-bg-color:       #363a4f;
+    --item-hover-text-color:     #cad3f5;
+    --control-text-hover-color:  #cad3f5;
 
     /* palette */
-    --cp-bg:        #1e1e2e;
-    --cp-bg-dark:   #181825;
-    --cp-bg-hl:     #313244;
-    --cp-gutter:    #45475a;
-    --cp-fg:        #cdd6f4;
-    --cp-fg-dim:    #bac2de;
-    --cp-comment:   #7f849c;
-    --cp-lavender:  #b4befe;
-    --cp-blue:      #89b4fa;
-    --cp-cyan:      #89dceb;
-    --cp-teal:      #94e2d5;
-    --cp-green:     #a6e3a1;
-    --cp-yellow:    #f9e2af;
-    --cp-orange:    #fab387;
-    --cp-red:       #f38ba8;
-    --cp-magenta:   #cba6f7;
-    --cp-selection: #45475a;
-    --cp-mark-bg:   rgba(249, 226, 175, 0.20);
-    --cp-blue-rgb:  137, 180, 250;
+    --cp-bg:        #24273a;
+    --cp-bg-dark:   #1e2030;
+    --cp-bg-hl:     #363a4f;
+    --cp-gutter:    #494d64;
+    --cp-fg:        #cad3f5;
+    --cp-fg-dim:    #b8c0e0;
+    --cp-comment:   #8087a2;
+    --cp-lavender:  #b7bdf8;
+    --cp-blue:      #8aadf4;
+    --cp-cyan:      #91d7e3;
+    --cp-teal:      #8bd5ca;
+    --cp-green:     #a6da95;
+    --cp-yellow:    #eed49f;
+    --cp-orange:    #f5a97f;
+    --cp-red:       #ed8796;
+    --cp-magenta:   #c6a0f6;
+    --cp-selection: #494d64;
+    --cp-mark-bg:   rgba(238, 212, 159, 0.20);
+    --cp-blue-rgb:  138, 173, 244;
 }
 
 /* ============================================================
@@ -79,10 +79,6 @@ body {
     #write { max-width: 960px; }
 }
 
-/* ============================================================
- * Links
- * ============================================================ */
-
 a {
     color: var(--cp-blue);
     text-decoration: underline;
@@ -95,10 +91,6 @@ a:hover {
     color: var(--cp-cyan);
     text-decoration-color: var(--cp-cyan);
 }
-
-/* ============================================================
- * Headings
- * ============================================================ */
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
@@ -127,12 +119,7 @@ h4 .md-tag, h5 .md-tag, h6 .md-tag {
     font-weight: 400;
 }
 
-/* ============================================================
- * Inline emphasis
- * ============================================================ */
-
 p { margin: 0.75rem 0; }
-
 strong { font-weight: 700; }
 em     { font-style: italic; }
 del    { color: var(--cp-comment); text-decoration: line-through; }
@@ -142,10 +129,6 @@ mark   {
     border-radius: 3px;
     padding: 0 3px;
 }
-
-/* ============================================================
- * Code
- * ============================================================ */
 
 code {
     font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
@@ -185,10 +168,6 @@ pre code, .md-fences code {
     border-radius: 4px;
 }
 
-/* ============================================================
- * Blockquote
- * ============================================================ */
-
 blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1.25rem;
@@ -199,24 +178,13 @@ blockquote {
 }
 
 blockquote p { margin: 0.3rem 0; }
-
-blockquote blockquote {
-    border-left-color: var(--cp-magenta);
-}
-
-/* ============================================================
- * HR
- * ============================================================ */
+blockquote blockquote { border-left-color: var(--cp-magenta); }
 
 hr {
     border: none;
     border-top: 1px solid var(--cp-gutter);
     margin: 2rem 0;
 }
-
-/* ============================================================
- * Tables
- * ============================================================ */
 
 table {
     width: 100%;
@@ -247,52 +215,16 @@ td {
 tr:nth-child(even) td { background: var(--cp-bg-hl); }
 tr:hover td           { background: var(--cp-bg-hl); }
 
-/* ============================================================
- * Lists
- * ============================================================ */
-
-ul, ol {
-    padding-left: 1.75rem;
-    margin: 0.5rem 0;
-}
-
+ul, ol { padding-left: 1.75rem; margin: 0.5rem 0; }
 li { margin: 0.3rem 0; }
 li > ul, li > ol { margin: 0.15rem 0; }
 
-.task-list-item {
-    list-style: none;
-    margin-left: -1.5rem;
-    padding-left: 0;
-}
+.task-list-item { list-style: none; margin-left: -1.5rem; padding-left: 0; }
+.task-list-item input[type="checkbox"] { margin-right: 0.6rem; accent-color: var(--cp-lavender); }
 
-.task-list-item input[type="checkbox"] {
-    margin-right: 0.6rem;
-    accent-color: var(--cp-lavender);
-}
+img { max-width: 100%; border-radius: 6px; display: block; margin: 1.25rem auto; }
 
-/* ============================================================
- * Images & Media
- * ============================================================ */
-
-img {
-    max-width: 100%;
-    border-radius: 6px;
-    display: block;
-    margin: 1.25rem auto;
-}
-
-/* ============================================================
- * Selection
- * ============================================================ */
-
-::selection {
-    background: var(--cp-selection);
-    color: var(--cp-fg);
-}
-
-/* ============================================================
- * Keyboard / Superscript / Subscript
- * ============================================================ */
+::selection { background: var(--cp-selection); color: var(--cp-fg); }
 
 kbd {
     font-family: "JetBrains Mono", Menlo, monospace;
@@ -308,10 +240,6 @@ kbd {
 sup { color: var(--cp-blue);  font-size: 0.75em; }
 sub { color: var(--cp-green); font-size: 0.75em; }
 
-/* ============================================================
- * YAML Front Matter
- * ============================================================ */
-
 pre.md-meta-block {
     background: var(--cp-bg-dark) !important;
     color: var(--cp-comment) !important;
@@ -321,10 +249,6 @@ pre.md-meta-block {
     font-size: 0.85em;
     margin-bottom: 2rem;
 }
-
-/* ============================================================
- * Footnotes
- * ============================================================ */
 
 .footnotes {
     color: var(--cp-fg-dim);
@@ -336,30 +260,12 @@ pre.md-meta-block {
 
 .footnotes ol { padding-left: 1.25rem; }
 
-/* ============================================================
- * TOC
- * ============================================================ */
-
 .md-toc { color: var(--cp-fg-dim); }
-.md-toc-item a {
-    color: var(--cp-blue);
-    border-bottom: none;
-}
+.md-toc-item a { color: var(--cp-blue); border-bottom: none; }
 .md-toc-item a:hover { color: var(--cp-cyan); }
 
-/* ============================================================
- * Math
- * ============================================================ */
-
-.md-math-block, .md-rawblock {
-    overflow-x: auto;
-}
-
+.md-math-block, .md-rawblock { overflow-x: auto; }
 .MathJax { color: var(--cp-fg) !important; }
-
-/* ============================================================
- * Mermaid / Diagrams
- * ============================================================ */
 
 .md-diagram-panel {
     background: var(--cp-bg-dark);
@@ -367,17 +273,9 @@ pre.md-meta-block {
     border-radius: 8px;
 }
 
-/* ============================================================
- * Source / Edit mode markers
- * ============================================================ */
-
 .md-tag   { color: var(--cp-comment); }
 .md-link  { color: var(--cp-blue); }
 .md-image { color: var(--cp-green); }
-
-/* ============================================================
- * Syntax Highlighting (highlight.js)
- * ============================================================ */
 
 .md-fences .hljs                                                        { color: var(--cp-fg); }
 .md-fences .hljs-comment,
@@ -419,10 +317,6 @@ pre.md-meta-block {
 .md-fences .hljs-emphasis                                               { font-style: italic; }
 .md-fences .hljs-strong                                                 { font-weight: bold; }
 
-/* ============================================================
- * CodeMirror Editor Syntax
- * ============================================================ */
-
 .md-fences .cm-s-inner                    { color: var(--cp-fg); }
 .md-fences .cm-s-inner .cm-comment       { color: var(--cp-comment); font-style: italic; }
 .md-fences .cm-s-inner .cm-string,
@@ -447,18 +341,11 @@ pre.md-meta-block {
 .md-fences .cm-s-inner .cm-header        { color: var(--cp-blue); font-weight: bold; }
 .md-fences .cm-s-inner .cm-link          { color: var(--cp-blue); text-decoration: underline; }
 
-/* ============================================================
- * Print / PDF Export
- * ============================================================ */
-
 @media print {
     body { font-size: 11pt; line-height: 1.7; }
     #write { max-width: 100%; padding: 0; }
-
     a { border-bottom: none; text-decoration: underline; }
-
     h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
     pre, .md-fences, blockquote, img, table { page-break-inside: avoid; break-inside: avoid; }
-
     .md-toc { display: none; }
 }

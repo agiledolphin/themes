@@ -1,4 +1,4 @@
-# Catppuccin for Obsidian
+# Catppuccin Mod for Obsidian
 
 A clean, full-featured Obsidian theme based on the [Catppuccin](https://catppuccin.com) color palette. Supports all four flavors — Mocha, Macchiato, Frappé, and Latte — independently selectable for dark and light modes via the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin.
 
@@ -44,14 +44,14 @@ Each flavor carries its own full palette — colors are not approximated or shar
 ### From Obsidian Community Themes
 
 1. Open **Settings → Appearance → Themes**
-2. Click **Manage** and search for `Catppuccin`
+2. Click **Manage** and search for `Catppuccin Mod`
 3. Click **Install and use**
 
 ### Manual
 
 1. Download `theme.css` and `manifest.json`
-2. Copy both files to `<your-vault>/.obsidian/themes/Catppuccin/`
-3. Open **Settings → Appearance → Themes** and select **Catppuccin**
+2. Copy both files to `<your-vault>/.obsidian/themes/Catppuccin Mod/`
+3. Open **Settings → Appearance → Themes** and select **Catppuccin Mod**
 
 ---
 
@@ -60,7 +60,7 @@ Each flavor carries its own full palette — colors are not approximated or shar
 Install the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin to switch flavors independently for each mode.
 
 1. Install **Style Settings** from the Community Plugins list
-2. Open **Settings → Style Settings → Catppuccin**
+2. Open **Settings → Style Settings → Catppuccin Mod**
 3. Set **Dark Mode Flavor** (default: Mocha) and choose Macchiato or Frappé as alternatives
 
 Without Style Settings, the theme defaults to **Mocha** in dark mode and **Latte** in light mode.
