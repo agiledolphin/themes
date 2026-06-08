@@ -36,6 +36,12 @@ settings:
       -
         label: Day
         value: tn-day
+  -
+    id: tn-hide-folder-icons
+    title: Hide Folder Icons
+    description: Hide the folder icons in the file explorer
+    type: class-toggle
+    default: false
 
 */
 
@@ -180,9 +186,6 @@ body.theme-light.tn-day {
     --tn-magenta-rgb: 152,  84, 241;
     --tn-teal-rgb:     17, 140, 116;
     --tn-comment-rgb: 132, 140, 181;
-    /* Tooltip: dark bg + light text for contrast on Day's light page */
-    --tooltip-background: #3760bf;
-    --tooltip-color:      #e1e2e7;
 }
 
 /* ============================================================
@@ -298,6 +301,7 @@ body.theme-light {
     --nav-item-background-hover: var(--tn-bg-hl);
     --nav-item-background-active: var(--tn-bg-hl);
     --nav-item-color-active:     var(--tn-blue);
+    --nav-item-weight-active:    500;
     --nav-heading-color:         var(--tn-fg);
 
     /* --- Graph --- */
@@ -321,6 +325,11 @@ body.theme-light {
     /* --- Tooltips --- */
     --tooltip-background: var(--tn-bg-dark);
     --tooltip-color:      var(--tn-fg);
+
+    /* --- Animation --- */
+    --anim-fast:     140ms;
+    --anim-moderate: 300ms;
+    --anim-smooth:   cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 /* ============================================================
@@ -383,15 +392,43 @@ body {
  * Links
  * ============================================================ */
 
-.markdown-rendered a,
-.cm-hmd-internal-link .cm-underline { color: var(--tn-blue); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(var(--tn-blue-rgb), 0.4); }
-.markdown-rendered a:hover           { color: var(--tn-cyan); text-decoration-color: var(--tn-cyan); }
-.cm-hmd-internal-link:hover .cm-underline { color: var(--tn-cyan) !important; }
-a.internal-link                      { color: var(--tn-blue); }
-a.internal-link:hover                { color: var(--tn-cyan); }
-a.external-link                      { color: var(--tn-blue); }
-a.external-link:hover                { color: var(--tn-cyan); }
-a.is-unresolved                      { color: var(--tn-comment); opacity: 1; }
+/* Reading mode — all link types: underline hidden at rest, shown on hover */
+.markdown-rendered a {
+    color: var(--tn-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-rendered a:hover    { color: var(--tn-cyan); text-decoration-color: var(--tn-cyan); }
+a.is-unresolved               { color: var(--tn-comment); opacity: 1; text-decoration-color: transparent !important; }
+a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color: var(--tn-comment) !important; }
+
+/* Editor mode — internal links */
+.cm-hmd-internal-link .cm-underline {
+    color: var(--tn-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.cm-hmd-internal-link { text-decoration: none !important; }
+.cm-hmd-internal-link:hover .cm-underline { color: var(--tn-cyan) !important; text-decoration-color: var(--tn-cyan) !important; }
+.is-unresolved { text-decoration: none !important; }
+.is-unresolved .cm-underline { color: var(--tn-comment) !important; text-decoration-color: transparent !important; }
+.is-unresolved:hover .cm-underline { color: var(--tn-comment) !important; text-decoration-color: var(--tn-comment) !important; }
+
+/* Editor mode — external links and markdown links */
+.markdown-source-view.mod-cm6 .cm-url .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link .cm-underline {
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
 
 /* ============================================================
  * Inline Code
@@ -804,15 +841,18 @@ input[type="checkbox"][data-task="!"]::before {
 .nav-folder-title,
 .nav-file-title { border-radius: 4px; }
 
-.nav-file-title:hover {
-    background: linear-gradient(90deg, rgba(var(--tn-blue-rgb), 0.08) 0%, transparent 100%);
+.nav-file-title:hover,
+.nav-folder-title:hover {
+    background: linear-gradient(90deg, rgba(var(--tn-blue-rgb), 0.15) 0%, transparent 80%);
+    transition: background var(--anim-fast) var(--anim-smooth);
 }
 
-/* Active file — color via CSS variable; background via --nav-item-background-active */
+/* Active file — color, background and weight all via the --nav-item-*-active
+   variables, so the bold (500) persists when the active file is also hovered
+   (app.css's active+hover rule reads --nav-item-weight-active). */
 .nav-file-title.is-active,
 .tree-item-self.is-active {
     color: var(--tn-blue);
-    font-weight: 500;
 }
 
 /* ============================================================
@@ -850,9 +890,15 @@ input[type="checkbox"][data-task="!"]::before {
  * ============================================================ */
 
 .tooltip {
-    background-color: var(--tooltip-background) !important;
-    color:            var(--tooltip-color) !important;
+    background-color: var(--tn-bg-dark) !important;
+    color:            rgba(var(--tn-blue-rgb), 0.85) !important;
+    border:           1px solid rgba(var(--tn-blue-rgb), 0.45);
+    box-shadow:       0 2px 8px rgba(0, 0, 0, 0.15);
 }
+.tooltip .tooltip-arrow              { border-bottom-color: rgba(var(--tn-blue-rgb), 0.45); }
+.tooltip.mod-right .tooltip-arrow   { border-right-color:  rgba(var(--tn-blue-rgb), 0.45); border-bottom-color: transparent; }
+.tooltip.mod-left  .tooltip-arrow   { border-left-color:   rgba(var(--tn-blue-rgb), 0.45); border-bottom-color: transparent; }
+.tooltip.mod-top   .tooltip-arrow   { border-top-color:    rgba(var(--tn-blue-rgb), 0.45); border-bottom-color: transparent; }
 
 /* ============================================================
  * Search / Quick switcher / Modal
@@ -894,3 +940,37 @@ input[type="checkbox"][data-task="!"]::before {
     border: 1px solid var(--tn-gutter);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
+
+/* ============================================================
+ * Folder Icons
+ * ============================================================ */
+
+.nav-folder-collapse-indicator { display: none; }
+.nav-folder.mod-root > .nav-folder-title .nav-folder-title-content::before { display: none; }
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before,
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    background-color: var(--text-accent);
+    -webkit-mask-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z'%3E%3C/path%3E%3Cpath d='M2 10h20'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.tn-hide-folder-icons .nav-folder .nav-folder-title .nav-folder-title-content::before,
+.tn-hide-folder-icons .nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    display: none !important;
+}
+.tn-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
