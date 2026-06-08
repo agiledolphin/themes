@@ -36,6 +36,12 @@ settings:
       -
         label: Latte
         value: cp-latte
+  -
+    id: cp-hide-folder-icons
+    title: Hide Folder Icons
+    description: Hide the folder icons in the file explorer
+    type: class-toggle
+    default: false
 
 */
 
@@ -72,16 +78,17 @@ body.theme-dark.cp-mocha {
     --cp-mark-bg:        rgba(249, 226, 175, 0.20);
     --cp-tag-bg:         rgba(137, 180, 250, 0.12);
     --cp-tag-bg-hover:   rgba(137, 180, 250, 0.22);
-    --cp-lavender-rgb: 180, 190, 254;
-    --cp-blue-rgb:     137, 180, 250;
-    --cp-cyan-rgb:     137, 220, 235;
-    --cp-teal-rgb:     148, 226, 213;
-    --cp-green-rgb:    166, 227, 161;
-    --cp-yellow-rgb:   249, 226, 175;
-    --cp-orange-rgb:   250, 179, 135;
-    --cp-red-rgb:      243, 139, 168;
-    --cp-magenta-rgb:  203, 166, 247;
-    --cp-comment-rgb:  127, 132, 156;
+    --cp-lavender-rgb:  180, 190, 254;
+    --cp-blue-rgb:      137, 180, 250;
+    --cp-cyan-rgb:      137, 220, 235;
+    --cp-teal-rgb:      148, 226, 213;
+    --cp-green-rgb:     166, 227, 161;
+    --cp-yellow-rgb:    249, 226, 175;
+    --cp-orange-rgb:    250, 179, 135;
+    --cp-red-rgb:       243, 139, 168;
+    --cp-magenta-rgb:   203, 166, 247;
+    --cp-comment-rgb:   127, 132, 156;
+    --cp-rosewater-rgb: 245, 224, 220;
 }
 
 /* --- Dark: Macchiato --- */
@@ -107,16 +114,17 @@ body.theme-dark.cp-macchiato {
     --cp-mark-bg:        rgba(238, 212, 159, 0.20);
     --cp-tag-bg:         rgba(138, 173, 244, 0.12);
     --cp-tag-bg-hover:   rgba(138, 173, 244, 0.22);
-    --cp-lavender-rgb: 183, 189, 248;
-    --cp-blue-rgb:     138, 173, 244;
-    --cp-cyan-rgb:     145, 215, 227;
-    --cp-teal-rgb:     139, 213, 202;
-    --cp-green-rgb:    166, 218, 149;
-    --cp-yellow-rgb:   238, 212, 159;
-    --cp-orange-rgb:   245, 169, 127;
-    --cp-red-rgb:      237, 135, 150;
-    --cp-magenta-rgb:  198, 160, 246;
-    --cp-comment-rgb:  128, 135, 162;
+    --cp-lavender-rgb:  183, 189, 248;
+    --cp-blue-rgb:      138, 173, 244;
+    --cp-cyan-rgb:      145, 215, 227;
+    --cp-teal-rgb:      139, 213, 202;
+    --cp-green-rgb:     166, 218, 149;
+    --cp-yellow-rgb:    238, 212, 159;
+    --cp-orange-rgb:    245, 169, 127;
+    --cp-red-rgb:       237, 135, 150;
+    --cp-magenta-rgb:   198, 160, 246;
+    --cp-comment-rgb:   128, 135, 162;
+    --cp-rosewater-rgb: 244, 219, 214;
 }
 
 /* --- Dark: Frappé --- */
@@ -142,16 +150,17 @@ body.theme-dark.cp-frappe {
     --cp-mark-bg:        rgba(229, 200, 144, 0.20);
     --cp-tag-bg:         rgba(140, 170, 238, 0.12);
     --cp-tag-bg-hover:   rgba(140, 170, 238, 0.22);
-    --cp-lavender-rgb: 186, 187, 241;
-    --cp-blue-rgb:     140, 170, 238;
-    --cp-cyan-rgb:     153, 209, 219;
-    --cp-teal-rgb:     129, 200, 190;
-    --cp-green-rgb:    166, 209, 137;
-    --cp-yellow-rgb:   229, 200, 144;
-    --cp-orange-rgb:   239, 159, 118;
-    --cp-red-rgb:      231, 130, 132;
-    --cp-magenta-rgb:  202, 158, 230;
-    --cp-comment-rgb:  131, 139, 167;
+    --cp-lavender-rgb:  186, 187, 241;
+    --cp-blue-rgb:      140, 170, 238;
+    --cp-cyan-rgb:      153, 209, 219;
+    --cp-teal-rgb:      129, 200, 190;
+    --cp-green-rgb:     166, 209, 137;
+    --cp-yellow-rgb:    229, 200, 144;
+    --cp-orange-rgb:    239, 159, 118;
+    --cp-red-rgb:       231, 130, 132;
+    --cp-magenta-rgb:   202, 158, 230;
+    --cp-comment-rgb:   131, 139, 167;
+    --cp-rosewater-rgb: 242, 213, 207;
 }
 
 /* --- Light: Latte (default) --- */
@@ -178,19 +187,17 @@ body.theme-light.cp-latte {
     --cp-mark-bg:        rgba(223, 142, 29, 0.15);
     --cp-tag-bg:         rgba(30, 102, 245, 0.12);
     --cp-tag-bg-hover:   rgba(30, 102, 245, 0.22);
-    --cp-lavender-rgb: 114, 135, 253;
-    --cp-blue-rgb:      30, 102, 245;
-    --cp-cyan-rgb:       4, 165, 229;
-    --cp-teal-rgb:      23, 146, 153;
-    --cp-green-rgb:     64, 160,  43;
-    --cp-yellow-rgb:   223, 142,  29;
-    --cp-orange-rgb:   254, 100,  11;
-    --cp-red-rgb:      210,  15,  57;
-    --cp-magenta-rgb:  136,  57, 239;
-    --cp-comment-rgb:  140, 143, 161;
-    /* Tooltip: dark bg + light text for contrast on Latte's light page */
-    --tooltip-background: #4c4f69;
-    --tooltip-color:      #eff1f5;
+    --cp-lavender-rgb:  114, 135, 253;
+    --cp-blue-rgb:       30, 102, 245;
+    --cp-cyan-rgb:        4, 165, 229;
+    --cp-teal-rgb:       23, 146, 153;
+    --cp-green-rgb:      64, 160,  43;
+    --cp-yellow-rgb:    223, 142,  29;
+    --cp-orange-rgb:    254, 100,  11;
+    --cp-red-rgb:       210,  15,  57;
+    --cp-magenta-rgb:   136,  57, 239;
+    --cp-comment-rgb:   140, 143, 161;
+    --cp-rosewater-rgb: 220, 138, 120;
 }
 
 /* ============================================================
@@ -299,13 +306,14 @@ body.theme-light {
     --scrollbar-thumb-bg:        var(--cp-gutter);
     --scrollbar-active-thumb-bg: var(--cp-fg-dim);
 
-    /* --- File explorer nav --- */
-    --nav-item-color:            var(--cp-fg-dim);
-    --nav-item-color-hover:      var(--cp-fg);
-    --nav-item-background-hover: var(--cp-bg-hl);
-    --nav-item-background-active: var(--cp-bg-hl);
-    --nav-item-color-active:     var(--cp-blue);
-    --nav-heading-color:         var(--cp-fg);
+    /* --- File explorer nav ---
+       hover = lavender accent, active (open file) = mauve, text = mantle */
+    --nav-item-color:             var(--cp-fg-dim);
+    --nav-item-color-hover:       var(--cp-bg-dark);
+    --nav-item-color-active:      var(--cp-bg-dark);
+    --nav-item-background-hover:  var(--cp-lavender);
+    --nav-item-background-active: var(--cp-magenta);
+    --nav-heading-color:          var(--cp-fg);
 
     /* --- Graph --- */
     --graph-color-line:             var(--cp-gutter);
@@ -328,6 +336,11 @@ body.theme-light {
     /* --- Tooltips --- */
     --tooltip-background: var(--cp-bg-dark);
     --tooltip-color:      var(--cp-fg);
+
+    /* --- Animation --- */
+    --anim-fast:     140ms;
+    --anim-moderate: 300ms;
+    --anim-smooth:   cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 /* ============================================================
@@ -390,15 +403,43 @@ body {
  * Links
  * ============================================================ */
 
-.markdown-rendered a,
-.cm-hmd-internal-link .cm-underline { color: var(--cp-blue); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(var(--cp-blue-rgb), 0.4); }
-.markdown-rendered a:hover           { color: var(--cp-cyan); text-decoration-color: var(--cp-cyan); }
-.cm-hmd-internal-link:hover .cm-underline { color: var(--cp-cyan) !important; }
-a.internal-link                      { color: var(--cp-blue); }
-a.internal-link:hover                { color: var(--cp-cyan); }
-a.external-link                      { color: var(--cp-blue); }
-a.external-link:hover                { color: var(--cp-cyan); }
-a.is-unresolved                      { color: var(--cp-comment); opacity: 1; }
+/* Reading mode — all link types: underline hidden at rest, shown on hover */
+.markdown-rendered a {
+    color: var(--cp-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-rendered a:hover    { color: var(--cp-cyan); text-decoration-color: var(--cp-cyan); }
+a.is-unresolved               { color: var(--cp-comment); opacity: 1; text-decoration-color: transparent !important; }
+a.is-unresolved:hover         { color: var(--cp-comment); text-decoration-color: var(--cp-comment) !important; }
+
+/* Editor mode — internal links */
+.cm-hmd-internal-link .cm-underline {
+    color: var(--cp-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.cm-hmd-internal-link { text-decoration: none !important; }
+.cm-hmd-internal-link:hover .cm-underline { color: var(--cp-cyan) !important; text-decoration-color: var(--cp-cyan) !important; }
+.is-unresolved { text-decoration: none !important; }
+.is-unresolved .cm-underline { color: var(--cp-comment) !important; text-decoration-color: transparent !important; }
+.is-unresolved:hover .cm-underline { color: var(--cp-comment) !important; text-decoration-color: var(--cp-comment) !important; }
+
+/* Editor mode — external links and markdown links */
+.markdown-source-view.mod-cm6 .cm-url .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link .cm-underline {
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
 
 /* ============================================================
  * Inline Code
@@ -785,7 +826,7 @@ input[type="checkbox"][data-task="!"]::before {
     bottom: 0;
     width: 1px;
     background-color: var(--cp-gutter);
-    z-index: 1;
+    z-index: -1;          /* behind nav item backgrounds so hover/active bars cover it */
     pointer-events: none;
 }
 
@@ -798,14 +839,40 @@ input[type="checkbox"][data-task="!"]::before {
 .nav-folder-title,
 .nav-file-title { border-radius: 4px; }
 
-.nav-file-title:hover {
-    background: linear-gradient(90deg, rgba(var(--cp-blue-rgb), 0.08) 0%, transparent 100%);
+/* Active (open file): mauve fill via the nav variable (app.css applies it).
+   Using the variable — not a direct background-color — lets the hover rule's
+   direct background-color win when an active file is hovered. */
+.nav-file-title.is-active,
+.nav-folder-title.is-active,
+.tree-item-self.is-active {
+    --nav-item-background-active: var(--cp-magenta);
+    --nav-item-color-active:      var(--cp-bg-dark);
+}
+.tree-item-self.is-active .nav-folder-title-content::before {
+    background-color: var(--cp-bg-dark);
 }
 
-.nav-file-title.is-active,
-.tree-item-self.is-active {
-    color: var(--cp-blue);
-    font-weight: 500;
+/* Hover: lavender accent fill, mantle text. The body:not(.is-grabbing) prefix
+   matches Obsidian app.css's own nav-hover specificity (0,4,1); loading after
+   app.css, this wins the cascade — including over app.css's active+hover rule —
+   so a hovered active file switches from mauve to the lavender hover color.
+   (No .css-settings-manager gate: Style Settings adds that class to <body>,
+   which would disable the rule whenever a variant is selected.) */
+body:not(.is-grabbing) .nav-file-title:hover,
+body:not(.is-grabbing) .nav-folder-title:hover,
+body:not(.is-grabbing) .tree-item-self.is-clickable:hover {
+    background-color: var(--cp-lavender);
+    color:            var(--cp-bg-dark);
+}
+body:not(.is-grabbing) .nav-file-title:hover .nav-folder-title-content::before,
+body:not(.is-grabbing) .nav-folder-title:hover .nav-folder-title-content::before {
+    background-color: var(--cp-bg-dark);
+}
+
+/* Root folder title: no fill on hover (specificity above the hover rule) */
+body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
+    background-color: transparent;
+    color:            var(--cp-fg);
 }
 
 /* ============================================================
@@ -843,9 +910,15 @@ input[type="checkbox"][data-task="!"]::before {
  * ============================================================ */
 
 .tooltip {
-    background-color: var(--tooltip-background) !important;
-    color:            var(--tooltip-color) !important;
+    background-color: var(--cp-bg-dark) !important;
+    color:            rgba(var(--cp-rosewater-rgb), 0.80) !important;
+    border:           1px solid rgba(var(--cp-rosewater-rgb), 0.60);
+    box-shadow:       0 0 4px rgba(var(--cp-rosewater-rgb), 0.15);
 }
+.tooltip .tooltip-arrow              { border-bottom-color: rgba(var(--cp-rosewater-rgb), 0.60); }
+.tooltip.mod-right .tooltip-arrow   { border-right-color:  rgba(var(--cp-rosewater-rgb), 0.60); border-bottom-color: transparent; }
+.tooltip.mod-left  .tooltip-arrow   { border-left-color:   rgba(var(--cp-rosewater-rgb), 0.60); border-bottom-color: transparent; }
+.tooltip.mod-top   .tooltip-arrow   { border-top-color:    rgba(var(--cp-rosewater-rgb), 0.60); border-bottom-color: transparent; }
 
 /* ============================================================
  * Search / Quick switcher / Modal
@@ -887,3 +960,37 @@ input[type="checkbox"][data-task="!"]::before {
     border: 1px solid var(--cp-gutter);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
+
+/* ============================================================
+ * Folder Icons
+ * ============================================================ */
+
+.nav-folder-collapse-indicator { display: none; }
+.nav-folder.mod-root > .nav-folder-title .nav-folder-title-content::before { display: none; }
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before,
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    background-color: var(--text-accent);
+    -webkit-mask-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z'%3E%3C/path%3E%3Cpath d='M2 10h20'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.cp-hide-folder-icons .nav-folder .nav-folder-title .nav-folder-title-content::before,
+.cp-hide-folder-icons .nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    display: none !important;
+}
+.cp-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
