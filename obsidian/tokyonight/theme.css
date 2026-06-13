@@ -299,9 +299,8 @@ body.theme-light {
     --nav-item-color:            var(--tn-fg-dim);
     --nav-item-color-hover:      var(--tn-fg);
     --nav-item-background-hover: var(--tn-bg-hl);
-    --nav-item-background-active: var(--tn-bg-hl);
-    --nav-item-color-active:     var(--tn-blue);
-    --nav-item-weight-active:    500;
+    --nav-item-background-active: rgba(var(--tn-blue-rgb), 0.12);
+    --nav-item-color-active:     var(--tn-fg);
     --nav-heading-color:         var(--tn-fg);
 
     /* --- Graph --- */
@@ -321,6 +320,18 @@ body.theme-light {
     --ribbon-tab-color:            var(--tn-comment);
     --ribbon-tab-color-hover:      var(--tn-fg);
     --ribbon-tab-background-hover: var(--tn-bg-hl);
+
+    /* --- Tables ---
+       Striping is driven through Obsidian's own variables: the row stripe lives
+       on <tr>, so it shows through transparent cells evenly. Column zebra is
+       turned off explicitly (its td-level rule outranks any custom row stripe,
+       which is what produced the spurious vertical banding). */
+    --table-header-background:        var(--tn-bg-hl);
+    --table-header-background-hover:  var(--tn-bg-hl);   /* header stays put on hover (default `inherit` shows page bg → white) */
+    --table-row-alt-background:       transparent;   /* zebra off */
+    --table-column-alt-background:    transparent;
+    --table-row-background-hover:     rgba(var(--tn-blue-rgb), 0.20);
+    --table-row-alt-background-hover: rgba(var(--tn-blue-rgb), 0.20);
 
     /* --- Tooltips --- */
     --tooltip-background: var(--tn-bg-dark);
@@ -551,10 +562,35 @@ body.theme-light .callout[data-callout="cite"] {
  * Tables
  * ============================================================ */
 
-.markdown-rendered table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+/* Rounded outer frame: needs `separate` (the collapse model ignores
+   border-radius); overflow:hidden clips the cell backgrounds to the radius. */
+.markdown-rendered table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.9em;
+    border: 1px solid var(--tn-gutter);
+    border-radius: 8px;
+    overflow: hidden;
+}
 
+/* Reset app.css's full per-cell border, then draw single internal grid lines
+   (right + bottom per cell); the outer edges are the table's own border. */
+.markdown-rendered th,
+.markdown-rendered td {
+    border: none;
+    border-right:  1px solid var(--tn-gutter);
+    border-bottom: 1px solid var(--tn-gutter);
+    padding: 0.5rem 1rem;
+    vertical-align: top;
+}
+.markdown-rendered th:last-child,
+.markdown-rendered td:last-child       { border-right: none; }
+.markdown-rendered tbody tr:last-child td { border-bottom: none; }
+
+/* Header — bg via --table-header-background (on <thead tr>); blue text + a 2px
+   blue underline as the header/body divider. */
 .markdown-rendered th {
-    background: var(--tn-bg-hl);
     color: var(--tn-blue);
     font-weight: 600;
     border-bottom: 2px solid var(--tn-blue);
@@ -562,14 +598,7 @@ body.theme-light .callout[data-callout="cite"] {
     text-align: left;
 }
 
-.markdown-rendered td {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--tn-gutter);
-    color: var(--tn-fg);
-}
-
-.markdown-rendered tr:nth-child(even) td { background: rgba(var(--tn-blue-rgb), 0.05); }
-.markdown-rendered tr:hover td           { background: var(--tn-bg-hl); }
+.markdown-rendered td { color: var(--tn-fg); }
 
 /* ============================================================
  * Horizontal Rule
@@ -847,12 +876,13 @@ input[type="checkbox"][data-task="!"]::before {
     transition: background var(--anim-fast) var(--anim-smooth);
 }
 
-/* Active file — color, background and weight all via the --nav-item-*-active
-   variables, so the bold (500) persists when the active file is also hovered
-   (app.css's active+hover rule reads --nav-item-weight-active). */
+/* Active file — distinguished by the blue-tinted background + left accent bar
+   (inset shadow, no layout shift) + brighter text, NOT by weight. Bold (500) is
+   reserved for folder titles, so the active file no longer reads like a folder. */
 .nav-file-title.is-active,
 .tree-item-self.is-active {
-    color: var(--tn-blue);
+    color: var(--tn-fg);
+    box-shadow: inset 2px 0 0 var(--tn-blue);
 }
 
 /* ============================================================
