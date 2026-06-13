@@ -26,6 +26,7 @@
     --cp-fg-dim:    #bac2de;
     --cp-comment:   #7f849c;
     --cp-lavender:  #b4befe;
+    --cp-lavender-rgb: 180, 190, 254;
     --cp-blue:      #89b4fa;
     --cp-cyan:      #89dceb;
     --cp-teal:      #94e2d5;
@@ -220,32 +221,37 @@ hr {
 
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;   /* `separate` so border-radius applies */
+    border-spacing: 0;
     margin: 1.25rem 0;
     font-size: 0.9em;
+    border: 1px solid var(--cp-gutter);
+    border-radius: 8px;
+    overflow: hidden;            /* clip cells to the rounded frame */
 }
 
-thead tr {
-    background: var(--cp-bg-hl);
-    border-bottom: 2px solid var(--cp-blue);
+thead tr { background: var(--cp-bg-hl); }
+
+th, td {
+    border: none;
+    border-right:  1px solid var(--cp-gutter);   /* single internal grid lines */
+    border-bottom: 1px solid var(--cp-gutter);
 }
+th:last-child, td:last-child { border-right: none; }
+tbody tr:last-child td       { border-bottom: none; }
 
 th {
     padding: 0.6rem 1rem;
     text-align: left;
-    color: var(--cp-blue);
+    color: var(--cp-magenta);
     font-weight: 600;
+    border-bottom: 2px solid var(--cp-magenta);   /* mauve header divider (Catppuccin accent) */
     font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
 }
 
-td {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--cp-gutter);
-    color: var(--cp-fg);
-}
+td { padding: 0.5rem 1rem; color: var(--cp-fg); vertical-align: top; }
 
-tr:nth-child(even) td { background: var(--cp-bg-hl); }
-tr:hover td           { background: var(--cp-bg-hl); }
+tr:hover td { background: rgba(var(--cp-lavender-rgb), 0.20); }   /* lavender, matching the nav hover */
 
 /* ============================================================
  * Lists
