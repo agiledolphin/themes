@@ -26,6 +26,7 @@
     --cp-fg-dim:    #5c5f77;
     --cp-comment:   #8c8fa1;
     --cp-lavender:  #7287fd;
+    --cp-lavender-rgb: 114, 135, 253;
     --cp-blue:      #1e66f5;
     --cp-cyan:      #04a5e5;
     --cp-teal:      #179299;
@@ -182,12 +183,34 @@ blockquote blockquote { border-left-color: var(--cp-magenta); }
 
 hr { border: none; border-top: 1px solid var(--cp-gutter); margin: 2rem 0; }
 
-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9em; }
-thead tr { background: var(--cp-bg-hl); border-bottom: 2px solid var(--cp-blue); }
-th { padding: 0.6rem 1rem; text-align: left; color: var(--cp-blue); font-weight: 600; font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif; }
-td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--cp-gutter); color: var(--cp-fg); }
-tr:nth-child(even) td { background: var(--cp-bg-hl); }
-tr:hover td           { background: var(--cp-bg-hl); }
+table {
+    width: 100%;
+    border-collapse: separate;   /* `separate` so border-radius applies */
+    border-spacing: 0;
+    margin: 1.25rem 0;
+    font-size: 0.9em;
+    border: 1px solid var(--cp-gutter);
+    border-radius: 8px;
+    overflow: hidden;            /* clip cells to the rounded frame */
+}
+thead tr { background: var(--cp-bg-hl); }
+th, td {
+    border: none;
+    border-right:  1px solid var(--cp-gutter);   /* single internal grid lines */
+    border-bottom: 1px solid var(--cp-gutter);
+}
+th:last-child, td:last-child { border-right: none; }
+tbody tr:last-child td       { border-bottom: none; }
+th {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--cp-magenta);
+    font-weight: 600;
+    border-bottom: 2px solid var(--cp-magenta);   /* mauve header divider (Catppuccin accent) */
+    font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+}
+td { padding: 0.5rem 1rem; color: var(--cp-fg); vertical-align: top; }
+tr:hover td { background: rgba(var(--cp-lavender-rgb), 0.20); }   /* lavender, matching the nav hover */
 
 ul, ol { padding-left: 1.75rem; margin: 0.5rem 0; }
 li { margin: 0.3rem 0; }

@@ -24,6 +24,7 @@
     --tn-fg-dim:    #a9b1d6;
     --tn-comment:   #565f89;
     --tn-blue:      #7aa2f7;
+    --tn-blue-rgb:  122, 162, 247;
     --tn-cyan:      #7dcfff;
     --tn-green:     #9ece6a;
     --tn-yellow:    #e0af68;
@@ -172,12 +173,34 @@ hr { border: none; border-top: 1px solid var(--tn-gutter); margin: 2rem 0; }
  * Tables
  * ============================================================ */
 
-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9em; }
-thead tr { background: var(--tn-bg-hl); border-bottom: 2px solid var(--tn-blue); }
-th { padding: 0.6rem 1rem; text-align: left; color: var(--tn-blue); font-weight: 600; font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif; }
-td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--tn-gutter); color: var(--tn-fg); }
-tr:nth-child(even) td { background: rgba(41, 46, 66, 0.4); }
-tr:hover td { background: var(--tn-bg-hl); }
+table {
+    width: 100%;
+    border-collapse: separate;   /* `separate` so border-radius applies */
+    border-spacing: 0;
+    margin: 1.25rem 0;
+    font-size: 0.9em;
+    border: 1px solid var(--tn-gutter);
+    border-radius: 8px;
+    overflow: hidden;            /* clip cells to the rounded frame */
+}
+thead tr { background: var(--tn-bg-hl); }
+th, td {
+    border: none;
+    border-right:  1px solid var(--tn-gutter);   /* single internal grid lines */
+    border-bottom: 1px solid var(--tn-gutter);
+}
+th:last-child, td:last-child { border-right: none; }
+tbody tr:last-child td       { border-bottom: none; }
+th {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--tn-blue);
+    font-weight: 600;
+    border-bottom: 2px solid var(--tn-blue);   /* header divider accent */
+    font-family: "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+}
+td { padding: 0.5rem 1rem; color: var(--tn-fg); vertical-align: top; }
+tr:hover td { background: rgba(var(--tn-blue-rgb), 0.20); }   /* distinct from header bg-hl */
 
 /* ============================================================
  * Lists
