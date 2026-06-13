@@ -333,6 +333,18 @@ body.theme-light {
     --ribbon-tab-color-hover:      var(--cp-fg);
     --ribbon-tab-background-hover: var(--cp-bg-hl);
 
+    /* --- Tables ---
+       Neutral bg-hl header, lavender hover (matching the nav's hover language).
+       Zebra is off; column-alt is forced transparent so app.css's td-level
+       column rule can't override anything. Header hover is pinned to bg-hl
+       (its default `inherit` would reveal the page bg → white on hover). */
+    --table-header-background:        var(--cp-bg-hl);
+    --table-header-background-hover:  var(--cp-bg-hl);
+    --table-row-alt-background:       transparent;   /* zebra off */
+    --table-column-alt-background:    transparent;
+    --table-row-background-hover:     rgba(var(--cp-lavender-rgb), 0.20);
+    --table-row-alt-background-hover: rgba(var(--cp-lavender-rgb), 0.20);
+
     /* --- Tooltips --- */
     --tooltip-background: var(--cp-bg-dark);
     --tooltip-color:      var(--cp-fg);
@@ -558,25 +570,43 @@ body.theme-light .callout[data-callout="cite"] {
  * Tables
  * ============================================================ */
 
-.markdown-rendered table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+/* Rounded outer frame: needs `separate` (the collapse model ignores
+   border-radius); overflow:hidden clips the cell backgrounds to the radius. */
+.markdown-rendered table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.9em;
+    border: 1px solid var(--cp-gutter);
+    border-radius: 8px;
+    overflow: hidden;
+}
 
+/* Reset app.css's full per-cell border, then draw single internal grid lines
+   (right + bottom per cell); the outer edges are the table's own border. */
+.markdown-rendered th,
+.markdown-rendered td {
+    border: none;
+    border-right:  1px solid var(--cp-gutter);
+    border-bottom: 1px solid var(--cp-gutter);
+    padding: 0.5rem 1rem;
+    vertical-align: top;
+}
+.markdown-rendered th:last-child,
+.markdown-rendered td:last-child       { border-right: none; }
+.markdown-rendered tbody tr:last-child td { border-bottom: none; }
+
+/* Header — bg via --table-header-background (on <thead tr>); mauve text + a 2px
+   mauve underline (Catppuccin's signature accent) as the header/body divider. */
 .markdown-rendered th {
-    background: var(--cp-bg-hl);
-    color: var(--cp-blue);
+    color: var(--cp-magenta);
     font-weight: 600;
-    border-bottom: 2px solid var(--cp-blue);
+    border-bottom: 2px solid var(--cp-magenta);
     padding: 0.6rem 1rem;
     text-align: left;
 }
 
-.markdown-rendered td {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--cp-gutter);
-    color: var(--cp-fg);
-}
-
-.markdown-rendered tr:nth-child(even) td { background: rgba(var(--cp-blue-rgb), 0.05); }
-.markdown-rendered tr:hover td           { background: var(--cp-bg-hl); }
+.markdown-rendered td { color: var(--cp-fg); }
 
 /* ============================================================
  * Horizontal Rule
