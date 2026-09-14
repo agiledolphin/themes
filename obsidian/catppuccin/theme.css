@@ -905,6 +905,14 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
     color:            var(--cp-fg);
 }
 
+/* Rename input: app.css's :focus-within rule reuses --nav-item-color-active
+   (mantle, meant for text on the mauve active-file fill) for the rename
+   text color, but renaming has no fill background — leaving the text nearly
+   invisible on the plain background. Restore normal readable text. */
+.tree-item-self.is-being-renamed:focus-within {
+    color: var(--cp-fg);
+}
+
 /* ============================================================
  * Workspace / Tab bar
  * ============================================================ */
