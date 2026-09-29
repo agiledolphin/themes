@@ -236,6 +236,14 @@ body.theme-light {
     --interactive-accent-rgb:   var(--tn-blue-rgb);
     --interactive-success:      var(--tn-green);
 
+    /* --- Blockquote ---
+       Obsidian reads these same variables for both Reading mode
+       (.markdown-rendered blockquote) and Live Preview (.HyperMD-quote),
+       so setting them here (instead of hardcoding colors only on the
+       Reading-mode selector) keeps the two modes visually consistent. */
+    --blockquote-background-color: transparent;
+    --blockquote-color:            var(--tn-fg-dim);
+
     /* --- Links --- */
     --link-color:                var(--tn-blue);
     --link-color-hover:          var(--tn-cyan);
@@ -488,10 +496,10 @@ a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color:
 .markdown-rendered blockquote {
     border-left: 2px solid var(--tn-blue);
     border-right: none;
-    background: var(--tn-bg-hl);
+    background: var(--blockquote-background-color);
     border-radius: 0 6px 6px 0;
     padding: 0.75rem 1.25rem;
-    color: var(--tn-fg-dim);
+    color: var(--blockquote-color);
     margin: 1rem 0;
 }
 
@@ -510,6 +518,11 @@ a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color:
     display: flex !important;
     align-items: center !important;
     gap: 0.4em !important;
+    /* app.css's own `color: var(--callout-color)` is a no-op here since our
+       --callout-color values are comma-separated RGB triples (for rgba()
+       backgrounds), not standalone colors — wrap it so title text (and the
+       icon, which inherits via currentColor) actually take the per-type hue. */
+    color: rgb(var(--callout-color)) !important;
 }
 .callout-content { padding: 0.5rem 1rem !important; }
 
