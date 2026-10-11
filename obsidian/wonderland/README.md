@@ -43,6 +43,10 @@ The palette is deliberately restrained: desaturated indigo-black grounds, cool g
 - **Task list** — 7 states with custom circular checkboxes: `x`, `/`, `-`, `>`, `?`, `!`
 - **Rounded grid tables** — brass header text and underline, brass row hover, no zebra striping
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC
+- **Search highlights** — one dedicated search color (cyan), distinct from highlighted text and the selection, in the search pane, in-note find (Cmd/Ctrl+F) and reading mode
+- **Context menus** — menus sit on a darker surface than the editor; the selected item uses a brass tint (matching the file explorer hover), and destructive items such as Delete turn red when selected
+
+> **Note (macOS):** Obsidian uses native system menus on macOS by default, and themes cannot style those. To see the themed context menus, turn off **Settings → Interface → Advanced → Native menus**.
 
 ---
 
