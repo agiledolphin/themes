@@ -93,7 +93,6 @@
 | 搜索高亮 | 搜索结果匹配文字背景色（三套主题） | ☐ |
 | 右键菜单 | `.menu`、`.menu-item` 背景和悬停色（三套主题） | ☐ |
 | Wonderland Mod 调色 | 在 Obsidian / Typora 中实际查看后微调（黄铜强度、Office District 与 Underground 的区分度） | ☐ |
-| sync-obsidian.sh 提示语 | 结束提示固定写着「select TokyoNight」，应改为通用文案 | ☐ |
 
 ### 阶段 2 — 多变体验证
 
