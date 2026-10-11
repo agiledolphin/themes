@@ -36,6 +36,10 @@ Each variant carries its own full palette — colors are not approximated or sha
 - **Consistent inline styles** — highlighted text and inline code render identically in reading and editing modes
 - **File explorer polish** — folder icon coloring, hover gradient, active file highlight
 - **Notice styling** — toast notifications styled to match the theme palette
+- **Search highlights** — one dedicated search color (orange), distinct from highlighted text and the selection, in the search pane, in-note find (Cmd/Ctrl+F) and reading mode
+- **Context menus** — menus sit on a darker surface than the editor; the selected item uses a blue tint (matching the file explorer hover), and destructive items such as Delete turn red when selected
+
+> **Note (macOS):** Obsidian uses native system menus on macOS by default, and themes cannot style those. To see the themed context menus, turn off **Settings → Interface → Advanced → Native menus**.
 
 ---
 
