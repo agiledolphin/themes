@@ -1,0 +1,976 @@
+/* ============================================================
+ * Wonderland Mod — Obsidian Theme
+ * Inspired by the "Hard-Boiled Wonderland" half of Haruki Murakami's
+ * Hard-Boiled Wonderland and the End of the World: a cold, deadpan,
+ * faintly surreal Tokyo — rain-dark streets, the INKlings' flooded
+ * underground, skull-lined labs, and the warm brass of a desk lamp or
+ * a whisky bar as the only warmth in the room.
+ *
+ * Variants: Underground · Office District (dark) · Lab (light)
+ * Requires: Style Settings plugin for variant switching
+ * ============================================================ */
+
+/* @settings
+
+name: Wonderland Mod
+id: wonderland
+settings:
+  -
+    id: wl-dark-scheme
+    title: Dark Mode Scheme
+    description: Color variant used when Obsidian is in dark mode
+    type: class-select
+    default: wl-underground
+    options:
+      -
+        label: Underground
+        value: wl-underground
+      -
+        label: Office District
+        value: wl-office
+  -
+    id: wl-light-scheme
+    title: Light Mode Scheme
+    description: Color variant used when Obsidian is in light mode
+    type: class-select
+    default: wl-lab
+    options:
+      -
+        label: Lab
+        value: wl-lab
+  -
+    id: wl-hide-folder-icons
+    title: Hide Folder Icons
+    description: Hide the folder icons in the file explorer
+    type: class-toggle
+    default: false
+
+*/
+
+/* ============================================================
+ * Palettes
+ *
+ * Dark mode:  body.theme-dark  + wl-{underground|office}
+ * Light mode: body.theme-light + wl-lab (only light variant)
+ *
+ * Roles: brass = UI accent (lamp light), cyan/steel = cold data,
+ * blood = danger, bone = skull-white highlight.
+ * ============================================================ */
+
+/* --- Dark: Underground (default) — the INKlings' sewers; darkest, coldest --- */
+
+body.theme-dark,
+body.theme-dark.wl-underground {
+    --wl-bg:        #121218;
+    --wl-bg-dark:   #0c0c11;
+    --wl-bg-hl:     #1e1f29;
+    --wl-gutter:    #2c2e3b;
+    --wl-fg:        #c6c8d4;
+    --wl-fg-dim:    #a3a6b8;
+    --wl-comment:   #686c82;
+    --wl-brass:     #c39a5f;
+    --wl-yellow:    #d8c27a;
+    --wl-rust:      #c47a4a;
+    --wl-blood:     #c25a50;
+    --wl-moss:      #7c9a74;
+    --wl-teal:      #6fa8a0;
+    --wl-cyan:      #7fcfcf;
+    --wl-steel:     #7d9ac4;
+    --wl-violet:    #9a8cc0;
+    --wl-bone:      #e6e1d3;
+    --wl-selection: #2f3242;
+    --wl-brass-rgb:   195, 154,  95;
+    --wl-yellow-rgb:  216, 194, 122;
+    --wl-rust-rgb:    196, 122,  74;
+    --wl-blood-rgb:   194,  90,  80;
+    --wl-moss-rgb:    124, 154, 116;
+    --wl-teal-rgb:    111, 168, 160;
+    --wl-cyan-rgb:    127, 207, 207;
+    --wl-steel-rgb:   125, 154, 196;
+    --wl-violet-rgb:  154, 140, 192;
+    --wl-comment-rgb: 104, 108, 130;
+    --wl-bone-rgb:    230, 225, 211;
+}
+
+/* --- Dark: Office District — Tokyo at night above ground; a shade lighter, warmer --- */
+
+body.theme-dark.wl-office {
+    --wl-bg:        #1a1a20;
+    --wl-bg-dark:   #141418;
+    --wl-bg-hl:     #26262e;
+    --wl-gutter:    #36363f;
+    --wl-fg:        #d0ccc2;
+    --wl-fg-dim:    #aea99e;
+    --wl-comment:   #77736c;
+    --wl-brass:     #d4a85e;
+    --wl-yellow:    #e2c47a;
+    --wl-rust:      #cf8350;
+    --wl-blood:     #c95f53;
+    --wl-moss:      #869f78;
+    --wl-teal:      #79ada3;
+    --wl-cyan:      #86cccb;
+    --wl-steel:     #8aa0c4;
+    --wl-violet:    #a493c4;
+    --wl-bone:      #ece5d4;
+    --wl-selection: #3a3a44;
+    --wl-brass-rgb:   212, 168,  94;
+    --wl-yellow-rgb:  226, 196, 122;
+    --wl-rust-rgb:    207, 131,  80;
+    --wl-blood-rgb:   201,  95,  83;
+    --wl-moss-rgb:    134, 159, 120;
+    --wl-teal-rgb:    121, 173, 163;
+    --wl-cyan-rgb:    134, 204, 203;
+    --wl-steel-rgb:   138, 160, 196;
+    --wl-violet-rgb:  164, 147, 196;
+    --wl-comment-rgb: 119, 115, 108;
+    --wl-bone-rgb:    236, 229, 212;
+}
+
+/* --- Light: Lab (default) — the System's sterile laboratory; cold white --- */
+
+body.theme-light,
+body.theme-light.wl-lab {
+    --wl-bg:        #eef0f2;
+    --wl-bg-dark:   #e3e6ea;
+    --wl-bg-hl:     #d5d9df;
+    --wl-gutter:    #c2c7cf;
+    --wl-fg:        #2b2f3a;
+    --wl-fg-dim:    #474c5a;
+    --wl-comment:   #7d8391;
+    --wl-brass:     #8f6426;
+    --wl-yellow:    #8a6a0e;
+    --wl-rust:      #a8521e;
+    --wl-blood:     #a8323a;
+    --wl-moss:      #4a7140;
+    --wl-teal:      #2d7a72;
+    --wl-cyan:      #1d7c88;
+    --wl-steel:     #3a5e94;
+    --wl-violet:    #6a5596;
+    --wl-bone:      #5a5446;   /* graphite: bone-white would vanish on a light ground */
+    --wl-selection: #c9d0db;
+    --wl-brass-rgb:   143, 100,  38;
+    --wl-yellow-rgb:  138, 106,  14;
+    --wl-rust-rgb:    168,  82,  30;
+    --wl-blood-rgb:   168,  50,  58;
+    --wl-moss-rgb:     74, 113,  64;
+    --wl-teal-rgb:     45, 122, 114;
+    --wl-cyan-rgb:     29, 124, 136;
+    --wl-steel-rgb:    58,  94, 148;
+    --wl-violet-rgb:  106,  85, 150;
+    --wl-comment-rgb: 125, 131, 145;
+    --wl-bone-rgb:     90,  84,  70;
+}
+
+/* ============================================================
+ * Obsidian Variable Mapping
+ * ============================================================ */
+
+body.theme-dark,
+body.theme-light {
+    /* --- Backgrounds --- */
+    --background-primary:                   var(--wl-bg);
+    --background-primary-alt:               var(--wl-bg);
+    --background-secondary:                 var(--wl-bg);
+    --background-secondary-alt:             var(--wl-bg);
+    --background-tertiary:                  var(--wl-bg-dark);
+    --background-modifier-hover:            var(--wl-bg-hl);
+    --background-modifier-active-hover:     var(--wl-bg-hl);
+    --background-modifier-border:           var(--wl-gutter);
+    --background-modifier-border-hover:     var(--wl-gutter);
+    --background-modifier-border-focus:     var(--wl-brass);
+    --background-modifier-form-field:       var(--wl-bg-dark);
+    --background-modifier-form-field-highlighted: var(--wl-bg-hl);
+    --background-modifier-error:            rgba(var(--wl-blood-rgb), 0.15);
+    --background-modifier-error-hover:      rgba(var(--wl-blood-rgb), 0.25);
+    --background-modifier-success:          rgba(var(--wl-moss-rgb), 0.15);
+    --background-modifier-message:          var(--wl-bg-hl);
+
+    /* --- Text --- */
+    --text-normal:          var(--wl-fg);
+    --text-muted:           var(--wl-fg-dim);
+    --text-faint:           var(--wl-comment);
+    --text-on-accent:       var(--wl-bg);
+    --text-on-accent-muted: var(--wl-bg-hl);
+    --text-error:           var(--wl-blood);
+    --text-warning:         var(--wl-yellow);
+    --text-success:         var(--wl-moss);
+    --text-accent:          var(--wl-brass);
+    --text-accent-hover:    var(--wl-yellow);
+    --text-selection:       var(--wl-selection);
+    --text-highlight-bg:        rgba(var(--wl-yellow-rgb), 0.18);
+    --text-highlight-bg-active: rgba(var(--wl-yellow-rgb), 0.18);
+
+    /* --- Interactive --- */
+    --interactive-normal:       var(--wl-bg-hl);
+    --interactive-hover:        var(--wl-gutter);
+    --interactive-accent:       var(--wl-brass);
+    --interactive-accent-hover: var(--wl-yellow);
+    --interactive-accent-rgb:   var(--wl-brass-rgb);
+    --interactive-success:      var(--wl-moss);
+
+    /* --- Blockquote ---
+       Shared by Reading mode (.markdown-rendered blockquote) and Live
+       Preview (.HyperMD-quote), so both modes stay consistent. */
+    --blockquote-background-color: transparent;
+    --blockquote-color:            var(--wl-fg-dim);
+
+    /* --- Links: cold steel, cyan on hover --- */
+    --link-color:                var(--wl-steel);
+    --link-color-hover:          var(--wl-cyan);
+    --link-external-color:       var(--wl-steel);
+    --link-external-color-hover: var(--wl-cyan);
+    --link-unresolved-color:     var(--wl-comment);
+    --link-unresolved-opacity:   1;
+
+    /* --- Code --- */
+    --code-background:  var(--wl-bg-dark);
+    --code-normal:      var(--wl-fg);
+    --code-comment:     var(--wl-comment);
+    --code-function:    var(--wl-steel);
+    --code-important:   var(--wl-violet);
+    --code-keyword:     var(--wl-violet);
+    --code-operator:    var(--wl-cyan);
+    --code-property:    var(--wl-yellow);
+    --code-punctuation: var(--wl-fg-dim);
+    --code-string:      var(--wl-moss);
+    --code-tag:         var(--wl-blood);
+    --code-value:       var(--wl-rust);
+
+    /* --- Headings --- */
+    --h1-color: var(--wl-cyan);
+    --h2-color: var(--wl-brass);
+    --h3-color: var(--wl-steel);
+    --h4-color: var(--wl-teal);
+    --h5-color: var(--wl-moss);
+    --h6-color: var(--wl-comment);
+
+    /* --- Tags --- */
+    --tag-color:            var(--wl-brass);
+    --tag-background:       rgba(var(--wl-brass-rgb), 0.12);
+    --tag-background-hover: rgba(var(--wl-brass-rgb), 0.22);
+    --tag-border-color:     transparent;
+    --tag-border-width:     0px;
+    --tag-padding-x:        0.45em;
+    --tag-padding-y:        0.1em;
+    --tag-radius:           4px;
+
+    /* --- Checkboxes --- */
+    --checkbox-color:            var(--wl-brass);
+    --checkbox-color-hover:      var(--wl-yellow);
+    --checkbox-border-color:     var(--wl-gutter);
+    --checkbox-marker-color:     var(--wl-bg);
+    --checklist-done-color:      var(--wl-comment);
+    --checklist-done-decoration: line-through;
+
+    /* --- Callouts --- */
+    --callout-border-width:   0px;
+    --callout-border-opacity: 0;
+    --callout-padding:        0.75rem 1rem;
+    --callout-radius:         6px;
+
+    /* --- Scrollbars --- */
+    --scrollbar-bg:              transparent;
+    --scrollbar-thumb-bg:        var(--wl-gutter);
+    --scrollbar-active-thumb-bg: var(--wl-fg-dim);
+
+    /* --- File explorer nav ---
+       Restrained: a brass tint + left bar marks the open file instead of a
+       solid fill, so the active text stays the normal foreground color. */
+    --nav-item-color:              var(--wl-fg-dim);
+    --nav-item-color-hover:        var(--wl-fg);
+    --nav-item-background-hover:   var(--wl-bg-hl);
+    --nav-item-background-active:  rgba(var(--wl-brass-rgb), 0.12);
+    --nav-item-color-active:       var(--wl-fg);
+    --nav-heading-color:           var(--wl-fg);
+
+    /* --- Graph --- */
+    --graph-color-line:             var(--wl-gutter);
+    --graph-color-text:             var(--wl-fg-dim);
+    --graph-color-fill:             var(--wl-bg);
+    --graph-color-fill-tag:         var(--wl-brass);
+    --graph-color-fill-attachment:  var(--wl-cyan);
+    --graph-color-fill-unresolved:  var(--wl-comment);
+    --graph-color-fill-focused:     var(--wl-steel);
+    --graph-color-arrow:            var(--wl-gutter);
+    --graph-color-node:             var(--wl-fg-dim);
+
+    /* --- Ribbon --- */
+    --ribbon-background:           var(--wl-bg);
+    --ribbon-background-collapsed: var(--wl-bg);
+    --ribbon-tab-color:            var(--wl-comment);
+    --ribbon-tab-color-hover:      var(--wl-fg);
+    --ribbon-tab-background-hover: var(--wl-bg-hl);
+
+    /* --- Tables ---
+       Zebra off; column-alt forced transparent so app.css's td-level column
+       rule can't override; header hover pinned (default `inherit` would
+       reveal the page bg on hover). */
+    --table-header-background:        var(--wl-bg-hl);
+    --table-header-background-hover:  var(--wl-bg-hl);
+    --table-row-alt-background:       transparent;
+    --table-column-alt-background:    transparent;
+    --table-row-background-hover:     rgba(var(--wl-brass-rgb), 0.12);
+    --table-row-alt-background-hover: rgba(var(--wl-brass-rgb), 0.12);
+
+    /* --- Tooltips --- */
+    --tooltip-background: var(--wl-bg-dark);
+    --tooltip-color:      var(--wl-fg);
+
+    /* --- Animation --- */
+    --anim-fast:     140ms;
+    --anim-moderate: 300ms;
+    --anim-smooth:   cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+/* ============================================================
+ * Typography & Headings
+ * ============================================================ */
+
+body {
+    --font-text-theme:      "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", Georgia, serif;
+    --font-interface-theme: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
+    --font-monospace-theme: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+    --line-height-normal:   1.75;
+    --font-text-size:       16px;
+    --font-interface-size:  14px;
+
+    --h1-size:        2em;
+    --h2-size:        1.5em;
+    --h3-size:        1.25em;
+    --h4-size:        1.1em;
+    --h5-size:        1em;
+    --h6-size:        0.9em;
+    --h1-weight:      600;
+    --h2-weight:      600;
+    --h3-weight:      600;
+    --h4-weight:      600;
+    --h5-weight:      600;
+    --h6-weight:      600;
+    --h1-line-height: 1.3;
+    --h2-line-height: 1.3;
+}
+
+.markdown-rendered h1 {
+    border-bottom: 2px solid var(--wl-gutter);
+    padding-bottom: 0.25em;
+    margin-bottom: 0.75em !important;
+}
+
+.markdown-source-view .cm-line:has(.cm-header-1) {
+    border-bottom: 2px solid var(--wl-gutter);
+    padding-bottom: 0.1em;
+    margin-bottom: 0.5em;
+}
+
+/* ============================================================
+ * Inline emphasis
+ * ============================================================ */
+
+.markdown-rendered strong, .cm-strong { color: inherit; }
+.markdown-rendered em,     .cm-em     { color: inherit; }
+.markdown-rendered del,    .cm-strikethrough { color: var(--wl-comment); }
+
+.markdown-rendered mark,
+.cm-highlight {
+    background: rgba(var(--wl-yellow-rgb), 0.18) !important;
+    color: var(--wl-yellow) !important;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+/* ============================================================
+ * Links
+ * ============================================================ */
+
+/* Reading mode — all link types: underline hidden at rest, shown on hover */
+.markdown-rendered a {
+    color: var(--wl-steel);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-rendered a:hover    { color: var(--wl-cyan); text-decoration-color: var(--wl-cyan); }
+a.is-unresolved               { color: var(--wl-comment); opacity: 1; text-decoration-color: transparent !important; }
+a.is-unresolved:hover         { color: var(--wl-comment); text-decoration-color: var(--wl-comment) !important; }
+
+/* Editor mode — internal links */
+.cm-hmd-internal-link .cm-underline {
+    color: var(--wl-steel);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.cm-hmd-internal-link { text-decoration: none !important; }
+.cm-hmd-internal-link:hover .cm-underline { color: var(--wl-cyan) !important; text-decoration-color: var(--wl-cyan) !important; }
+.is-unresolved { text-decoration: none !important; }
+.is-unresolved .cm-underline { color: var(--wl-comment) !important; text-decoration-color: transparent !important; }
+.is-unresolved:hover .cm-underline { color: var(--wl-comment) !important; text-decoration-color: var(--wl-comment) !important; }
+
+/* Editor mode — external links and markdown links */
+.markdown-source-view.mod-cm6 .cm-url .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link .cm-underline {
+    text-decoration-color: transparent;
+    transition: color var(--anim-fast) var(--anim-smooth),
+                text-decoration-color var(--anim-fast) var(--anim-smooth);
+}
+.markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
+.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
+
+/* ============================================================
+ * Inline Code
+ * ============================================================ */
+
+.markdown-rendered code,
+.cm-inline-code {
+    font-family: var(--font-monospace-theme);
+    color: var(--wl-fg);
+    background: var(--wl-bg-dark);
+    border: 1px solid var(--wl-gutter);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.875em;
+}
+.cm-inline-code {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+/* ============================================================
+ * Code Blocks
+ * ============================================================ */
+
+.markdown-rendered pre,
+.markdown-source-view pre {
+    background: var(--wl-bg-dark) !important;
+    border: 1px solid var(--wl-gutter);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    line-height: 1.6;
+}
+
+.markdown-rendered pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--wl-fg);
+    font-size: inherit;
+}
+
+/* ============================================================
+ * Blockquotes
+ * ============================================================ */
+
+.markdown-rendered blockquote {
+    border-left: 2px solid var(--wl-brass);
+    border-right: none;
+    background: var(--blockquote-background-color);
+    border-radius: 0 6px 6px 0;
+    padding: 0.75rem 1.25rem;
+    color: var(--blockquote-color);
+    margin: 1rem 0;
+}
+
+.markdown-rendered blockquote p { margin: 0.3rem 0; }
+
+/* ============================================================
+ * Callouts
+ * ============================================================ */
+
+.callout { border-radius: 8px; overflow: hidden; }
+
+.callout-title {
+    padding: 0.6rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4em !important;
+    /* --callout-color holds an RGB triple (for the rgba() backgrounds), so
+       app.css's plain `color: var(--callout-color)` would be invalid — wrap it. */
+    color: rgb(var(--callout-color)) !important;
+}
+.callout-content { padding: 0.5rem 1rem !important; }
+
+body.theme-dark .callout {
+    mix-blend-mode: normal !important;
+    background-color: rgba(var(--callout-color), 0.10) !important;
+}
+
+body.theme-light .callout {
+    mix-blend-mode: normal !important;
+    background-color: rgba(var(--callout-color), 0.12) !important;
+}
+
+.callout[data-callout="note"],
+.callout[data-callout="info"],
+.callout[data-callout="todo"]             { --callout-color: var(--wl-steel-rgb); }
+.callout[data-callout="abstract"],
+.callout[data-callout="summary"],
+.callout[data-callout="tldr"]             { --callout-color: var(--wl-teal-rgb); }
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="important"]        { --callout-color: var(--wl-cyan-rgb); }
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"]             { --callout-color: var(--wl-moss-rgb); }
+.callout[data-callout="question"],
+.callout[data-callout="faq"],
+.callout[data-callout="help"]             { --callout-color: var(--wl-yellow-rgb); }
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"]        { --callout-color: var(--wl-rust-rgb); }
+.callout[data-callout="failure"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"]          { --callout-color: var(--wl-blood-rgb); }
+.callout[data-callout="danger"],
+.callout[data-callout="error"],
+.callout[data-callout="bug"]              { --callout-color: var(--wl-blood-rgb); }
+.callout[data-callout="example"]          { --callout-color: var(--wl-violet-rgb); }
+.callout[data-callout="quote"],
+.callout[data-callout="cite"]             { --callout-color: var(--wl-comment-rgb); }
+
+body.theme-light .callout[data-callout="quote"],
+body.theme-light .callout[data-callout="cite"] {
+    background-color: rgba(var(--wl-comment-rgb), 0.20) !important;
+}
+
+/* ============================================================
+ * Tables
+ * ============================================================ */
+
+/* Rounded outer frame: needs `separate` (the collapse model ignores
+   border-radius); overflow:hidden clips the cell backgrounds to the radius. */
+.markdown-rendered table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 0.9em;
+    border: 1px solid var(--wl-gutter);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Reset app.css's full per-cell border, then draw single internal grid lines
+   (right + bottom per cell); the outer edges are the table's own border. */
+.markdown-rendered th,
+.markdown-rendered td {
+    border: none;
+    border-right:  1px solid var(--wl-gutter);
+    border-bottom: 1px solid var(--wl-gutter);
+    padding: 0.5rem 1rem;
+    vertical-align: top;
+}
+.markdown-rendered th:last-child,
+.markdown-rendered td:last-child       { border-right: none; }
+.markdown-rendered tbody tr:last-child td { border-bottom: none; }
+
+/* Header — brass text + a 2px brass underline as the header/body divider. */
+.markdown-rendered th {
+    color: var(--wl-brass);
+    font-weight: 600;
+    border-bottom: 2px solid var(--wl-brass);
+    padding: 0.6rem 1rem;
+    text-align: left;
+}
+
+.markdown-rendered td { color: var(--wl-fg); }
+
+/* ============================================================
+ * Horizontal Rule
+ * ============================================================ */
+
+.markdown-rendered hr { border: none; border-top: 1px solid var(--wl-gutter); margin: 2rem 0; }
+
+/* ============================================================
+ * Task List
+ * ============================================================ */
+
+.task-list-item-checkbox,
+input[type="checkbox"].task-list-item-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    width:  1.2em;
+    height: 1.2em;
+    border: 1px solid var(--wl-comment);
+    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: 0.1em;
+    position: relative;
+    overflow: hidden;
+    margin-right: 0.4em;
+    flex-shrink: 0;
+    cursor: default;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+.task-list-item-checkbox:hover,
+input[type="checkbox"].task-list-item-checkbox:hover {
+    border-color: var(--checkbox-color) !important;
+}
+
+.task-list-item-checkbox::after,
+input[type="checkbox"].task-list-item-checkbox::after {
+    display: none !important;
+}
+
+/* ── [x] Checked ── */
+.task-list-item[data-task="x"] .task-list-item-checkbox,
+.task-list-item[data-task="X"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="x"],
+input[type="checkbox"][data-task="X"] {
+    background-color: var(--checkbox-color) !important;
+    background-image: none !important;
+    border-color: var(--checkbox-color) !important;
+}
+.task-list-item[data-task="x"] .task-list-item-checkbox:hover,
+.task-list-item[data-task="X"] .task-list-item-checkbox:hover,
+input[type="checkbox"][data-task="x"]:hover,
+input[type="checkbox"][data-task="X"]:hover {
+    background-color: var(--checkbox-color-hover) !important;
+    border-color: var(--checkbox-color-hover) !important;
+}
+.task-list-item[data-task="x"] .task-list-item-checkbox::before,
+.task-list-item[data-task="X"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="x"]::before,
+input[type="checkbox"][data-task="X"]::before {
+    content: "✓";
+    color: var(--wl-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+.task-list-item[data-task="x"],
+.task-list-item[data-task="X"] {
+    color: var(--wl-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--wl-comment);
+}
+.cm-line:has(input[data-task="x"]),
+.cm-line:has(input[data-task="X"]) {
+    color: var(--wl-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--wl-comment);
+}
+
+/* ── [/] In-progress ── */
+.task-list-item[data-task="/"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="/"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--wl-yellow) !important;
+}
+.task-list-item[data-task="/"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="/"]::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%; height: 100%;
+    background-color: var(--wl-yellow);
+}
+
+/* ── [-] Cancelled ── */
+.task-list-item[data-task="-"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="-"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--wl-comment) !important;
+}
+.task-list-item[data-task="-"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="-"]::before {
+    content: "—";
+    color: var(--wl-comment);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -56%);
+}
+.task-list-item[data-task="-"] {
+    color: var(--wl-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--wl-comment);
+}
+.cm-line:has(input[data-task="-"]) {
+    color: var(--wl-comment);
+    text-decoration: line-through;
+    text-decoration-color: var(--wl-comment);
+}
+
+/* ── [>] Rescheduled ── */
+.task-list-item[data-task=">"] .task-list-item-checkbox,
+input[type="checkbox"][data-task=">"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: var(--wl-cyan) !important;
+}
+.task-list-item[data-task=">"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task=">"]::before {
+    content: "▶";
+    color: var(--wl-cyan);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-42%, -50%);
+}
+
+/* ── [?] Questionable ── */
+.task-list-item[data-task="?"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="?"] {
+    background-color: var(--wl-yellow) !important;
+    background-image: none !important;
+    border-color: var(--wl-yellow) !important;
+}
+.task-list-item[data-task="?"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="?"]::before {
+    content: "?";
+    color: var(--wl-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ── [!] Important ── */
+.task-list-item[data-task="!"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="!"] {
+    background-color: var(--wl-blood) !important;
+    background-image: none !important;
+    border-color: var(--wl-blood) !important;
+}
+.task-list-item[data-task="!"] .task-list-item-checkbox::before,
+input[type="checkbox"][data-task="!"]::before {
+    content: "!";
+    color: var(--wl-bg);
+    font-family: system-ui, sans-serif;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ============================================================
+ * Tags
+ * ============================================================ */
+
+.tag {
+    color: var(--wl-brass) !important;
+    background: rgba(var(--wl-brass-rgb), 0.12);
+    border-radius: var(--tag-radius);
+    padding: var(--tag-padding-y) var(--tag-padding-x);
+    font-size: 0.85em;
+    text-decoration: none;
+}
+.tag:hover { background: rgba(var(--wl-brass-rgb), 0.22); color: var(--wl-yellow) !important; }
+
+/* ============================================================
+ * Properties / Frontmatter
+ * ============================================================ */
+
+.metadata-container {
+    background: var(--wl-bg-dark);
+    border: 1px solid var(--wl-gutter);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875em;
+}
+
+.metadata-property-key   { color: var(--wl-cyan); }
+.metadata-property-value { color: var(--wl-fg); }
+
+/* ============================================================
+ * Sidebar / File Explorer
+ * ============================================================ */
+
+.mod-left-split,
+.mod-right-split,
+.mod-left-split .workspace-tabs,
+.mod-left-split .workspace-leaf,
+.mod-right-split .workspace-tabs,
+.mod-right-split .workspace-leaf,
+.workspace-leaf-content[data-type="file-explorer"],
+.nav-files-container {
+    background-color: var(--wl-bg);
+}
+
+/* Indent guide redrawn via ::before so it paints above the (translucent)
+   active-item tint: .nav-file-title's negative margin otherwise lets the
+   active background cover a plain border-left guide. */
+.nav-folder-children {
+    position: relative;
+    z-index: 0;
+}
+.nav-folder-children::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--wl-gutter);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.nav-folder-title {
+    color: var(--wl-fg);
+    font-weight: 500;
+}
+.nav-folder-collapse-indicator { color: var(--wl-yellow); }
+
+.nav-folder-title,
+.nav-file-title { border-radius: 4px; }
+
+.nav-file-title:hover,
+.nav-folder-title:hover {
+    background: linear-gradient(90deg, rgba(var(--wl-brass-rgb), 0.15) 0%, transparent 80%);
+    transition: background var(--anim-fast) var(--anim-smooth);
+}
+
+/* Active file — brass tint (via --nav-item-background-active) + a left brass
+   bar (inset shadow, no layout shift). Weight stays normal; bold is for folders. */
+.nav-file-title.is-active,
+.tree-item-self.is-active {
+    color: var(--wl-fg);
+    box-shadow: inset 2px 0 0 var(--wl-brass);
+}
+
+/* ============================================================
+ * Workspace / Tab bar
+ * ============================================================ */
+
+.workspace-tab-header-container,
+.workspace-tab-header-container-inner { background-color: var(--wl-bg) !important; }
+.workspace-tab-header                 { background-color: var(--wl-bg) !important; }
+.workspace-tab-header.is-active       { background-color: var(--wl-bg) !important; color: var(--wl-fg); }
+.workspace-tab-header:hover           { background-color: var(--wl-bg-hl) !important; }
+
+/* ============================================================
+ * Ribbon
+ * ============================================================ */
+
+.app-container { background-color: var(--wl-bg) !important; }
+
+.workspace-ribbon,
+.workspace-ribbon.mod-left,
+.side-dock-ribbon { background-color: var(--wl-bg) !important; }
+
+/* ============================================================
+ * Status bar
+ * ============================================================ */
+
+.status-bar {
+    background-color: var(--wl-bg) !important;
+    border-top: 1px solid var(--wl-gutter);
+    color: var(--wl-comment);
+}
+
+/* ============================================================
+ * Tooltip — skull-white (graphite in Lab) on the deepest background
+ * ============================================================ */
+
+.tooltip {
+    background-color: var(--wl-bg-dark) !important;
+    color:            rgba(var(--wl-bone-rgb), 0.85) !important;
+    border:           1px solid rgba(var(--wl-bone-rgb), 0.45);
+    box-shadow:       0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.tooltip .tooltip-arrow              { border-bottom-color: rgba(var(--wl-bone-rgb), 0.45); }
+.tooltip.mod-right .tooltip-arrow   { border-right-color:  rgba(var(--wl-bone-rgb), 0.45); border-bottom-color: transparent; }
+.tooltip.mod-left  .tooltip-arrow   { border-left-color:   rgba(var(--wl-bone-rgb), 0.45); border-bottom-color: transparent; }
+.tooltip.mod-top   .tooltip-arrow   { border-top-color:    rgba(var(--wl-bone-rgb), 0.45); border-bottom-color: transparent; }
+
+/* ============================================================
+ * Search / Quick switcher / Modal
+ * ============================================================ */
+
+.prompt {
+    background: var(--wl-bg-dark);
+    border: 1px solid var(--wl-gutter);
+    border-radius: 8px;
+}
+
+.prompt-input {
+    background: var(--wl-bg-hl);
+    color: var(--wl-fg);
+    border: 1px solid var(--wl-gutter);
+    border-radius: 6px;
+}
+
+.suggestion-item.is-selected { background: var(--wl-bg-hl); color: var(--wl-brass); }
+
+/* ============================================================
+ * Selection & Cursor — the cursor is the lamp: brass
+ * ============================================================ */
+
+::selection { background: var(--wl-selection); color: var(--wl-fg); }
+
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground { background: var(--wl-selection) !important; }
+
+.cm-editor .cm-cursor { border-left-color: var(--wl-brass); }
+
+/* ============================================================
+ * Notice (toast)
+ * ============================================================ */
+
+.notice {
+    background: var(--wl-bg-hl) !important;
+    color: var(--wl-fg) !important;
+    border: 1px solid var(--wl-gutter);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+ * Folder Icons
+ * ============================================================ */
+
+.nav-folder-collapse-indicator { display: none; }
+.nav-folder.mod-root > .nav-folder-title .nav-folder-title-content::before { display: none; }
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before,
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    background-color: var(--text-accent);
+    -webkit-mask-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav-folder .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z'%3E%3C/path%3E%3Cpath d='M2 10h20'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.wl-hide-folder-icons .nav-folder .nav-folder-title .nav-folder-title-content::before,
+.wl-hide-folder-icons .nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
+    display: none !important;
+}
+.wl-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
