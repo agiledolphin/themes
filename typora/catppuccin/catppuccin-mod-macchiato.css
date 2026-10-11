@@ -1,7 +1,7 @@
 /* ============================================================
  * Catppuccin Mod Macchiato — Typora Theme
  * Palette: catppuccin.com  variant: macchiato
- * Version: 1.2.0
+ * Version: 1.2.1
  * bg: #24273a
  * ============================================================ */
 
@@ -173,7 +173,7 @@ blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1.25rem;
     border-left: 3px solid var(--cp-lavender);
-    background: var(--cp-bg-hl);
+    background: transparent;
     color: var(--cp-fg-dim);
     border-radius: 0 6px 6px 0;
 }
