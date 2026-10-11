@@ -353,6 +353,12 @@ body.theme-light {
     --table-row-background-hover:     rgba(var(--cp-lavender-rgb), 0.20);
     --table-row-alt-background-hover: rgba(var(--cp-lavender-rgb), 0.20);
 
+    /* --- Menus (right-click / context) ---
+       Raised onto the darker surface used by the quick switcher and
+       tooltips, so a menu no longer blends into the editor behind it. */
+    --menu-background:   var(--cp-bg-dark);
+    --menu-border-color: var(--cp-gutter);
+
     /* --- Tooltips --- */
     --tooltip-background: var(--cp-bg-dark);
     --tooltip-color:      var(--cp-fg);
@@ -1000,6 +1006,68 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .cm-editor.cm-focused .cm-selectionBackground { background: var(--cp-selection) !important; }
 
 .cm-editor .cm-cursor { border-left-color: var(--cp-blue); }
+
+/* ============================================================
+ * Menus (right-click / context)
+ * ============================================================ */
+
+/* Selected item: lavender fill + mantle text, mirroring the file explorer hover. */
+.menu-item:not(.is-label):not(.is-disabled).selected,
+.menu-item:not(.is-label):not(.is-disabled).mobile-tap {
+    background-color: var(--cp-lavender);
+    color:            var(--cp-bg-dark);
+}
+.menu-item:not(.is-label):not(.is-disabled).selected .menu-item-icon,
+.menu-item:not(.is-label):not(.is-disabled).selected .menu-item-desc {
+    color: var(--cp-bg-dark);
+}
+
+/* Destructive items (e.g. Delete) keep red text and get a red tint when
+   selected. Must follow the rule above: equal specificity (0,4,0). */
+.menu-item.is-warning:not(.is-disabled).selected {
+    background-color: rgba(var(--cp-red-rgb), 0.15);
+    color:            var(--text-error);
+}
+.menu-item.is-warning:not(.is-disabled).selected .menu-item-icon {
+    color: var(--text-error);
+}
+
+/* ============================================================
+ * Search highlights
+ * One dedicated search hue, distinct from the ==mark== yellow and the
+ * selection color, so a hit always reads as a hit.
+ * ============================================================ */
+
+/* Search pane: app.css tints matches with --text-highlight-bg (the mark color). */
+.search-result-file-matched-text {
+    background-color: rgba(var(--cp-orange-rgb), 0.25);
+    color:            var(--text-normal);
+    border-radius:    2px;
+}
+
+/* Editor find (Cmd+F): app.css only rings each match; add a tint. The current
+   match is just the editor selection, which still shows through the tint. */
+.cm-s-obsidian span.obsidian-search-match-highlight {
+    background-color: rgba(var(--cp-orange-rgb), 0.25);
+    box-shadow:       0 0 0 1px rgba(var(--cp-orange-rgb), 0.60);
+}
+/* A match inside ==highlighted== text: beat the mark rule's !important. */
+.cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
+    background-color: rgba(var(--cp-orange-rgb), 0.35) !important;
+}
+
+/* Reading-mode find: these boxes are overlays drawn ABOVE the text, so a fill
+   would hide it — recolor the rings instead (app.css: faint 30% text ring). */
+.markdown-rendered .search-highlight > div {
+    box-shadow: 0 0 0 2px rgba(var(--cp-orange-rgb), 0.70);
+    opacity:    1;
+}
+.markdown-rendered .search-highlight > div.is-active {
+    box-shadow: 0 0 0 3px var(--cp-orange);
+}
+
+/* Quick switcher / suggestions: fuzzy-matched characters (app.css: bold only). */
+.suggestion-highlight { color: var(--text-accent); }
 
 /* ============================================================
  * Notice (toast)

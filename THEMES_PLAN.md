@@ -71,6 +71,8 @@
 
 ### 通用
 
+- 搜索高亮（三套主题，Obsidian + Typora）：每套主题一个专用搜索色，区别于 `==高亮==` 黄色与选区色——TokyoNight 橙、Catppuccin peach、Wonderland 冷青。所有命中 25% 淡底；Obsidian 阅读模式改为搜索色描边（高亮层盖在文字上方，不能填底）；Typora 当前命中为实色底（Latte 因 peach 亮度居中改用 55% 淡底 + 正文色，对比度 4.0）
+- 右键菜单（Obsidian）：菜单底色改为 `bg-dark` 与编辑区区分；选中项沿用各主题文件列表的 hover 语言（TokyoNight 蓝色淡底、Catppuccin lavender 实色填充、Wonderland 黄铜淡底）；删除等危险项选中时为红色淡底。Typora 右键菜单是 macOS 原生菜单，主题无法修改
 - 主题命名统一加 "Mod" 后缀（`Catppuccin` → `Catppuccin Mod`，`TokyoNight` → `TokyoNight Mod`），Typora CSS 文件、Obsidian manifest、Style Settings YAML、README 全部同步改名
 - 同步脚本：`scripts/sync-typora.sh`、`scripts/sync-obsidian.sh`（自动识别 `obsidian/` 下所有主题目录）
 
@@ -78,9 +80,9 @@
 
 | 主题 | Obsidian | Typora |
 |------|----------|--------|
-| TokyoNight Mod | 1.4.1 | 1.3.1 |
-| Catppuccin Mod | 1.2.1 | 1.2.1 |
-| Wonderland Mod | 1.0.0 | 1.0.0 |
+| TokyoNight Mod | 1.5.0 | 1.4.0 |
+| Catppuccin Mod | 1.3.0 | 1.3.0 |
+| Wonderland Mod | 1.1.0 | 1.1.0 |
 
 ---
 
@@ -90,8 +92,6 @@
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| 搜索高亮 | 搜索结果匹配文字背景色（三套主题） | ☐ |
-| 右键菜单 | `.menu`、`.menu-item` 背景和悬停色（三套主题） | ☐ |
 | Wonderland Mod 调色 | 在 Obsidian / Typora 中实际查看后微调（黄铜强度、Office District 与 Underground 的区分度） | ☐ |
 
 ### 阶段 2 — 多变体验证

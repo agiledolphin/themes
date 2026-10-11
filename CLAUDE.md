@@ -14,7 +14,9 @@ themes/
 ├── shared/tokens/base.css   # reference values only — NOT imported by any theme
 ├── scripts/
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
-│   └── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
+│   ├── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
+│   ├── gen-wonderland-typora.py            # generates typora/wonderland/*.css
+│   └── templates/wonderland-typora.css.tmpl
 └── THEMES_PLAN.md
 ```
 
@@ -46,8 +48,11 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 - Themes directory: `~/Library/Application Support/abnerworks.Typora/themes/`
 - One standalone CSS file per variant, named `<theme>-mod-<variant>.css`; the palette is
   declared in that file's `:root`. `--bg-color` must be set in `:root` (it drives `#write`).
-- Wonderland's three files are generated from one template with palettes read from the
-  Obsidian `theme.css`; if you change Wonderland colors, keep both platforms identical.
+- Wonderland's three Typora files are GENERATED — never edit them by hand. Edit
+  `scripts/templates/wonderland-typora.css.tmpl` (structure) or the palettes in
+  `obsidian/wonderland/theme.css` (colors), then run `./scripts/gen-wonderland-typora.py`;
+  `--check` exits 1 if the files are stale. Its Typora version is the `VERSION` constant
+  in the script. TokyoNight/Catppuccin Typora files are still edited directly.
 - After syncing, reselect the theme in Preferences → Appearance (or restart Typora).
 
 ## Design conventions
