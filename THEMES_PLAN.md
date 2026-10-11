@@ -62,6 +62,13 @@
 - 从一开始即包含 Callout 标题/图标着色、Blockquote 两种模式一致（透明背景）
 - 已校验：三个变体变量定义完整、`-rgb` 三元组与 hex 一致；强调色对背景对比度 ≥ 4.3
 
+#### Typora（v1.0.0）
+
+- Underground / Office District / Lab 三个独立 CSS 文件，由同一模板生成，配色直接取自 Obsidian 版 `theme.css`，两个平台颜色完全一致
+- 元素覆盖与 Catppuccin Mod Typora 版相同（选择器集合一致）；色彩角色与 Obsidian 版一致：H1 冷青、H2 黄铜、链接钢蓝、表头黄铜、代码高亮角色相同
+- Blockquote 透明背景 + 黄铜竖线（嵌套为钢蓝）
+- 与其他 Typora 主题保持一致的两处：inline code 为冷青文字、链接常驻淡下划线
+
 ### 通用
 
 - 主题命名统一加 "Mod" 后缀（`Catppuccin` → `Catppuccin Mod`，`TokyoNight` → `TokyoNight Mod`），Typora CSS 文件、Obsidian manifest、Style Settings YAML、README 全部同步改名
@@ -73,7 +80,7 @@
 |------|----------|--------|
 | TokyoNight Mod | 1.4.1 | 1.3.0 |
 | Catppuccin Mod | 1.2.1 | 1.2.0 |
-| Wonderland Mod | 1.0.0 | — |
+| Wonderland Mod | 1.0.0 | 1.0.0 |
 
 ---
 
@@ -85,8 +92,7 @@
 |------|------|------|
 | 搜索高亮 | 搜索结果匹配文字背景色（三套主题） | ☐ |
 | 右键菜单 | `.menu`、`.menu-item` 背景和悬停色（三套主题） | ☐ |
-| Wonderland Mod Typora | 按 Obsidian 版配色移植 Underground / Office District / Lab 三个 CSS 文件 + README | ☐ |
-| Wonderland Mod 调色 | 在 Obsidian 中实际查看后微调（黄铜强度、Office District 与 Underground 的区分度） | ☐ |
+| Wonderland Mod 调色 | 在 Obsidian / Typora 中实际查看后微调（黄铜强度、Office District 与 Underground 的区分度） | ☐ |
 | sync-obsidian.sh 提示语 | 结束提示固定写着「select TokyoNight」，应改为通用文案 | ☐ |
 
 ### 阶段 2 — 多变体验证
@@ -144,7 +150,11 @@ themes/
 │   │   ├── catppuccin-mod-frappe.css     ✓
 │   │   ├── catppuccin-mod-latte.css      ✓
 │   │   └── README.md                     ✓
-│   └── wonderland/                       ☐ 待建
+│   └── wonderland/
+│       ├── wonderland-mod-underground.css      ✓
+│       ├── wonderland-mod-office-district.css  ✓
+│       ├── wonderland-mod-lab.css              ✓
+│       └── README.md                           ✓
 └── scripts/
     ├── sync-typora.sh     ✓
     └── sync-obsidian.sh   ✓
