@@ -101,7 +101,22 @@
 - Wonderland Mod：验证全部 2 种有效组合（深色 Underground/Office District 各配浅色 Lab），截图对比
 - 重点检查：可读性、对比度、代码高亮与新表格样式是否协调
 
-### 阶段 3 — 文档与发布准备
+### 阶段 3 — 结构改进：模板化生成
+
+**动机**：14 个主题文件（Obsidian 3 + Typora 11）大部分结构重复，修一个问题要逐个文件改，容易漏改或改错（曾出现平台间不一致、11 个 Typora 文件同一处格式错误）。
+
+**现状**：Wonderland Mod 的 Typora 版已由 `scripts/gen-wonderland-typora.py` 从模板生成（配色读自 Obsidian `theme.css`，`--check` 检查是否过期），可作为先例；其余文件仍手改。
+
+| 项目 | 说明 | 状态 |
+|------|------|------|
+| 梳理有意保留的差异 | 三套主题之间的结构差异，如 Catppuccin 的实色填充导航 vs TokyoNight/Wonderland 的淡底 + 左侧强调条、表头与 tooltip 配色等，整理成模板参数 | ☐ |
+| Typora 模板化 | 一个模板 + 每套主题的配色与角色映射，生成全部 11 个 Typora 文件 | ☐ |
+| Obsidian 模板化 | 一个模板 + 每套主题的变体调色板与差异参数，生成 3 个 `theme.css` | ☐ |
+| 等价性验证 | 生成结果与现有文件逐一 diff，确认只有预期差异；版本号不因重构而变 | ☐ |
+
+**前提**：等 Wonderland Mod 调色稳定后再做，避免重构与改色同时进行。
+
+### 阶段 4 — 文档与发布准备
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
@@ -109,7 +124,7 @@
 | manifest.json | 补全 `authorUrl`（GitHub 地址）— 三套主题均为空 | ☐ |
 | 社区提交 | 按 Obsidian 官方流程提 PR 到 obsidian-releases（三套主题） | ☐ |
 
-### 阶段 4 — 可选扩展
+### 阶段 5 — 可选扩展
 
 - JetBrains / VS Code 配色方案移植
 - Typora 主题提交到官方主题库
