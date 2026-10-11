@@ -58,5 +58,5 @@ else
 fi
 
 echo ""
-echo "Done. In Obsidian: Settings → Appearance → Themes → select TokyoNight."
-echo "Install the Style Settings plugin to switch variants and modes."
+echo "Done. In Obsidian: Settings → Appearance → Themes → select the theme to apply."
+echo "Install the Style Settings plugin to switch variants per mode."
