@@ -1,7 +1,7 @@
 /* ============================================================
  * Catppuccin Mod Frappé — Typora Theme
  * Palette: catppuccin.com  variant: frappé
- * Version: 1.2.1
+ * Version: 1.3.0
  * bg: #303446
  * ============================================================ */
 
@@ -15,6 +15,8 @@
     --active-file-border-color:  #8caaee;
     --item-hover-bg-color:       #414559;
     --item-hover-text-color:     #c6d0f5;
+    --search-select-bg-color:    #ef9f76;   /* current find hit: solid search hue */
+    --search-select-text-color:  #303446;
     --control-text-hover-color:  #c6d0f5;
 
     /* palette */
@@ -38,6 +40,7 @@
     --cp-selection: #51576d;
     --cp-mark-bg:   rgba(229, 200, 144, 0.20);
     --cp-blue-rgb:  140, 170, 238;
+    --cp-search-rgb: 239, 159, 118;   /* orange: find hits */
 }
 
 /* ============================================================
@@ -324,6 +327,14 @@ pre.md-meta-block {
 .md-fences .cm-s-inner .cm-error         { color: var(--cp-red); background: transparent; }
 .md-fences .cm-s-inner .cm-header        { color: var(--cp-blue); font-weight: bold; }
 .md-fences .cm-s-inner .cm-link          { color: var(--cp-blue); text-decoration: underline; }
+
+/* ============================================================
+ * Search — every hit tinted with the search hue (orange); the current hit
+ * is solid via --search-select-bg-color / --search-select-text-color.
+ * ============================================================ */
+
+.md-search-hit,
+.cm-search-hit { background-color: rgba(var(--cp-search-rgb), 0.25); }
 
 @media print {
     body { font-size: 11pt; line-height: 1.7; }

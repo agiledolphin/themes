@@ -1,7 +1,7 @@
 /* ============================================================
  * Catppuccin Mod Mocha — Typora Theme
  * Palette: catppuccin.com  variant: mocha
- * Version: 1.2.1
+ * Version: 1.3.0
  * bg: #1e1e2e
  * ============================================================ */
 
@@ -15,6 +15,8 @@
     --active-file-border-color:  #89b4fa;
     --item-hover-bg-color:       #313244;
     --item-hover-text-color:     #cdd6f4;
+    --search-select-bg-color:    #fab387;   /* current find hit: solid search hue */
+    --search-select-text-color:  #1e1e2e;
     --control-text-hover-color:  #cdd6f4;
 
     /* palette */
@@ -38,6 +40,7 @@
     --cp-selection: #45475a;
     --cp-mark-bg:   rgba(249, 226, 175, 0.20);
     --cp-blue-rgb:  137, 180, 250;
+    --cp-search-rgb: 250, 179, 135;   /* orange: find hits */
 }
 
 /* ============================================================
@@ -452,6 +455,14 @@ pre.md-meta-block {
 .md-fences .cm-s-inner .cm-error         { color: var(--cp-red); background: transparent; }
 .md-fences .cm-s-inner .cm-header        { color: var(--cp-blue); font-weight: bold; }
 .md-fences .cm-s-inner .cm-link          { color: var(--cp-blue); text-decoration: underline; }
+
+/* ============================================================
+ * Search — every hit tinted with the search hue (orange); the current hit
+ * is solid via --search-select-bg-color / --search-select-text-color.
+ * ============================================================ */
+
+.md-search-hit,
+.cm-search-hit { background-color: rgba(var(--cp-search-rgb), 0.25); }
 
 /* ============================================================
  * Print / PDF Export

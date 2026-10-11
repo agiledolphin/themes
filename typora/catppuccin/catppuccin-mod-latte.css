@@ -1,7 +1,7 @@
 /* ============================================================
  * Catppuccin Mod Latte — Typora Theme
  * Palette: catppuccin.com  variant: latte  (light)
- * Version: 1.2.1
+ * Version: 1.3.0
  * bg: #eff1f5
  * ============================================================ */
 
@@ -15,6 +15,10 @@
     --active-file-border-color:  #1e66f5;
     --item-hover-bg-color:       #ccd0da;
     --item-hover-text-color:     #4c4f69;
+    /* current find hit: peach is mid-luminance, so neither light nor dark text
+       clears 3:1 on it solid — use a strong tint with the normal text color */
+    --search-select-bg-color:    rgba(254, 100, 11, 0.55);
+    --search-select-text-color:  #4c4f69;
     --control-text-hover-color:  #4c4f69;
 
     /* palette */
@@ -38,6 +42,7 @@
     --cp-selection: #bcc0cc;
     --cp-mark-bg:   rgba(223, 142, 29, 0.20);
     --cp-blue-rgb:  30, 102, 245;
+    --cp-search-rgb: 254, 100, 11;   /* orange: find hits */
 }
 
 /* ============================================================
@@ -324,6 +329,14 @@ pre.md-meta-block {
 .md-fences .cm-s-inner .cm-error         { color: var(--cp-red); background: transparent; }
 .md-fences .cm-s-inner .cm-header        { color: var(--cp-blue); font-weight: bold; }
 .md-fences .cm-s-inner .cm-link          { color: var(--cp-blue); text-decoration: underline; }
+
+/* ============================================================
+ * Search — every hit tinted with the search hue (orange); the current hit
+ * is solid via --search-select-bg-color / --search-select-text-color.
+ * ============================================================ */
+
+.md-search-hit,
+.cm-search-hit { background-color: rgba(var(--cp-search-rgb), 0.25); }
 
 @media print {
     body { font-size: 11pt; line-height: 1.7; }
