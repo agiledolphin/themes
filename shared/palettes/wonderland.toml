@@ -1,0 +1,129 @@
+# Wonderland Mod — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   obsidian/wonderland/theme.css, obsidian/wonderland/manifest.json, typora/wonderland/*.css
+
+name = "Wonderland Mod"
+prefix = "wl"                 # CSS variable / class prefix
+obsidian_version = "1.1.0"
+typora_version = "1.1.0"
+tagline = ["Inspired by the \"Hard-Boiled Wonderland\" half of Haruki Murakami's", "Hard-Boiled Wonderland and the End of the World: a cold, deadpan,", "faintly surreal Tokyo — rain-dark streets, the INKlings' flooded", "underground, skull-lined labs, and the warm brass of a desk lamp or", "a whisky bar as the only warmth in the room."]
+min_app_version = "1.0.0"         # Obsidian manifest fields
+author = "Jiaming Sun"
+author_url = ""
+
+# Style Settings wording. The ids derived from settings_noun (e.g. wl-dark-scheme) must stay stable:
+# changing them silently resets every user's saved variant choice.
+settings_noun = "scheme"
+settings_desc_noun = "variant"
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["brass", "yellow", "rust", "blood", "moss", "teal", "cyan", "steel", "violet", "comment", "bone"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map any that this palette names differently.
+[aliases]
+blue = "steel"
+magenta = "violet"
+orange = "rust"
+green = "moss"
+red = "blood"
+
+# Roles: palette color names (or literal values) the templates plug in.
+[roles]
+accent = "brass"
+accent_hover = "yellow"
+highlight = "brass"
+table_header = "brass"
+table_hover_alpha = "0.12"
+tag = "brass"
+tag_hover = "yellow"
+search = "cyan"
+callout_note = "steel"
+graph_tag = "brass"
+quote_nested = "steel"
+tooltip = "bone"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.25)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["cyan", "brass", "steel", "teal", "moss", "comment"]   # H1..H6
+
+[[variants]]
+slug = "underground"
+label = "Underground"
+mode = "dark"
+character = "the INKlings' sewers; darkest, coldest"
+[variants.palette]
+bg        = "#121218"
+bg-dark   = "#0c0c11"
+bg-hl     = "#1e1f29"
+gutter    = "#2c2e3b"
+fg        = "#c6c8d4"
+fg-dim    = "#a3a6b8"
+comment   = "#686c82"
+brass     = "#c39a5f"
+yellow    = "#d8c27a"
+rust      = "#c47a4a"
+blood     = "#c25a50"
+moss      = "#7c9a74"
+teal      = "#6fa8a0"
+cyan      = "#7fcfcf"
+steel     = "#7d9ac4"
+violet    = "#9a8cc0"
+bone      = "#e6e1d3"
+selection = "#2f3242"
+
+[[variants]]
+slug = "office"
+label = "Office District"
+mode = "dark"
+file_slug = "office-district"   # Typora file name
+character = "Tokyo at night above ground; a shade lighter, warmer"
+[variants.palette]
+bg        = "#1a1a20"
+bg-dark   = "#141418"
+bg-hl     = "#26262e"
+gutter    = "#36363f"
+fg        = "#d0ccc2"
+fg-dim    = "#aea99e"
+comment   = "#77736c"
+brass     = "#d4a85e"
+yellow    = "#e2c47a"
+rust      = "#cf8350"
+blood     = "#c95f53"
+moss      = "#869f78"
+teal      = "#79ada3"
+cyan      = "#86cccb"
+steel     = "#8aa0c4"
+violet    = "#a493c4"
+bone      = "#ece5d4"
+selection = "#3a3a44"
+
+[[variants]]
+slug = "lab"
+label = "Lab"
+mode = "light"
+character = "the System's sterile laboratory; cold white"
+[variants.palette]
+bg        = "#eef0f2"
+bg-dark   = "#e3e6ea"
+bg-hl     = "#d5d9df"
+gutter    = "#c2c7cf"
+fg        = "#2b2f3a"
+fg-dim    = "#474c5a"
+comment   = "#7d8391"
+brass     = "#8f6426"
+yellow    = "#8a6a0e"
+rust      = "#a8521e"
+blood     = "#a8323a"
+moss      = "#4a7140"
+teal      = "#2d7a72"
+cyan      = "#1d7c88"
+steel     = "#3a5e94"
+violet    = "#6a5596"
+bone      = "#5a5446"
+selection = "#c9d0db"

@@ -80,8 +80,8 @@
 
 | 主题 | Obsidian | Typora |
 |------|----------|--------|
-| TokyoNight Mod | 1.5.0 | 1.4.0 |
-| Catppuccin Mod | 1.3.0 | 1.3.0 |
+| TokyoNight Mod | 1.5.0 | 1.4.1 |
+| Catppuccin Mod | 1.3.1 | 1.3.0 |
 | Wonderland Mod | 1.1.0 | 1.1.0 |
 
 ---
@@ -92,7 +92,15 @@
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| Wonderland Mod 调色 | 在 Obsidian / Typora 中实际查看后微调（黄铜强度、Office District 与 Underground 的区分度） | ☐ |
+| Wonderland Mod 调色 | 已实际使用，当前满意；有问题再按需调整（观察点见下） | ☑ |
+
+**Wonderland Mod 调色观察点**（2026-10-12 测量，供日后调整参考；ΔE 为色差，低于约 15 不易区分）：
+
+- 黄铜 vs 黄色接近：Office ΔE 11、Lab ΔE 12（Underground 16）——H2 / 标签 / 表头 与 `==高亮==` / question callout 可能混淆
+- 冷青 vs 青绿接近：Office ΔE 13、Lab ΔE 12（Underground 15）——H1 与 H4、tip 与 abstract callout
+- Underground 与 Office District 背景几乎相同（ΔE 3.9），区别主要在正文冷暖（ΔE 11.9）
+- Lab 下搜索命中落在冷青文字上（H1、Typora 行内代码）对比度仅 3.1
+- Lab 注释色对比度 3.3，三个变体中最低
 
 ### 阶段 2 — 多变体验证
 
@@ -101,20 +109,21 @@
 - Wonderland Mod：验证全部 2 种有效组合（深色 Underground/Office District 各配浅色 Lab），截图对比
 - 重点检查：可读性、对比度、代码高亮与新表格样式是否协调
 
-### 阶段 3 — 结构改进：模板化生成
+### 阶段 3 — 结构改进：模板化生成（已完成 2026-10-12）
 
-**动机**：14 个主题文件（Obsidian 3 + Typora 11）大部分结构重复，修一个问题要逐个文件改，容易漏改或改错（曾出现平台间不一致、11 个 Typora 文件同一处格式错误）。
-
-**现状**：Wonderland Mod 的 Typora 版已由 `scripts/gen-wonderland-typora.py` 从模板生成（配色读自 Obsidian `theme.css`，`--check` 检查是否过期），可作为先例；其余文件仍手改。
+全部 14 个主题 CSS 和 3 个 `manifest.json` 改由 `scripts/gen-themes.py` 生成，数据源为 `shared/palettes/<theme>.toml`（调色板、颜色角色、`nav_style` / `menu_style` 风格开关、版本号），模板为 `scripts/templates/{obsidian,typora}.css.tmpl`；`--check` 检查产物是否过期。取代原 `gen-wonderland-typora.py`。
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| 梳理有意保留的差异 | 三套主题之间的结构差异，如 Catppuccin 的实色填充导航 vs TokyoNight/Wonderland 的淡底 + 左侧强调条、表头与 tooltip 配色等，整理成模板参数 | ☐ |
-| Typora 模板化 | 一个模板 + 每套主题的配色与角色映射，生成全部 11 个 Typora 文件 | ☐ |
-| Obsidian 模板化 | 一个模板 + 每套主题的变体调色板与差异参数，生成 3 个 `theme.css` | ☐ |
-| 等价性验证 | 生成结果与现有文件逐一 diff，确认只有预期差异；版本号不因重构而变 | ☐ |
+| 梳理有意保留的差异 | 颜色角色映射（Obsidian 76 处 / Typora 44 处）、导航与菜单的实色填充 vs 淡底两种风格、tooltip 参数 | ☑ |
+| Typora 模板化 | 一个模板生成 11 个文件 | ☑ |
+| Obsidian 模板化 | 一个模板生成 3 个 `theme.css`，Style Settings 块与 manifest 逐字节一致 | ☑ |
+| 等价性验证 | 按变体解析变量后逐条对比选择器/属性/值与规则顺序：除下列有意修正外渲染完全一致 | ☑ |
 
-**前提**：等 Wonderland Mod 调色稳定后再做，避免重构与改色同时进行。
+梳理中发现并修正的不一致：
+
+- Catppuccin 标签：阅读模式蓝色、Live Preview magenta（`.tag` 规则写死颜色只作用于阅读模式）→ 统一为 magenta，标签颜色改由 `--tag-*` 变量驱动（Obsidian 1.3.1）
+- TokyoNight 的 4 个 Typora 文件初版遗留漂移 → 统一：Moon 引用竖线改蓝、Night 的 H4 改绿、Day/Moon 的代码内建函数与目录悬停改冷青（原为 2:2 平局，选冷青以与另两套主题一致）（Typora 1.4.1）
 
 ### 阶段 4 — 文档与发布准备
 
@@ -136,8 +145,11 @@
 ```
 themes/
 ├── shared/
-│   ├── tokens/base.css
-│   └── palettes/
+│   ├── palettes/              # 每套主题的唯一数据源（.toml）
+│   │   ├── tokyonight.toml
+│   │   ├── catppuccin.toml
+│   │   └── wonderland.toml
+│   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   ├── tokyonight/
 │   │   ├── theme.css          ✓
@@ -170,6 +182,8 @@ themes/
 │       ├── wonderland-mod-lab.css              ✓
 │       └── README.md                           ✓
 └── scripts/
+    ├── gen-themes.py      ✓  # 生成全部主题文件
+    ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
     ├── sync-typora.sh     ✓
     └── sync-obsidian.sh   ✓
 ```
