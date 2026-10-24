@@ -443,8 +443,10 @@ body {
  * Links
  * ============================================================ */
 
-/* Reading mode — all link types: underline hidden at rest, shown on hover */
-.markdown-rendered a {
+/* Reading mode — all link types: underline hidden at rest, shown on hover.
+   :not(.tag) — tags are <a class="tag">; this rule has the same specificity as
+   app.css's a.tag and loads later, so without it tags turned link-colored. */
+.markdown-rendered a:not(.tag) {
     color: var(--cp-blue);
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -452,7 +454,7 @@ body {
     transition: color var(--anim-fast) var(--anim-smooth),
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
-.markdown-rendered a:hover    { color: var(--cp-cyan); text-decoration-color: var(--cp-cyan); }
+.markdown-rendered a:not(.tag):hover { color: var(--cp-cyan); text-decoration-color: var(--cp-cyan); }
 a.is-unresolved               { color: var(--cp-comment); opacity: 1; text-decoration-color: transparent !important; }
 a.is-unresolved:hover         { color: var(--cp-comment); text-decoration-color: var(--cp-comment) !important; }
 
@@ -497,7 +499,7 @@ a.is-unresolved:hover         { color: var(--cp-comment); text-decoration-color:
     /* Live Preview inline code takes its radius from --code-radius (via a
        higher-specificity app.css rule); keep it at 4px, not the 8px blocks use. */
     --code-radius: 4px;
-    padding: 0.1em 0.4em;
+    /* padding: left to app.css (0.15em 0.3em), the value Live Preview uses too */
     font-size: 0.875em;
 }
 /* Live Preview code-block language label: keep its default small radius. */
