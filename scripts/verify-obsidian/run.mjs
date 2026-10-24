@@ -9,7 +9,7 @@
 //
 // Usage
 //   node scripts/verify-obsidian/run.mjs [--port 9333] [--note <vault path>] [--out .verify] [--only cp-latte,wl]
-//   python3 scripts/verify-obsidian/analyze.py .verify      # report + exit 1 on Reading/Live mismatches
+//   uv run scripts/verify-obsidian/analyze.py .verify       # report + exit 1 on Reading/Live mismatches
 //
 // Each run first clears its previous results in --out (screenshots, measure.json, index.html).
 // While it runs (~5 min for all variants) Obsidian switches themes on screen — don't use it.

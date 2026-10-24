@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Generate every theme file from shared/palettes/<theme>.toml + scripts/templates/.
 
 Outputs (never edit by hand — edit the TOML or the templates, then rerun):

@@ -38,7 +38,7 @@ sync_theme() {
 
     # Read theme display name from manifest
     local display_name
-    display_name=$(python3 -c "import json,sys; print(json.load(open('$src_dir/manifest.json'))['name'])" 2>/dev/null || echo "$name")
+    display_name=$(uv run --no-project python -c "import json,sys; print(json.load(open('$src_dir/manifest.json'))['name'])" 2>/dev/null || echo "$name")
 
     local dest_dir="$DEST/$display_name"
     mkdir -p "$dest_dir"
