@@ -4,8 +4,8 @@
 
 name = "Catppuccin Mod"
 prefix = "cp"                 # CSS variable / class prefix
-obsidian_version = "1.3.1"
-typora_version = "1.3.0"
+obsidian_version = "1.3.2"
+typora_version = "1.3.1"
 tagline = ["Palette: catppuccin.com"]
 min_app_version = "1.0.0"         # Obsidian manifest fields
 author = "Jiaming Sun"

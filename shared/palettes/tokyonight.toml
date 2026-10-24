@@ -4,8 +4,8 @@
 
 name = "TokyoNight Mod"
 prefix = "tn"                 # CSS variable / class prefix
-obsidian_version = "1.5.0"
-typora_version = "1.4.1"
+obsidian_version = "1.5.1"
+typora_version = "1.4.2"
 tagline = ["Palette: github.com/folke/tokyonight.nvim"]
 min_app_version = "1.0.0"         # Obsidian manifest fields
 author = "Jiaming Sun"
