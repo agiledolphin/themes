@@ -39,6 +39,7 @@ themes/
 │   ├── verify-obsidian/     # automated Reading/Live Preview rendering check (see Obsidian)
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
 │   └── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
+├── .verify/                 # verify-obsidian output (git-ignored)
 └── THEMES_PLAN.md
 ```
 
@@ -55,24 +56,34 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   on `theme-dark` — app.css applies light-mode rules (e.g. `mix-blend-mode: darken` on callouts)
   to `theme-light`, which silently breaks dark colors.
 - Below the palettes, one `body.theme-dark, body.theme-light` block maps palette vars onto
-  Obsidian's own variables. Prefer setting Obsidian variables over hardcoding colors on a
-  selector: Reading mode and Live Preview often read the same variable through different
-  selectors (e.g. `--blockquote-background-color` for `.markdown-rendered blockquote` and
-  `.HyperMD-quote`), so a selector-only override makes the two modes disagree.
+  Obsidian's own variables. Prefer setting Obsidian variables over styling a selector:
+  Reading view and Live Preview often read the same variable through different selectors
+  (`--blockquote-*`, `--code-border-width`/`--code-radius`, `--hr-*`, `--table-text-size`,
+  `--tag-*`), while a theme rule on `.markdown-rendered …` reaches Reading view only and is
+  often beaten in Live Preview by a higher-specificity app.css rule.
+- When the two views differ and no variable covers it, prefer Obsidian's default over a
+  theme override that only one view honors (done for tag size and inline-code padding).
+- A theme rule can also collide with app.css in the same view: `.markdown-rendered a` has
+  the same specificity as app.css's `a.tag` and loads later, so link rules must exclude tags
+  (`a:not(.tag)`).
 - `--<prefix>-<color>-rgb` vars and `--callout-color` hold bare RGB triples (`195, 154, 95`)
   for `rgba()`. Wherever app.css uses such a var as a plain color, wrap it: `rgb(var(...))`.
 - When a color doesn't apply, check what app.css actually does: extract it with
   `npx asar extract /Applications/Obsidian.app/Contents/Resources/obsidian.asar <dir>` and grep.
 - Sync to the user's vault for testing: `./scripts/sync-obsidian.sh ~/notebook`.
-- Automated check of the real rendering (after Obsidian-side changes): with Obsidian running
-  on a debug port (`open -a Obsidian --args --remote-debugging-port=9333`) and the themes
-  synced, run `node scripts/verify-obsidian/run.mjs` (all variants, ~5 min; `--only cp-latte,wl`
-  to narrow) then `python3 scripts/verify-obsidian/analyze.py .verify`. It screenshots the test
-  note in Reading view and Live Preview, compares computed styles (exit 1 on any mismatch),
-  reports contrast, and writes `.verify/index.html` (each run first clears its own previous
-  screenshots/report there; if Obsidian is unreachable nothing is cleared). It switches themes on screen, works in a
-  new tab, never edits the note, and restores the user's theme/mode afterwards — tell the user
-  before running it. Live Preview table drag handles can't be triggered this way; check by hand.
+- Automated check of the real rendering (after any Obsidian-side change):
+  1. Obsidian running on a debug port: `open -a Obsidian --args --remote-debugging-port=9333`,
+     themes synced to the vault.
+  2. `node scripts/verify-obsidian/run.mjs` — all variants from the TOMLs, ~5 min
+     (`--only cp-latte,wl` to narrow; `--note <vault path>`, default
+     `tech/lab/obsidian/obsidian-theme-sample.md`; `--port`, `--out`).
+  3. `uv run scripts/verify-obsidian/analyze.py .verify` — lists every Reading/Live mismatch
+     (exit 1 if any), contrast per variant, and writes `.verify/index.html` with screenshots.
+
+  It switches themes on screen (tell the user before running it), works in a new tab, never
+  edits the note, and restores the user's theme, mode and Style Settings classes. Each run
+  clears its own previous output, but only after connecting. Live Preview table drag handles
+  can't be triggered this way — check by hand.
 
 ## Typora
 
@@ -85,8 +96,14 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 
 - All colors go through CSS custom properties; never hardcode a hex outside the palette blocks.
 - Chinese body text: PingFang SC → Hiragino Sans GB → Noto Serif SC.
+- One step below body text is `--font-smaller` (0.875em, 14px at 16px) — used for code, tables,
+  tags and footnotes alike; inline code inside table cells stays at cell size (1em).
+- Tables size to their content (no `width: 100%`), cells padded 6px / 12px on both platforms.
 - Typora content width ≤ 860px (960px on ≥1400px screens).
-- Text contrast: accents ≥ ~4.3:1 against the background; faint/comment text may be ~3.3:1.
+- Text contrast: accents ≥ 4.3:1 against the background, faint text (H6, comments, unresolved
+  links) ≥ 3:1 — the thresholds `analyze.py` reports against. Some upstream palettes (TokyoNight
+  Day, Catppuccin Latte) fall below in places; those are recorded in `THEMES_PLAN.md`, not
+  silently changed.
 
 ## Versioning & commits
 
@@ -96,3 +113,13 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   minor for feature batches) and update the table in `THEMES_PLAN.md`. A pure refactor
   that renders identically does not bump.
 - Commit style: `feat(obsidian): …`, `fix(typora): …`, `docs: …`, `chore: …`.
+
+## Tooling
+
+- Run Python through uv, never a bare `python3`: `uv run <script>`, and
+  `uv run --no-project python -c …` (or `python -` with a heredoc) for one-off snippets.
+  Repo scripts carry `#!/usr/bin/env -S uv run --script` plus PEP 723 inline metadata
+  (`requires-python = ">=3.11"`, needed for `tomllib`), so `./scripts/gen-themes.py` already
+  goes through uv; new Python scripts follow the same pattern.
+- The verification scripts are Node (≥ 22, for the built-in `WebSocket`) + uv/Python; no
+  package installs are needed.

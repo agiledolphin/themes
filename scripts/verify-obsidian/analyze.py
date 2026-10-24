@@ -1,7 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Analyze a run.mjs result: Reading-vs-Live-Preview mismatches and text contrast.
 
-Usage: python3 scripts/verify-obsidian/analyze.py [.verify]
+Usage: uv run scripts/verify-obsidian/analyze.py [.verify]
 Prints a report, writes <dir>/index.html (findings, contrast table, screenshot pairs),
 and exits 1 if any checked property differs between the two views.
 """
