@@ -20,7 +20,9 @@ Workflow: edit the TOML (colors, roles, versions) or a template (structure, a fi
 themes), run `./scripts/gen-themes.py`, then sync. `--check` exits 1 if outputs are stale.
 A theme-specific difference belongs in the TOML as a role or style switch, not as a
 one-off edit in a generated file. When refactoring a template, diff the generated CSS
-against the previous version rule by rule (resolved values per variant) before committing.
+against the previous version rule by rule (resolved values per variant) before committing,
+and run the Obsidian verification below — a CSS diff cannot see how a rule interacts with
+app.css (e.g. a link rule that silently recolored `a.tag`).
 
 ## Directory layout
 
@@ -34,6 +36,7 @@ themes/
 ├── scripts/
 │   ├── gen-themes.py        # generates every theme file (--check to verify)
 │   ├── templates/           # obsidian.css.tmpl, typora.css.tmpl
+│   ├── verify-obsidian/     # automated Reading/Live Preview rendering check (see Obsidian)
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
 │   └── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
 └── THEMES_PLAN.md
@@ -61,6 +64,15 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 - When a color doesn't apply, check what app.css actually does: extract it with
   `npx asar extract /Applications/Obsidian.app/Contents/Resources/obsidian.asar <dir>` and grep.
 - Sync to the user's vault for testing: `./scripts/sync-obsidian.sh ~/notebook`.
+- Automated check of the real rendering (after Obsidian-side changes): with Obsidian running
+  on a debug port (`open -a Obsidian --args --remote-debugging-port=9333`) and the themes
+  synced, run `node scripts/verify-obsidian/run.mjs` (all variants, ~5 min; `--only cp-latte,wl`
+  to narrow) then `python3 scripts/verify-obsidian/analyze.py .verify`. It screenshots the test
+  note in Reading view and Live Preview, compares computed styles (exit 1 on any mismatch),
+  reports contrast, and writes `.verify/index.html` (each run first clears its own previous
+  screenshots/report there; if Obsidian is unreachable nothing is cleared). It switches themes on screen, works in a
+  new tab, never edits the note, and restores the user's theme/mode afterwards — tell the user
+  before running it. Live Preview table drag handles can't be triggered this way; check by hand.
 
 ## Typora
 
