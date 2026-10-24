@@ -235,6 +235,11 @@ body.theme-light {
     --blockquote-background-color: transparent;
     --blockquote-color:            var(--tn-fg-dim);
 
+    /* --- Horizontal rule ---
+       app.css draws both Reading-mode and Live Preview rules from these. */
+    --hr-thickness: 1px;
+    --hr-color:     var(--tn-gutter);
+
     /* --- Links --- */
     --link-color:                var(--tn-blue);
     --link-color-hover:          var(--tn-cyan);
@@ -243,7 +248,13 @@ body.theme-light {
     --link-unresolved-color:     var(--tn-comment);
     --link-unresolved-opacity:   1;
 
-    /* --- Code --- */
+    /* --- Code ---
+       Border / radius vars are read by app.css for Reading-mode <pre> AND the
+       per-line background layers of Live Preview code blocks (first/last line
+       carry the top/bottom border and corners), so both views get the frame. */
+    --code-border-width: 1px;
+    --code-border-color: var(--tn-gutter);
+    --code-radius:       8px;
     --code-background:  var(--tn-bg-dark);
     --code-normal:      var(--tn-fg);
     --code-comment:     var(--tn-comment);
@@ -329,6 +340,10 @@ body.theme-light {
        Zebra off; column-alt forced transparent so app.css's td-level column
        rule can't override; header hover pinned (default `inherit` would
        reveal the page bg on hover). */
+    /* Cells take their size from these (app.css sets font-size on th/td, so a
+       font-size on <table> has no effect). One step below body text, like code,
+       tags and footnotes; --table-header-size follows --table-text-size. */
+    --table-text-size:                var(--font-smaller);
     --table-header-background:        var(--tn-bg-hl);
     --table-header-background-hover:  var(--tn-bg-hl);
     --table-row-alt-background:       transparent;
@@ -364,7 +379,7 @@ body {
     --font-text-size:       16px;
     --font-interface-size:  14px;
 
-    --h1-size:        2em;
+    --h1-size:        1.75em;
     --h2-size:        1.5em;
     --h3-size:        1.25em;
     --h4-size:        1.1em;
@@ -456,14 +471,21 @@ a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color:
 
 .markdown-rendered code,
 .cm-inline-code {
-    font-family: var(--font-monospace-theme);
+    /* --font-monospace = the user's Settings → Appearance monospace font if set,
+       else --font-monospace-theme — the same chain Live Preview uses. */
+    font-family: var(--font-monospace);
     color: var(--tn-fg);
     background: var(--tn-bg-dark);
     border: 1px solid var(--tn-gutter);
     border-radius: 4px;
+    /* Live Preview inline code takes its radius from --code-radius (via a
+       higher-specificity app.css rule); keep it at 4px, not the 8px blocks use. */
+    --code-radius: 4px;
     padding: 0.1em 0.4em;
     font-size: 0.875em;
 }
+/* Live Preview code-block language label: keep its default small radius. */
+.markdown-source-view.mod-cm6 .code-block-flair { --code-radius: 4px; }
 .cm-inline-code {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
@@ -476,10 +498,8 @@ a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color:
 .markdown-rendered pre,
 .markdown-source-view pre {
     background: var(--tn-bg-dark) !important;
-    border: 1px solid var(--tn-gutter);
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    line-height: 1.6;
+    padding: 1rem 1.25rem;   /* border + radius: --code-* variables */
+    line-height: var(--line-height-normal);   /* 1.75, same as Live Preview lines */
 }
 
 .markdown-rendered pre code {
@@ -487,7 +507,7 @@ a.is-unresolved:hover         { color: var(--tn-comment); text-decoration-color:
     border: none;
     padding: 0;
     color: var(--tn-fg);
-    font-size: inherit;
+    font-size: var(--code-size);   /* same size as Live Preview code blocks (14px at 16px text) */
 }
 
 /* ============================================================
@@ -575,8 +595,8 @@ body.theme-light .callout[data-callout="cite"] {
 .markdown-rendered table {
     border-collapse: separate;
     border-spacing: 0;
-    width: 100%;
-    font-size: 0.9em;
+    /* No width: tables size to their content, as in Live Preview (whose table
+       wrapper is width: fit-content) and Obsidian's default. */
     border: 1px solid var(--tn-gutter);
     border-radius: 8px;
     overflow: hidden;
@@ -589,9 +609,12 @@ body.theme-light .callout[data-callout="cite"] {
     border: none;
     border-right:  1px solid var(--tn-gutter);
     border-bottom: 1px solid var(--tn-gutter);
-    padding: 0.5rem 1rem;
+    padding: 6px 12px;
     vertical-align: top;
 }
+/* Live Preview zeroes the cell padding (higher-specificity app.css rule) and pads
+   an inner .table-cell-wrapper instead — give it the same 6px 12px. */
+.markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper { padding: 6px 12px; }
 .markdown-rendered th:last-child,
 .markdown-rendered td:last-child       { border-right: none; }
 .markdown-rendered tbody tr:last-child td { border-bottom: none; }
@@ -601,17 +624,21 @@ body.theme-light .callout[data-callout="cite"] {
     color: var(--tn-blue);
     font-weight: 600;
     border-bottom: 2px solid var(--tn-blue);
-    padding: 0.6rem 1rem;
     text-align: left;
 }
 
 .markdown-rendered td { color: var(--tn-fg); }
 
+/* Inline code in cells: same size as the (already smaller) cell text, not a
+   further 0.875× step — mirrors app.css's own rule for source-mode tables. */
+.markdown-rendered th code,
+.markdown-rendered td code { font-size: 1em; }
+
 /* ============================================================
  * Horizontal Rule
  * ============================================================ */
 
-.markdown-rendered hr { border: none; border-top: 1px solid var(--tn-gutter); margin: 2rem 0; }
+.markdown-rendered hr { margin: 2rem 0; }   /* thickness/color: --hr-* variables */
 
 /* ============================================================
  * Task List
@@ -805,7 +832,6 @@ input[type="checkbox"][data-task="!"]::before {
 .tag {
     border-radius: var(--tag-radius);
     padding: var(--tag-padding-y) var(--tag-padding-x);
-    font-size: 0.85em;
     text-decoration: none;
 }
 

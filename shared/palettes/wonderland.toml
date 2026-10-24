@@ -4,8 +4,8 @@
 
 name = "Wonderland Mod"
 prefix = "wl"                 # CSS variable / class prefix
-obsidian_version = "1.1.0"
-typora_version = "1.1.0"
+obsidian_version = "1.1.1"
+typora_version = "1.1.1"
 tagline = ["Inspired by the \"Hard-Boiled Wonderland\" half of Haruki Murakami's", "Hard-Boiled Wonderland and the End of the World: a cold, deadpan,", "faintly surreal Tokyo — rain-dark streets, the INKlings' flooded", "underground, skull-lined labs, and the warm brass of a desk lamp or", "a whisky bar as the only warmth in the room."]
 min_app_version = "1.0.0"         # Obsidian manifest fields
 author = "Jiaming Sun"

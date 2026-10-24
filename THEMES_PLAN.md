@@ -73,6 +73,8 @@
 
 - 搜索高亮（三套主题，Obsidian + Typora）：每套主题一个专用搜索色，区别于 `==高亮==` 黄色与选区色——TokyoNight 橙、Catppuccin peach、Wonderland 冷青。所有命中 25% 淡底；Obsidian 阅读模式改为搜索色描边（高亮层盖在文字上方，不能填底）；Typora 当前命中为实色底（Latte 因 peach 亮度居中改用 55% 淡底 + 正文色，对比度 4.0）
 - 右键菜单（Obsidian）：菜单底色改为 `bg-dark` 与编辑区区分；选中项沿用各主题文件列表的 hover 语言（TokyoNight 蓝色淡底、Catppuccin lavender 实色填充、Wonderland 黄铜淡底）；删除等危险项选中时为红色淡底。Typora 右键菜单是 macOS 原生菜单，主题无法修改
+- 排版调整（三套主题，2026-10-24）：H1 字号 2em → 1.75em；表格字号统一为 14px（`--font-smaller`，与代码、标签、脚注同档），表格内行内代码与单元格同大；表格改为按内容宽度（不再撑满），单元格内边距统一为 6px / 12px（Obsidian 两种视图 + Typora）
+- Obsidian 阅读视图与编辑视图（Live Preview）一致性：分隔线统一 1px（`--hr-*`）；代码块边框与 8px 圆角改由 `--code-border-width` / `--code-radius` 驱动，编辑视图也有边框圆角；编辑视图行内代码补上边框（原被 app.css 高优先级规则清零），圆角保持 4px；代码块字号统一为 `--code-size`（14px）、行高统一为 `--line-height-normal`（1.75）；代码字体改读 `--font-monospace`（尊重 Obsidian 设置里的等宽字体）；标签字号改用 Obsidian 默认（0.875em）。剩余差异：引用块与代码块的上下留白（编辑视图逐行渲染，无法整体加留白）、搜索高亮描边 vs 填底（有意）
 - 主题命名统一加 "Mod" 后缀（`Catppuccin` → `Catppuccin Mod`，`TokyoNight` → `TokyoNight Mod`），Typora CSS 文件、Obsidian manifest、Style Settings YAML、README 全部同步改名
 - 同步脚本：`scripts/sync-typora.sh`、`scripts/sync-obsidian.sh`（自动识别 `obsidian/` 下所有主题目录）
 
@@ -80,9 +82,9 @@
 
 | 主题 | Obsidian | Typora |
 |------|----------|--------|
-| TokyoNight Mod | 1.5.0 | 1.4.1 |
-| Catppuccin Mod | 1.3.1 | 1.3.0 |
-| Wonderland Mod | 1.1.0 | 1.1.0 |
+| TokyoNight Mod | 1.5.1 | 1.4.2 |
+| Catppuccin Mod | 1.3.2 | 1.3.1 |
+| Wonderland Mod | 1.1.1 | 1.1.1 |
 
 ---
 
