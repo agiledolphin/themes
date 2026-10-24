@@ -106,7 +106,7 @@
 
 ### 阶段 2 — 多变体验证（Obsidian 已完成 2026-10-24；Typora 暂不验证）
 
-通过 Obsidian 远程调试端口自动执行：三套主题 11 个变体 × 阅读视图 / 编辑视图（Live Preview），对测试笔记 `obsidian-theme-sample.md` 各章节截图（132 张，整理在核验页 artifact 中），并读取实际渲染样式逐项比对、计算对比度。
+通过 Obsidian 远程调试端口自动执行（工具已收入仓库 `scripts/verify-obsidian/`，用法见 CLAUDE.md）：三套主题 11 个变体 × 阅读视图 / 编辑视图（Live Preview），对测试笔记 `obsidian-theme-sample.md` 各章节截图（132 张，整理在核验页 artifact 中），并读取实际渲染样式逐项比对、计算对比度。
 
 | 项目 | 结果 | 状态 |
 |------|------|------|
