@@ -82,13 +82,14 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含三套配色） | 1.0.0 |
+| Lamplit（含四套配色） | 1.1.0 |
 
 | Typora | 版本 |
 |--------|------|
 | TokyoNight Mod | 1.4.2 |
 | Catppuccin Mod | 1.3.1 |
 | Wonderland Mod | 1.1.2 |
+| Merino Mod | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -178,6 +179,22 @@
 | 4. vault 切换到 Lamplit；删除仓库中三个旧 Obsidian 目录；README / CLAUDE.md 更新 | ☑ 2026-10-25 切换（深色方案设为 Wonderland · Office District，沿用用户当时的选择）；生成器与核验工具移除旧的每配色一主题模式 |
 | 5. vault 中旧主题文件夹（用户确认后删除） | ☑ 已删除 TokyoNight Mod / Catppuccin Mod / Wonderland Mod 三个文件夹，保留 Lamplit 与用户自装的 Minimal |
 
+
+### 阶段 7 — 新增 Merino 配色（2026-10-25）
+
+按用户提供的 Merino Light / Merino Dark 终端配色截图设计（GitHub Primer 配色）。截图里的颜色原样采用；终端配色没有青绿和橙：青绿取其青与绿的中点，橙用 Primer 的橙。背景层级（bg-dark / bg-hl / gutter）取 Primer 的中性色，选区为蓝色淡底。
+
+- 变体：**Light**（`#ffffff` / 文字 `#1f2328`）、**Dark**（`#0d1117` / 文字 `#e6edf3`）
+- 强调色蓝（链接、H1、复选框、光标）；紫为第二声部（H2、表头）；标签青绿（浅色下对比度 5.1，紫只有 4.29）；搜索色橙；淡底风格
+- 约束：点缀色对比度 ≥ 4.5、易混淆色 ΔE ≥ 16（最近一对 20），浅色高亮底透明度降为 0.15（高亮文字 4.32）
+- 接入：`shared/palettes/merino.toml`；schemes 顺序 Wonderland → Merino → TokyoNight → Catppuccin；Lamplit 1.1.0，Typora Merino Mod 1.0.0；生成器修正新配色目录不存在时的写入错误
+
+| 步骤 | 状态 |
+|------|------|
+| 配色与约束检查 | ☑ |
+| 生成（Lamplit + Typora）并同步 | ☑ |
+| Obsidian 自动核验：Merino 两变体 + 原 11 变体与上次 `.verify` 逐项对比（应 0 差异） | ☑ 13 个变体阅读/编辑视图 0 不一致；Merino 对比度全部达标（Light 最低为高亮 4.31，Dark 最低为 H6 4.12）。原 11 变体只有 `table.parentWidth` 不同，查明是基线测量偏差：基线 10 个变体的阅读视图记成 0px，本次全部 700px，表格宽度两次一致，实际渲染无变化。`analyze.py --baseline` 改为跳过基线里没有的变体并列出名称 |
+
 ---
 
 ## 三、文件结构（现状）
@@ -189,7 +206,8 @@ themes/
 │   ├── palettes/              # 每套配色的唯一数据源（.toml）
 │   │   ├── tokyonight.toml
 │   │   ├── catppuccin.toml
-│   │   └── wonderland.toml
+│   │   ├── wonderland.toml
+│   │   └── merino.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -209,11 +227,15 @@ themes/
 │   │   ├── catppuccin-mod-frappe.css     ✓
 │   │   ├── catppuccin-mod-latte.css      ✓
 │   │   └── README.md                     ✓
-│   └── wonderland/
-│       ├── wonderland-mod-underground.css      ✓
-│       ├── wonderland-mod-office-district.css  ✓
-│       ├── wonderland-mod-lab.css              ✓
-│       └── README.md                           ✓
+│   ├── wonderland/
+│   │   ├── wonderland-mod-underground.css      ✓
+│   │   ├── wonderland-mod-office-district.css  ✓
+│   │   ├── wonderland-mod-lab.css              ✓
+│   │   └── README.md                           ✓
+│   └── merino/
+│       ├── merino-mod-fleece.css    ✓（生成）
+│       ├── merino-mod-charcoal.css  ✓（生成）
+│       └── README.md                ✓
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
     ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
@@ -253,8 +275,24 @@ themes/
 
 | 角色 | Underground | Office District | Lab | 用途 |
 |------|-------------|-----------------|-----|------|
-| 黄铜 brass | `#c39a5f` | `#d4a85e` | `#8f6426` | UI 强调、H2 |
-| 冷青 cyan | `#7fcfcf` | `#86cccb` | `#1d7c88` | H1、属性键 |
+| 黄铜 brass | `#c39a5f` | `#d4a85e` | `#885c20` | UI 强调、H2 |
+| 冷青 cyan | `#7fcfcf` | `#86cccb` | `#007784` | H1、属性键、搜索 |
 | 钢蓝 steel | `#7d9ac4` | `#8aa0c4` | `#3a5e94` | 链接、H3 |
 | 血红 blood | `#c25a50` | `#c95f53` | `#a8323a` | 错误、危险 |
 | 骨白 bone | `#e6e1d3` | `#ece5d4` | `#5a5446`（石墨） | tooltip |
+
+### Merino Mod
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Light | `#ffffff` | `#1f2328` |
+| Dark | `#0d1117` | `#e6edf3` |
+
+| 角色 | Light | Dark | 用途 |
+|------|-------|------|------|
+| 蓝 blue | `#0969da` | `#58a6ff` | 强调色、链接、H1 |
+| 紫 magenta | `#8250df` | `#bc8cff` | H2、表头、关键字 |
+| 青 cyan | `#1b7c83` | `#39c5cf` | H3、行内代码 |
+| 青绿 teal | `#167056` | `#3cbf90` | 标签 |
+| 橙 orange | `#bc4c00` | `#f0883e` | 搜索、数字 |
+| 红 red | `#cf222e` | `#ff7b72` | 错误、危险 |
