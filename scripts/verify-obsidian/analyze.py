@@ -129,7 +129,7 @@ for v, theme, label, body, (mk, mv), low in contrast_rows:
 
 # --- HTML report
 SECTIONS = [("top", "标题"), ("text", "文字样式与链接"), ("quote-code", "引用与代码"), ("tables", "表格"),
-            ("callouts", "Callout"), ("tags", "标签与表格内格式")]
+            ("callouts", "Callout"), ("tags", "标签与表格内格式"), ("mermaid", "Mermaid 图")]
 esc = html.escape
 mm_html = ("".join(f"<tr><td>{esc(v)}</td><td>{esc(el)}</td><td><code>{esc(p)}</code></td><td>{esc(str(a))}</td><td>{esc(str(b))}</td></tr>"
                    for v, el, p, a, b in mismatches)

@@ -117,6 +117,21 @@ def load_themes() -> list[dict]:
     return themes
 
 
+def mermaid_vars(ctx: Ctx, mode: str) -> str:
+    """Typora's Mermaid variables: the default theme on light variants; on dark ones an empty
+    --mermaid-theme plus a node fill (30% accent over the background) to derive a theme from."""
+    if mode == "light":
+        return "    --mermaid-theme:             default;"
+    accent, bg = (rgb_triple(ctx.hex(n)).split(", ") for n in ("accent", "bg"))
+    fill = ", ".join(str(round(int(a) * 0.3 + int(b) * 0.7)) for a, b in zip(accent, bg))
+    return "\n".join([
+        '    --mermaid-theme:             "";',
+        f"    --node-fill:                 rgb({fill});",
+        f"    --node-text-color:           {ctx.hex('fg')};",
+        f"    --cluster-fill:              {ctx.hex('bg-hl')};   /* Mermaid note background */",
+    ])
+
+
 def typora_outputs(theme: dict) -> dict[Path, str]:
     template = (TEMPLATES / "typora.css.tmpl").read_text()
     outputs = {}
@@ -135,6 +150,7 @@ def typora_outputs(theme: dict) -> dict[Path, str]:
             "TAGLINE": "".join(f" * {line}\n" for line in theme["tagline"]),
             "PALETTE": "\n".join(ctx.palette_lines("    ")),
             "SEARCH_SELECT_BG": sel_bg, "SEARCH_SELECT_TEXT": sel_text,
+            "MERMAID": mermaid_vars(ctx, v["mode"]),
         }
         name = f"{theme['slug']}-mod-{v.get('file_slug', v['slug'])}.css"
         outputs[ROOT / "typora" / theme["slug"] / name] = ctx.render(template, extra)

@@ -54,6 +54,20 @@ window.__V = (() => {
     }
   }
 
+  // Sections whose content renders asynchronously: wait (up to 5 s) until it is on screen.
+  const SETTLE = { mermaid: '.mermaid svg' };
+  async function settle(section) {
+    const sel = SETTLE[section];
+    if (!sel) return;
+    const root = leaf.view.containerEl, view = root.querySelector('.view-content').getBoundingClientRect();
+    for (let t = 0; t < 5000; t += 100) {
+      if ([...root.querySelectorAll(sel)].some(e => { const r = e.getBoundingClientRect(); return r.height > 0 && r.bottom > view.top && r.top < view.bottom; })) {
+        await sleep(300); return;
+      }
+      await sleep(100);
+    }
+  }
+
   function rect() {
     const r = leaf.view.containerEl.querySelector('.view-content').getBoundingClientRect();
     return { x: r.x, y: r.y, width: r.width, height: r.height };
@@ -194,6 +208,6 @@ window.__V = (() => {
   }
   function removeProbes() { document.getElementById('__vprobe')?.remove(); }
 
-  return { init, variant, viewMode, scrollTo, rect, measure, measureUI, probeState, removeProbes,
+  return { init, variant, viewMode, scrollTo, settle, rect, measure, measureUI, probeState, removeProbes,
            close: () => { removeProbes(); leaf?.detach(); } };
 })();

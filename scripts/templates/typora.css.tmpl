@@ -20,6 +20,14 @@
     --search-select-bg-color:    {{SEARCH_SELECT_BG}};   /* current find hit */
     --search-select-text-color:  {{SEARCH_SELECT_TEXT}};
     --control-text-hover-color:  {{hex:fg}};
+    --text-color:                {{hex:fg}};   /* Typora's own UI text: menus, inputs, focus mode */
+
+    /* Mermaid (Typora reads these). Light variants use Mermaid's default theme. Dark variants
+       leave --mermaid-theme empty, so Typora derives a theme from --node-fill (an accent tint,
+       written as rgb(): Typora's hex check misreads the blue channel, rgb() makes it take dark
+       mode from the page background instead). */
+{{MERMAID}}
+    --mermaid-font-family:       "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", sans-serif;
 
     /* palette */
 {{PALETTE}}
@@ -355,10 +363,19 @@ pre.md-meta-block {
  * Mermaid / Diagrams
  * ============================================================ */
 
-.md-diagram-panel {
-    background: {{c:bg-dark}};
-    border: 1px solid {{c:gutter}};
-    border-radius: 8px;
+/* Unedited diagrams sit on the page without a frame, as in Typora's base style (the code-block
+   rule's !important background and padding would otherwise box them); while editing, the fence
+   keeps the code-block look and a rule separates the preview from the source. */
+.md-fences-advanced:not(.md-focus):not(.md-fences-math) {
+    background: transparent !important;
+    padding: 0 !important;
+}
+.md-fences.md-focus .md-diagram-panel { border-top: 1px solid {{c:gutter}}; }
+
+/* Subgraph boxes: a quiet surface instead of Mermaid's derived off-hue fill */
+.md-diagram-panel .cluster rect {
+    fill: {{c:bg-hl}} !important;
+    stroke: {{c:gutter}} !important;
 }
 
 /* ============================================================

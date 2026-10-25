@@ -5,7 +5,7 @@
 name = "Merino Mod"
 short_name = "Merino"                # label in Lamplit's scheme dropdowns
 prefix = "mr"                        # CSS variable / class prefix
-typora_version = "1.0.0"
+typora_version = "1.0.1"
 tagline = ["Neutral white and near-black grounds with crisp accents, after the",
            "Merino Light / Merino Dark terminal themes (GitHub Primer colors)."]
 
