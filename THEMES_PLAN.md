@@ -148,13 +148,15 @@
 - Catppuccin 标签：阅读模式蓝色、Live Preview magenta（`.tag` 规则写死颜色只作用于阅读模式）→ 统一为 magenta，标签颜色改由 `--tag-*` 变量驱动（Obsidian 1.3.1）
 - TokyoNight 的 4 个 Typora 文件初版遗留漂移 → 统一：Moon 引用竖线改蓝、Night 的 H4 改绿、Day/Moon 的代码内建函数与目录悬停改冷青（原为 2:2 平局，选冷青以与另两套主题一致）（Typora 1.4.1）
 
-### 阶段 4 — 文档与发布准备
+### 阶段 4 — 文档与发布准备（已推迟，等用户提起）
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| 截图素材 | 各变体效果图（Typora + Obsidian，三套主题） | ☐ |
-| manifest.json | 补全 `authorUrl`（GitHub 地址）— 三套主题均为空 | ☐ |
-| 社区提交 | 按 Obsidian 官方流程提 PR 到 obsidian-releases（三套主题） | ☐ |
+| 独立发布仓库 | 社区主题库要求一个主题一个仓库、`theme.css` 与 `manifest.json` 在根目录：为 Lamplit 拆出单独仓库（本仓库继续作为生成源） | ☐ |
+| 截图素材 | Lamplit 各方案效果图（社区库需 `screenshot.png`）+ Typora 各配色效果图（各 README 中的 *coming soon*） | ☐ |
+| manifest.json | 补全 `authorUrl`（GitHub 地址）：改 `shared/lamplit.toml` 的 `author_url` 后重新生成 | ☐ |
+| LICENSE / README | 发布仓库补 LICENSE 文件（README 已写 MIT）与根目录 README | ☐ |
+| 社区提交 | 按 Obsidian 官方流程向 obsidian-releases 提 PR（只提 Lamplit 一个主题；提交前对照官方文档核实格式） | ☐ |
 
 ### 阶段 5 — 可选扩展
 
@@ -193,6 +195,7 @@
 |------|------|
 | 配色与约束检查 | ☑ |
 | 生成（Lamplit + Typora）并同步 | ☑ |
+| Typora 实际效果（Light / Dark） | ☑ 用户手动确认 |
 | Obsidian 自动核验：Merino 两变体 + 原 11 变体与上次 `.verify` 逐项对比（应 0 差异） | ☑ 13 个变体阅读/编辑视图 0 不一致；Merino 对比度全部达标（Light 最低为高亮 4.31，Dark 最低为 H6 4.12）。原 11 变体只有 `table.parentWidth` 不同，查明是基线测量偏差：基线 10 个变体的阅读视图记成 0px，本次全部 700px，表格宽度两次一致，实际渲染无变化。`analyze.py --baseline` 改为跳过基线里没有的变体并列出名称 |
 
 ---
