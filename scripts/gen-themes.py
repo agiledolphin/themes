@@ -351,6 +351,7 @@ def main() -> None:
             if not path.exists() or path.read_text() != text:
                 stale.append(str(rel))
         else:
+            path.parent.mkdir(parents=True, exist_ok=True)   # a new palette's typora/<palette>/
             path.write_text(text)
             print(f"  wrote {rel}")
     if check:

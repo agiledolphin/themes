@@ -1,0 +1,96 @@
+# Merino Mod — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/merino/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+name = "Merino Mod"
+short_name = "Merino"                # label in Lamplit's scheme dropdowns
+prefix = "mr"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["Neutral white and near-black grounds with crisp accents, after the",
+           "Merino Light / Merino Dark terminal themes (GitHub Primer colors)."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["blue", "cyan", "teal", "green", "yellow", "orange", "red", "magenta", "comment"]
+
+# Palette names are the canonical template names, so no aliases are needed.
+[aliases]
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Blue is the accent (the terminal theme's cursor color); magenta is the second voice
+# (H2, table header); teal marks tags.
+[roles]
+accent = "blue"
+accent_hover = "cyan"
+highlight = "blue"
+table_header = "magenta"
+table_hover_alpha = "0.12"
+tag = "teal"                   # 5.1:1 on its tint in light mode (magenta was 4.29)
+tag_hover = "blue"
+search = "orange"
+callout_note = "blue"
+graph_tag = "teal"
+quote_nested = "magenta"
+tooltip = "blue"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.15)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["blue", "magenta", "cyan", "green", "yellow", "comment"]   # H1..H6
+
+# Colors come from the Merino Light / Dark terminal themes (ANSI standard colors, text,
+# background). The terminal palette has no teal or orange: teal is the midpoint of its cyan and
+# green, orange is GitHub Primer's orange. Background tiers (bg-dark, bg-hl, gutter) are Primer's
+# neutral canvas / border tones; selection is a blue tint. All accents read at >= 4.5:1 and
+# look-alike pairs stay at ΔE >= 16 (closest: 20).
+
+[[variants]]
+slug = "light"
+label = "Light"
+mode = "light"
+character = "white ground, near-black text"
+# mark text (yellow) needs a lighter tint on white to stay above 4.3:1
+overrides = { mark_alpha = "0.15" }
+[variants.palette]
+bg        = "#ffffff"
+bg-dark   = "#f6f8fa"
+bg-hl     = "#eaeef2"
+gutter    = "#d0d7de"
+fg        = "#1f2328"
+fg-dim    = "#57606a"
+comment   = "#6e7781"
+blue      = "#0969da"
+cyan      = "#1b7c83"
+teal      = "#167056"
+green     = "#116329"
+yellow    = "#9d5c00"
+orange    = "#bc4c00"
+red       = "#cf222e"
+magenta   = "#8250df"
+selection = "#c9def7"
+
+[[variants]]
+slug = "dark"
+label = "Dark"
+mode = "dark"
+character = "near-black ground, cool light text"
+[variants.palette]
+bg        = "#0d1117"
+bg-dark   = "#010409"
+bg-hl     = "#161b22"
+gutter    = "#30363d"
+fg        = "#e6edf3"
+fg-dim    = "#b1bac4"
+comment   = "#6e7681"
+blue      = "#58a6ff"
+cyan      = "#39c5cf"
+teal      = "#3cbf90"
+green     = "#3fb950"
+yellow    = "#d29922"
+orange    = "#f0883e"
+red       = "#ff7b72"
+magenta   = "#bc8cff"
+selection = "#243e5d"

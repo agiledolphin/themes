@@ -1,8 +1,10 @@
 # Themes Workspace
 
-Design workspace for Typora and Obsidian themes built from three palettes: TokyoNight
-(`tn-`), Catppuccin (`cp-`) and Wonderland (`wl-`, original, inspired by Murakami's
-"Hard-Boiled Wonderland").
+Design workspace for Typora and Obsidian themes built from four palettes: TokyoNight
+(`tn-`), Catppuccin (`cp-`), Merino (`mr-`, after the Merino Light/Dark terminal themes — GitHub
+Primer colors) and Wonderland (`wl-`, original, inspired by Murakami's "Hard-Boiled Wonderland").
+A new palette is just a new `shared/palettes/<palette>.toml` (plus its name in
+`shared/lamplit.toml` → `schemes`); the generator does the rest.
 - **Obsidian**: one theme, **Lamplit** (`ll-`), carrying every palette as a Style Settings
   scheme (dark scheme and light scheme chosen separately).
 - **Typora**: one theme file per palette variant (TokyoNight Mod Storm, …).

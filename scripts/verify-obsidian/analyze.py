@@ -212,7 +212,11 @@ if BASELINE:
         elif (a or "").__str__().replace(" ", "") != (b or "").__str__().replace(" ", ""):
             baseline_diffs.append((path, a, b))
 
-    ids = [x["id"] for x in RUN["variants"]]
+    base_ids = {x["id"] for x in BASE["variants"]}
+    ids = [x["id"] for x in RUN["variants"] if x["id"] in base_ids]
+    new_ids = [x["id"] for x in RUN["variants"] if x["id"] not in base_ids]
+    if new_ids:
+        print(f"\n(not in the baseline, so not compared: {', '.join(new_ids)})")
     for v in ids:
         for view in ("reading", "live"):
             walk(f"{v}/{view}", BASE["data"].get(f"{v}/{view}"), DATA.get(f"{v}/{view}"))
