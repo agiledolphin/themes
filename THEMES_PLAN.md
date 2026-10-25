@@ -80,11 +80,17 @@
 
 当前版本：
 
-| 主题 | Obsidian | Typora |
-|------|----------|--------|
-| TokyoNight Mod | 1.5.2 | 1.4.2 |
-| Catppuccin Mod | 1.3.3 | 1.3.1 |
-| Wonderland Mod | 1.1.3 | 1.1.2 |
+| Obsidian | 版本 |
+|----------|------|
+| Lamplit（含三套配色） | 1.0.0 |
+
+| Typora | 版本 |
+|--------|------|
+| TokyoNight Mod | 1.4.2 |
+| Catppuccin Mod | 1.3.1 |
+| Wonderland Mod | 1.1.2 |
+
+（合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
 ---
 
@@ -154,6 +160,24 @@
 - JetBrains / VS Code 配色方案移植
 - Typora 主题提交到官方主题库
 
+
+### 阶段 6 — Obsidian 主题合并为 Lamplit（2026-10-25 完成，待清理 vault 旧主题）
+
+名称 **Lamplit**（青灯夜读）。Obsidian 侧三套主题合并为一个，TokyoNight / Catppuccin / Wonderland 作为配色方案在 Style Settings 里选择；Typora 不变。
+
+- 设置：深色方案 8 选 1、浅色方案 3 选 1（选项形如「Wonderland · Underground」，顺序 Wonderland → TokyoNight → Catppuccin），默认 Underground + Lab（与当前使用一致，无需迁移）；隐藏文件夹图标开关
+- 差异处理：颜色角色与按风格变化的变量 → 每个变体块输出语义颜色（`--ll-accent`、`--ll-h2` …）；按风格变化的整条规则（文件列表 / 菜单的实色填充 vs 淡底）→ 两套都输出，用 `:where()` 限定作用域（不改变优先级）；未装 Style Settings 时默认走淡底风格
+- 配置：新增 `shared/lamplit.toml`（名称、前缀 `ll`、Obsidian 版本、默认、顺序）；三个配色 toml 保留 `typora_version`，`obsidian_version` 移入 lamplit.toml
+- 验证：先给核验工具补上文件列表 / 菜单 / tooltip / 搜索 / Obsidian 变量的测量，用现有三主题建立基线，再与 Lamplit 逐项对比，要求完全一致；另测深浅混搭
+
+| 步骤 | 状态 |
+|------|------|
+| 1. 核验工具补测量项 + 基线（现有三主题 × 11 变体） | ☑ 补测 Obsidian 变量 122 个、UI 探针 72 个、5 种强制 hover/focus 状态；`--baseline` 逐项对比。修正测量不稳定：探针禁用过渡动画、每项只在所属章节取可见元素（全量与部分重跑 0 差异）；Obsidian 窗口隐藏时渲染暂停，工具改为先检查、不可见则拒绝运行 |
+| 2. 生成器与模板改造，生成 `obsidian/lamplit/` | ☑ 静态检查：各变体变量定义完整 |
+| 3. 与基线逐项对比、混搭测试 | ☑ 11 个变体共 13,519 项与旧三主题完全一致；阅读/编辑视图 0 差异；深色 Catppuccin Mocha + 浅色 Wonderland Lab 混搭各自与单独选择时一致 |
+| 4. vault 切换到 Lamplit；删除仓库中三个旧 Obsidian 目录；README / CLAUDE.md 更新 | ☑ 2026-10-25 切换（深色方案设为 Wonderland · Office District，沿用用户当时的选择）；生成器与核验工具移除旧的每配色一主题模式 |
+| 5. vault 中旧主题文件夹（用户确认后删除） | ☐ |
+
 ---
 
 ## 三、文件结构（现状）
@@ -161,23 +185,16 @@
 ```
 themes/
 ├── shared/
-│   ├── palettes/              # 每套主题的唯一数据源（.toml）
+│   ├── lamplit.toml           # Lamplit（Obsidian）设置：名称、前缀、版本、默认方案、顺序
+│   ├── palettes/              # 每套配色的唯一数据源（.toml）
 │   │   ├── tokyonight.toml
 │   │   ├── catppuccin.toml
 │   │   └── wonderland.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
-│   ├── tokyonight/
-│   │   ├── theme.css          ✓
-│   │   ├── manifest.json      ✓（需补 authorUrl）
-│   │   └── README.md          ✓
-│   ├── catppuccin/
-│   │   ├── theme.css          ✓
-│   │   ├── manifest.json      ✓（需补 authorUrl）
-│   │   └── README.md          ✓
-│   └── wonderland/
-│       ├── theme.css          ✓
-│       ├── manifest.json      ✓（需补 authorUrl）
+│   └── lamplit/
+│       ├── theme.css          ✓（生成）
+│       ├── manifest.json      ✓（生成，需补 authorUrl）
 │       └── README.md          ✓
 ├── typora/
 │   ├── tokyonight/

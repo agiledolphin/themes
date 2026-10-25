@@ -1,20 +1,12 @@
 # Catppuccin Mod — single source of truth for both platforms.
 # Generated from this file by scripts/gen-themes.py (never edit the outputs):
-#   obsidian/catppuccin/theme.css, obsidian/catppuccin/manifest.json, typora/catppuccin/*.css
+#   typora/catppuccin/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 
 name = "Catppuccin Mod"
+short_name = "Catppuccin"            # label in Lamplit's scheme dropdowns
 prefix = "cp"                 # CSS variable / class prefix
-obsidian_version = "1.3.3"
 typora_version = "1.3.1"
 tagline = ["Palette: catppuccin.com"]
-min_app_version = "1.0.0"         # Obsidian manifest fields
-author = "Jiaming Sun"
-author_url = ""
-
-# Style Settings wording. The ids derived from settings_noun (e.g. cp-dark-flavor) must stay stable:
-# changing them silently resets every user's saved variant choice.
-settings_noun = "flavor"
-settings_desc_noun = "flavor"
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
 rgb = ["lavender", "blue", "cyan", "teal", "green", "yellow", "orange", "red", "magenta", "comment", "rosewater"]
@@ -39,7 +31,7 @@ quote_nested = "magenta"
 tooltip = "rosewater"
 tooltip_text_alpha = "0.80"
 tooltip_border_alpha = "0.60"
-tooltip_shadow = "0 0 4px rgba(var(--cp-rosewater-rgb), 0.15)"
+tooltip_shadow = "0 0 4px rgba({{rgb:tooltip}}, 0.15)"
 nav_style = "fill"
 nav_hover = "lavender"
 nav_active = "magenta"

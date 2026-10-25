@@ -21,3 +21,4 @@ desktop.ini
 # Obsidian verification output (scripts/verify-obsidian)
 .verify/
 __pycache__/
+.verify-*/

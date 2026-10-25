@@ -3,11 +3,12 @@
 # requires-python = ">=3.11"
 # dependencies = []
 # ///
-"""Generate every theme file from shared/palettes/<theme>.toml + scripts/templates/.
+"""Generate every theme file from shared/palettes/<palette>.toml, shared/lamplit.toml
+and scripts/templates/.
 
 Outputs (never edit by hand — edit the TOML or the templates, then rerun):
-    typora/<theme>/<theme>-mod-<variant>.css
-    obsidian/<theme>/theme.css + manifest.json
+    typora/<palette>/<palette>-mod-<variant>.css    one Typora theme per palette variant
+    obsidian/lamplit/theme.css + manifest.json      one Obsidian theme, every palette as a scheme
 
 Usage:
     ./scripts/gen-themes.py            # (re)write all outputs
@@ -97,8 +98,8 @@ class Ctx:
                 return self.rgb(name)
             if kind == "hex":
                 return self.hex(name)
-            if kind == "r":
-                return str(self.roles[name])
+            if kind == "r":   # role values may themselves contain placeholders
+                return re.sub(r"\{\{([^{}#/]+)\}\}", sub, str(self.roles[name]))
             raise KeyError(m.group(0))
 
         out = re.sub(r"\{\{([^{}]+)\}\}", sub, out)
@@ -143,76 +144,206 @@ def typora_outputs(theme: dict) -> dict[Path, str]:
 RULE = " * " + "=" * 60
 
 
-def obsidian_settings(theme: dict) -> str:
-    p, noun, desc = theme["prefix"], theme["settings_noun"], theme["settings_desc_noun"]
-    lines = ["/* @settings", "", f"name: {theme['name']}", f"id: {theme['slug']}", "settings:"]
+# ---------------------------------------------------------------- Lamplit (single theme)
+# Every palette becomes a Style Settings scheme. The template is rendered once: placeholders
+# turn into semantic variables (--ll-accent, --ll-h2, …) that each variant block defines,
+# and the template's style-conditional blocks are handled by kind:
+#   rule groups        -> kept for every style, scoped with :where() (specificity unchanged)
+#   declaration groups -> moved into the variant blocks of the variants using that style
+#   inline values      -> become per-variant variables (--ll-cond-N)
+COND = re.compile(r"\{\{#([\w-]+)=([\w-]+)\}\}(\n?)(.*?)\{\{/\1\}\}(\n?)", re.S)
+
+
+def ll_var(p: str, kind: str, name: str) -> str:
+    n = name.replace("_", "-")
+    return f"var(--{p}-{n}-rgb)" if kind == "rgb" else f"var(--{p}-{n})"
+
+
+def split_selectors(sel: str) -> list[str]:
+    parts, depth, cur = [], 0, ""
+    for ch in sel:
+        depth += (ch == "(") - (ch == ")")
+        if ch == "," and depth == 0:
+            parts.append(cur); cur = ""
+        else:
+            cur += ch
+    return [x.strip() for x in parts + [cur] if x.strip()]
+
+
+def scope_rules(css: str, scope: list[str]) -> str:
+    """Prefix every rule's selectors with :where(scope); keep comments and declarations."""
+    def one(sel: str) -> str:
+        m = re.match(r"body((?::[\w-]+(?:\([^)]*\))?|\.[\w-]+)*)", sel)
+        if m:   # attach to the existing body compound
+            return f"body{m.group(1)}:where({', '.join(scope)}){sel[m.end():]}"
+        return f":where({', '.join('body' + x for x in scope)}) {sel}"
+
+    def rule(m):
+        head, body = m.group(1), m.group(2)
+        cut = head.rfind("*/") + 2 if "*/" in head else 0
+        lead, sel = head[:cut], head[cut:]
+        ws = re.match(r"\s*", sel).group(0)
+        return f"{lead}{ws}{',\n'.join(one(x) for x in split_selectors(sel))} {{{body}}}"
+    return re.sub(r"([^{}]*)\{([^{}]*)\}", rule, css)
+
+
+def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
+    cfg = tomllib.loads((ROOT / "shared/lamplit.toml").read_text())
+    P = cfg["prefix"]
+    order = {s: i for i, s in enumerate(cfg["schemes"])}
+    schemes = sorted(themes, key=lambda t: order[t["slug"]])
+    vid = lambda t, v: f"{t['prefix']}-{v['slug']}"
+    by_mode = {}
     for mode in ("dark", "light"):
-        vs = [v for v in theme["variants"] if v["mode"] == mode]
-        lines += ["  -", f"    id: {p}-{mode}-{noun}",
-                  f"    title: {mode.title()} Mode {noun.title()}",
-                  f"    description: Color {desc} used when Obsidian is in {mode} mode",
-                  "    type: class-select", f"    default: {p}-{vs[0]['slug']}", "    options:"]
-        for v in vs:
-            lines += ["      -", f"        label: {v['label']}", f"        value: {p}-{v['slug']}"]
-    lines += ["  -", f"    id: {p}-hide-folder-icons", "    title: Hide Folder Icons",
-              "    description: Hide the folder icons in the file explorer",
-              "    type: class-toggle", "    default: false", "", "*/"]
-    return "\n".join(lines)
+        lst = [(t, v) for t in schemes for v in t["variants"] if v["mode"] == mode]
+        lst.sort(key=lambda tv: vid(*tv) != cfg[f"default_{mode}"])   # default first, rest in scheme order
+        by_mode[mode] = lst
+    ctxs = {vid(t, v): Ctx(t, v, "obsidian") for t in schemes for v in t["variants"]}
+    classes = {m: [f".{P}-{vid(t, v)}" for t, v in lst] for m, lst in by_mode.items()}
 
+    def scope_for(key: str, value: str) -> list[str]:
+        out = []
+        for mode, lst in by_mode.items():
+            for i, (t, v) in enumerate(lst):
+                if str(ctxs[vid(t, v)].roles.get(key)) != value:
+                    continue
+                out.append(f".theme-{mode}.{P}-{vid(t, v)}")
+                if i == 0:   # default variant: also when no scheme class is set (no Style Settings)
+                    out.append(f".theme-{mode}:not({', '.join(classes[mode])})")
+        return out
 
-def alternatives(variants: list[dict]) -> str:
-    slugs = [v["slug"] for v in variants]
-    return slugs[0] if len(slugs) == 1 else "{" + "|".join(slugs) + "}"
-
-
-def obsidian_outputs(theme: dict) -> dict[Path, str]:
     template = (TEMPLATES / "obsidian.css.tmpl").read_text()
-    p, slug = theme["prefix"], theme["slug"]
-    dark = [v for v in theme["variants"] if v["mode"] == "dark"]
-    light = [v for v in theme["variants"] if v["mode"] == "light"]
+    used: dict[tuple[str, str], None] = {}
+
+    def to_vars(text: str) -> str:
+        def sub(m):
+            kind, _, name = m.group(1).partition(":")
+            if not name:
+                return m.group(0)                       # {{UPPER}} handled later
+            if kind not in ("c", "rgb", "r"):
+                raise KeyError(f"Lamplit does not support {{{{{kind}:…}}}}")
+            used[(kind, name)] = None
+            return ll_var(P, kind, name)
+        return re.sub(r"\{\{([^{}#/]+)\}\}", sub, text)
+
+    # 1. style-conditional blocks
+    decl_groups, cond_vars, pieces, pos = [], [], [], 0
+    matches = list(COND.finditer(template))
+    i = 0
+    while i < len(matches):
+        m = matches[i]
+        pieces.append(to_vars(template[pos:m.start()]))
+        key, val, nl1, body, nl2 = m.groups()
+        if "{" in re.sub(r"\{\{[^{}]*\}\}", "", body):            # rule group
+            pieces.append(scope_rules(to_vars(body), scope_for(key, val)) + nl2)
+            pos = m.end(); i += 1
+        elif nl1:                                                  # declaration group
+            decl_groups.append((key, val, to_vars(body)))
+            pos = m.end(); i += 1
+        else:                                                      # inline alternatives
+            run = [m]
+            while i + len(run) < len(matches) and matches[i + len(run)].start() == run[-1].end() \
+                    and matches[i + len(run)].group(1) == key:
+                run.append(matches[i + len(run)])
+            name = f"cond-{len(cond_vars) + 1}"
+            cond_vars.append((name, key, {r.group(2): to_vars(r.group(4)) for r in run}))
+            pieces.append(f"var(--{P}-{name})")
+            pos = run[-1].end(); i += len(run)
+    pieces.append(to_vars(template[pos:]))
+    body_css = "".join(pieces)
+
+    # 2. per-variant blocks: semantic variables + this variant's declaration groups / inline values
+    def tokens(ctx: Ctx) -> list[tuple[str, str]]:
+        rows = []
+        for kind, name in used:
+            n = name.replace("_", "-")
+            if kind == "r":
+                if name not in ctx.roles or ctx.roles[name] == "":
+                    continue
+                raw = str(ctx.roles[name])          # placeholders inside role values -> semantic vars
+                rows.append((f"--{P}-{n}", re.sub(r"\{\{(\w+):([\w-]+)\}\}",
+                                                  lambda m: ll_var(P, m.group(1), m.group(2)), raw)))
+                continue
+            if name in ctx.roles and ctx.roles[name] == "":
+                continue                                   # role unused by this palette's styles
+            if name == "mark-bg":
+                value = f"rgba({rgb_triple(ctx.hex('yellow'))}, {ctx.roles['mark_alpha']})"
+            else:
+                value = ctx.hex(name)
+            rows.append((f"--{P}-{n}-rgb", rgb_triple(value)) if kind == "rgb" else (f"--{P}-{n}", value))
+        base = ["bg", "bg-dark", "bg-hl", "gutter", "fg", "fg-dim", "comment", "selection", "mark-bg",
+                "blue", "cyan", "teal", "green", "yellow", "orange", "red", "magenta"]
+        def key(row):
+            n = row[0][len(P) + 3:].removesuffix("-rgb")
+            return (base.index(n) if n in base else len(base), n, row[0].endswith("-rgb"))
+        return sorted(rows, key=key)
+
+    blocks = ["/* " + "=" * 60, " * Schemes (one block per palette variant)", " *",
+              f" * Dark mode:  body.theme-dark  + {P}-<palette>-<variant> (Style Settings: dark scheme)",
+              f" * Light mode: body.theme-light + {P}-<palette>-<variant> (Style Settings: light scheme)",
+              " * Each block defines the semantic variables the rules below use.", RULE + " */"]
+    for mode, lst in by_mode.items():
+        for i, (t, v) in enumerate(lst):
+            ctx = ctxs[vid(t, v)]
+            rows = tokens(ctx)
+            for name, key, alts in cond_vars:
+                if str(ctx.roles.get(key)) in alts:
+                    rows.append((f"--{P}-{name}", alts[str(ctx.roles.get(key))]))
+            width = max(len(k) for k, _ in rows) + 1
+            lines = [f"    {(k + ':').ljust(width)} {val};" for k, val in rows]
+            for key, val, body in decl_groups:
+                if str(ctx.roles.get(key)) == val:
+                    lines.append(body.rstrip("\n"))
+            sel = f"body.theme-{mode}.{P}-{vid(t, v)}"
+            if i == 0:
+                sel = f"body.theme-{mode},\n" + sel
+            char = f" — {v['character']}" if v.get("character") else ""
+            note = " (default)" if i == 0 else ""
+            blocks += ["", f"/* --- {mode.title()}: {t['short_name']} · {v['label']}{note}{char} --- */", "",
+                       sel + " {", *lines, "}"]
+
+    # 3. Style Settings, header, manifest
+    def option_lines(mode):
+        out = []
+        for t, v in by_mode[mode]:
+            out += ["      -", f"        label: {t['short_name']} · {v['label']}", f"        value: {P}-{vid(t, v)}"]
+        return out
+    settings = ["/* @settings", "", f"name: {cfg['name']}", "id: lamplit", "settings:"]
+    for mode in ("dark", "light"):
+        settings += ["  -", f"    id: {P}-{mode}-scheme", f"    title: {mode.title()} Mode Scheme",
+                     f"    description: Palette used when Obsidian is in {mode} mode",
+                     "    type: class-select", f"    default: {P}-{cfg['default_' + mode]}", "    options:",
+                     *option_lines(mode)]
+    settings += ["  -", f"    id: {P}-hide-folder-icons", "    title: Hide Folder Icons",
+                 "    description: Hide the folder icons in the file explorer",
+                 "    type: class-toggle", "    default: false", "", "*/"]
     header = "\n".join([
-        "/* " + "=" * 60, f" * {theme['name']} — Obsidian Theme",
-        *[f" * {line}" for line in theme["tagline"]],
-        " * Variants: " + " · ".join(v["label"] for v in dark) + " (dark) · "
-        + " · ".join(v["label"] for v in light) + " (light)",
-        " * Requires: Style Settings plugin for variant switching",
-        f" * GENERATED by scripts/gen-themes.py from shared/palettes/{slug}.toml",
+        "/* " + "=" * 60, f" * {cfg['name']} — Obsidian Theme",
+        *[f" * {line}" for line in cfg["tagline"]],
+        " * Schemes: " + " · ".join(f"{t['short_name']} ({', '.join(v['label'] for v in t['variants'])})" for t in schemes),
+        " * Requires: Style Settings plugin to choose schemes (otherwise the defaults apply)",
+        " * GENERATED by scripts/gen-themes.py from shared/lamplit.toml, shared/palettes/*.toml",
         " * and scripts/templates/obsidian.css.tmpl — edit those, not this file.",
         RULE + " */"])
-    blocks = ["/* " + "=" * 60, " * Palettes", " *",
-              f" * Dark mode:  body.theme-dark  + {p}-{alternatives(dark)}",
-              f" * Light mode: body.theme-light + {p}-{alternatives(light)}",
-              " *", f" * Default dark = {dark[0]['label']}; default light = {light[0]['label']}.",
-              RULE + " */"]
-    for group in (dark, light):
-        for i, v in enumerate(group):
-            ctx = Ctx(theme, v, "obsidian")
-            note = " (default)" if i == 0 else ""
-            char = f" — {v['character']}" if v.get("character") else ""
-            sel = f"body.theme-{v['mode']}.{p}-{v['slug']}"
-            if i == 0:
-                sel = f"body.theme-{v['mode']},\n" + sel
-            blocks += ["", f"/* --- {v['mode'].title()}: {v['label']}{note}{char} --- */", "",
-                       sel + " {", *ctx.palette_lines("    "), "}"]
-    extra = {"HEADER": header, "SETTINGS": obsidian_settings(theme),
-             "PALETTES": "\n".join(blocks), "P": p}
-    rendered = {Ctx(theme, v, "obsidian").render(template, extra) for v in theme["variants"]}
-    if len(rendered) != 1:
-        raise ValueError(f"{slug}: a per-variant override changes the shared Obsidian rules")
-    manifest = {"name": theme["name"], "version": theme["obsidian_version"],
-                "minAppVersion": theme["min_app_version"], "author": theme["author"],
-                "authorUrl": theme["author_url"]}
-    out_dir = ROOT / "obsidian" / slug
-    return {out_dir / "theme.css": rendered.pop(),
+    extra = {"HEADER": header, "SETTINGS": "\n".join(settings), "PALETTES": "\n".join(blocks), "P": P}
+    css = re.sub(r"\{\{([A-Z_]+)\}\}", lambda m: extra[m.group(1)], body_css)
+    if "{{" in css:
+        raise ValueError("Lamplit: unresolved placeholder")
+    manifest = {"name": cfg["name"], "version": cfg["obsidian_version"], "minAppVersion": cfg["min_app_version"],
+                "author": cfg["author"], "authorUrl": cfg["author_url"]}
+    out_dir = ROOT / "obsidian" / "lamplit"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    return {out_dir / "theme.css": css,
             out_dir / "manifest.json": json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"}
 
 
 def main() -> None:
     check = "--check" in sys.argv[1:]
     outputs: dict[Path, str] = {}
-    for theme in load_themes():
+    themes = load_themes()
+    for theme in themes:
         outputs.update(typora_outputs(theme))
-        outputs.update(obsidian_outputs(theme))
+    outputs.update(lamplit_outputs(themes))
     stale = []
     for path, text in outputs.items():
         rel = path.relative_to(ROOT)
