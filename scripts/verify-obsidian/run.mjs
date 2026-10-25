@@ -37,7 +37,7 @@ const ONLY = arg('only', '')?.split(',').filter(Boolean) ?? [];
 const SECTIONS = [
   ['top', null, true], ['text', 'Text Styles', true], ['tasks', 'Task List', false],
   ['quote-code', 'Blockquotes', true], ['tables', 'Tables', true], ['callouts', 'Callouts', true],
-  ['hr', 'Horizontal Rules', false], ['tags', 'Inline Tags', true],
+  ['hr', 'Horizontal Rules', false], ['tags', 'Inline Tags', true], ['mermaid', 'Mermaid Diagrams', true],
 ];
 
 const LAMPLIT_TOML = fs.readFileSync(path.join(ROOT, 'shared/lamplit.toml'), 'utf8');
@@ -129,7 +129,7 @@ try {
       await ev(`await __V.viewMode('${view}'); return 1;`);
       const merged = {};
       for (const [id, heading, line, takeShot] of sections) {
-        await ev(`await __V.scrollTo(${line}, ${JSON.stringify(heading)}); return 1;`);
+        await ev(`await __V.scrollTo(${line}, ${JSON.stringify(heading)}); await __V.settle(${JSON.stringify(id)}); return 1;`);
         const m = await ev(`return __V.measure(${JSON.stringify(id)});`);
         for (const [k, val] of Object.entries(m)) if (merged[k] == null && val != null) merged[k] = val;
         if (takeShot) await shot(path.join(OUT, 'shots', `${v.id}-${view}-${id}.png`), { ...(await ev('return __V.rect();')), scale: 0.35 });

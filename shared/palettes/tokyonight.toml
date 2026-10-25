@@ -5,7 +5,7 @@
 name = "TokyoNight Mod"
 short_name = "TokyoNight"            # label in Lamplit's scheme dropdowns
 prefix = "tn"                 # CSS variable / class prefix
-typora_version = "1.4.2"
+typora_version = "1.4.3"
 tagline = ["Palette: github.com/folke/tokyonight.nvim"]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).

@@ -86,10 +86,10 @@
 
 | Typora | 版本 |
 |--------|------|
-| TokyoNight Mod | 1.4.2 |
-| Catppuccin Mod | 1.3.1 |
-| Wonderland Mod | 1.1.2 |
-| Merino Mod | 1.0.0 |
+| TokyoNight Mod | 1.4.3 |
+| Catppuccin Mod | 1.3.2 |
+| Wonderland Mod | 1.1.3 |
+| Merino Mod | 1.0.1 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -197,6 +197,22 @@
 | 生成（Lamplit + Typora）并同步 | ☑ |
 | Typora 实际效果（Light / Dark） | ☑ 用户手动确认 |
 | Obsidian 自动核验：Merino 两变体 + 原 11 变体与上次 `.verify` 逐项对比（应 0 差异） | ☑ 13 个变体阅读/编辑视图 0 不一致；Merino 对比度全部达标（Light 最低为高亮 4.31，Dark 最低为 H6 4.12）。原 11 变体只有 `table.parentWidth` 不同，查明是基线测量偏差：基线 10 个变体的阅读视图记成 0px，本次全部 700px，表格宽度两次一致，实际渲染无变化。`analyze.py --baseline` 改为跳过基线里没有的变体并列出名称 |
+
+### 阶段 8 — Mermaid 图（2026-10-25）
+
+机制（查自两个应用的源码，Mermaid 均为 11.13.0）：
+
+- **Obsidian**：初始化 Mermaid 时不指定主题，一律用默认浅色主题；只有字体读主题（`--font-mermaid` → `--font-text`）。深色模式下 app.css 给整张图加 `filter: invert(100%) hue-rotate(180deg) saturate(1.25)` 反相。Lamplit 不改：图的颜色与配色方案无关，但各方案都能看清。若要随配色走，需去掉反相滤镜，并按图表类型用 `!important` 覆盖 Mermaid 内嵌、以图 id 限定的样式，没有变量可用，不做。
+- **Typora**：读主题的 `--mermaid-theme`（基础样式设为 `default`）。`default` / `dark` / `forest` / `neutral` / `base` 直接用 Mermaid 同名主题；`night` 用 Mermaid 的 `dark` 主题；值为空时走自定义方式：Mermaid `base` 主题，以 `--node-fill` 为主色推导整套颜色，另读 `--node-text-color`、`--cluster-fill`（备注底色）、`--text-color`（备注文字）、`--bg-color`、`--mermaid-font-family`。深浅判断：`--node-fill` 是十六进制时用一个读错蓝色分量的公式（如 `#161b22` 被判成浅色），否则按页面背景判断。
+- Mermaid 自带的 `dark` 主题按 `#333` 灰底设计，饼图等配色里有 `#0b0000` 这类近黑色，放在我们接近纯黑的底上看不见（Night 方式试过，用户截图确认此问题）。
+
+| 项目 | 状态 |
+|------|------|
+| Typora 深色变体：`--mermaid-theme` 置空走自定义方式，`--node-fill` 为强调色 30% 叠在背景上（写成 `rgb()`，绕开深浅判断的 bug），节点文字为正文色，备注底色为 bg-hl；浅色变体保持 `default` | ☑ 用 Typora 自己的配置函数 + Mermaid 库在无头浏览器中渲染确认（theme=base、darkMode=true）；用户在 Typora 中确认 |
+| Typora 图表外框：未编辑的图表恢复 Typora 默认的无框无底（原先代码块样式的 `!important` 底色与内边距盖掉了 Typora 的设置，面板又加了一圈边框）；编辑时保留代码块外观，预览上方加一条分隔线；子图框改用 bg-hl 底、gutter 边 | ☑ 同上 |
+| Typora `--text-color`：基础样式为 `#333333`，主题从未设置，深色变体里下拉菜单、输入框、专注模式等处文字发暗；改为正文色 | ☑ |
+| 版本：TokyoNight 1.4.3 / Catppuccin 1.3.2 / Wonderland 1.1.3 / Merino 1.0.1（Typora） | ☑ |
+| 核验工具：示例笔记的 Mermaid 一节加入截图（等图渲染出来再截），报告页增加「Mermaid 图」 | ☑ Merino 两变体试跑正常 |
 
 ---
 
