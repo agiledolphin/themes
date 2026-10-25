@@ -161,7 +161,7 @@
 - Typora 主题提交到官方主题库
 
 
-### 阶段 6 — Obsidian 主题合并为 Lamplit（2026-10-25 完成，待清理 vault 旧主题）
+### 阶段 6 — Obsidian 主题合并为 Lamplit（2026-10-25 完成）
 
 名称 **Lamplit**（青灯夜读）。Obsidian 侧三套主题合并为一个，TokyoNight / Catppuccin / Wonderland 作为配色方案在 Style Settings 里选择；Typora 不变。
 
@@ -176,7 +176,7 @@
 | 2. 生成器与模板改造，生成 `obsidian/lamplit/` | ☑ 静态检查：各变体变量定义完整 |
 | 3. 与基线逐项对比、混搭测试 | ☑ 11 个变体共 13,519 项与旧三主题完全一致；阅读/编辑视图 0 差异；深色 Catppuccin Mocha + 浅色 Wonderland Lab 混搭各自与单独选择时一致 |
 | 4. vault 切换到 Lamplit；删除仓库中三个旧 Obsidian 目录；README / CLAUDE.md 更新 | ☑ 2026-10-25 切换（深色方案设为 Wonderland · Office District，沿用用户当时的选择）；生成器与核验工具移除旧的每配色一主题模式 |
-| 5. vault 中旧主题文件夹（用户确认后删除） | ☐ |
+| 5. vault 中旧主题文件夹（用户确认后删除） | ☑ 已删除 TokyoNight Mod / Catppuccin Mod / Wonderland Mod 三个文件夹，保留 Lamplit 与用户自装的 Minimal |
 
 ---
 
