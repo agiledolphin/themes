@@ -5,9 +5,11 @@
 # ///
 """Analyze a run.mjs result: Reading-vs-Live-Preview mismatches and text contrast.
 
-Usage: uv run scripts/verify-obsidian/analyze.py [.verify]
+Usage: uv run scripts/verify-obsidian/analyze.py [.verify] [--baseline <other run dir>]
 Prints a report, writes <dir>/index.html (findings, contrast table, screenshot pairs),
-and exits 1 if any checked property differs between the two views.
+and exits 1 if any checked property differs between the two views — or, with --baseline,
+if any measured value (styles, Obsidian variables, UI probes, hover/focus states) differs
+from the baseline run for the same variant.
 """
 import html
 import json
@@ -17,7 +19,11 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = Path(sys.argv[1] if len(sys.argv) > 1 else ".verify")
+args = sys.argv[1:]
+BASELINE = Path(args[args.index("--baseline") + 1]) if "--baseline" in args else None
+if BASELINE:
+    i = args.index("--baseline"); del args[i:i + 2]
+OUT = Path(args[0] if args else ".verify")
 RUN = json.loads((OUT / "measure.json").read_text())
 DATA = RUN["data"]
 
@@ -73,7 +79,7 @@ def variant_info(cls):
 
 # --- 1. consistency
 mismatches = []
-for v in [x["cls"] for x in RUN["variants"]]:
+for v in [x["id"] for x in RUN["variants"]]:
     r, l = DATA[f"{v}/reading"], DATA[f"{v}/live"]
     for el, props in CHECK.items():
         for p in props:
@@ -82,13 +88,14 @@ for v in [x["cls"] for x in RUN["variants"]]:
                 continue
             if a is None or b is None or a.replace(" ", "") != b.replace(" ", ""):
                 mismatches.append((v, el, p, a, b))
-    full = [bool(t and t.get("width") == t.get("parentWidth")) for t in (r.get("table"), l.get("table"))]
+    px = lambda x: float(re.sub(r"[^\d.]", "", x or "") or 0)
+    full = [bool(t and abs(px(t.get("width")) - px(t.get("parentWidth"))) < 2) for t in (r.get("table"), l.get("table"))]
     if full[0] != full[1]:
         mismatches.append((v, "table", "width", "full" if full[0] else "content", "full" if full[1] else "content"))
 
 # --- 2. contrast (Reading view, against the variant's real page background)
 contrast_rows = []
-for v in [x["cls"] for x in RUN["variants"]]:
+for v in [x["id"] for x in RUN["variants"]]:
     theme, label, bg_hex = variant_info(v)
     page = [int(bg_hex[i:i + 2], 16) for i in (1, 3, 5)] + [1.0]
     r = DATA[f"{v}/reading"]
@@ -134,12 +141,12 @@ ct_html = "".join(
     for v, theme, label, body, (mk, mv), low in contrast_rows)
 groups = {}
 for x in RUN["variants"]:
-    theme, label, _ = variant_info(x["cls"])
-    groups.setdefault(theme, []).append(f'<button class="v" type="button" data-v="{x["cls"]}" aria-pressed="false">{esc(label)}</button>')
+    theme, label, _ = variant_info(x["id"])
+    groups.setdefault(theme, []).append(f'<button class="v" type="button" data-v="{x["id"]}" aria-pressed="false">{esc(label)}</button>')
 picker = "".join(f'<div class="group"><span class="lbl">{esc(t)}</span>{"".join(b)}</div>' for t, b in groups.items())
-first = RUN["variants"][0]["cls"]
+first = RUN["variants"][0]["id"]
 # only sections whose screenshots exist (a heading missing from the note is skipped by run.mjs)
-available = {x["cls"]: [k for k, _ in SECTIONS if (OUT / "shots" / f"{x['cls']}-reading-{k}.png").exists()]
+available = {x["id"]: [k for k, _ in SECTIONS if (OUT / "shots" / f"{x['id']}-reading-{k}.png").exists()]
              for x in RUN["variants"]}
 page = f"""<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mod 主题渲染核验</title>
@@ -192,4 +199,29 @@ show({json.dumps(first)});
 """
 (OUT / "index.html").write_text(page)
 print(f"\nReport: {OUT / 'index.html'}")
-sys.exit(1 if mismatches else 0)
+
+# --- 3. baseline comparison (same variant ids, every recorded value)
+baseline_diffs = []
+if BASELINE:
+    BASE = json.loads((BASELINE / "measure.json").read_text())
+
+    def walk(path, a, b):
+        if isinstance(a, dict) and isinstance(b, dict):
+            for k in sorted(set(a) | set(b)):
+                walk(f"{path}.{k}", a.get(k), b.get(k))
+        elif (a or "").__str__().replace(" ", "") != (b or "").__str__().replace(" ", ""):
+            baseline_diffs.append((path, a, b))
+
+    ids = [x["id"] for x in RUN["variants"]]
+    for v in ids:
+        for view in ("reading", "live"):
+            walk(f"{v}/{view}", BASE["data"].get(f"{v}/{view}"), DATA.get(f"{v}/{view}"))
+        walk(f"{v}/ui", BASE.get("ui", {}).get(v), RUN.get("ui", {}).get(v))
+    print(f"\nBaseline {BASELINE} vs this run: "
+          f"{len(baseline_diffs)} difference(s) across {len(ids)} variant(s)")
+    for path, a, b in baseline_diffs[:200]:
+        print(f"  {path}\n      baseline={a}\n      now     ={b}")
+    if len(baseline_diffs) > 200:
+        print(f"  … {len(baseline_diffs) - 200} more")
+
+sys.exit(1 if mismatches or baseline_diffs else 0)

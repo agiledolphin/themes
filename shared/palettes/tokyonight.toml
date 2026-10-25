@@ -1,20 +1,12 @@
 # TokyoNight Mod — single source of truth for both platforms.
 # Generated from this file by scripts/gen-themes.py (never edit the outputs):
-#   obsidian/tokyonight/theme.css, obsidian/tokyonight/manifest.json, typora/tokyonight/*.css
+#   typora/tokyonight/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 
 name = "TokyoNight Mod"
+short_name = "TokyoNight"            # label in Lamplit's scheme dropdowns
 prefix = "tn"                 # CSS variable / class prefix
-obsidian_version = "1.5.2"
 typora_version = "1.4.2"
 tagline = ["Palette: github.com/folke/tokyonight.nvim"]
-min_app_version = "1.0.0"         # Obsidian manifest fields
-author = "Jiaming Sun"
-author_url = ""
-
-# Style Settings wording. The ids derived from settings_noun (e.g. tn-dark-scheme) must stay stable:
-# changing them silently resets every user's saved variant choice.
-settings_noun = "scheme"
-settings_desc_noun = "variant"
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
 rgb = ["blue", "cyan", "green", "yellow", "orange", "red", "magenta", "teal", "comment"]

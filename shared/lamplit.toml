@@ -1,0 +1,22 @@
+# Lamplit — one Obsidian theme that bundles every palette in shared/palettes/ as a
+# Style Settings scheme (青灯夜读: reading by lamplight).
+# Generated from this file + the palette TOMLs by scripts/gen-themes.py:
+#   obsidian/lamplit/theme.css, obsidian/lamplit/manifest.json
+# Typora is unaffected: each palette still ships its own Typora theme files.
+
+name = "Lamplit"
+prefix = "ll"                     # CSS variable / class prefix
+obsidian_version = "1.0.0"
+min_app_version = "1.0.0"
+author = "Jiaming Sun"
+author_url = ""
+tagline = ["Reading by lamplight (青灯夜读). One theme, several palettes:",
+           "pick a dark and a light scheme in Style Settings."]
+
+# Order of the palettes in the Style Settings dropdowns.
+schemes = ["wonderland", "tokyonight", "catppuccin"]
+
+# Variant ids (<palette prefix>-<variant slug>) used when nothing is chosen. Changing the
+# Style Settings ids below would reset every user's saved choice — keep them stable.
+default_dark = "wl-underground"
+default_light = "wl-lab"
