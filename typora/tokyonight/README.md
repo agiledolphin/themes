@@ -1,4 +1,4 @@
-# TokyoNight Mod for Typora
+# Lamplit TokyoNight for Typora
 
 A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvim) color palette by folke. Four variants are provided as separate CSS files, each with its own full palette.
 
@@ -14,10 +14,10 @@ A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvi
 
 | File | Mode | Background | Character |
 |------|------|------------|-----------|
-| `tokyonight-mod-storm.css` | Dark  | `#24283b`  | Blue-grey, standard dark |
-| `tokyonight-mod-night.css` | Dark  | `#1a1b26`  | Deep, near-black |
-| `tokyonight-mod-moon.css`  | Dark  | `#222436`  | Blue-purple tint |
-| `tokyonight-mod-day.css`   | Light | `#e1e2e7`  | Low-saturation light |
+| `lamplit-tokyonight-storm.css` | Dark  | `#24283b`  | Blue-grey, standard dark |
+| `lamplit-tokyonight-night.css` | Dark  | `#1a1b26`  | Deep, near-black |
+| `lamplit-tokyonight-moon.css`  | Dark  | `#222436`  | Blue-purple tint |
+| `lamplit-tokyonight-day.css`   | Light | `#e1e2e7`  | Low-saturation light |
 
 ---
 
@@ -41,8 +41,8 @@ If you have cloned this repository:
 
 ```bash
 ./scripts/sync-typora.sh
-# or sync a single variant:
-./scripts/sync-typora.sh tokyonight-mod-storm
+# or sync only this palette:
+./scripts/sync-typora.sh tokyonight
 ```
 
 The script copies the CSS files to Typora's themes directory automatically.
@@ -54,10 +54,10 @@ The script copies the CSS files to Typora's themes directory automatically.
    - **Windows**: `%APPDATA%\Typora\themes\`
    - **Linux**: `~/.config/Typora/themes/`
 2. Copy one or more of the following files into that directory:
-   - `tokyonight-mod-storm.css`
-   - `tokyonight-mod-night.css`
-   - `tokyonight-mod-moon.css`
-   - `tokyonight-mod-day.css`
+   - `lamplit-tokyonight-storm.css`
+   - `lamplit-tokyonight-night.css`
+   - `lamplit-tokyonight-moon.css`
+   - `lamplit-tokyonight-day.css`
 3. Open **Typora → Preferences → Appearance** and select the desired variant
 
 ---

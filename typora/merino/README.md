@@ -1,4 +1,4 @@
-# Merino Mod for Typora
+# Lamplit Merino for Typora
 
 A clean, neutral Typora theme after the **Merino Light** and **Merino Dark** terminal themes: a white or near-black ground, near-black or cool light text, and crisp accents (GitHub Primer colors). The terminal palette has no teal or orange, so teal is the midpoint of its cyan and green, and orange is Primer's orange.
 
@@ -16,8 +16,8 @@ Two variants are provided as separate CSS files. Colors match the Merino scheme 
 
 | File | Mode | Background | Text |
 |------|------|------------|------|
-| `merino-mod-light.css` | Light | `#ffffff` | `#1f2328` |
-| `merino-mod-dark.css`  | Dark  | `#0d1117` | `#e6edf3` |
+| `lamplit-merino-light.css` | Light | `#ffffff` | `#1f2328` |
+| `lamplit-merino-dark.css`  | Dark  | `#0d1117` | `#e6edf3` |
 
 ## Color roles
 

@@ -74,7 +74,7 @@ def variant_info(cls):
     prefix, slug = cls.split("-", 1)
     t = next(t for t in themes.values() if t["prefix"] == prefix)
     v = next(v for v in t["variants"] if v["slug"] == slug)
-    return t["name"], v["label"], v["palette"]["bg"]
+    return t["short_name"], v["label"], v["palette"]["bg"]
 
 
 # --- 1. consistency
@@ -149,7 +149,7 @@ first = RUN["variants"][0]["id"]
 available = {x["id"]: [k for k, _ in SECTIONS if (OUT / "shots" / f"{x['id']}-reading-{k}.png").exists()]
              for x in RUN["variants"]}
 page = f"""<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mod 主题渲染核验</title>
+<title>Lamplit 渲染核验</title>
 <style>
 :root {{ --bg:#f3f4f6; --surface:#fff; --ink:#1d2330; --muted:#5d6576; --line:#d9dde5; --accent:#3b5bdb;
   --ok:#2f7d4f; --warn:#a3620b; --bad:#b4232c; --chip:#e8ebf2;
@@ -177,7 +177,7 @@ img {{ width:100%; height:auto; border:1px solid var(--line); border-radius:8px;
 @media (max-width:760px) {{ .pair {{ grid-template-columns:1fr; }} .lbl {{ width:100%; }} }}
 </style>
 <div class="wrap">
-<header><h1>Mod 主题渲染核验</h1>
+<header><h1>Lamplit 渲染核验</h1>
 <p class="meta">测试笔记 <code>{esc(RUN["note"])}</code> · {len(RUN["variants"])} 个变体 × 阅读视图 / 编辑视图</p></header>
 <section><h2>阅读视图 vs 编辑视图差异</h2><div class="box"><table>
 <thead><tr><th>变体</th><th>元素</th><th>属性</th><th>阅读视图</th><th>编辑视图</th></tr></thead><tbody>{mm_html}</tbody></table></div></section>

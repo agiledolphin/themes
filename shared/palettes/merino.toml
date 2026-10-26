@@ -1,11 +1,10 @@
-# Merino Mod — single source of truth for both platforms.
+# Merino — single source of truth for both platforms.
 # Generated from this file by scripts/gen-themes.py (never edit the outputs):
 #   typora/merino/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 
-name = "Merino Mod"
-short_name = "Merino"                # label in Lamplit's scheme dropdowns
+short_name = "Merino"                # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "mr"                        # CSS variable / class prefix
-typora_version = "1.0.1"
+typora_version = "1.0.2"
 tagline = ["Neutral white and near-black grounds with crisp accents, after the",
            "Merino Light / Merino Dark terminal themes (GitHub Primer colors)."]
 

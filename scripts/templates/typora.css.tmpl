@@ -22,10 +22,9 @@
     --control-text-hover-color:  {{hex:fg}};
     --text-color:                {{hex:fg}};   /* Typora's own UI text: menus, inputs, focus mode */
 
-    /* Mermaid (Typora reads these). Light variants use Mermaid's default theme. Dark variants
-       leave --mermaid-theme empty, so Typora derives a theme from --node-fill (an accent tint,
-       written as rgb(): Typora's hex check misreads the blue channel, rgb() makes it take dark
-       mode from the page background instead). */
+    /* Mermaid (Typora reads these). An empty --mermaid-theme makes Typora derive a theme from
+       --node-fill (an accent tint, written as rgb(): Typora's hex check misreads the blue
+       channel, rgb() makes it take light/dark mode from the page background instead). */
 {{MERMAID}}
     --mermaid-font-family:       "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", sans-serif;
 

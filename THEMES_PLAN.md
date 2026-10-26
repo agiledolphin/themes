@@ -84,12 +84,12 @@
 |----------|------|
 | Lamplit（含四套配色） | 1.1.0 |
 
-| Typora | 版本 |
+| Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
-| TokyoNight Mod | 1.4.3 |
-| Catppuccin Mod | 1.3.2 |
-| Wonderland Mod | 1.1.3 |
-| Merino Mod | 1.0.1 |
+| Lamplit TokyoNight | 1.4.4 |
+| Lamplit Catppuccin | 1.3.3 |
+| Lamplit Wonderland | 1.1.4 |
+| Lamplit Merino | 1.0.2 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -209,10 +209,20 @@
 | 项目 | 状态 |
 |------|------|
 | Typora 深色变体：`--mermaid-theme` 置空走自定义方式，`--node-fill` 为强调色 30% 叠在背景上（写成 `rgb()`，绕开深浅判断的 bug），节点文字为正文色，备注底色为 bg-hl；浅色变体保持 `default` | ☑ 用 Typora 自己的配置函数 + Mermaid 库在无头浏览器中渲染确认（theme=base、darkMode=true）；用户在 Typora 中确认 |
+| Typora 浅色变体（2026-10-26）：同样走自定义方式，`--node-fill` 为强调色 20% 叠在背景上（深色 30%），四套浅色主题的图表随配色带色调；原先为 Mermaid 默认主题（淡紫节点、黄色备注），与配色无关（Typora：TokyoNight 1.4.4 / Catppuccin 1.3.3 / Wonderland 1.1.4 / Merino 1.0.2） | ☑ 无头浏览器渲染确认（theme=base、darkMode=false）；用户在 Typora 中确认 |
 | Typora 图表外框：未编辑的图表恢复 Typora 默认的无框无底（原先代码块样式的 `!important` 底色与内边距盖掉了 Typora 的设置，面板又加了一圈边框）；编辑时保留代码块外观，预览上方加一条分隔线；子图框改用 bg-hl 底、gutter 边 | ☑ 同上 |
 | Typora `--text-color`：基础样式为 `#333333`，主题从未设置，深色变体里下拉菜单、输入框、专注模式等处文字发暗；改为正文色 | ☑ |
 | 版本：TokyoNight 1.4.3 / Catppuccin 1.3.2 / Wonderland 1.1.3 / Merino 1.0.1（Typora） | ☑ |
 | 核验工具：示例笔记的 Mermaid 一节加入截图（等图渲染出来再截），报告页增加「Mermaid 图」 | ☑ Merino 两变体试跑正常 |
+
+### 阶段 9 — Typora 主题改用 Lamplit 前缀（2026-10-26）
+
+Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 显示为「Tokyonight Mod Storm」；Mod 对原创的 Wonderland、按终端配色设计的 Merino 并不贴切，而 TokyoNight / Catppuccin 直接去掉 Mod 又容易被当成官方移植、或与同名文件互相覆盖。改为统一前缀 `lamplit-<配色>-<变体>.css`（菜单显示「Lamplit Tokyonight Storm」等），与 Obsidian 的 Lamplit 同名、13 个主题在菜单中排在一起。
+
+- 生成器：文件名前缀与文件头标题取自 `shared/lamplit.toml` 的 `name` + 各配色的 `short_name`；配色 TOML 删去 `name`（"… Mod"）
+- 各 Typora README、CLAUDE.md、本文件同步改名；`analyze.py` 报告标题改为「Lamplit 渲染核验」
+- Typora 主题目录：删除旧的 `*-mod-*.css`，同步新文件；用户需在 Typora 中重新选一次主题（用户已确认）
+- 不另升版本（与阶段 8 浅色 Mermaid 同一批提交）
 
 ---
 
@@ -234,27 +244,18 @@ themes/
 │       ├── manifest.json      ✓（生成，需补 authorUrl）
 │       └── README.md          ✓
 ├── typora/
-│   ├── tokyonight/
-│   │   ├── tokyonight-mod-storm.css  ✓
-│   │   ├── tokyonight-mod-night.css  ✓
-│   │   ├── tokyonight-mod-moon.css   ✓
-│   │   ├── tokyonight-mod-day.css    ✓
-│   │   └── README.md                 ✓
+│   ├── tokyonight/            # 各配色目录：lamplit-<配色>-<变体>.css（生成）+ README.md
+│   │   ├── lamplit-tokyonight-{storm,night,moon,day}.css
+│   │   └── README.md
 │   ├── catppuccin/
-│   │   ├── catppuccin-mod-mocha.css      ✓
-│   │   ├── catppuccin-mod-macchiato.css  ✓
-│   │   ├── catppuccin-mod-frappe.css     ✓
-│   │   ├── catppuccin-mod-latte.css      ✓
-│   │   └── README.md                     ✓
+│   │   ├── lamplit-catppuccin-{mocha,macchiato,frappe,latte}.css
+│   │   └── README.md
 │   ├── wonderland/
-│   │   ├── wonderland-mod-underground.css      ✓
-│   │   ├── wonderland-mod-office-district.css  ✓
-│   │   ├── wonderland-mod-lab.css              ✓
-│   │   └── README.md                           ✓
+│   │   ├── lamplit-wonderland-{underground,office-district,lab}.css
+│   │   └── README.md
 │   └── merino/
-│       ├── merino-mod-fleece.css    ✓（生成）
-│       ├── merino-mod-charcoal.css  ✓（生成）
-│       └── README.md                ✓
+│       ├── lamplit-merino-{light,dark}.css
+│       └── README.md
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
     ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
@@ -266,7 +267,7 @@ themes/
 
 ## 四、调色板参考
 
-### TokyoNight Mod
+### TokyoNight
 
 | 变体 | 背景色 | 特点 |
 |------|--------|------|
@@ -275,7 +276,7 @@ themes/
 | Moon | `#222436` | 深色，蓝紫调 |
 | Day | `#e1e2e7` | 浅色，低饱和 |
 
-### Catppuccin Mod
+### Catppuccin
 
 | 变体 | 背景色 | 特点 |
 |------|--------|------|
@@ -284,7 +285,7 @@ themes/
 | Frappé | `#303446` | 冷灰蓝调 |
 | Latte | `#eff1f5` | 浅色，暖白 |
 
-### Wonderland Mod
+### Wonderland
 
 | 变体 | 背景色 | 特点 |
 |------|--------|------|
@@ -300,7 +301,7 @@ themes/
 | 血红 blood | `#c25a50` | `#c95f53` | `#a8323a` | 错误、危险 |
 | 骨白 bone | `#e6e1d3` | `#ece5d4` | `#5a5446`（石墨） | tooltip |
 
-### Merino Mod
+### Merino
 
 | 变体 | 背景色 | 文字 |
 |------|--------|------|

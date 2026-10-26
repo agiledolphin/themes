@@ -1,4 +1,4 @@
-# Catppuccin Mod for Typora
+# Lamplit Catppuccin for Typora
 
 A Typora theme based on the [Catppuccin](https://catppuccin.com) color palette. Four flavors are provided as separate CSS files, each with its own complete palette.
 
@@ -14,10 +14,10 @@ A Typora theme based on the [Catppuccin](https://catppuccin.com) color palette. 
 
 | File | Mode | Background | Character |
 |------|------|------------|-----------|
-| `catppuccin-mod-mocha.css`     | Dark  | `#1e1e2e`  | Deep navy, the darkest flavor |
-| `catppuccin-mod-macchiato.css` | Dark  | `#24273a`  | Slightly lighter navy |
-| `catppuccin-mod-frappe.css`    | Dark  | `#303446`  | Cool dark grey-blue |
-| `catppuccin-mod-latte.css`     | Light | `#eff1f5`  | Warm parchment light |
+| `lamplit-catppuccin-mocha.css`     | Dark  | `#1e1e2e`  | Deep navy, the darkest flavor |
+| `lamplit-catppuccin-macchiato.css` | Dark  | `#24273a`  | Slightly lighter navy |
+| `lamplit-catppuccin-frappe.css`    | Dark  | `#303446`  | Cool dark grey-blue |
+| `lamplit-catppuccin-latte.css`     | Light | `#eff1f5`  | Warm parchment light |
 
 ---
 
@@ -41,8 +41,8 @@ If you have cloned this repository:
 
 ```bash
 ./scripts/sync-typora.sh
-# or sync a single flavor:
-./scripts/sync-typora.sh catppuccin-mod-mocha
+# or sync only this palette:
+./scripts/sync-typora.sh catppuccin
 ```
 
 The script copies the CSS files to Typora's themes directory automatically.
@@ -54,10 +54,10 @@ The script copies the CSS files to Typora's themes directory automatically.
    - **Windows**: `%APPDATA%\Typora\themes\`
    - **Linux**: `~/.config/Typora/themes/`
 2. Copy one or more of the following files into that directory:
-   - `catppuccin-mod-mocha.css`
-   - `catppuccin-mod-macchiato.css`
-   - `catppuccin-mod-frappe.css`
-   - `catppuccin-mod-latte.css`
+   - `lamplit-catppuccin-mocha.css`
+   - `lamplit-catppuccin-macchiato.css`
+   - `lamplit-catppuccin-frappe.css`
+   - `lamplit-catppuccin-latte.css`
 3. Open **Typora → Preferences → Appearance** and select the desired flavor
 
 ---

@@ -7,7 +7,8 @@ A new palette is just a new `shared/palettes/<palette>.toml` (plus its name in
 `shared/lamplit.toml` → `schemes`); the generator does the rest.
 - **Obsidian**: one theme, **Lamplit** (`ll-`), carrying every palette as a Style Settings
   scheme (dark scheme and light scheme chosen separately).
-- **Typora**: one theme file per palette variant (TokyoNight Mod Storm, …).
+- **Typora**: one theme file per palette variant, also under the Lamplit name
+  (`lamplit-tokyonight-storm.css` → "Lamplit Tokyonight Storm" in Typora's menu).
 
 Status, to-dos and current versions live in `THEMES_PLAN.md` — keep it updated when work lands.
 
@@ -37,9 +38,9 @@ app.css (e.g. a link rule that silently recolored `a.tag`).
 ```
 themes/
 ├── obsidian/lamplit/        # theme.css + manifest.json (generated) + README.md
-├── typora/<palette>/        # <palette>-mod-<variant>.css (one file per variant) + README.md
+├── typora/<palette>/        # lamplit-<palette>-<variant>.css (one file per variant) + README.md
 ├── shared/
-│   ├── lamplit.toml            # Lamplit (Obsidian) settings — see above
+│   ├── lamplit.toml            # Lamplit settings — see above (its name is also the Typora prefix)
 │   ├── palettes/<palette>.toml # SOURCE OF TRUTH per palette (see above)
 │   └── tokens/base.css         # reference values only — NOT imported by any theme
 ├── scripts/
@@ -109,7 +110,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 ## Typora
 
 - Themes directory: `~/Library/Application Support/abnerworks.Typora/themes/`
-- One standalone CSS file per variant, named `<theme>-mod-<variant>.css`; the palette is
+- One standalone CSS file per variant, named `lamplit-<palette>-<variant>.css` (Typora's menu
+  shows the file name: prefix from `shared/lamplit.toml` `name`, palette from `short_name`); the palette is
   declared in that file's `:root`. `--bg-color` must be set in `:root` (it drives `#write`).
 - After syncing, reselect the theme in Preferences → Appearance (or restart Typora).
 
