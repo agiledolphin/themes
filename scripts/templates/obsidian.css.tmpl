@@ -904,20 +904,21 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 
 /* Search pane: app.css tints matches with --text-highlight-bg (the mark color). */
 .search-result-file-matched-text {
-    background-color: rgba({{rgb:search}}, 0.25);
+    background-color: rgba({{rgb:search}}, 0.18);
     color:            var(--text-normal);
     border-radius:    2px;
 }
 
 /* Editor find (Cmd+F): app.css only rings each match; add a tint. The current
-   match is just the editor selection, which still shows through the tint. */
+   match is just the editor selection, which still shows through the tint.
+   18%: light enough that colored text (headings, links) stays readable on it. */
 .cm-s-obsidian span.obsidian-search-match-highlight {
-    background-color: rgba({{rgb:search}}, 0.25);
+    background-color: rgba({{rgb:search}}, 0.18);
     box-shadow:       0 0 0 1px rgba({{rgb:search}}, 0.60);
 }
 /* A match inside ==highlighted== text: beat the mark rule's !important. */
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: rgba({{rgb:search}}, 0.35) !important;
+    background-color: rgba({{rgb:search}}, 0.25) !important;
 }
 
 /* Reading-mode find: these boxes are overlays drawn ABOVE the text, so a fill

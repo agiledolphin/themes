@@ -4,7 +4,7 @@
 
 short_name = "Merino"                # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "mr"                        # CSS variable / class prefix
-typora_version = "1.0.2"
+typora_version = "1.0.3"
 tagline = ["Neutral white and near-black grounds with crisp accents, after the",
            "Merino Light / Merino Dark terminal themes (GitHub Primer colors)."]
 

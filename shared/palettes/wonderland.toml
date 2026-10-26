@@ -4,7 +4,7 @@
 
 short_name = "Wonderland"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "wl"                 # CSS variable / class prefix
-typora_version = "1.1.4"
+typora_version = "1.1.5"
 tagline = ["Inspired by the \"Hard-Boiled Wonderland\" half of Haruki Murakami's", "Hard-Boiled Wonderland and the End of the World: a cold, deadpan,", "faintly surreal Tokyo — rain-dark streets, the INKlings' flooded", "underground, skull-lined labs, and the warm brass of a desk lamp or", "a whisky bar as the only warmth in the room."]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
@@ -74,11 +74,13 @@ label = "Office District"
 mode = "dark"
 file_slug = "office-district"   # Typora file name
 character = "Tokyo at night above ground; a shade lighter, warmer"
+# Surfaces keep their lightness but lean warm (Lab b* +5 instead of -4, like the text),
+# so the two dark grounds part (ΔE 9.7, was 3.9); text contrast is unchanged.
 [variants.palette]
-bg        = "#1a1a20"
-bg-dark   = "#141418"
-bg-hl     = "#26262e"
-gutter    = "#36363f"
+bg        = "#1f1a14"
+bg-dark   = "#1a130b"
+bg-hl     = "#2d251e"
+gutter    = "#3e352d"
 fg        = "#d0ccc2"
 fg-dim    = "#aea99e"
 comment   = "#77736c"
@@ -92,7 +94,7 @@ cyan      = "#86cccb"
 steel     = "#8aa0c4"
 violet    = "#a493c4"
 bone      = "#ece5d4"
-selection = "#3a3a44"
+selection = "#423931"
 
 [[variants]]
 slug = "lab"
