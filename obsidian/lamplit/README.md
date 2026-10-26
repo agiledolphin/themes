@@ -9,7 +9,7 @@ Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries 
 | Palette | Scheme | Mode | Background | Character |
 |---------|--------|------|------------|-----------|
 | Wonderland | Underground | Dark | `#121218` | The INKlings' sewers — darkest, coldest (default dark) |
-| Wonderland | Office District | Dark | `#1f1a14` | Tokyo at night above ground — a shade lighter, warmer |
+| Wonderland | Office District | Dark | `#1d1d1d` | Tokyo at night above ground — a shade lighter, warmer |
 | Wonderland | Lab | Light | `#eef0f2` | The System's sterile laboratory — cold white (default light) |
 | Merino | Dark | Dark | `#0d1117` | Near-black ground, cool light text |
 | Merino | Light | Light | `#ffffff` | White ground, near-black text |

@@ -144,15 +144,15 @@ body.theme-dark.ll-wl-underground {
 /* --- Dark: Wonderland · Office District — Tokyo at night above ground; a shade lighter, warmer --- */
 
 body.theme-dark.ll-wl-office {
-    --ll-bg:                   #1f1a14;
-    --ll-bg-dark:              #1a130b;
-    --ll-bg-hl:                #2d251e;
-    --ll-gutter:               #3e352d;
+    --ll-bg:                   #1d1d1d;
+    --ll-bg-dark:              #171717;
+    --ll-bg-hl:                #2a2a2a;
+    --ll-gutter:               #3a3a3a;
     --ll-fg:                   #d0ccc2;
     --ll-fg-dim:               #aea99e;
     --ll-comment:              #77736c;
     --ll-comment-rgb:          119, 115, 108;
-    --ll-selection:            #423931;
+    --ll-selection:            #3e3e3e;
     --ll-mark-bg:              rgba(233, 209, 132, 0.18);
     --ll-blue:                 #8aa0c4;
     --ll-cyan:                 #86cccb;
@@ -164,8 +164,8 @@ body.theme-dark.ll-wl-office {
     --ll-yellow-rgb:           233, 209, 132;
     --ll-orange:               #cf8350;
     --ll-orange-rgb:           207, 131, 80;
-    --ll-red:                  #c95f53;
-    --ll-red-rgb:              201, 95, 83;
+    --ll-red:                  #cc6155;
+    --ll-red-rgb:              204, 97, 85;
     --ll-magenta:              #a493c4;
     --ll-magenta-rgb:          164, 147, 196;
     --ll-accent:               #d4a85e;
