@@ -144,15 +144,15 @@ body.theme-dark.ll-wl-underground {
 /* --- Dark: Wonderland · Office District — Tokyo at night above ground; a shade lighter, warmer --- */
 
 body.theme-dark.ll-wl-office {
-    --ll-bg:                   #1a1a20;
-    --ll-bg-dark:              #141418;
-    --ll-bg-hl:                #26262e;
-    --ll-gutter:               #36363f;
+    --ll-bg:                   #1f1a14;
+    --ll-bg-dark:              #1a130b;
+    --ll-bg-hl:                #2d251e;
+    --ll-gutter:               #3e352d;
     --ll-fg:                   #d0ccc2;
     --ll-fg-dim:               #aea99e;
     --ll-comment:              #77736c;
     --ll-comment-rgb:          119, 115, 108;
-    --ll-selection:            #3a3a44;
+    --ll-selection:            #423931;
     --ll-mark-bg:              rgba(233, 209, 132, 0.18);
     --ll-blue:                 #8aa0c4;
     --ll-cyan:                 #86cccb;
@@ -1718,20 +1718,21 @@ body:not(.is-grabbing):where(.theme-dark.ll-cp-mocha, .theme-dark.ll-cp-macchiat
 
 /* Search pane: app.css tints matches with --text-highlight-bg (the mark color). */
 .search-result-file-matched-text {
-    background-color: rgba(var(--ll-search-rgb), 0.25);
+    background-color: rgba(var(--ll-search-rgb), 0.18);
     color:            var(--text-normal);
     border-radius:    2px;
 }
 
 /* Editor find (Cmd+F): app.css only rings each match; add a tint. The current
-   match is just the editor selection, which still shows through the tint. */
+   match is just the editor selection, which still shows through the tint.
+   18%: light enough that colored text (headings, links) stays readable on it. */
 .cm-s-obsidian span.obsidian-search-match-highlight {
-    background-color: rgba(var(--ll-search-rgb), 0.25);
+    background-color: rgba(var(--ll-search-rgb), 0.18);
     box-shadow:       0 0 0 1px rgba(var(--ll-search-rgb), 0.60);
 }
 /* A match inside ==highlighted== text: beat the mark rule's !important. */
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: rgba(var(--ll-search-rgb), 0.35) !important;
+    background-color: rgba(var(--ll-search-rgb), 0.25) !important;
 }
 
 /* Reading-mode find: these boxes are overlays drawn ABOVE the text, so a fill

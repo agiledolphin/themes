@@ -17,7 +17,7 @@ Three variants are provided as separate CSS files. Colors match the Wonderland s
 | File | Mode | Background | Character |
 |------|------|------------|-----------|
 | `lamplit-wonderland-underground.css`     | Dark  | `#121218` | The INKlings' sewers — darkest, coldest |
-| `lamplit-wonderland-office-district.css` | Dark  | `#1a1a20` | Tokyo at night above ground — a shade lighter, warmer |
+| `lamplit-wonderland-office-district.css` | Dark  | `#1f1a14` | Tokyo at night above ground — a shade lighter, warmer |
 | `lamplit-wonderland-lab.css`             | Light | `#eef0f2` | The System's sterile laboratory — cold white |
 
 ## Color roles

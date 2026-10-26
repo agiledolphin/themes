@@ -44,12 +44,12 @@ const LAMPLIT_TOML = fs.readFileSync(path.join(ROOT, 'shared/lamplit.toml'), 'ut
 const LAMPLIT = { name: LAMPLIT_TOML.match(/^name = "(.+)"/m)[1], prefix: LAMPLIT_TOML.match(/^prefix = "(.+?)"/m)[1] };
 const MODE = 'lamplit';
 
-// Variants straight from the palette TOMLs (theme name, prefix, [[variants]] slug + mode).
+// Variants straight from the palette TOMLs (prefix, [[variants]] slug + mode).
 function loadVariants() {
   const out = [];
   for (const f of fs.readdirSync(path.join(ROOT, 'shared/palettes')).filter(f => f.endsWith('.toml')).sort()) {
     const text = fs.readFileSync(path.join(ROOT, 'shared/palettes', f), 'utf8');
-    const name = text.match(/^name = "(.+)"/m)[1], prefix = text.match(/^prefix = "(.+?)"/m)[1];
+    const prefix = text.match(/^prefix = "(.+?)"/m)[1];
     for (const block of text.split(/^\[\[variants\]\]$/m).slice(1)) {
       const slug = block.match(/^slug = "(.+?)"/m)[1], mode = block.match(/^mode = "(.+?)"/m)[1];
       const id = `${prefix}-${slug}`;

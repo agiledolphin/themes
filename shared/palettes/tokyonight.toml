@@ -4,7 +4,7 @@
 
 short_name = "TokyoNight"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "tn"                 # CSS variable / class prefix
-typora_version = "1.4.4"
+typora_version = "1.4.5"
 tagline = ["Palette: github.com/folke/tokyonight.nvim"]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).

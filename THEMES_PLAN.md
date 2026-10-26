@@ -82,14 +82,14 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含四套配色） | 1.1.0 |
+| Lamplit（含四套配色） | 1.1.1 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
-| Lamplit TokyoNight | 1.4.4 |
-| Lamplit Catppuccin | 1.3.3 |
-| Lamplit Wonderland | 1.1.4 |
-| Lamplit Merino | 1.0.2 |
+| Lamplit TokyoNight | 1.4.5 |
+| Lamplit Catppuccin | 1.3.4 |
+| Lamplit Wonderland | 1.1.5 |
+| Lamplit Merino | 1.0.3 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -103,7 +103,13 @@
 |------|------|------|
 | Wonderland Mod 调色 | 已实际使用，当前满意；有问题再按需调整（观察点见下） | ☑ |
 
-**Wonderland Mod 调色修正**（2026-10-24，Obsidian 1.1.3 / Typora 1.1.2）：对下列观察点逐一取满足约束（易混淆色 ΔE ≥ 16、文字对比度 ≥ 4.3）且离原色最近的值——Underground 青绿 `#6fa8a0→#6ca59d`；Office 黄色 `#e2c47a→#e9d184`、青绿 `#79ada3→#78a499`；Lab 黄色 `#8a6a0e→#6d5d00`、青绿 `#2d7a72→#2e7567`、冷青 `#1d7c88→#007784`、黄铜 `#8f6426→#885c20`。核验：三个变体两种视图 0 差异，Lab 的 H1 / 高亮 / 标签升至 4.63 / 4.45 / 4.36。未处理：两个深色变体背景几乎相同（备选方案：Office 背景整体偏暖，需连带调亮血红色）；Lab 搜索命中落在 H1 上约 3.3。
+**Wonderland Mod 调色修正**（2026-10-24，Obsidian 1.1.3 / Typora 1.1.2）：对下列观察点逐一取满足约束（易混淆色 ΔE ≥ 16、文字对比度 ≥ 4.3）且离原色最近的值——Underground 青绿 `#6fa8a0→#6ca59d`；Office 黄色 `#e2c47a→#e9d184`、青绿 `#79ada3→#78a499`；Lab 黄色 `#8a6a0e→#6d5d00`、青绿 `#2d7a72→#2e7567`、冷青 `#1d7c88→#007784`、黄铜 `#8f6426→#885c20`。核验：三个变体两种视图 0 差异，Lab 的 H1 / 高亮 / 标签升至 4.63 / 4.45 / 4.36。当时未处理的两点已于 2026-10-26 处理（见下）。
+
+**2026-10-26 处理遗留两点**（Lamplit 1.1.1；Typora：Wonderland 1.1.5，其余三套各升补丁版本）：
+
+- 深色背景区分：Office 原背景其实偏冷（Lab b* -4，与 Underground 同向），只是略亮。表面五层（bg / bg-dark / bg-hl / gutter / selection）保持亮度、改为偏暖（b* +5，与正文的暖色同向）：`#1a1a20→#1f1a14`、`#141418→#1a130b`、`#26262e→#2d251e`、`#36363f→#3e352d`、`#3a3a44→#423931`。与 Underground 背景的 ΔE 3.9 → 9.7；亮度不变，所有文字对比度不变（血红 4.31，无需调整）。三档候选（b* +2.5 / +5 / +8）做了预览，用户选中间档。
+- 搜索命中对比度：测算发现与色相无关（换成任何色相，Lab 的 H1 都在 3.1–3.3），是 25% 底色压暗浅色背景、提亮深色背景所致，所有配色都有（深色变体正文/链接最低 3.3–3.7）。模板中搜索底色统一降为 18%（Obsidian 编辑器 Cmd+F 与搜索面板、Typora 搜索命中；高亮文字内的命中 35% → 25%）：深色变体正文/链接最低约 3.8–4.1，Lab 正文/链接 4.50、H1 3.63（大字号，WCAG 要求 3:1）。TokyoNight Day / Catppuccin Latte 受上游配色所限仍偏低。
+- 核验：与 2026-10-26 完整基线对比 122 处差异，全部在预期内——Wonderland Office 86 处（表面颜色），其余 12 个变体各 3 处（搜索高亮透明度）；阅读/编辑视图 0 不一致。
 
 原始观察点（2026-10-12）：
 
@@ -223,6 +229,7 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 各 Typora README、CLAUDE.md、本文件同步改名；`analyze.py` 报告标题改为「Lamplit 渲染核验」
 - Typora 主题目录：删除旧的 `*-mod-*.css`，同步新文件；用户需在 Typora 中重新选一次主题（用户已确认）
 - 不另升版本（与阶段 8 浅色 Mermaid 同一批提交）
+- 遗漏修正（2026-10-26）：核验工具 `run.mjs` 仍读取配色 TOML 已删除的 `name`，启动即报错（未连接 Obsidian、未改动任何东西）；该值本未使用，删去读取。随后完整核验 13 个变体建立新基线：阅读/编辑视图 0 不一致，对比度与此前一致，表格父容器宽度全部 700px，Mermaid 截图 26 张
 
 ---
 
@@ -290,7 +297,7 @@ themes/
 | 变体 | 背景色 | 特点 |
 |------|--------|------|
 | Underground | `#121218` | 最深最冷，地下水道 |
-| Office District | `#1a1a20` | 略亮略暖，地面东京夜 |
+| Office District | `#1f1a14` | 略亮、偏暖（表面层级 Lab b* +5），地面东京夜 |
 | Lab | `#eef0f2` | 浅色，冷白实验室 |
 
 | 角色 | Underground | Office District | Lab | 用途 |
