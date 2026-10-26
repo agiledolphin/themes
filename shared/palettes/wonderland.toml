@@ -4,7 +4,7 @@
 
 short_name = "Wonderland"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "wl"                 # CSS variable / class prefix
-typora_version = "1.1.5"
+typora_version = "1.1.6"
 tagline = ["Inspired by the \"Hard-Boiled Wonderland\" half of Haruki Murakami's", "Hard-Boiled Wonderland and the End of the World: a cold, deadpan,", "faintly surreal Tokyo — rain-dark streets, the INKlings' flooded", "underground, skull-lined labs, and the warm brass of a desk lamp or", "a whisky bar as the only warmth in the room."]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
@@ -74,27 +74,28 @@ label = "Office District"
 mode = "dark"
 file_slug = "office-district"   # Typora file name
 character = "Tokyo at night above ground; a shade lighter, warmer"
-# Surfaces keep their lightness but lean warm (Lab b* +5 instead of -4, like the text),
-# so the two dark grounds part (ΔE 9.7, was 3.9); text contrast is unchanged.
+# Surfaces: neutral charcoal (no hue; Underground leans cool at Lab b* -4), one step lighter
+# than before, so the two dark grounds part (ΔE 6.5, was 3.9) while staying clean — warm
+# tints (b* +5, +1.5) read as muddy. Blood lifted to keep 4.3:1.
 [variants.palette]
-bg        = "#1f1a14"
-bg-dark   = "#1a130b"
-bg-hl     = "#2d251e"
-gutter    = "#3e352d"
+bg        = "#1d1d1d"
+bg-dark   = "#171717"
+bg-hl     = "#2a2a2a"
+gutter    = "#3a3a3a"
 fg        = "#d0ccc2"
 fg-dim    = "#aea99e"
 comment   = "#77736c"
 brass     = "#d4a85e"
 yellow    = "#e9d184"
 rust      = "#cf8350"
-blood     = "#c95f53"
+blood     = "#cc6155"
 moss      = "#869f78"
 teal      = "#78a499"
 cyan      = "#86cccb"
 steel     = "#8aa0c4"
 violet    = "#a493c4"
 bone      = "#ece5d4"
-selection = "#423931"
+selection = "#3e3e3e"
 
 [[variants]]
 slug = "lab"

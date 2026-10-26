@@ -82,13 +82,13 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含四套配色） | 1.1.1 |
+| Lamplit（含四套配色） | 1.1.2 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
 | Lamplit TokyoNight | 1.4.5 |
 | Lamplit Catppuccin | 1.3.4 |
-| Lamplit Wonderland | 1.1.5 |
+| Lamplit Wonderland | 1.1.6 |
 | Lamplit Merino | 1.0.3 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
@@ -109,6 +109,7 @@
 
 - 深色背景区分：Office 原背景其实偏冷（Lab b* -4，与 Underground 同向），只是略亮。表面五层（bg / bg-dark / bg-hl / gutter / selection）保持亮度、改为偏暖（b* +5，与正文的暖色同向）：`#1a1a20→#1f1a14`、`#141418→#1a130b`、`#26262e→#2d251e`、`#36363f→#3e352d`、`#3a3a44→#423931`。与 Underground 背景的 ΔE 3.9 → 9.7；亮度不变，所有文字对比度不变（血红 4.31，无需调整）。三档候选（b* +2.5 / +5 / +8）做了预览，用户选中间档。
 - 搜索命中对比度：测算发现与色相无关（换成任何色相，Lab 的 H1 都在 3.1–3.3），是 25% 底色压暗浅色背景、提亮深色背景所致，所有配色都有（深色变体正文/链接最低 3.3–3.7）。模板中搜索底色统一降为 18%（Obsidian 编辑器 Cmd+F 与搜索面板、Typora 搜索命中；高亮文字内的命中 35% → 25%）：深色变体正文/链接最低约 3.8–4.1，Lab 正文/链接 4.50、H1 3.63（大字号，WCAG 要求 3:1）。TokyoNight Day / Catppuccin Latte 受上游配色所限仍偏低。
+- 同日修订（Lamplit 1.1.2 / Typora Wonderland 1.1.6）：用户实看后觉得 b* +5 的暖色偏脏、不够清爽。四组候选（中性炭灰 / 中性略亮 / 冷而亮 / 极微暖）预览后先选极微暖（b* +1.5，`#1f1d1b`），实看仍不舒服，改为中性炭灰：`#1d1d1d` / `#171717` / `#2a2a2a` / `#3a3a3a` / `#3e3e3e`（亮度比原先 +1.5），与 Underground ΔE 6.5；背景提亮后血红 `#c95f53→#cc6155`（4.34；与锈红 ΔE 22.4），注释 3.57、正文 10.51。核验：与上一基线的差异只在 Wonderland Office；阅读/编辑视图 0 不一致（完整运行末尾 Wonderland Lab 的编辑视图标签一节因窗口被遮挡漏测，单独重跑 Lab 后数值与之前一致，结果已并入 `.verify`）。
 - 核验：与 2026-10-26 完整基线对比 122 处差异，全部在预期内——Wonderland Office 86 处（表面颜色），其余 12 个变体各 3 处（搜索高亮透明度）；阅读/编辑视图 0 不一致。
 
 原始观察点（2026-10-12）：
@@ -297,7 +298,7 @@ themes/
 | 变体 | 背景色 | 特点 |
 |------|--------|------|
 | Underground | `#121218` | 最深最冷，地下水道 |
-| Office District | `#1f1a14` | 略亮、偏暖（表面层级 Lab b* +5），地面东京夜 |
+| Office District | `#1d1d1d` | 略亮、中性炭灰（不带色相），地面东京夜 |
 | Lab | `#eef0f2` | 浅色，冷白实验室 |
 
 | 角色 | Underground | Office District | Lab | 用途 |
@@ -305,7 +306,7 @@ themes/
 | 黄铜 brass | `#c39a5f` | `#d4a85e` | `#885c20` | UI 强调、H2 |
 | 冷青 cyan | `#7fcfcf` | `#86cccb` | `#007784` | H1、属性键、搜索 |
 | 钢蓝 steel | `#7d9ac4` | `#8aa0c4` | `#3a5e94` | 链接、H3 |
-| 血红 blood | `#c25a50` | `#c95f53` | `#a8323a` | 错误、危险 |
+| 血红 blood | `#c25a50` | `#cc6155` | `#a8323a` | 错误、危险 |
 | 骨白 bone | `#e6e1d3` | `#ece5d4` | `#5a5446`（石墨） | tooltip |
 
 ### Merino
