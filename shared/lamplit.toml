@@ -2,7 +2,8 @@
 # Style Settings scheme (青灯夜读: reading by lamplight).
 # Generated from this file + the palette TOMLs by scripts/gen-themes.py:
 #   obsidian/lamplit/theme.css, obsidian/lamplit/manifest.json
-# Typora is unaffected: each palette still ships its own Typora theme files.
+# Typora: each palette variant ships its own theme file, lamplit-<palette>-<variant>.css
+# ("Lamplit <palette> <variant>" in Typora's menu); `name` below is that prefix.
 
 name = "Lamplit"
 prefix = "ll"                     # CSS variable / class prefix

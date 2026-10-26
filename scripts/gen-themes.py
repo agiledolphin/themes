@@ -7,7 +7,7 @@
 and scripts/templates/.
 
 Outputs (never edit by hand — edit the TOML or the templates, then rerun):
-    typora/<palette>/<palette>-mod-<variant>.css    one Typora theme per palette variant
+    typora/<palette>/lamplit-<palette>-<variant>.css  one Typora theme per palette variant
     obsidian/lamplit/theme.css + manifest.json      one Obsidian theme, every palette as a scheme
 
 Usage:
@@ -117,13 +117,15 @@ def load_themes() -> list[dict]:
     return themes
 
 
+MERMAID_TINT = {"dark": 0.3, "light": 0.2}   # share of the accent in Mermaid's node fill
+
+
 def mermaid_vars(ctx: Ctx, mode: str) -> str:
-    """Typora's Mermaid variables: the default theme on light variants; on dark ones an empty
-    --mermaid-theme plus a node fill (30% accent over the background) to derive a theme from."""
-    if mode == "light":
-        return "    --mermaid-theme:             default;"
+    """Typora's Mermaid variables: an empty --mermaid-theme makes Typora derive a theme from
+    --node-fill, here the accent tinted over the background."""
+    t = MERMAID_TINT[mode]
     accent, bg = (rgb_triple(ctx.hex(n)).split(", ") for n in ("accent", "bg"))
-    fill = ", ".join(str(round(int(a) * 0.3 + int(b) * 0.7)) for a, b in zip(accent, bg))
+    fill = ", ".join(str(round(int(a) * t + int(b) * (1 - t))) for a, b in zip(accent, bg))
     return "\n".join([
         '    --mermaid-theme:             "";',
         f"    --node-fill:                 rgb({fill});",
@@ -132,7 +134,8 @@ def mermaid_vars(ctx: Ctx, mode: str) -> str:
     ])
 
 
-def typora_outputs(theme: dict) -> dict[Path, str]:
+def typora_outputs(theme: dict, brand: str) -> dict[Path, str]:
+    """brand: Lamplit's name — Typora themes are "<brand> <palette> <variant>"."""
     template = (TEMPLATES / "typora.css.tmpl").read_text()
     outputs = {}
     for v in theme["variants"]:
@@ -143,7 +146,7 @@ def typora_outputs(theme: dict) -> dict[Path, str]:
         else:
             sel_bg, sel_text = ctx.hex("search"), ctx.hex("bg")
         extra = {
-            "THEME": theme["name"], "SLUG": theme["slug"], "VERSION": theme["typora_version"],
+            "THEME": f"{brand} {theme['short_name']}", "SLUG": theme["slug"], "VERSION": theme["typora_version"],
             "VARIANT_LABEL": v["label"], "VARIANT_SLUG": v.get("file_slug", v["slug"]),
             "MODE_NOTE": "  (light)" if v["mode"] == "light" else "",
             "CHARACTER": f" — {v['character']}" if v.get("character") else "",
@@ -152,7 +155,7 @@ def typora_outputs(theme: dict) -> dict[Path, str]:
             "SEARCH_SELECT_BG": sel_bg, "SEARCH_SELECT_TEXT": sel_text,
             "MERMAID": mermaid_vars(ctx, v["mode"]),
         }
-        name = f"{theme['slug']}-mod-{v.get('file_slug', v['slug'])}.css"
+        name = f"{brand.lower()}-{theme['slug']}-{v.get('file_slug', v['slug'])}.css"
         outputs[ROOT / "typora" / theme["slug"] / name] = ctx.render(template, extra)
     return outputs
 
@@ -357,8 +360,9 @@ def main() -> None:
     check = "--check" in sys.argv[1:]
     outputs: dict[Path, str] = {}
     themes = load_themes()
+    brand = tomllib.loads((ROOT / "shared/lamplit.toml").read_text())["name"]
     for theme in themes:
-        outputs.update(typora_outputs(theme))
+        outputs.update(typora_outputs(theme, brand))
     outputs.update(lamplit_outputs(themes))
     stale = []
     for path, text in outputs.items():

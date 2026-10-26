@@ -1,11 +1,10 @@
-# Catppuccin Mod — single source of truth for both platforms.
+# Catppuccin — single source of truth for both platforms.
 # Generated from this file by scripts/gen-themes.py (never edit the outputs):
 #   typora/catppuccin/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 
-name = "Catppuccin Mod"
-short_name = "Catppuccin"            # label in Lamplit's scheme dropdowns
+short_name = "Catppuccin"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "cp"                 # CSS variable / class prefix
-typora_version = "1.3.2"
+typora_version = "1.3.3"
 tagline = ["Palette: catppuccin.com"]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).

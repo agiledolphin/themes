@@ -1,11 +1,10 @@
-# TokyoNight Mod — single source of truth for both platforms.
+# TokyoNight — single source of truth for both platforms.
 # Generated from this file by scripts/gen-themes.py (never edit the outputs):
 #   typora/tokyonight/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 
-name = "TokyoNight Mod"
-short_name = "TokyoNight"            # label in Lamplit's scheme dropdowns
+short_name = "TokyoNight"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "tn"                 # CSS variable / class prefix
-typora_version = "1.4.3"
+typora_version = "1.4.4"
 tagline = ["Palette: github.com/folke/tokyonight.nvim"]
 
 # Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).

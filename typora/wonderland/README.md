@@ -1,8 +1,8 @@
-# Wonderland Mod for Typora
+# Lamplit Wonderland for Typora
 
 A Typora theme inspired by the **Hard-Boiled Wonderland** half of Haruki Murakami's *Hard-Boiled Wonderland and the End of the World* (《世界尽头与冷酷仙境》): a cold, deadpan, faintly surreal Tokyo — rain-dark streets, the INKlings' flooded underground, skull-lined laboratories — where the warm brass of a desk lamp or a whisky bar is the only warmth in the room.
 
-Three variants are provided as separate CSS files. Colors match the Obsidian version of Wonderland Mod.
+Three variants are provided as separate CSS files. Colors match the Wonderland scheme in the Obsidian theme Lamplit.
 
 ---
 
@@ -16,9 +16,9 @@ Three variants are provided as separate CSS files. Colors match the Obsidian ver
 
 | File | Mode | Background | Character |
 |------|------|------------|-----------|
-| `wonderland-mod-underground.css`     | Dark  | `#121218` | The INKlings' sewers — darkest, coldest |
-| `wonderland-mod-office-district.css` | Dark  | `#1a1a20` | Tokyo at night above ground — a shade lighter, warmer |
-| `wonderland-mod-lab.css`             | Light | `#eef0f2` | The System's sterile laboratory — cold white |
+| `lamplit-wonderland-underground.css`     | Dark  | `#121218` | The INKlings' sewers — darkest, coldest |
+| `lamplit-wonderland-office-district.css` | Dark  | `#1a1a20` | Tokyo at night above ground — a shade lighter, warmer |
+| `lamplit-wonderland-lab.css`             | Light | `#eef0f2` | The System's sterile laboratory — cold white |
 
 ## Color roles
 
