@@ -4,7 +4,7 @@
 
 short_name = "Big Wave"              # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "bw"                        # CSS variable / class prefix
-typora_version = "1.0.0"
+typora_version = "1.0.1"
 tagline = ["After the cover of Tatsuro Yamashita's \"Big Wave\" (1984): a deep-navy tube,",
            "white spray, cobalt sky, the coral script of the title and a yellow surfboard."]
 
@@ -67,7 +67,7 @@ cobalt    = "#6ea0ff"
 aqua      = "#5fd4e0"
 teal      = "#4cc7a8"
 palm      = "#8fd18a"
-board     = "#f2d94e"
+board     = "#e6cf7e"   # sun-bleached; the pure lemon (#f2d94e) shouted on the navy
 sunset    = "#ff9f5a"
 red       = "#ff6b6b"
 coral     = "#ff8fa3"

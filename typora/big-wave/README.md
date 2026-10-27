@@ -26,7 +26,7 @@ Two variants are provided as separate CSS files. Colors match the Big Wave schem
 | Coral  | `#ff8fa3` | `#bd4762` | the title color: H1, table header, nested quotes, code keywords |
 | Cobalt | `#6ea0ff` | `#1f4fbf` | the accent: links, H2, blockquote rule, task checkboxes, active file in the sidebar |
 | Aqua   | `#5fd4e0` | `#007283` | H3, inline code, tags |
-| Board  | `#f2d94e` | `#7e6200` | `==highlighted==` text, H5 |
+| Board  | `#e6cf7e` | `#7e6200` | `==highlighted==` text, H5 |
 | Sunset | `#ff9f5a` | `#b8500f` | search hits, numbers |
 | Palm   | `#8fd18a` | `#2f7a2a` | strings, H4 |
 | Red    | `#ff6b6b` | `#c0303a` | errors, deleted lines |

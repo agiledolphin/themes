@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含五套配色） | 1.2.0 |
+| Lamplit（含五套配色） | 1.2.1 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -90,7 +90,7 @@
 | Lamplit Catppuccin | 1.3.4 |
 | Lamplit Wonderland | 1.1.6 |
 | Lamplit Merino | 1.0.3 |
-| Lamplit Big Wave | 1.0.0 |
+| Lamplit Big Wave | 1.0.1 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -243,6 +243,7 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 约束：初稿深色全部达标；浅色校正三处，均只降亮度：黄 `#8a6d00→#7e6200`（高亮 4.39，透明度 0.15 同 Merino Light）、水青 `#00798a→#007283`（标签 4.43）、珊瑚 `#c04a64→#bd4762`（4.61）。所有点缀色 ≥ 4.6，易混淆色 ΔE ≥ 21（最近：浅色珊瑚/红 21.3）
 - 接入：`shared/palettes/big-wave.toml`（文件名带连字符，Typora 菜单显示「Lamplit Big Wave …」；CSS 前缀 `bw`）；schemes 顺序 Wonderland → Merino → Big Wave → TokyoNight → Catppuccin；Lamplit 1.2.0，Typora Big Wave 1.0.0
 - 核验：15 个变体阅读/编辑视图 0 不一致；原 13 个变体与基线 0 差异；Big Wave 正文 13.65 / 13.81，最低 H6 4.28 / 4.03
+- 2026-10-27 修订（Lamplit 1.2.1 / Typora Big Wave 1.0.1）：用户觉得 Pipeline 的高亮太黄、突兀。柠檬黄 `#f2d94e`（色度 69）是全页最亮最饱和的颜色，改为柔沙黄 `#e6cf7e`（色度 43）：文字 11.24、高亮 7.36，与晚霞橙 ΔE 34、棕榈绿 35。五组候选（柔沙黄 / 暖奶油 / 日晒板黄 / 淡金 / 柔沙黄 + 底色 14%）预览后用户选柔沙黄；影响高亮、H5、代码属性名，以及同样用黄色的 question callout、两种任务状态复选框和 `--text-warning`。Spray 不变。核验：与基线 33 处差异全部在 Big Wave Pipeline 的上述黄色用处；15 个变体阅读/编辑视图 0 不一致
 
 ---
 
@@ -353,7 +354,7 @@ themes/
 | 珊瑚 coral | `#ff8fa3` | `#bd4762` | H1、表头、嵌套引用、关键字 |
 | 钴蓝 cobalt | `#6ea0ff` | `#1f4fbf` | 强调色、链接、H2 |
 | 水青 aqua | `#5fd4e0` | `#007283` | H3、行内代码、标签 |
-| 冲浪板黄 board | `#f2d94e` | `#7e6200` | 高亮、H5 |
+| 冲浪板黄 board | `#e6cf7e` | `#7e6200` | 高亮、H5 |
 | 晚霞橙 sunset | `#ff9f5a` | `#b8500f` | 搜索、数字 |
 | 棕榈绿 palm | `#8fd18a` | `#2f7a2a` | 字符串、H4 |
 | 红 red | `#ff6b6b` | `#c0303a` | 错误、危险 |
