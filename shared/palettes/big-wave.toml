@@ -1,0 +1,99 @@
+# Big Wave — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/big-wave/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+short_name = "Big Wave"              # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "bw"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["After the cover of Tatsuro Yamashita's \"Big Wave\" (1984): a deep-navy tube,",
+           "white spray, cobalt sky, the coral script of the title and a yellow surfboard."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["cobalt", "aqua", "teal", "palm", "board", "sunset", "red", "coral", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map any that this palette names differently.
+[aliases]
+blue = "cobalt"
+cyan = "aqua"
+green = "palm"
+yellow = "board"
+orange = "sunset"
+magenta = "coral"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Coral (the title script) leads: H1 and table headers; cobalt (the sky) is the accent:
+# links, H2, cursor, the open file; aqua (light through the wave) marks code and tags.
+[roles]
+accent = "cobalt"
+accent_hover = "aqua"
+highlight = "cobalt"
+table_header = "coral"
+table_hover_alpha = "0.12"
+tag = "aqua"
+tag_hover = "cobalt"
+search = "sunset"
+callout_note = "cobalt"
+graph_tag = "aqua"
+quote_nested = "coral"
+tooltip = "cobalt"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.25)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["coral", "cobalt", "aqua", "palm", "board", "comment"]   # H1..H6
+
+# The cover gives blue, white, coral and yellow; palm green, sunset orange and red come from
+# the same 80s city-pop summer. All accents read at >= 4.6:1, look-alike pairs stay at ΔE >= 21.
+
+[[variants]]
+slug = "pipeline"
+label = "Pipeline"
+mode = "dark"
+character = "inside the tube; deep navy, foam-white text"
+[variants.palette]
+bg        = "#0e1a30"
+bg-dark   = "#0a1324"
+bg-hl     = "#17284a"
+gutter    = "#233a63"
+fg        = "#dbe5f2"
+fg-dim    = "#a9bad3"
+comment   = "#6a7fa3"
+cobalt    = "#6ea0ff"
+aqua      = "#5fd4e0"
+teal      = "#4cc7a8"
+palm      = "#8fd18a"
+board     = "#f2d94e"
+sunset    = "#ff9f5a"
+red       = "#ff6b6b"
+coral     = "#ff8fa3"
+selection = "#1f3f7a"
+
+[[variants]]
+slug = "spray"
+label = "Spray"
+mode = "light"
+character = "white spray; blue-white ground, deep-navy text"
+# the yellow mark text needs a lighter tint on white to stay above 4.3:1
+overrides = { mark_alpha = "0.15" }
+[variants.palette]
+bg        = "#f4f7fb"
+bg-dark   = "#e8eef6"
+bg-hl     = "#dbe4f0"
+gutter    = "#c3d0e2"
+fg        = "#18264a"
+fg-dim    = "#3d4f75"
+comment   = "#6b7a96"
+cobalt    = "#1f4fbf"
+aqua      = "#007283"
+teal      = "#0f7a63"
+palm      = "#2f7a2a"
+board     = "#7e6200"
+sunset    = "#b8500f"
+red       = "#c0303a"
+coral     = "#bd4762"
+selection = "#cddcf3"

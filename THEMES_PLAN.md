@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含四套配色） | 1.1.2 |
+| Lamplit（含五套配色） | 1.2.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -90,6 +90,7 @@
 | Lamplit Catppuccin | 1.3.4 |
 | Lamplit Wonderland | 1.1.6 |
 | Lamplit Merino | 1.0.3 |
+| Lamplit Big Wave | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -232,6 +233,17 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 不另升版本（与阶段 8 浅色 Mermaid 同一批提交）
 - 遗漏修正（2026-10-26）：核验工具 `run.mjs` 仍读取配色 TOML 已删除的 `name`，启动即报错（未连接 Obsidian、未改动任何东西）；该值本未使用，删去读取。随后完整核验 13 个变体建立新基线：阅读/编辑视图 0 不一致，对比度与此前一致，表格父容器宽度全部 700px，Mermaid 截图 26 张
 
+
+### 阶段 10 — 新增 Big Wave 配色（2026-10-27）
+
+参考山下达郎专辑《Big Wave》（1984）封面：浪管内侧的深海军蓝、浪花白、天空钴蓝、标题的珊瑚粉手写字、黄色冲浪板。封面只有蓝、白、珊瑚、黄四种颜色，代码高亮所需的绿、橙、红按 80 年代 City Pop 的夏日色补齐（棕榈绿、晚霞橙）。
+
+- 变体：**Pipeline**（深色，`#0e1a30` / 文字 `#dbe5f2`）、**Spray**（浅色，`#f4f7fb` / 文字 `#18264a`）；用户选定一深一浅
+- 角色：H1、表头、嵌套引用、关键字为珊瑚粉（专辑标题色，用户选定）；强调色钴蓝（链接、H2、光标、当前文件）；水青为 H3、行内代码、标签；冲浪板黄为 `==高亮==` 与 H5；搜索为晚霞橙；淡底风格
+- 约束：初稿深色全部达标；浅色校正三处，均只降亮度：黄 `#8a6d00→#7e6200`（高亮 4.39，透明度 0.15 同 Merino Light）、水青 `#00798a→#007283`（标签 4.43）、珊瑚 `#c04a64→#bd4762`（4.61）。所有点缀色 ≥ 4.6，易混淆色 ΔE ≥ 21（最近：浅色珊瑚/红 21.3）
+- 接入：`shared/palettes/big-wave.toml`（文件名带连字符，Typora 菜单显示「Lamplit Big Wave …」；CSS 前缀 `bw`）；schemes 顺序 Wonderland → Merino → Big Wave → TokyoNight → Catppuccin；Lamplit 1.2.0，Typora Big Wave 1.0.0
+- 核验：15 个变体阅读/编辑视图 0 不一致；原 13 个变体与基线 0 差异；Big Wave 正文 13.65 / 13.81，最低 H6 4.28 / 4.03
+
 ---
 
 ## 三、文件结构（现状）
@@ -244,7 +256,8 @@ themes/
 │   │   ├── tokyonight.toml
 │   │   ├── catppuccin.toml
 │   │   ├── wonderland.toml
-│   │   └── merino.toml
+│   │   ├── merino.toml
+│   │   └── big-wave.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -261,8 +274,11 @@ themes/
 │   ├── wonderland/
 │   │   ├── lamplit-wonderland-{underground,office-district,lab}.css
 │   │   └── README.md
-│   └── merino/
-│       ├── lamplit-merino-{light,dark}.css
+│   ├── merino/
+│   │   ├── lamplit-merino-{light,dark}.css
+│   │   └── README.md
+│   └── big-wave/
+│       ├── lamplit-big-wave-{pipeline,spray}.css
 │       └── README.md
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
@@ -324,3 +340,20 @@ themes/
 | 青绿 teal | `#167056` | `#3cbf90` | 标签 |
 | 橙 orange | `#bc4c00` | `#f0883e` | 搜索、数字 |
 | 红 red | `#cf222e` | `#ff7b72` | 错误、危险 |
+
+### Big Wave
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Pipeline | `#0e1a30` | `#dbe5f2` |
+| Spray | `#f4f7fb` | `#18264a` |
+
+| 角色 | Pipeline | Spray | 用途 |
+|------|----------|-------|------|
+| 珊瑚 coral | `#ff8fa3` | `#bd4762` | H1、表头、嵌套引用、关键字 |
+| 钴蓝 cobalt | `#6ea0ff` | `#1f4fbf` | 强调色、链接、H2 |
+| 水青 aqua | `#5fd4e0` | `#007283` | H3、行内代码、标签 |
+| 冲浪板黄 board | `#f2d94e` | `#7e6200` | 高亮、H5 |
+| 晚霞橙 sunset | `#ff9f5a` | `#b8500f` | 搜索、数字 |
+| 棕榈绿 palm | `#8fd18a` | `#2f7a2a` | 字符串、H4 |
+| 红 red | `#ff6b6b` | `#c0303a` | 错误、危险 |
