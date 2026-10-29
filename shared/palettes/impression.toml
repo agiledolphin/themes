@@ -1,0 +1,103 @@
+# Impression — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/impression/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+short_name = "Impression"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "im"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["After Monet's \"Impression, Sunrise\" (1872): the harbour of Le Havre at dawn,",
+           "cool grey-blue and grey-green mist, and one orange sun with its reflection."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["sun", "harbor", "water", "jade", "shore", "ochre", "madder", "lilac", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map any that this palette names differently.
+[aliases]
+blue = "harbor"
+cyan = "water"
+teal = "jade"
+green = "shore"
+yellow = "ochre"
+orange = "sun"
+red = "madder"
+magenta = "lilac"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# The sun is the only warm, saturated color, as in the painting: H1, accent, table header.
+# Everything else stays cool and muted: harbour blue links and H2, water-cyan code and tags,
+# lilac haze for H4, keywords and search hits.
+[roles]
+accent = "sun"
+accent_hover = "ochre"
+highlight = "sun"
+table_header = "sun"
+table_hover_alpha = "0.12"
+tag = "water"
+tag_hover = "harbor"
+search = "lilac"
+callout_note = "harbor"
+graph_tag = "water"
+quote_nested = "lilac"
+tooltip = "harbor"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.18)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["sun", "harbor", "water", "lilac", "ochre", "comment"]   # H1..H6
+
+# All accents read at >= 4.5:1, look-alike pairs stay at ΔE >= 20 (closest: sun / madder and
+# water / jade in Brume). The painting's cool hues sit close together, so they are kept apart
+# by hue steps (Lab hue: harbor ~265°, water ~210°, jade ~165°, shore ~125°) at low chroma.
+
+[[variants]]
+slug = "havre"
+label = "Havre"
+mode = "dark"
+character = "the harbour before sunrise; slate grey-green, misty text"
+[variants.palette]
+bg        = "#1c272c"
+bg-dark   = "#162024"
+bg-hl     = "#243238"
+gutter    = "#31424a"
+fg        = "#d6dfe2"
+fg-dim    = "#a9b7bd"
+comment   = "#71838b"
+sun       = "#f07a45"
+harbor    = "#82a3c8"
+water     = "#6cbcc4"
+jade      = "#6dbb9c"
+shore     = "#a6bd7e"
+ochre     = "#dcb27a"
+madder    = "#e86060"
+lilac     = "#aa9ad6"
+selection = "#2c4552"
+
+[[variants]]
+slug = "brume"
+label = "Brume"
+mode = "light"
+character = "morning mist; airy grey-green white, slate text, surfaces a breath apart"
+# lighter tints keep it airy and the ochre mark text above 4.3:1
+overrides = { mark_alpha = "0.15" }
+[variants.palette]
+bg        = "#f4f6f5"
+bg-dark   = "#ebf0ef"
+bg-hl     = "#e0e7e7"
+gutter    = "#cfd9da"
+fg        = "#2a3842"
+fg-dim    = "#4a5a64"
+comment   = "#6e7e86"
+sun       = "#b4471f"
+harbor    = "#355f86"
+water     = "#1f6f7a"
+jade      = "#2f6e58"
+shore     = "#4f6b2c"
+ochre     = "#835e1d"
+madder    = "#b2373b"
+lilac     = "#62538f"
+selection = "#d3e2ea"

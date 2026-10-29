@@ -7,7 +7,7 @@
 
 name = "Lamplit"
 prefix = "ll"                     # CSS variable / class prefix
-obsidian_version = "1.2.1"
+obsidian_version = "1.3.0"
 min_app_version = "1.0.0"
 author = "Jiaming Sun"
 author_url = ""
@@ -15,7 +15,7 @@ tagline = ["Reading by lamplight (青灯夜读). One theme, several palettes:",
            "pick a dark and a light scheme in Style Settings."]
 
 # Order of the palettes in the Style Settings dropdowns.
-schemes = ["wonderland", "merino", "big-wave", "tokyonight", "catppuccin"]
+schemes = ["wonderland", "merino", "big-wave", "impression", "tokyonight", "catppuccin"]
 
 # Variant ids (<palette prefix>-<variant slug>) used when nothing is chosen. Changing the
 # Style Settings ids below would reset every user's saved choice — keep them stable.

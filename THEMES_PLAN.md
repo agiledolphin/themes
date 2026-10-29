@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含五套配色） | 1.2.1 |
+| Lamplit（含六套配色） | 1.3.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -91,6 +91,7 @@
 | Lamplit Wonderland | 1.1.6 |
 | Lamplit Merino | 1.0.3 |
 | Lamplit Big Wave | 1.0.1 |
+| Lamplit Impression | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -245,6 +246,19 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 核验：15 个变体阅读/编辑视图 0 不一致；原 13 个变体与基线 0 差异；Big Wave 正文 13.65 / 13.81，最低 H6 4.28 / 4.03
 - 2026-10-27 修订（Lamplit 1.2.1 / Typora Big Wave 1.0.1）：用户觉得 Pipeline 的高亮太黄、突兀。柠檬黄 `#f2d94e`（色度 69）是全页最亮最饱和的颜色，改为柔沙黄 `#e6cf7e`（色度 43）：文字 11.24、高亮 7.36，与晚霞橙 ΔE 34、棕榈绿 35。五组候选（柔沙黄 / 暖奶油 / 日晒板黄 / 淡金 / 柔沙黄 + 底色 14%）预览后用户选柔沙黄；影响高亮、H5、代码属性名，以及同样用黄色的 question callout、两种任务状态复选框和 `--text-warning`。Spray 不变。核验：与基线 33 处差异全部在 Big Wave Pipeline 的上述黄色用处；15 个变体阅读/编辑视图 0 不一致
 
+
+### 阶段 11 — 新增 Impression 配色（2026-10-29）
+
+参考莫奈《印象·日出》（1872）：勒阿弗尔港的清晨，大片冷灰蓝、灰绿的晨雾里只有一轮橙红的太阳和水中倒影是暖的。配色沿用这个结构——太阳是唯一的暖色与高饱和色，其余颜色偏冷、低饱和。用户要求覆盖深浅两种模式、浅色要通透；变体名、浅色太阳色统一为深朱红、深色底色（灰绿石板蓝）按建议默认。
+
+- 变体：**Havre**（深色，`#1c272c` / 文字 `#d6dfe2`）、**Brume**（浅色，`#f4f6f5` / 文字 `#2a3842`）
+- 角色：太阳 H1、表头、强调色（光标、当前文件、引用竖线）；港湾灰蓝为链接与 H2；海水青为 H3、行内代码、标签；淡紫雾为 H4、关键字、搜索命中、嵌套引用；赭黄光晕为高亮与 H5；岸边灰绿为字符串；茜红为错误；淡底风格
+- 浅色「通透」：灰绿近白底，侧栏 / 代码块 / 边框之间只差一层雾色（`#ebf0ef` / `#e0e7e7` / `#cfd9da`），正文为深石板蓝而非纯黑，高亮底色透明度 0.15
+- 约束：深色初稿全部达标；浅色校正三处——茜红转 5°（`#b03a34→#b2373b`，与太阳 ΔE 15.5→20.1）、青绿转 5°（`#2a6e5c→#2f6e58`，与海水青 ΔE 18.0→20.3）、赭黄略压暗（`#86601f→#835e1d`，高亮 4.30→4.40）。点缀色 ≥ 5.0（深色最低茜红 4.56），易混淆色 ΔE ≥ 20
+- 已知：Brume 底色与 Wonderland Lab、Big Wave Spray 的 ΔE 仅约 2.5（近白底难以拉开，区别在点缀色）；Brume 太阳为作文字压成深朱红 `#b4471f`，发光感弱于 Havre
+- 接入：`shared/palettes/impression.toml`（CSS 前缀 `im`）；schemes 顺序 Wonderland → Merino → Big Wave → Impression → TokyoNight → Catppuccin；Lamplit 1.3.0，Typora Impression 1.0.0
+- 核验：17 个变体阅读/编辑视图 0 不一致；原 15 个变体与基线 0 差异；Impression 正文 11.27 / 11.1，最低 H6 3.87 / 3.88
+
 ---
 
 ## 三、文件结构（现状）
@@ -258,7 +272,8 @@ themes/
 │   │   ├── catppuccin.toml
 │   │   ├── wonderland.toml
 │   │   ├── merino.toml
-│   │   └── big-wave.toml
+│   │   ├── big-wave.toml
+│   │   └── impression.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -278,8 +293,11 @@ themes/
 │   ├── merino/
 │   │   ├── lamplit-merino-{light,dark}.css
 │   │   └── README.md
-│   └── big-wave/
-│       ├── lamplit-big-wave-{pipeline,spray}.css
+│   ├── big-wave/
+│   │   ├── lamplit-big-wave-{pipeline,spray}.css
+│   │   └── README.md
+│   └── impression/
+│       ├── lamplit-impression-{havre,brume}.css
 │       └── README.md
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
@@ -358,3 +376,21 @@ themes/
 | 晚霞橙 sunset | `#ff9f5a` | `#b8500f` | 搜索、数字 |
 | 棕榈绿 palm | `#8fd18a` | `#2f7a2a` | 字符串、H4 |
 | 红 red | `#ff6b6b` | `#c0303a` | 错误、危险 |
+
+### Impression
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Havre | `#1c272c` | `#d6dfe2` |
+| Brume | `#f4f6f5` | `#2a3842` |
+
+| 角色 | Havre | Brume | 用途 |
+|------|-------|-------|------|
+| 太阳 sun | `#f07a45` | `#b4471f` | 强调色、H1、表头 |
+| 港湾灰蓝 harbor | `#82a3c8` | `#355f86` | 链接、H2 |
+| 海水青 water | `#6cbcc4` | `#1f6f7a` | H3、行内代码、标签 |
+| 淡紫雾 lilac | `#aa9ad6` | `#62538f` | H4、关键字、搜索 |
+| 赭黄 ochre | `#dcb27a` | `#835e1d` | 高亮、H5 |
+| 岸边灰绿 shore | `#a6bd7e` | `#4f6b2c` | 字符串 |
+| 青绿 jade | `#6dbb9c` | `#2f6e58` | 代码中的 teal 角色 |
+| 茜红 madder | `#e86060` | `#b2373b` | 错误、危险 |
