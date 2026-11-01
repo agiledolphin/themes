@@ -21,6 +21,11 @@ Template placeholders:
     {{r:NAME}}    a role's literal value (alphas, shadows, ...)
     {{UPPER}}     file-level values (theme name, version, palette block, ...)
     {{#KEY=VALUE}} ... {{/KEY}}   kept only when role KEY equals VALUE
+
+Optional style switches (palette [roles]; omitted = the original look):
+    corners    = "round" | "square"   square: every corner radius 0 (roles radius_2 … radius_8)
+    mark_style = "tint"  | "solid"    solid: ==mark== as a block of mark_fill (default: the
+                                      yellow) with dark text (mark_text: bg / fg by mode)
 """
 import json
 import re
@@ -32,6 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PALETTES = ROOT / "shared/palettes"
 TEMPLATES = ROOT / "scripts/templates"
 HEADINGS = ["h1", "h2", "h3", "h4", "h5", "h6"]
+RADII = [2, 3, 4, 6, 8]   # corner radii the templates use, as roles radius_2 … radius_8
 
 
 def rgb_triple(hex_color: str) -> str:
@@ -47,6 +53,18 @@ class Ctx:
         self.roles.update(zip(HEADINGS, theme["roles"]["headings"]))
         self.roles.update(variant.get("overrides", {}))
         self.roles.update(variant.get(f"{platform}_overrides", {}))
+        # Optional style switches; their defaults reproduce the original rendering.
+        # corners = "square": every template radius becomes 0 (Obsidian's UI radii too).
+        square = self.roles.setdefault("corners", "round") == "square"
+        for n in RADII:
+            self.roles.setdefault(f"radius_{n}", "0" if square else f"{n}px")
+        # mark_style = "solid": ==mark== is a solid block (mark_fill, default the yellow) with
+        # dark text, instead of yellow text on a yellow tint.
+        if self.roles.setdefault("mark_style", "tint") == "solid":
+            self.roles.setdefault("mark_fill", "yellow")
+            self.roles.setdefault("mark_text", "bg" if variant["mode"] == "dark" else "fg")
+        self.roles.setdefault("mark_fill", "mark-bg")
+        self.roles.setdefault("mark_text", "yellow")
         self.aliases = theme.get("aliases", {})
         self.palette = variant["palette"]
 
@@ -254,7 +272,8 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
         pieces.append(to_vars(template[pos:m.start()]))
         key, val, nl1, body, nl2 = m.groups()
         if "{" in re.sub(r"\{\{[^{}]*\}\}", "", body):            # rule group
-            pieces.append(scope_rules(to_vars(body), scope_for(key, val)) + nl2)
+            scope = scope_for(key, val)                            # none use this style: drop it
+            pieces.append(scope_rules(to_vars(body), scope) + nl2 if scope else "")
             pos = m.end(); i += 1
         elif nl1:                                                  # declaration group
             decl_groups.append((key, val, to_vars(body)))
@@ -285,7 +304,7 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
                 continue
             if name in ctx.roles and ctx.roles[name] == "":
                 continue                                   # role unused by this palette's styles
-            if name == "mark-bg":
+            if ctx.color(name) == "mark-bg":
                 value = f"rgba({rgb_triple(ctx.hex('yellow'))}, {ctx.roles['mark_alpha']})"
             else:
                 value = ctx.hex(name)

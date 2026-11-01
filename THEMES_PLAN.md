@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含六套配色） | 1.3.0 |
+| Lamplit（含七套配色） | 1.4.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -92,6 +92,7 @@
 | Lamplit Merino | 1.0.3 |
 | Lamplit Big Wave | 1.0.1 |
 | Lamplit Impression | 1.0.0 |
+| Lamplit Bauhaus | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -259,6 +260,27 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 接入：`shared/palettes/impression.toml`（CSS 前缀 `im`）；schemes 顺序 Wonderland → Merino → Big Wave → Impression → TokyoNight → Catppuccin；Lamplit 1.3.0，Typora Impression 1.0.0
 - 核验：17 个变体阅读/编辑视图 0 不一致；原 15 个变体与基线 0 差异；Impression 正文 11.27 / 11.1，最低 H6 3.87 / 3.88
 
+
+### 阶段 12 — 新增 Bauhaus 配色与两个模板开关（2026-11-01）
+
+参考包豪斯（1919–1933）：三原色加黑白灰、平涂色块、几何直角。正文只用红黄蓝与黑白灰；代码高亮所需的橙、绿、紫、青取伊顿色环的二次色（伊顿是包豪斯基础课教师），只出现在代码里。用户选定：加「实色高亮」与「直角」两个模板开关、浅色用暖纸白、变体名 Dessau / Weimar。
+
+- 变体：**Weimar**（深色，`#161616` / 文字 `#ece8de`）、**Dessau**（浅色，暖纸白 `#f3f0e7` / 文字 `#1c1c1c`）
+- 角色：H1、强调色为红；链接、H2、标签、表头为蓝；H3 在 Weimar 为黄、在 Dessau 为近黑加粗（黄色当不了浅色文字）；高亮为实心黄块；搜索为橙；导航与菜单用实色填充（悬停蓝、当前文件红）
+- 两种黄：`yellow` 供文字用途（代码属性、警告，Dessau 压暗为 `#876700`），`signal` 为高亮色块的亮黄 `#f2c014`
+- 约束：深色初稿全部达标；浅色橙 `#b85a12→#ad5106`、黄 `#8a6a00→#876700` 只降亮度至 4.6。文字点缀色 ≥ 4.6，易混淆色 ΔE ≥ 26，红 / 蓝实色填充上的导航文字 ≥ 4.5
+- 已知：Weimar 底色与 Wonderland Office 的 ΔE 3.5（同为中性炭黑，区别在点缀色）
+
+**模板开关**（配色 TOML 的 `[roles]`；不写即原样，其他配色输出不变）：
+
+- `corners = "square"`：两个模板中所有圆角（2/3/4/6/8px）改由角色 `radius_2 … radius_8` 提供，直角时为 0；Obsidian 侧另把界面圆角变量 `--radius-s/m/l/xl`、`--input-radius`、`--tab-radius-active` 归零。任务复选框的圆形保留
+- `mark_style = "solid"`：`==高亮==` 为实心色块（`mark_fill`，默认黄色）加深色字（`mark_text`，深色模式取 bg、浅色取 fg）。Obsidian 复用的 `--text-highlight-bg`（链接跳转闪烁、搜索等）仍为淡色，避免浅色正文压在亮黄上；高亮中的搜索命中保留黄底再叠搜索色
+- 生成器：Lamplit 的 rule group 若无方案使用即不输出（避免空 `:where()`）；经角色间接指向 `mark-bg` 的颜色也能正确展开
+- 等价性验证：原 17 个变体的 Typora 文件逐字节不变；Obsidian 与基线对比仅多出 6 个新记录的界面圆角变量（`--radius-*` 等），测到的均为 Obsidian 默认值，其余样式全部一致
+
+- 接入：`shared/palettes/bauhaus.toml`（CSS 前缀 `bh`）；schemes 顺序 Wonderland → Merino → Big Wave → Impression → Bauhaus → TokyoNight → Catppuccin；Lamplit 1.4.0，Typora Bauhaus 1.0.0（其余 Typora 主题输出不变，不升版本）
+- 核验：19 个变体阅读/编辑视图 0 不一致；Bauhaus 正文 14.79 / 14.96，最低 H6 4.98 / 4.72
+
 ---
 
 ## 三、文件结构（现状）
@@ -273,7 +295,8 @@ themes/
 │   │   ├── wonderland.toml
 │   │   ├── merino.toml
 │   │   ├── big-wave.toml
-│   │   └── impression.toml
+│   │   ├── impression.toml
+│   │   └── bauhaus.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -296,8 +319,11 @@ themes/
 │   ├── big-wave/
 │   │   ├── lamplit-big-wave-{pipeline,spray}.css
 │   │   └── README.md
-│   └── impression/
-│       ├── lamplit-impression-{havre,brume}.css
+│   ├── impression/
+│   │   ├── lamplit-impression-{havre,brume}.css
+│   │   └── README.md
+│   └── bauhaus/
+│       ├── lamplit-bauhaus-{weimar,dessau}.css
 │       └── README.md
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
@@ -394,3 +420,21 @@ themes/
 | 岸边灰绿 shore | `#a6bd7e` | `#4f6b2c` | 字符串 |
 | 青绿 jade | `#6dbb9c` | `#2f6e58` | 代码中的 teal 角色 |
 | 茜红 madder | `#e86060` | `#b2373b` | 错误、危险 |
+
+### Bauhaus
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Weimar | `#161616` | `#ece8de` |
+| Dessau | `#f3f0e7` | `#1c1c1c` |
+
+| 角色 | Weimar | Dessau | 用途 |
+|------|--------|--------|------|
+| 红 red | `#ff5a4e` | `#c4262e` | 强调色、H1、当前文件 |
+| 蓝 blue | `#6f9dff` | `#1f4f9c` | 链接、H2、标签、表头 |
+| 信号黄 signal | `#ffd23f` | `#f2c014` | 实色高亮块 |
+| 黄 yellow | `#ffd23f` | `#876700` | H3（Weimar）、代码属性、警告 |
+| 橙 orange | `#ff9a3c` | `#ad5106` | 搜索、数字 |
+| 绿 green | `#6cc070` | `#2e7d32` | 字符串 |
+| 紫 violet | `#b48cff` | `#6a3fa0` | 关键字 |
+| 青 teal | `#4fc1b8` | `#00756e` | 行内代码 |

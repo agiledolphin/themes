@@ -1,6 +1,6 @@
 # Lamplit for Obsidian
 
-Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries six palettes as schemes — **Wonderland**, **Merino**, **Big Wave**, **Impression**, **TokyoNight** and **Catppuccin** — so you switch palettes in [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) instead of switching themes. Dark and light mode each get their own scheme, and they can come from different palettes.
+Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries seven palettes as schemes — **Wonderland**, **Merino**, **Big Wave**, **Impression**, **Bauhaus**, **TokyoNight** and **Catppuccin** — so you switch palettes in [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) instead of switching themes. Dark and light mode each get their own scheme, and they can come from different palettes.
 
 ---
 
@@ -17,6 +17,8 @@ Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries 
 | Big Wave | Spray | Light | `#f4f7fb` | White spray — blue-white ground, deep-navy text |
 | Impression | Havre | Dark | `#1c272c` | The harbour before sunrise — slate grey-green, misty text |
 | Impression | Brume | Light | `#f4f6f5` | Morning mist — airy grey-green white, slate text |
+| Bauhaus | Weimar | Dark | `#161616` | Black ground, paper-white text, bright primaries |
+| Bauhaus | Dessau | Light | `#f3f0e7` | Warm paper white, near-black text |
 | TokyoNight | Storm | Dark | `#24283b` | Blue-grey, standard dark |
 | TokyoNight | Night | Dark | `#1a1b26` | Deep, near-black |
 | TokyoNight | Moon | Dark | `#222436` | Blue-purple tint |
@@ -26,12 +28,12 @@ Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries 
 | Catppuccin | Frappé | Dark | `#303446` | Cool dark grey-blue |
 | Catppuccin | Latte | Light | `#eff1f5` | Warm parchment light |
 
-Wonderland is an original palette inspired by the "Hard-Boiled Wonderland" half of Haruki Murakami's *Hard-Boiled Wonderland and the End of the World*: restrained indigo-black grounds, cool grey-white text, and a single warm brass accent. Merino follows the Merino Light / Merino Dark terminal themes (GitHub Primer colors): neutral white and near-black grounds with crisp accents. Big Wave follows the cover of Tatsuro Yamashita's *Big Wave* (1984): ocean-navy and spray-white grounds, a coral title color for H1, cobalt links and a yellow-surfboard highlight. Impression follows Monet's *Impression, Sunrise* (1872): cool, muted grey-blue and grey-green mist with the orange sun as the only warm note; its light scheme is kept airy. TokyoNight and Catppuccin follow their official palettes.
+Wonderland is an original palette inspired by the "Hard-Boiled Wonderland" half of Haruki Murakami's *Hard-Boiled Wonderland and the End of the World*: restrained indigo-black grounds, cool grey-white text, and a single warm brass accent. Merino follows the Merino Light / Merino Dark terminal themes (GitHub Primer colors): neutral white and near-black grounds with crisp accents. Big Wave follows the cover of Tatsuro Yamashita's *Big Wave* (1984): ocean-navy and spray-white grounds, a coral title color for H1, cobalt links and a yellow-surfboard highlight. Impression follows Monet's *Impression, Sunrise* (1872): cool, muted grey-blue and grey-green mist with the orange sun as the only warm note; its light scheme is kept airy. Bauhaus follows the Bauhaus school: red, yellow and blue on paper white or black, solid blocks and square corners — the highlight is a solid yellow block, the file explorer and menus use solid fills, and every corner is square, Obsidian's own UI included. TokyoNight and Catppuccin follow their official palettes.
 
 Each palette keeps its own character beyond color:
 
-- **File explorer** — Wonderland, Merino, Big Wave, Impression and TokyoNight mark the open file with an accent tint and a left bar; Catppuccin uses solid fills (lavender on hover, mauve for the open file).
-- **Context menus** — the selected item follows the same language: an accent tint, or a solid lavender fill for Catppuccin.
+- **File explorer** — Wonderland, Merino, Big Wave, Impression and TokyoNight mark the open file with an accent tint and a left bar; Catppuccin and Bauhaus use solid fills (Catppuccin: lavender on hover, mauve for the open file; Bauhaus: blue on hover, red for the open file).
+- **Context menus** — the selected item follows the same language: an accent tint, or a solid fill for Catppuccin (lavender) and Bauhaus (red).
 
 ---
 
@@ -39,7 +41,7 @@ Each palette keeps its own character beyond color:
 
 1. Install **Style Settings** from the Community Plugins list.
 2. Open **Settings → Style Settings → Lamplit**.
-3. Pick a **Dark Mode Scheme** (11 options) and a **Light Mode Scheme** (6 options).
+3. Pick a **Dark Mode Scheme** (12 options) and a **Light Mode Scheme** (7 options).
 
 Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode and **Wonderland · Lab** in light mode.
 
@@ -51,8 +53,8 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 - **Reading view and Live Preview look the same** — headings, code blocks (frame, size, font, line height), inline code, tables, blockquotes, tags, highlights and links are driven by the same variables in both views
 - **Callouts** — all 13 official types with semantic colors; titles and icons take the per-type hue
 - **Task list** — 7 states with custom circular checkboxes: `x`, `/`, `-`, `>`, `?`, `!`
-- **Tables** — sized to their content, rounded frame, single grid lines, 14px text
-- **Search highlights** — one dedicated search color per palette (Wonderland cyan, Merino orange, Big Wave sunset orange, Impression lilac, TokyoNight orange, Catppuccin peach), distinct from highlighted text and the selection
+- **Tables** — sized to their content, rounded frame (square in Bauhaus), single grid lines, 14px text
+- **Search highlights** — one dedicated search color per palette (Wonderland cyan, Merino orange, Big Wave sunset orange, Impression lilac, Bauhaus orange, TokyoNight orange, Catppuccin peach), distinct from highlighted text and the selection
 - **Context menus** — a darker surface than the editor; destructive items such as Delete turn red when selected
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC
 - **Hide Folder Icons** toggle in Style Settings
@@ -70,7 +72,7 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 
 ## Credits
 
-- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Wonderland is original
+- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Wonderland is original
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
 
 ---
