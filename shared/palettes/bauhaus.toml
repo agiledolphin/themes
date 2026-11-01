@@ -1,0 +1,101 @@
+# Bauhaus — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/bauhaus/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+short_name = "Bauhaus"               # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "bh"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["After the Bauhaus (1919-1933): the three primaries on paper white or black,",
+           "flat solid blocks, square corners. Itten's secondaries appear in code only."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["red", "blue", "yellow", "signal", "orange", "green", "violet", "teal", "comment", "fg"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map any that this palette names differently.
+[aliases]
+magenta = "violet"
+cyan = "teal"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Prose uses only the three primaries plus black, white and grey: red H1 and accent, blue
+# links / H2 / tags / table headers, yellow as a solid block. Orange, green, violet and teal
+# (Itten's colour wheel, taught at the Bauhaus) colour code only. `yellow` is the text-safe
+# yellow (code properties, warnings); `signal` is the bright yellow of the highlight block.
+[roles]
+accent = "red"
+accent_hover = "blue"
+highlight = "red"
+table_header = "blue"
+table_hover_alpha = "0.12"
+tag = "blue"
+tag_hover = "red"
+search = "orange"
+callout_note = "blue"
+graph_tag = "red"
+quote_nested = "blue"
+tooltip = "fg"
+tooltip_text_alpha = "0.90"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 0 rgba(0, 0, 0, 0.25)"
+nav_style = "fill"                   # solid blocks: blue on hover, red for the open file
+nav_hover = "blue"
+nav_active = "red"
+menu_style = "fill"
+mark_style = "solid"                 # ==mark== as a solid yellow block with dark text
+mark_fill = "signal"
+mark_alpha = "0.18"                  # the faint tint Obsidian still uses (e.g. link flashes)
+corners = "square"
+headings = ["red", "blue", "fg", "fg-dim", "fg-dim", "comment"]   # H1..H6 (Dessau)
+
+# Text accents >= 4.6:1, look-alike pairs ΔE >= 26; the red and blue fills carry the dark
+# nav / menu text at >= 4.5:1. Weimar's ground sits close to Wonderland Office (both neutral
+# charcoal): the two differ by their accents.
+
+[[variants]]
+slug = "weimar"
+label = "Weimar"
+mode = "dark"
+character = "black ground, paper-white text, bright primaries"
+# on black the yellow reads as text, so it takes H3
+overrides = { h3 = "yellow", h4 = "fg", h5 = "fg-dim" }
+[variants.palette]
+bg        = "#161616"
+bg-dark   = "#0f0f0f"
+bg-hl     = "#232323"
+gutter    = "#353535"
+fg        = "#ece8de"
+fg-dim    = "#c0bbb0"
+comment   = "#8a867c"
+red       = "#ff5a4e"
+blue      = "#6f9dff"
+yellow    = "#ffd23f"
+signal    = "#ffd23f"
+orange    = "#ff9a3c"
+green     = "#6cc070"
+violet    = "#b48cff"
+teal      = "#4fc1b8"
+selection = "#2f3a52"
+
+[[variants]]
+slug = "dessau"
+label = "Dessau"
+mode = "light"
+character = "warm paper white, near-black text; the white school building"
+[variants.palette]
+bg        = "#f3f0e7"
+bg-dark   = "#e9e5da"
+bg-hl     = "#dedace"
+gutter    = "#cbc6b8"
+fg        = "#1c1c1c"
+fg-dim    = "#45423c"
+comment   = "#6e6a62"
+red       = "#c4262e"
+blue      = "#1f4f9c"
+yellow    = "#876700"
+signal    = "#f2c014"
+orange    = "#ad5106"
+green     = "#2e7d32"
+violet    = "#6a3fa0"
+teal      = "#00756e"
+selection = "#d5dbe8"

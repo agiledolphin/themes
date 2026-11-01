@@ -76,7 +76,7 @@ body.theme-light {
        carry the top/bottom border and corners), so both views get the frame. */
     --code-border-width: 1px;
     --code-border-color: {{c:gutter}};
-    --code-radius:       8px;
+    --code-radius:       {{r:radius_8}};
     --code-background:  {{c:bg-dark}};
     --code-normal:      {{c:fg}};
     --code-comment:     {{c:comment}};
@@ -109,7 +109,7 @@ body.theme-light {
     --tag-border-width:     0px;
     --tag-padding-x:        0.45em;
     --tag-padding-y:        0.1em;
-    --tag-radius:           4px;
+    --tag-radius:           {{r:radius_4}};
 
     /* --- Checkboxes --- */
     --checkbox-color:            {{c:accent}};
@@ -123,10 +123,19 @@ body.theme-light {
     --callout-border-width:   0px;
     --callout-border-opacity: 0;
     --callout-padding:        0.75rem 1rem;
-    --callout-radius:         6px;
+    --callout-radius:         {{r:radius_6}};
 
     /* --- Scrollbars --- */
     --scrollbar-bg:              transparent;
+{{#corners=square}}
+    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs) */
+    --radius-s:          0;
+    --radius-m:          0;
+    --radius-l:          0;
+    --radius-xl:         0;
+    --input-radius:      0;
+    --tab-radius-active: 0;
+{{/corners}}
     --scrollbar-thumb-bg:        {{c:gutter}};
     --scrollbar-active-thumb-bg: {{c:fg-dim}};
 
@@ -247,9 +256,9 @@ body {
 
 .markdown-rendered mark,
 .cm-highlight {
-    background: {{c:mark-bg}} !important;
-    color: {{c:yellow}} !important;
-    border-radius: 3px;
+    background: {{c:mark_fill}} !important;
+    color: {{c:mark_text}} !important;
+    border-radius: {{r:radius_3}};
     padding: 0 3px;
 }
 
@@ -309,15 +318,15 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
     color: {{c:fg}};
     background: {{c:bg-dark}};
     border: 1px solid {{c:gutter}};
-    border-radius: 4px;
+    border-radius: {{r:radius_4}};
     /* Live Preview inline code takes its radius from --code-radius (via a
        higher-specificity app.css rule); keep it at 4px, not the 8px blocks use. */
-    --code-radius: 4px;
+    --code-radius: {{r:radius_4}};
     /* padding: left to app.css (0.15em 0.3em), the value Live Preview uses too */
     font-size: 0.875em;
 }
 /* Live Preview code-block language label: keep its default small radius. */
-.markdown-source-view.mod-cm6 .code-block-flair { --code-radius: 4px; }
+.markdown-source-view.mod-cm6 .code-block-flair { --code-radius: {{r:radius_4}}; }
 .cm-inline-code {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
@@ -350,7 +359,7 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
     border-left: 2px solid {{c:accent}};
     border-right: none;
     background: var(--blockquote-background-color);
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 {{r:radius_6}} {{r:radius_6}} 0;
     padding: 0.75rem 1.25rem;
     color: var(--blockquote-color);
     margin: 1rem 0;
@@ -362,7 +371,7 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
  * Callouts
  * ============================================================ */
 
-.callout { border-radius: 8px; overflow: hidden; }
+.callout { border-radius: {{r:radius_8}}; overflow: hidden; }
 
 .callout-title {
     padding: 0.6rem 1rem !important;
@@ -430,7 +439,7 @@ body.theme-light .callout[data-callout="cite"] {
     /* No width: tables size to their content, as in Live Preview (whose table
        wrapper is width: fit-content) and Obsidian's default. */
     border: 1px solid {{c:gutter}};
-    border-radius: 8px;
+    border-radius: {{r:radius_8}};
     overflow: hidden;
 }
 
@@ -674,7 +683,7 @@ input[type="checkbox"][data-task="!"]::before {
 .metadata-container {
     background: {{c:bg-dark}};
     border: 1px solid {{c:gutter}};
-    border-radius: 8px;
+    border-radius: {{r:radius_8}};
     padding: 0.5rem 1rem;
     margin-bottom: 1.5rem;
     font-size: 0.875em;
@@ -724,7 +733,7 @@ input[type="checkbox"][data-task="!"]::before {
 .nav-folder-collapse-indicator { color: {{c:yellow}}; }
 
 .nav-folder-title,
-.nav-file-title { border-radius: 4px; }
+.nav-file-title { border-radius: {{r:radius_4}}; }
 
 {{#nav_style=tint}}
 .nav-file-title:hover,
@@ -839,14 +848,14 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .prompt {
     background: {{c:bg-dark}};
     border: 1px solid {{c:gutter}};
-    border-radius: 8px;
+    border-radius: {{r:radius_8}};
 }
 
 .prompt-input {
     background: {{c:bg-hl}};
     color: {{c:fg}};
     border: 1px solid {{c:gutter}};
-    border-radius: 6px;
+    border-radius: {{r:radius_6}};
 }
 
 .suggestion-item.is-selected { background: {{c:bg-hl}}; color: {{c:highlight}}; }
@@ -906,7 +915,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .search-result-file-matched-text {
     background-color: rgba({{rgb:search}}, 0.18);
     color:            var(--text-normal);
-    border-radius:    2px;
+    border-radius:    {{r:radius_2}};
 }
 
 /* Editor find (Cmd+F): app.css only rings each match; add a tint. The current
@@ -920,6 +929,14 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
     background-color: rgba({{rgb:search}}, 0.25) !important;
 }
+{{#mark_style=solid}}
+/* mark_style "solid": keep the mark's solid fill under the match (its dark text would
+   vanish on a plain tint) and lay the search tint over it. */
+.cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
+    background-color: {{c:mark_fill}} !important;
+    background-image: linear-gradient(rgba({{rgb:search}}, 0.35), rgba({{rgb:search}}, 0.35)) !important;
+}
+{{/mark_style}}
 
 /* Reading-mode find: these boxes are overlays drawn ABOVE the text, so a fill
    would hide it — recolor the rings instead (app.css: faint 30% text ring). */
