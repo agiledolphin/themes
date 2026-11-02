@@ -165,7 +165,7 @@
 | 独立发布仓库 | 社区主题库要求一个主题一个仓库、`theme.css` 与 `manifest.json` 在根目录：为 Lamplit 拆出单独仓库（本仓库继续作为生成源） | ☐ |
 | 截图素材 | Lamplit 各方案效果图（社区库需 `screenshot.png`）+ Typora 各配色效果图（各 README 中的 *coming soon*） | ☐ |
 | manifest.json | 补全 `authorUrl`（GitHub 地址）：改 `shared/lamplit.toml` 的 `author_url` 后重新生成 | ☐ |
-| LICENSE / README | 发布仓库补 LICENSE 文件（README 已写 MIT）与根目录 README | ☐ |
+| LICENSE / README | 本仓库已补 MIT LICENSE 与根目录 README（2026-11-02）；拆出发布仓库时另写面向 Obsidian 用户的 README | ☐ |
 | 社区提交 | 按 Obsidian 官方流程向 obsidian-releases 提 PR（只提 Lamplit 一个主题；提交前对照官方文档核实格式） | ☐ |
 
 ### 阶段 5 — 可选扩展
@@ -303,6 +303,7 @@ themes/
 │       ├── theme.css          ✓（生成）
 │       ├── manifest.json      ✓（生成，需补 authorUrl）
 │       └── README.md          ✓
+├── README.md / LICENSE        # 总览与安装 / MIT
 ├── typora/
 │   ├── tokyonight/            # 各配色目录：lamplit-<配色>-<变体>.css（生成）+ README.md
 │   │   ├── lamplit-tokyonight-{storm,night,moon,day}.css

@@ -54,6 +54,8 @@ themes/
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
 │   └── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
 ├── .verify/                 # verify-obsidian output (git-ignored)
+├── README.md                # overview, installation (keep palette table and counts current)
+├── LICENSE
 └── THEMES_PLAN.md
 ```
 
