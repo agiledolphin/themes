@@ -350,7 +350,7 @@ themes/
 │       ├── manifest.json      ✓（生成，需补 authorUrl）
 │       └── README.md          ✓
 ├── install.sh                 # 从最新 Release 安装，无需 clone
-├── README.md / LICENSE        # 总览与安装 / MIT
+├── README.md / README.zh-CN.md / LICENSE   # 总览与安装（英文 / 中文）/ MIT
 ├── typora/
 │   ├── tokyonight/            # 各配色目录：lamplit-<配色>-<变体>.css（生成）+ README.md
 │   │   ├── lamplit-tokyonight-{storm,night,moon,day}.css

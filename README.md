@@ -1,5 +1,7 @@
 # Lamplit
 
+English · [简体中文](README.zh-CN.md)
+
 Reading by lamplight (青灯夜读). Seven color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
 
 - **Obsidian**: one theme, **Lamplit**, that carries every palette as a scheme. Dark and light mode each pick their own scheme in [Style Settings](https://github.com/mgmeyers/obsidian-style-settings).

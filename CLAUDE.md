@@ -57,6 +57,7 @@ themes/
 ├── .verify/                 # verify-obsidian output (git-ignored)
 ├── install.sh               # installs from the latest GitHub Release, no clone needed
 ├── README.md                # overview, installation (keep palette table and counts current)
+├── README.zh-CN.md          # Chinese version; change it together with README.md
 ├── LICENSE
 └── THEMES_PLAN.md
 ```
