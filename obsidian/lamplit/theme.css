@@ -2608,6 +2608,9 @@ body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart
         fill: var(--ll-m-fill);
         stroke: var(--ll-accent);
     }
+    /* Mermaid's fallback for lines without a class: before .actor-man, which must win */
+    & line:not([class]) { stroke: var(--ll-fg-dim); }
+    & .actor-man :is(line, circle) { fill: var(--ll-m-fill); stroke: var(--ll-accent); }
     & .cluster rect { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
     & .labelBox { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
     & :is(rect.note, .note rect) {
@@ -2616,13 +2619,19 @@ body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart
     }
 
     /* Lines and arrowheads */
-    & :is(.flowchart-link, .edgePath path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
+    & :is(.flowchart-link, .edgePath path, .edgePaths path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
         stroke: var(--ll-fg-dim);
     }
     /* Only solid arrowheads get a fill: class and ER markers are hollow by meaning. The second
        :not() outranks the rules Mermaid scopes to the marker's own id as well. */
     &:not(#__) marker :is(path, circle) { stroke: var(--ll-fg-dim); }
-    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="crossEnd"], [id*="barbEnd"]) :is(path, circle) { fill: var(--ll-fg-dim); }
+    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="solidTopArrowHead"], [id*="solidBottomArrowHead"],
+        [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="circleStart"], [id*="crossEnd"], [id*="crossStart"], [id*="barbEnd"],
+        [id*="compositionStart"], [id*="compositionEnd"], [id*="dependencyStart"], [id*="dependencyEnd"]) :is(path, circle) { fill: var(--ll-fg-dim); }
+    /* Mermaid fills the ER "zero" circle white to read as hollow: on any scheme that is the page color */
+    &:not(#__) [id*="zeroOr"] circle { fill: var(--ll-bg); }
+    &:not(#__) [id$="-sequencenumber"] circle { fill: var(--ll-accent); stroke: var(--ll-accent); }
+    &:not(#__) .sequenceNumber { fill: var(--ll-bg); }
 
     /* Text */
     & :is(text, text.actor tspan, .noteText tspan, .loopText tspan, [class*="taskText"]) { fill: var(--ll-fg); }
@@ -2660,6 +2669,7 @@ body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart
     & :is(.section0, .section2) { fill: var(--ll-bg-hl); }
     & :is(.section1, .section3) { fill: var(--ll-bg); }
     & :is(.grid line, .grid path) { stroke: var(--ll-gutter); }
+    & .today { stroke: var(--ll-red); }
     & :is(.task0, .task1, .task2, .task3) { fill: var(--ll-m-fill); stroke: var(--ll-accent); }
     & :is(.done0, .done1, .done2, .done3) { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
     & :is(.active0, .active1, .active2, .active3) {

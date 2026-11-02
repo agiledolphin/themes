@@ -96,7 +96,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   app without CSS nesting ignores it and keeps its look). `{{MM}}` expands to a selector limited
   to `MERMAID_TYPES` in `gen-themes.py`, so an unknown diagram type keeps Obsidian's look, and its
   `:not(#_)` outranks Mermaid's id-scoped rules without `!important`. The rules depend on Mermaid's
-  class names: after an Obsidian update, check `--note` with every diagram type.
+  class names: after an Obsidian update, run the verification; the test note has one section per
+  diagram type (`MERMAID` in `pagelib.js` lists them), so a new type needs a heading there too.
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different
@@ -118,18 +119,32 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 - Automated check of the real rendering (after any Obsidian-side change):
   1. Obsidian running on a debug port (quit it, then
      `open -a Obsidian --args --remote-debugging-port=9333`), Lamplit synced to the vault.
-  2. `node scripts/verify-obsidian/run.mjs` — every scheme from the TOMLs, ~5 min
-     (`--only cp-latte,wl` to narrow; `--note <vault path>`, default
+  2. `node scripts/verify-obsidian/run.mjs` — every scheme from the TOMLs, ~10 min
+     (`--only cp-latte,wl` and `--sections mermaid,tables` to narrow; `--note <vault path>`, default
      `tech/lab/obsidian/obsidian-theme-sample.md`; `--port`, `--out`).
   3. `uv run scripts/verify-obsidian/analyze.py .verify [--baseline <earlier run>]` — every
-     Reading/Live mismatch, contrast per variant, and with `--baseline` every difference from
+     Reading/Live mismatch, contrast per variant, Mermaid (every diagram type rendered without the
+     inversion filter, solid and hollow markers, any painted color not from the scheme; text on
+     its fill below 3:1 is reported), and with `--baseline` every difference from
      an earlier run (styles, mapped Obsidian variables, UI probes incl. forced :hover); exit 1
      on any. Writes `.verify/index.html` with screenshots. For a refactor: copy `.verify` to
      `.verify-baseline` first, then compare — a refactor must show 0 differences.
 
+  Choose the scope from what changed; a full run is the exception. A narrowed run writes to
+  `.verify-scoped`, so compare it with `analyze.py .verify-scoped --baseline .verify`:
+  - one palette's TOML: `--only <its variants>`
+  - a template rule for one area: `--only bw-pipeline,wl-lab` (a dark and a light scheme, plus
+    `cp-latte` when colors change) with `--sections` for that area
+  - a style switch: `--only` the variants using it plus one that does not
+  - verification tool or test note only: one scheme, the affected sections
+  - full run: a change to the generator, the variant blocks or the Obsidian variable mapping, a
+    refactor (must show 0 differences), or an Obsidian update
+
   Keep Obsidian's window visible for the whole run: while it is minimized, covered or on
   another Space, Chromium stops rendering (no animation frames), lazily rendered content never
-  appears and measurements would come back empty — the tool checks this and refuses (exit 3).
+  appears and measurements would come back empty — the tool checks this and refuses (exit 3). Measured, not adopted: with
+  `setBackgroundThrottling(false)` and focus emulation a covered window keeps rendering, but a
+  minimized one never returns a fresh screenshot.
   It switches schemes on screen (tell the user before running it), works in a new tab plus
   off-screen probe elements, never edits the note, and restores the user's theme, mode and
   Style Settings classes. Each run clears its own previous output, only after connecting.

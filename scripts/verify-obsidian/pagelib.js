@@ -57,7 +57,7 @@ window.__V = (() => {
   // Sections whose content renders asynchronously: wait (up to 5 s) until it is on screen.
   const SETTLE = { mermaid: '.mermaid svg' };
   async function settle(section) {
-    const sel = SETTLE[section];
+    const sel = MERMAID[section] ? `.mermaid > svg[aria-roledescription="${MERMAID[section].type}"]` : SETTLE[section];
     if (!sel) return;
     const root = leaf.view.containerEl, view = root.querySelector('.view-content').getBoundingClientRect();
     for (let t = 0; t < 5000; t += 100) {
@@ -94,12 +94,74 @@ window.__V = (() => {
     tags: ['tag', 'tdCode'],
     mermaid: ['mermaidSvg', 'mermaidNode', 'mermaidEdge', 'mermaidLabel', 'mermaidPie', 'mermaidPieText'],
   };
+  // One section per diagram type: probe name -> [selector inside that diagram, properties].
+  // Markers have no box of their own, so `hidden` probes skip the on-screen test.
+  const F = ['fill'], FS = ['fill', 'stroke'], S = ['stroke'], C = ['color'];
+  const MERMAID = {
+    'mm-flow': { type: 'flowchart-v2', name: 'Flow', probes: {
+      Cluster: ['.cluster rect', FS], ClusterLabel: ['.cluster-label .nodeLabel', C], Node: ['.node rect', FS],
+      NodeLabel: ['.node .nodeLabel', C], EdgeLabel: ['.edgeLabel p', [...C, 'background-color']] } },
+    'mm-sequence': { type: 'sequence', name: 'Seq', probes: {
+      Actor: ['rect.actor', FS], ActorText: ['text.actor tspan', F], Line: ['.actor-line', S],
+      Number: ['.sequenceNumber', F], NumberDot: ['[id$="-sequencenumber"] circle', FS, 'hidden'], Man: ['.actor-man circle', FS],
+      Message: ['.messageLine0', S], MessageText: ['.messageText', F], Arrow: ['[id$="-arrowhead"] path', FS, 'hidden'],
+      Note: ['rect.note', FS], NoteText: ['.noteText tspan', F], Loop: ['.labelBox', FS], LoopText: ['.labelText', F] } },
+    'mm-class': { type: 'class', name: 'Class', probes: {
+      Box: ['.node path', FS], Label: ['.nodeLabel', C], Line: ['.relation', S],
+      Hollow: ['[id*="extensionStart"] path', FS, 'hidden'], Solid: ['[id*="compositionStart"] path', FS, 'hidden'] } },
+    'mm-state': { type: 'stateDiagram', name: 'State', probes: {
+      Node: ['.node rect', FS], Label: ['.node .nodeLabel', C], Line: ['.transition', S],
+      Arrow: ['marker path', FS, 'hidden'] } },
+    'mm-gantt': { type: 'gantt', name: 'Gantt', probes: {
+      Section: ['.section0', F], Today: ['.today', S], Grid: ['.grid line', S], Task: ['.task0, .task1', FS], TaskText: ['[class*="taskText"]:not([class*="taskTextOutside"])', F],
+      Done: ['.done0, .done1', FS], DoneText: ['[class*="doneText"]', F], Active: ['.active0, .active1', FS],
+      ActiveText: ['[class*="activeText"]', F], Crit: ['.crit0, .crit1', FS], CritText: ['[class*="critText"]', F] } },
+    'mm-er': { type: 'er', name: 'Er', probes: {
+      Row: [':is(.row-rect-odd, .row-rect-even) path', FS], Label: ['.nodeLabel', C], Line: ['.edgePaths path', S],
+      Circle: ['[id*="zeroOrMore"] circle', FS, 'hidden'] } },
+    'mm-git': { type: 'gitGraph', name: 'Git', probes: {
+      Commit: ['.commit0', FS], Arrow: ['.arrow', S], BranchBkg: ['.branchLabelBkg', F], BranchText: ['.branchLabel text', F],
+      CommitLabelBkg: ['.commit-label-bkg', F], CommitLabel: ['.commit-label', F], TagBkg: ['.tag-label-bkg', FS], TagText: ['.tag-label', F] } },
+    'mm-mindmap': { type: 'mindmap', name: 'Mind', probes: {
+      Root: ['.section-root .label-container', FS], Node: ['.section-0 .node-bkg', FS], Label: ['.mindmap-node .nodeLabel', C],
+      Edge: ['.section-edge-0', S] } },
+  };
+  // Every painted color in a diagram that is not one of the scheme's: what the probes above
+  // can't name. fill does nothing on a line or a foreignObject; symbols are unused definitions.
+  function mermaidStrays(svg) {
+    if (!svg) return null;
+    const dot = document.createElement('i'), cs = getComputedStyle(document.body), ok = new Set();
+    document.body.appendChild(dot);
+    for (const k of ['accent', 'bg', 'bg-dark', 'bg-hl', 'gutter', 'fg', 'fg-dim', 'comment', 'yellow', 'red', ...[1, 2, 3, 4, 5, 6, 7, 8].map(i => `folder-${i}`)]) {
+      dot.style.color = cs.getPropertyValue(`--${cfg.prefix}-${k}`).trim(); ok.add(getComputedStyle(dot).color);
+    }
+    dot.remove();
+    const found = new Set();
+    for (const e of svg.querySelectorAll('*')) {
+      if (['style', 'title', 'desc', 'defs', 'marker', 'g', 'symbol', 'foreignObject'].includes(e.localName) || e.closest('symbol')) continue;
+      const c = getComputedStyle(e), html = e.namespaceURI?.endsWith('xhtml'), text = ['text', 'tspan'].includes(e.localName);
+      const props = html ? ['color', 'backgroundColor'] : [...(e.localName === 'line' ? [] : ['fill']), ...(text || c.strokeWidth === '0px' ? [] : ['stroke'])];
+      for (const p of props) if (!/^none$|^url|rgba\(0, 0, 0, 0\)|^color\(srgb/.test(c[p]) && !ok.has(c[p])) {
+        const where = (e.getAttribute('class') || e.closest('marker')?.id.replace(/^m?[0-9a-f]+[-_]/, '') || '').trim().slice(0, 24);
+        found.add(`${e.localName}.${where} ${p} ${c[p]}`);
+      }
+    }
+    return { list: [...found].sort().join('; ') };
+  }
+  function measureMermaid({ type, name, probes }, q, root) {
+    const svg = `.mermaid > svg[aria-roledescription="${type}"]`;
+    const out = { [`mm${name}Svg`]: pick(q(svg), ['filter']), [`mm${name}Strays`]: mermaidStrays(root.querySelector(svg)) };
+    for (const [k, [sel, props, hidden]] of Object.entries(probes))
+      out[`mm${name}${k}`] = pick(hidden ? root.querySelector(`${svg} ${sel}`) : q(sel.split(', ').map(x => `${svg} ${x}`).join(', ')), props);
+    return out;
+  }
   function measure(section) {
     const root = leaf.view.containerEl, live = leaf.view.getMode() !== 'preview';
     const view = root.querySelector('.view-content').getBoundingClientRect();
     const visible = e => { const r = e.getBoundingClientRect(); return r.height > 0 && r.bottom > view.top && r.top < view.bottom; };
     // first visible match that is part of the note itself, not of an embedded note
     const q = s => [...root.querySelectorAll(s)].find(e => !e.closest('.markdown-embed, .internal-embed') && visible(e)) || null;
+    if (MERMAID[section]) return measureMermaid(MERMAID[section], q, root);
     const T = ['color', 'font-size', 'font-family', 'line-height', 'background-color'];
     const B = ['border-top-width', 'border-top-color', 'border-left-width', 'border-left-color', 'border-top-left-radius'];
     const P = ['padding-top', 'padding-left', 'padding-right'];

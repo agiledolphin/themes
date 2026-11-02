@@ -1123,6 +1123,9 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
         fill: var(--{{P}}-m-fill);
         stroke: {{c:accent}};
     }
+    /* Mermaid's fallback for lines without a class: before .actor-man, which must win */
+    & line:not([class]) { stroke: {{c:fg-dim}}; }
+    & .actor-man :is(line, circle) { fill: var(--{{P}}-m-fill); stroke: {{c:accent}}; }
     & .cluster rect { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
     & .labelBox { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
     & :is(rect.note, .note rect) {
@@ -1131,13 +1134,19 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
     }
 
     /* Lines and arrowheads */
-    & :is(.flowchart-link, .edgePath path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
+    & :is(.flowchart-link, .edgePath path, .edgePaths path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
         stroke: {{c:fg-dim}};
     }
     /* Only solid arrowheads get a fill: class and ER markers are hollow by meaning. The second
        :not() outranks the rules Mermaid scopes to the marker's own id as well. */
     &:not(#__) marker :is(path, circle) { stroke: {{c:fg-dim}}; }
-    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="crossEnd"], [id*="barbEnd"]) :is(path, circle) { fill: {{c:fg-dim}}; }
+    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="solidTopArrowHead"], [id*="solidBottomArrowHead"],
+        [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="circleStart"], [id*="crossEnd"], [id*="crossStart"], [id*="barbEnd"],
+        [id*="compositionStart"], [id*="compositionEnd"], [id*="dependencyStart"], [id*="dependencyEnd"]) :is(path, circle) { fill: {{c:fg-dim}}; }
+    /* Mermaid fills the ER "zero" circle white to read as hollow: on any scheme that is the page color */
+    &:not(#__) [id*="zeroOr"] circle { fill: {{c:bg}}; }
+    &:not(#__) [id$="-sequencenumber"] circle { fill: {{c:accent}}; stroke: {{c:accent}}; }
+    &:not(#__) .sequenceNumber { fill: {{c:bg}}; }
 
     /* Text */
     & :is(text, text.actor tspan, .noteText tspan, .loopText tspan, [class*="taskText"]) { fill: {{c:fg}}; }
@@ -1175,6 +1184,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
     & :is(.section0, .section2) { fill: {{c:bg-hl}}; }
     & :is(.section1, .section3) { fill: {{c:bg}}; }
     & :is(.grid line, .grid path) { stroke: {{c:gutter}}; }
+    & .today { stroke: {{c:red}}; }
     & :is(.task0, .task1, .task2, .task3) { fill: var(--{{P}}-m-fill); stroke: {{c:accent}}; }
     & :is(.done0, .done1, .done2, .done3) { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
     & :is(.active0, .active1, .active2, .active3) {
