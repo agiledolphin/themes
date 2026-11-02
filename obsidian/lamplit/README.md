@@ -32,12 +32,13 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 
 - **Same look in Reading view and Live Preview**: headings, code, tables, quotes, tags, highlights and links match
 - **File type icons** in the file explorer: notes, images, canvases, bases, PDFs, audio and video
+- **Mermaid diagrams in your scheme's colors**, in dark and light mode: flowcharts, sequence, pie, class, state, Gantt, ER, git and mindmap diagrams
 - **Callouts**: all 13 official types, each with its own color
 - **Task states**: `x`, `/`, `-`, `>`, `?`, `!`, drawn as round checkboxes
 - **Search highlights** in a color of their own, apart from highlighted text and the selection
 - **Chinese-first typography**: PingFang SC → Hiragino Sans GB → Noto Serif SC
 
-The Style Settings page also has three toggles: **Hide Folder Icons**, **Hide File Icons** and **Color Folders**.
+The Style Settings page also has four toggles: **Hide Folder Icons**, **Hide File Icons**, **Color Folders** and **Use Default Mermaid Colors**.
 
 ## Good to know
 
