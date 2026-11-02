@@ -32,12 +32,13 @@
 
 - **阅读视图和实时预览外观一致**：标题、代码、表格、引用、标签、高亮和链接都相同
 - **文件类型图标**：文件列表里的笔记、图片、白板、数据库、PDF、音频和视频各有图标
+- **Mermaid 图使用方案的配色**，深浅模式都适配：流程图、时序图、饼图、类图、状态图、甘特图、ER 图、Git 图和思维导图
 - **Callout**：全部 13 种官方类型，各有自己的颜色
 - **任务状态**：`x`、`/`、`-`、`>`、`?`、`!`，都是圆形复选框
 - **搜索高亮**有独立的颜色，和高亮文字、选区都不同
 - **中文优先的排版**：PingFang SC → Hiragino Sans GB → Noto Serif SC
 
-Style Settings 页面还有三个开关：**Hide Folder Icons**（隐藏文件夹图标）、**Hide File Icons**（隐藏文件图标）和 **Color Folders**（目录上色）。
+Style Settings 页面还有四个开关：**Hide Folder Icons**（隐藏文件夹图标）、**Hide File Icons**（隐藏文件图标）、**Color Folders**（目录上色）和 **Use Default Mermaid Colors**（使用 Obsidian 默认的 Mermaid 颜色）。
 
 ## 须知
 

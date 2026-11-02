@@ -92,6 +92,7 @@ window.__V = (() => {
     callouts: ['calloutNote', 'calloutNoteBg', 'calloutBody'],
     hr: ['hr'],
     tags: ['tag', 'tdCode'],
+    mermaid: ['mermaidSvg', 'mermaidNode', 'mermaidEdge', 'mermaidLabel', 'mermaidPie', 'mermaidPieText'],
   };
   function measure(section) {
     const root = leaf.view.containerEl, live = leaf.view.getMode() !== 'preview';
@@ -130,6 +131,12 @@ window.__V = (() => {
       calloutNote: pick(q('.callout[data-callout="note"] .callout-title'), ['color', ...P, 'display', 'align-items', 'column-gap']),
       calloutNoteBg: pick(q('.callout[data-callout="note"]'), ['background-color', 'mix-blend-mode', 'border-top-left-radius']),
       calloutBody: pick(q('.callout[data-callout="note"] .callout-content'), P),
+      mermaidSvg: pick(q('.mermaid > svg'), ['filter']),
+      mermaidNode: pick(q('.mermaid > svg .node rect'), ['fill', 'stroke']),
+      mermaidEdge: pick(q('.mermaid > svg .flowchart-link'), ['stroke']),
+      mermaidLabel: pick(q('.mermaid > svg .nodeLabel'), ['color']),
+      mermaidPie: pick(q('.mermaid > svg .pieCircle'), ['fill', 'stroke']),
+      mermaidPieText: pick(q('.mermaid > svg text.slice'), ['fill']),
       taskDone: taskBox('x'), taskDoing: taskBox('/'), taskImportant: taskBox('!'),
     };
     return Object.fromEntries((SECTION_KEYS[section] || []).map(k => [k, all[k]]));

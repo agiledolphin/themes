@@ -71,8 +71,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 
 - Style Settings: `ll-dark-scheme` (every dark variant of every palette) and `ll-light-scheme`
   (every light variant), class values `ll-<palette prefix>-<variant>` (e.g. `ll-cp-latte`),
-  plus `ll-hide-folder-icons`, `ll-hide-file-icons` and `ll-color-folders`. These ids are users'
-  saved choices — never rename them.
+  plus `ll-hide-folder-icons`, `ll-hide-file-icons`, `ll-color-folders` and `ll-default-mermaid`.
+  These ids are users' saved choices — never rename them.
 - One block per variant: `body.theme-dark.ll-wl-office { … }` (the default variant's block also
   matches plain `body.theme-dark`). Each block defines the semantic variables the rules use
   (`--ll-accent`, `--ll-h2`, `--ll-search-rgb`, …); the generator turns every template
@@ -91,6 +91,12 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   The 8 colors are `FOLDER_CYCLE` in `gen-themes.py`. Known limit, measured: the file explorer
   virtualizes, so scrolled-out top-level folders leave the DOM and the rest renumber (Blue Topaz's
   by-order mode does the same).
+- Mermaid: Obsidian renders every diagram in Mermaid's light theme and inverts it in dark mode. The
+  template drops that filter and recolors from the scheme, all nested under one `{{MM}}` block (an
+  app without CSS nesting ignores it and keeps its look). `{{MM}}` expands to a selector limited
+  to `MERMAID_TYPES` in `gen-themes.py`, so an unknown diagram type keeps Obsidian's look, and its
+  `:not(#_)` outranks Mermaid's id-scoped rules without `!important`. The rules depend on Mermaid's
+  class names: after an Obsidian update, check `--note` with every diagram type.
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different

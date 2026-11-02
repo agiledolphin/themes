@@ -41,6 +41,8 @@ CHECK = {
     "quoteRule": ["border-left-width", "border-left-color"], "quoteText": ["color"],
     "mark": ["color", "background-color"], "link": ["color"], "unresolved": ["color"],
     "calloutNote": ["color"], "calloutNoteBg": ["background-color"],
+    "mermaidSvg": ["filter"], "mermaidNode": ["fill", "stroke"], "mermaidEdge": ["stroke"], "mermaidLabel": ["color"],
+    "mermaidPie": ["fill", "stroke"], "mermaidPieText": ["fill"],
 }
 LABELS = {"body": "正文", **{f"h{i}": f"H{i}" for i in range(1, 7)}, "link": "链接", "unresolved": "失效链接",
           "quoteText": "引用", "inlineCode": "行内代码", "codeText": "代码块", "mark": "高亮", "tag": "标签",

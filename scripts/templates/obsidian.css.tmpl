@@ -1097,3 +1097,131 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .{{P}}-hide-file-icons .nav-file-title-content::before {
     display: none;
 }
+
+/* ============================================================
+ * Mermaid
+ * Obsidian draws every diagram in Mermaid's light theme and inverts it in dark mode, so its
+ * colors ignore the scheme. These rules drop the filter and recolor from the scheme. {{MM}}
+ * names the diagram types covered, so an unknown type keeps Obsidian's look, and its :not(#_)
+ * outranks the rules Mermaid scopes to each diagram's id. Style Settings: Use Default Mermaid Colors.
+ * Everything is nested under {{MM}} so its long selector is written once. Even filter: none is
+ * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
+ * ============================================================ */
+
+{{MM}} {
+    & {
+        filter: none;
+        --{{P}}-m-fill: color-mix(in srgb, {{c:accent}} 16%, {{c:bg}});
+        --{{P}}-m-c: {{c:accent}};
+    }
+
+    /* Nodes, actors, boxes */
+    & .node :is(rect, polygon, circle, ellipse, path:not(.divider)),
+    & .actor,
+    & :is(.row-rect-odd, .row-rect-even) path,
+    & .divider {
+        fill: var(--{{P}}-m-fill);
+        stroke: {{c:accent}};
+    }
+    & .cluster rect { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
+    & .labelBox { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
+    & :is(rect.note, .note rect) {
+        fill: color-mix(in srgb, {{c:yellow}} 18%, {{c:bg}});
+        stroke: {{c:yellow}};
+    }
+
+    /* Lines and arrowheads */
+    & :is(.flowchart-link, .edgePath path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
+        stroke: {{c:fg-dim}};
+    }
+    /* Only solid arrowheads get a fill: class and ER markers are hollow by meaning. The second
+       :not() outranks the rules Mermaid scopes to the marker's own id as well. */
+    &:not(#__) marker :is(path, circle) { stroke: {{c:fg-dim}}; }
+    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="crossEnd"], [id*="barbEnd"]) :is(path, circle) { fill: {{c:fg-dim}}; }
+
+    /* Text */
+    & :is(text, text.actor tspan, .noteText tspan, .loopText tspan, [class*="taskText"]) { fill: {{c:fg}}; }
+    /* Mermaid marks the Gantt status text !important */
+    & :is([class*="doneText"], [class*="activeText"], [class*="critText"], [class*="CritText"]) { fill: {{c:fg}} !important; }
+    & :is(.nodeLabel, .edgeLabel, .label, .cluster-label, .labelBkg, p, span) { color: {{c:fg}}; }
+    & :is(.edgeLabel, .labelBkg, .edgeLabel p, .edgeLabel rect) {
+        background-color: {{c:bg}};
+        fill: {{c:bg}};
+    }
+
+    /* Pie: the folder cycle; legend swatches carry inline styles, hence !important */
+    & .pieCircle { stroke: {{c:bg}}; stroke-width: 2px; opacity: 1; }
+    & .pieOuterCircle { stroke: {{c:gutter}}; }
+    &:not(#__) text.slice { fill: {{c:bg}}; }
+    & .pieCircle:nth-of-type(8n + 1) { fill: {{c:folder_1}}; }
+    & .legend:nth-of-type(8n + 1) { --{{P}}-m-c: {{c:folder_1}}; }
+    & .pieCircle:nth-of-type(8n + 2) { fill: {{c:folder_2}}; }
+    & .legend:nth-of-type(8n + 2) { --{{P}}-m-c: {{c:folder_2}}; }
+    & .pieCircle:nth-of-type(8n + 3) { fill: {{c:folder_3}}; }
+    & .legend:nth-of-type(8n + 3) { --{{P}}-m-c: {{c:folder_3}}; }
+    & .pieCircle:nth-of-type(8n + 4) { fill: {{c:folder_4}}; }
+    & .legend:nth-of-type(8n + 4) { --{{P}}-m-c: {{c:folder_4}}; }
+    & .pieCircle:nth-of-type(8n + 5) { fill: {{c:folder_5}}; }
+    & .legend:nth-of-type(8n + 5) { --{{P}}-m-c: {{c:folder_5}}; }
+    & .pieCircle:nth-of-type(8n + 6) { fill: {{c:folder_6}}; }
+    & .legend:nth-of-type(8n + 6) { --{{P}}-m-c: {{c:folder_6}}; }
+    & .pieCircle:nth-of-type(8n + 7) { fill: {{c:folder_7}}; }
+    & .legend:nth-of-type(8n + 7) { --{{P}}-m-c: {{c:folder_7}}; }
+    & .pieCircle:nth-of-type(8n + 0) { fill: {{c:folder_8}}; }
+    & .legend:nth-of-type(8n + 0) { --{{P}}-m-c: {{c:folder_8}}; }
+    & .legend rect { fill: var(--{{P}}-m-c) !important; stroke: var(--{{P}}-m-c) !important; }
+
+    /* Gantt */
+    & :is(.section0, .section2) { fill: {{c:bg-hl}}; }
+    & :is(.section1, .section3) { fill: {{c:bg}}; }
+    & :is(.grid line, .grid path) { stroke: {{c:gutter}}; }
+    & :is(.task0, .task1, .task2, .task3) { fill: var(--{{P}}-m-fill); stroke: {{c:accent}}; }
+    & :is(.done0, .done1, .done2, .done3) { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
+    & :is(.active0, .active1, .active2, .active3) {
+        fill: color-mix(in srgb, {{c:accent}} 35%, {{c:bg}});
+        stroke: {{c:accent}};
+    }
+    & :is(.crit0, .crit1, .crit2, .crit3, .activeCrit0, .activeCrit1, .activeCrit2, .activeCrit3, .doneCrit0, .doneCrit1, .doneCrit2, .doneCrit3) {
+        fill: color-mix(in srgb, {{c:red}} 25%, {{c:bg}});
+        stroke: {{c:red}};
+    }
+
+    /* Git graph: one color per branch */
+    & :is(.commit0, .arrow0, .label0) { --{{P}}-m-c: {{c:folder_1}}; }
+    & :is(.commit1, .arrow1, .label1) { --{{P}}-m-c: {{c:folder_2}}; }
+    & :is(.commit2, .arrow2, .label2) { --{{P}}-m-c: {{c:folder_3}}; }
+    & :is(.commit3, .arrow3, .label3) { --{{P}}-m-c: {{c:folder_4}}; }
+    & :is(.commit4, .arrow4, .label4) { --{{P}}-m-c: {{c:folder_5}}; }
+    & :is(.commit5, .arrow5, .label5) { --{{P}}-m-c: {{c:folder_6}}; }
+    & :is(.commit6, .arrow6, .label6) { --{{P}}-m-c: {{c:folder_7}}; }
+    & :is(.commit7, .arrow7, .label7) { --{{P}}-m-c: {{c:folder_8}}; }
+    & .commit { fill: var(--{{P}}-m-c); stroke: var(--{{P}}-m-c); }
+    & .commit-merge { fill: {{c:bg}}; stroke: var(--{{P}}-m-c); }
+    & .arrow { stroke: var(--{{P}}-m-c); }
+    & .branch { stroke: {{c:gutter}}; }
+    & .branchLabelBkg { fill: var(--{{P}}-m-c); }
+    &:not(#__) .branchLabel text { fill: {{c:bg}}; }
+    & .commit-label-bkg { fill: {{c:bg-hl}}; opacity: 1; }
+    & .tag-label-bkg { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
+    & .tag-hole { fill: {{c:bg}}; }
+
+    /* Mindmap: one color per branch */
+    & :is(.section-0, .section-edge-0) { --{{P}}-m-c: {{c:folder_1}}; }
+    & :is(.section-1, .section-edge-1) { --{{P}}-m-c: {{c:folder_2}}; }
+    & :is(.section-2, .section-edge-2) { --{{P}}-m-c: {{c:folder_3}}; }
+    & :is(.section-3, .section-edge-3) { --{{P}}-m-c: {{c:folder_4}}; }
+    & :is(.section-4, .section-edge-4) { --{{P}}-m-c: {{c:folder_5}}; }
+    & :is(.section-5, .section-edge-5) { --{{P}}-m-c: {{c:folder_6}}; }
+    & :is(.section-6, .section-edge-6) { --{{P}}-m-c: {{c:folder_7}}; }
+    & :is(.section-7, .section-edge-7) { --{{P}}-m-c: {{c:folder_8}}; }
+    & :is(.section-8, .section-edge-8) { --{{P}}-m-c: {{c:folder_1}}; }
+    & :is(.section-9, .section-edge-9) { --{{P}}-m-c: {{c:folder_2}}; }
+    & :is(.section-10, .section-edge-10) { --{{P}}-m-c: {{c:folder_3}}; }
+    & :is(.section-11, .section-edge-11) { --{{P}}-m-c: {{c:folder_4}}; }
+    & .mindmap-node :is(.node-bkg, .label-container) {
+        fill: color-mix(in srgb, var(--{{P}}-m-c) 22%, {{c:bg}});
+        stroke: var(--{{P}}-m-c);
+    }
+    & .mindmap-node line { stroke: var(--{{P}}-m-c); }
+    & .edge[class*="section-edge-"] { stroke: var(--{{P}}-m-c); }
+}
