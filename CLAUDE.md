@@ -96,7 +96,9 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   for `rgba()`. Wherever app.css uses such a var as a plain color, wrap it: `rgb(var(...))`.
 - When a color doesn't apply, check what app.css actually does: extract it with
   `npx asar extract /Applications/Obsidian.app/Contents/Resources/obsidian.asar <dir>` and grep.
-- Sync to the user's vault for testing: `./scripts/sync-obsidian.sh ~/notebook`.
+- Sync to the user's vault for testing: `./scripts/sync-obsidian.sh ~/notebook`. Obsidian silently
+  skips a theme unless its folder name equals the manifest's `name` exactly (case-sensitive), so
+  the script names the folder `Lamplit` from the manifest, and renames a lowercase `lamplit`.
 - Automated check of the real rendering (after any Obsidian-side change):
   1. Obsidian running on a debug port (quit it, then
      `open -a Obsidian --args --remote-debugging-port=9333`), Lamplit synced to the vault.

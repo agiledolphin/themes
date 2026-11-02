@@ -28,7 +28,7 @@ git clone https://github.com/agiledolphin/themes.git
 cd themes
 ```
 
-`sync-obsidian.sh` needs [uv](https://docs.astral.sh/uv/) to read the theme name, and `sync-typora.sh` only knows Typora's macOS folder. Otherwise, use the manual steps.
+`sync-typora.sh` only knows Typora's macOS folder; on other systems, use the manual steps.
 
 ### Obsidian
 
@@ -36,7 +36,7 @@ cd themes
 ./scripts/sync-obsidian.sh /path/to/your/vault
 ```
 
-Or copy `theme.css` and `manifest.json` from `obsidian/lamplit/` to `<your-vault>/.obsidian/themes/Lamplit/`.
+Or copy `theme.css` and `manifest.json` from `obsidian/lamplit/` to `<your-vault>/.obsidian/themes/Lamplit/`. The folder must be named exactly `Lamplit`, capital L included: copying the repository's lowercase `lamplit` folder as it is will not work.
 
 Then:
 
@@ -45,6 +45,8 @@ Then:
 3. Open **Settings → Style Settings → Lamplit** and pick a **Dark Mode Scheme** and a **Light Mode Scheme**.
 
 Without Style Settings, Lamplit uses Wonderland · Underground in dark mode and Wonderland · Lab in light mode.
+
+**Lamplit does not show up?** It is listed in the theme dropdown under **Settings → Appearance → Themes**, not under **Manage**, which only searches the community gallery. Obsidian silently skips a theme whose folder name differs from the `name` in its `manifest.json`, even by case, so check that the folder is `Lamplit`, and that it holds `theme.css` and `manifest.json` directly. If Obsidian was open during the install, restart it.
 
 ### Typora
 

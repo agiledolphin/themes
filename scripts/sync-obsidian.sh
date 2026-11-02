@@ -36,9 +36,31 @@ sync_theme() {
         exit 1
     fi
 
-    # Read theme display name from manifest
+    # Obsidian skips a theme unless its folder name equals the manifest's "name" exactly
+    # (case-sensitive), so the folder is named from the manifest, never from the repo folder.
     local display_name
-    display_name=$(uv run --no-project python -c "import json,sys; print(json.load(open('$src_dir/manifest.json'))['name'])" 2>/dev/null || echo "$name")
+    display_name=$(sed -n 's/^[[:space:]]*"name":[[:space:]]*"\([^"]*\)".*/\1/p' "$src_dir/manifest.json" | head -n 1)
+    if [[ -z "$display_name" ]]; then
+        echo "No \"name\" found in $src_dir/manifest.json"
+        exit 1
+    fi
+
+    # A folder differing only by case stays as it is on a case-insensitive disk: rename it.
+    local wanted existing
+    wanted=$(echo "$display_name" | tr '[:upper:]' '[:lower:]')
+    for existing in "$DEST"/*/; do
+        existing=$(basename "$existing")
+        if [[ "$existing" != "$display_name" && "$(echo "$existing" | tr '[:upper:]' '[:lower:]')" == "$wanted" ]]; then
+            mv "$DEST/$existing" "$DEST/$existing.renaming"
+            if [[ -e "$DEST/$display_name" ]]; then
+                mv "$DEST/$existing.renaming" "$DEST/$existing"
+                echo "  note: $existing/ is ignored by Obsidian; delete it, $display_name/ is the real one"
+            else
+                mv "$DEST/$existing.renaming" "$DEST/$display_name"
+                echo "  renamed: $existing/ → $display_name/"
+            fi
+        fi
+    done
 
     local dest_dir="$DEST/$display_name"
     mkdir -p "$dest_dir"
