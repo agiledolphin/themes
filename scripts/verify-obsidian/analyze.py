@@ -26,6 +26,7 @@ if BASELINE:
 OUT = Path(args[0] if args else ".verify")
 RUN = json.loads((OUT / "measure.json").read_text())
 DATA = RUN["data"]
+SCOPE = RUN.get("sections")           # the sections of a narrowed run; None = all of them
 
 # element -> properties that must match between Reading view and Live Preview
 CHECK = {
@@ -49,9 +50,28 @@ LABELS = {"body": "正文", **{f"h{i}": f"H{i}" for i in range(1, 7)}, "link": "
           "th": "表头", "td": "表格", "calloutNote": "Note 标题"}
 FAINT = {"unresolved", "h6"}          # de-emphasized text: flag below 3.0 instead of 4.3
 
+# Mermaid: diagram types that must render without Obsidian's inversion filter, and
+# text -> what it sits on (None = the page). Below 3:1 is reported, like text contrast.
+MM_SECTIONS = {"Flow": "mm-flow", "Seq": "mm-sequence", "Class": "mm-class", "State": "mm-state", "Gantt": "mm-gantt",
+               "Er": "mm-er", "Git": "mm-git", "Mind": "mm-mindmap"}
+MM_TYPES = [t for t, s in MM_SECTIONS.items() if SCOPE is None or s in SCOPE]
+MM_TEXT = {
+    "mermaidLabel": "mermaidNode", "mermaidPieText": "mermaidPie",
+    "mmFlowNodeLabel": "mmFlowNode", "mmFlowClusterLabel": "mmFlowCluster", "mmFlowEdgeLabel": None,
+    "mmSeqActorText": "mmSeqActor", "mmSeqNumber": "mmSeqNumberDot", "mmSeqMessageText": None, "mmSeqNoteText": "mmSeqNote", "mmSeqLoopText": "mmSeqLoop",
+    "mmClassLabel": "mmClassBox", "mmStateLabel": "mmStateNode", "mmErLabel": "mmErRow",
+    "mmGanttTaskText": "mmGanttTask", "mmGanttDoneText": "mmGanttDone", "mmGanttActiveText": "mmGanttActive",
+    "mmGanttCritText": "mmGanttCrit", "mmGitBranchText": "mmGitBranchBkg", "mmGitCommitLabel": "mmGitCommitLabelBkg",
+    "mmGitTagText": "mmGitTagBkg", "mmMindLabel": "mmMindNode",
+}
+MM_TEXT = {k: v for k, v in MM_TEXT.items()
+           if any(k.startswith(f"mm{t}") for t in MM_TYPES) or (k.startswith("mermaid") and (SCOPE is None or "mermaid" in SCOPE))}
+
 
 def rgba(s):
     n = [float(x) for x in re.findall(r"[\d.]+", s or "")]
+    if (s or "").startswith("color(srgb"):       # what the browser reports for color-mix()
+        n[:3] = [x * 255 for x in n[:3]]
     return (n + [1.0])[:4] if len(n) >= 3 else None
 
 
@@ -83,7 +103,8 @@ def variant_info(cls):
 mismatches = []
 for v in [x["id"] for x in RUN["variants"]]:
     r, l = DATA[f"{v}/reading"], DATA[f"{v}/live"]
-    for el, props in CHECK.items():
+    mm = {k: list((r.get(k) or l.get(k) or {})) for k in {*r, *l} if k.startswith("mm")}
+    for el, props in {**CHECK, **mm}.items():
         for p in props:
             a, b = (r.get(el) or {}).get(p), (l.get(el) or {}).get(p)
             if a is None and b is None:
@@ -118,20 +139,62 @@ for v in [x["id"] for x in RUN["variants"]]:
             "mark": c("mark", ("mark", "background-color")), "tag": c("tag", ("tag", "background-color")),
             "th": c("th"), "td": c("td"), "calloutNote": c("calloutNote", ("calloutNoteBg", "background-color"))}
     vals = {k: x for k, x in vals.items() if x}
+    if not vals:                      # a narrowed run may measure no text at all
+        continue
     low = sorted([(k, x) for k, x in vals.items() if x < (3.0 if k in FAINT else 4.3)], key=lambda kv: kv[1])
     contrast_rows.append((v, theme, label, vals.get("body"), min(vals.items(), key=lambda kv: kv[1]), low))
+
+# --- 3. Mermaid: every type themed, hollow markers hollow, text readable on what it sits on
+mermaid_errors, mermaid_low = [], []
+for v in [x["id"] for x in RUN["variants"]]:
+    page = [int(variant_info(v)[2][i:i + 2], 16) for i in (1, 3, 5)] + [1.0]
+    for view in ("reading", "live"):
+        d = DATA[f"{v}/{view}"]
+        for t in MM_TYPES:
+            f = (d.get(f"mm{t}Svg") or {}).get("filter")
+            if f != "none":
+                mermaid_errors.append((v, view, f"{t} diagram", "not rendered" if f is None else f"filter {f}"))
+            if stray := (d.get(f"mm{t}Strays") or {}).get("list"):
+                mermaid_errors.append((v, view, f"{t} colors not from the scheme", stray))
+        solid = rgba((d.get("mmClassSolid") or {}).get("fill"))
+        if solid and solid[3] == 0:
+            mermaid_errors.append((v, view, "class composition marker", "hollow, should be solid"))
+        fill = rgba((d.get("mmClassHollow") or {}).get("fill"))
+        if fill and fill[3] > 0:
+            mermaid_errors.append((v, view, "class arrowhead", "filled, should be hollow"))
+        for fg, on in MM_TEXT.items():
+            text = d.get(fg) or {}
+            col = rgba(text.get("fill") or text.get("color"))
+            if not col:
+                mermaid_errors.append((v, view, fg, "not measured"))
+                continue
+            below = page if on is None else rgba((d.get(on) or {}).get("fill"))
+            if below is None:
+                mermaid_errors.append((v, view, on, "not measured"))
+                continue
+            below = over(below, page)
+            ratio = round(contrast(over(col, below), below), 2)
+            if ratio < 3 and view == "reading":
+                mermaid_low.append((v, fg, ratio))
 
 # --- text report
 print(f"Reading vs Live Preview: {len(mismatches)} mismatch(es) across {len(RUN['variants'])} variant(s)")
 for v, el, p, a, b in mismatches:
     print(f"  {v:16} {el:12} {p:22} reading={a}  live={b}")
+print(f"Mermaid: {len(mermaid_errors)} problem(s), {len(mermaid_low)} text color(s) below 3:1")
+for v, view, what, why in mermaid_errors:
+    print(f"  {v:16} {view:8} {what}: {why}")
+for v, what, ratio in mermaid_low:
+    print(f"  {v:16} {what} {ratio}")
 print("\nContrast (Reading view):")
 for v, theme, label, body, (mk, mv), low in contrast_rows:
     print(f"  {v:16} body {body}  min {LABELS[mk]} {mv}  " + (", ".join(f"{LABELS[k]} {x}" for k, x in low) or "ok"))
 
 # --- HTML report
 SECTIONS = [("top", "标题"), ("text", "文字样式与链接"), ("quote-code", "引用与代码"), ("tables", "表格"),
-            ("callouts", "Callout"), ("tags", "标签与表格内格式"), ("mermaid", "Mermaid 图")]
+            ("callouts", "Callout"), ("tags", "标签与表格内格式"), ("mermaid", "Mermaid 图"),
+            ("mm-flow", "Mermaid 子图"), ("mm-sequence", "时序图"), ("mm-class", "类图"), ("mm-state", "状态图"),
+            ("mm-gantt", "甘特图"), ("mm-er", "ER 图"), ("mm-git", "Git 图"), ("mm-mindmap", "思维导图")]
 esc = html.escape
 mm_html = ("".join(f"<tr><td>{esc(v)}</td><td>{esc(el)}</td><td><code>{esc(p)}</code></td><td>{esc(str(a))}</td><td>{esc(str(b))}</td></tr>"
                    for v, el, p, a, b in mismatches)
@@ -221,7 +284,8 @@ if BASELINE:
         print(f"\n(not in the baseline, so not compared: {', '.join(new_ids)})")
     for v in ids:
         for view in ("reading", "live"):
-            walk(f"{v}/{view}", BASE["data"].get(f"{v}/{view}"), DATA.get(f"{v}/{view}"))
+            base, now = BASE["data"].get(f"{v}/{view}") or {}, DATA.get(f"{v}/{view}") or {}
+            walk(f"{v}/{view}", {k: base.get(k) for k in now} if SCOPE else base, now)
         walk(f"{v}/ui", BASE.get("ui", {}).get(v), RUN.get("ui", {}).get(v))
     print(f"\nBaseline {BASELINE} vs this run: "
           f"{len(baseline_diffs)} difference(s) across {len(ids)} variant(s)")
@@ -230,4 +294,4 @@ if BASELINE:
     if len(baseline_diffs) > 200:
         print(f"  … {len(baseline_diffs) - 200} more")
 
-sys.exit(1 if mismatches or baseline_diffs else 0)
+sys.exit(1 if mismatches or baseline_diffs or mermaid_errors else 0)

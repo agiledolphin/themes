@@ -10,14 +10,17 @@
 //   - A test note in the vault that has the section headings listed in SECTIONS below.
 //
 // Usage
-//   node scripts/verify-obsidian/run.mjs [--port 9333] [--note <vault path>] [--out .verify] [--only cp-latte,wl]
+//   node scripts/verify-obsidian/run.mjs [--port 9333] [--note <vault path>] [--out <dir>]
+//        [--only cp-latte,wl] [--sections mermaid,tables]
+//   --only / --sections narrow a run (`mermaid` means every Mermaid section). A narrowed run
+//   writes to .verify-scoped by default, so the full run in .verify stays usable as a baseline.
 //   uv run scripts/verify-obsidian/analyze.py .verify [--baseline <other run dir>]
 //
 // Results are keyed by <palette prefix>-<variant slug> (e.g. cp-latte), so an earlier run can
 // serve as --baseline: keep a copy of .verify before a refactor, then compare.
 //
 // Each run first clears its previous results in --out (screenshots, measure.json, index.html).
-// While it runs (~5 min for all variants) Obsidian switches themes on screen — don't use it.
+// While it runs (~10 min for all variants) Obsidian switches themes on screen — don't use it.
 // It works in a new tab, never edits the note, and restores the theme, light/dark mode,
 // Style Settings classes and active tab afterwards.
 import fs from 'node:fs';
@@ -30,15 +33,23 @@ const ROOT = path.resolve(HERE, '../..');
 const arg = (name, dflt) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : dflt; };
 const PORT = arg('port', '9333');
 const NOTE = arg('note', 'tech/lab/obsidian/obsidian-theme-sample.md');
-const OUT = path.resolve(arg('out', '.verify'));
 const ONLY = arg('only', '')?.split(',').filter(Boolean) ?? [];
+const PICK = arg('sections', '')?.split(',').filter(Boolean) ?? [];
+const OUT = path.resolve(arg('out', ONLY.length || PICK.length ? '.verify-scoped' : '.verify'));
 
 // [section id, heading text in the test note, screenshot?]
 const SECTIONS = [
   ['top', null, true], ['text', 'Text Styles', true], ['tasks', 'Task List', false],
   ['quote-code', 'Blockquotes', true], ['tables', 'Tables', true], ['callouts', 'Callouts', true],
   ['hr', 'Horizontal Rules', false], ['tags', 'Inline Tags', true], ['mermaid', 'Mermaid Diagrams', true],
+  ['mm-flow', 'Flowchart with Subgraph', true], ['mm-sequence', 'Sequence Diagram', true],
+  ['mm-class', 'Class Diagram', true], ['mm-state', 'State Diagram', true], ['mm-gantt', 'Gantt Chart', true],
+  ['mm-er', 'ER Diagram', true], ['mm-git', 'Git Graph', true], ['mm-mindmap', 'Mindmap', true],
 ];
+
+const picked = id => !PICK.length || PICK.includes(id) || (PICK.includes('mermaid') && id.startsWith('mm-'));
+const unknownPick = PICK.filter(p => !SECTIONS.some(([id]) => id === p));
+if (unknownPick.length) { console.error(`Unknown --sections: ${unknownPick.join(', ')}. Valid: ${SECTIONS.map(s => s[0]).join(', ')}`); process.exit(2); }
 
 const LAMPLIT_TOML = fs.readFileSync(path.join(ROOT, 'shared/lamplit.toml'), 'utf8');
 const LAMPLIT = { name: LAMPLIT_TOML.match(/^name = "(.+)"/m)[1], prefix: LAMPLIT_TOML.match(/^prefix = "(.+?)"/m)[1] };
@@ -108,10 +119,11 @@ for (const f of fs.readdirSync(path.join(OUT, 'shots'))) if (f.endsWith('.png'))
 for (const f of ['measure.json', 'index.html']) fs.rmSync(path.join(OUT, f), { force: true });
 const varNames = mappedVarNames();
 let completed = false, failure = null;
-const results = { note: NOTE, mode: MODE, variants: variants.map(v => ({ ...v })), data: {}, ui: {} };
+const results = { note: NOTE, mode: MODE, variants: variants.map(v => ({ ...v })), data: {}, ui: {},
+  sections: PICK.length ? SECTIONS.map(s => s[0]).filter(picked) : null };
 try {
-  const lines = await ev(`return await __V.init(${JSON.stringify({ note: NOTE, variantClasses })});`);
-  const sections = SECTIONS.filter(([id, h]) => {
+  const lines = await ev(`return await __V.init(${JSON.stringify({ note: NOTE, variantClasses, prefix: LAMPLIT.prefix })});`);
+  const sections = SECTIONS.filter(([id]) => picked(id)).filter(([id, h]) => {
     if (h && lines[h] === undefined) { console.warn(`  (skipping section "${id}": heading "${h}" not in note)`); return false; }
     return true;
   }).map(([id, h, s]) => [id, h, h ? lines[h] : 0, s]);
