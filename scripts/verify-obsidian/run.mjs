@@ -69,7 +69,9 @@ function mappedVarNames() {
   return [...names].sort();
 }
 // [probe id, pseudo-class forced through CDP]
-const FORCED = [['file', 'hover'], ['folder', 'hover'], ['active', 'hover'], ['root', 'hover'], ['rename', 'focus-within']];
+const FORCED = [['file', 'hover'], ['folder', 'hover'], ['active', 'hover'], ['root', 'hover'], ['rename', 'focus-within'],
+  ['link', 'hover'], ['link-unres', 'hover'], ['cm-link', 'hover'], ['cm-unres', 'hover'], ['cm-url', 'hover'], ['cm-ext', 'hover'],
+  ['task-0-box', 'hover'], ['task-1-box', 'hover'], ['live-task-0', 'hover'], ['live-task-1', 'hover'], ['tab-idle', 'hover'], ['tab-active', 'hover']];
 
 const all = loadVariants();
 const variants = all.filter(v => !ONLY.length || ONLY.some(o => v.id === o || v.id.startsWith(o + '-') || v.themeSlug === o));

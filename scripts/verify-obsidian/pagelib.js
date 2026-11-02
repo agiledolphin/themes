@@ -88,7 +88,8 @@ window.__V = (() => {
     text: ['body', 'mark', 'link', 'unresolved'],
     'quote-code': ['quoteRule', 'quoteText', 'inlineCode', 'codeFrame', 'codeText'],
     tables: ['table', 'th', 'td', 'cellPad'],
-    callouts: ['calloutNote', 'calloutNoteBg'],
+    tasks: ['taskDone', 'taskDoing', 'taskImportant'],
+    callouts: ['calloutNote', 'calloutNoteBg', 'calloutBody'],
     hr: ['hr'],
     tags: ['tag', 'tdCode'],
   };
@@ -104,6 +105,8 @@ window.__V = (() => {
     const table = q(live ? '.cm-table-widget table' : '.markdown-preview-view table');
     const quoteLine = live ? q('.HyperMD-quote') : null;
     const heading = n => pick(q(live ? `.cm-header-${n}` : `.markdown-preview-view h${n}`), T);
+    const taskBox = t => pick(q(`${live ? '.HyperMD-task-line' : '.task-list-item'}[data-task="${t}"] input.task-list-item-checkbox`),
+      ['background-color', 'background-image', 'border-top-color', 'border-top-left-radius', 'box-shadow', 'width']);
     const all = {
       body: pick(q(live ? '.cm-line:not(.HyperMD-header):not(.HyperMD-codeblock)' : '.markdown-preview-view p'), T),
       h1: heading(1), h2: heading(2), h3: heading(3), h4: heading(4), h5: heading(5), h6: heading(6),
@@ -124,8 +127,10 @@ window.__V = (() => {
       cellPad: pick(live ? table?.querySelector('td .table-cell-wrapper') : table?.querySelector('td'), P),
       tdCode: pick(q(live ? '.cm-table-widget td .cm-inline-code, .cm-table-widget td code' : '.markdown-preview-view td code'), ['font-size']),
       tag: pick(q(live ? '.cm-hashtag.cm-hashtag-end' : 'a.tag'), T),
-      calloutNote: pick(q('.callout[data-callout="note"] .callout-title'), ['color']),
-      calloutNoteBg: pick(q('.callout[data-callout="note"]'), ['background-color']),
+      calloutNote: pick(q('.callout[data-callout="note"] .callout-title'), ['color', ...P, 'display', 'align-items', 'column-gap']),
+      calloutNoteBg: pick(q('.callout[data-callout="note"]'), ['background-color', 'mix-blend-mode', 'border-top-left-radius']),
+      calloutBody: pick(q('.callout[data-callout="note"] .callout-content'), P),
+      taskDone: taskBox('x'), taskDoing: taskBox('/'), taskImportant: taskBox('!'),
     };
     return Object.fromEntries((SECTION_KEYS[section] || []).map(k => [k, all[k]]));
   }
@@ -170,20 +175,39 @@ window.__V = (() => {
         <span class="cm-hashtag cm-hashtag-end" data-vprobe="hashtag">tag</span></div>
       <div class="markdown-rendered">
         <div class="search-highlight"><div data-vprobe="search-read"></div><div class="is-active" data-vprobe="search-read-active"></div></div>
-        ${CALLOUTS.map(c => `<div class="callout" data-callout="${c}" data-vprobe="callout-${c}"><div class="callout-title" data-vprobe="callout-${c}-title">${c}</div></div>`).join('')}
+        ${CALLOUTS.map(c => `<div class="callout" data-callout="${c}" data-vprobe="callout-${c}"><div class="callout-title" data-vprobe="callout-${c}-title">${c}</div><div class="callout-content" data-vprobe="callout-${c}-content">c</div></div>`).join('')}
         <ul class="contains-task-list">${TASKS.map((t, i) => `<li class="task-list-item" data-task="${t}" data-vprobe="task-${i}">
           <input type="checkbox" class="task-list-item-checkbox" data-task="${t}" data-vprobe="task-${i}-box">t</li>`).join('')}</ul>
         <p><a class="tag" href="#t" data-vprobe="tag">#t</a> <a class="internal-link" data-vprobe="link">l</a> <mark data-vprobe="mark">m</mark></p>
+        <h1 data-vprobe="h1">h</h1><pre data-vprobe="pre"><code>c</code></pre>
+        <p><a class="internal-link is-unresolved" href="#u" data-vprobe="link-unres">u</a> <a class="external-link" href="#e" data-vprobe="link-ext">e</a></p>
       </div>
       <div class="prompt" data-vprobe="prompt"><input class="prompt-input" data-vprobe="prompt-input"></div>
       <div class="notice" data-vprobe="notice">n</div>
       <div class="status-bar" data-vprobe="status-bar">s</div>
-      <div class="workspace-tab-header is-active" data-vprobe="tab-active">t</div>`;
+      <div class="workspace-tab-header is-active" data-vprobe="tab-active">t</div>
+      <div class="workspace-tab-header-container" data-vprobe="tab-container"><div class="workspace-tab-header-container-inner" data-vprobe="tab-inner">
+        <div class="workspace-tab-header" data-vprobe="tab-idle">t</div></div></div>
+      <div class="workspace-ribbon side-dock-ribbon mod-left" data-vprobe="ribbon">r</div>
+      <div class="app-container" data-vprobe="app-container">a</div>
+      <div class="markdown-source-view mod-cm6 is-live-preview"><div class="cm-editor cm-focused cm-s-obsidian"><div class="cm-content">
+        ${TASKS.map((t, i) => `<div class="cm-line HyperMD-task-line" data-task="${t}" data-vprobe="live-line-${i}">
+          <input type="checkbox" class="task-list-item-checkbox" data-task="${t}" data-vprobe="live-task-${i}">t</div>`).join('')}
+        <div class="cm-line"><span class="cm-hmd-internal-link" data-vprobe="cm-link"><span class="cm-underline" data-vprobe="cm-link-u">l</span></span>
+          <span class="is-unresolved" data-vprobe="cm-unres"><span class="cm-underline" data-vprobe="cm-unres-u">u</span></span>
+          <span class="cm-url" data-vprobe="cm-url"><span class="cm-underline" data-vprobe="cm-url-u">w</span></span>
+          <span class="cm-link" data-vprobe="cm-ext"><span class="cm-underline" data-vprobe="cm-ext-u">e</span></span>
+          <span class="cm-highlight" data-vprobe="cm-mark">m</span></div>
+        <div class="cm-selectionBackground" data-vprobe="cm-selection">s</div>
+        <pre data-vprobe="live-pre"><code>c</code></pre>
+      </div></div></div>`;
     document.body.appendChild(box);
     return box;
   }
   const PROBE_PROPS = ['color', 'background-color', 'background-image', 'box-shadow', 'font-weight',
-    'border-top-color', 'border-top-width', 'border-left-color', 'border-bottom-color', 'opacity', 'z-index'];
+    'border-top-color', 'border-top-width', 'border-left-color', 'border-bottom-color', 'opacity', 'z-index',
+    'padding-top', 'padding-left', 'margin-bottom', 'display', 'align-items', 'column-gap', 'mix-blend-mode',
+    'border-top-left-radius', 'text-decoration-line', 'text-decoration-color'];
   const FILE_ICON_PROPS = ['display', 'width', 'opacity', 'background-color', '-webkit-mask-image'];
   function probe(id, pseudo) {
     const el = ensureProbes().querySelector(`[data-vprobe="${id}"]`);
@@ -197,7 +221,8 @@ window.__V = (() => {
     for (const el of box.querySelectorAll('[data-vprobe]')) {
       const id = el.dataset.vprobe;
       out.probes[id] = probe(id);
-      if (/^(folder|root|children)$|^task-\d-box$/.test(id)) out.probes[`${id}::before`] = probe(id, '::before');
+      if (/^(folder|root|children)$|^task-\d-box$|^live-task-\d$/.test(id)) out.probes[`${id}::before`] = probe(id, '::before');
+      if (/^task-\d-box$|^live-task-\d$/.test(id)) out.probes[`${id}::after`] = probe(id, '::after');
     }
     out.probes['folder-icon::before'] = pick(box.querySelector('[data-vprobe="folder"] .nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before');
     for (const id of ['file', 'active'])
@@ -207,7 +232,9 @@ window.__V = (() => {
   // used by run.mjs after it forces :hover / :focus-within on a probe through CDP
   function probeState(id) {
     const box = ensureProbes(), el = box.querySelector(`[data-vprobe="${id}"]`);
-    return { self: probe(id), icon: pick(el?.querySelector('.nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before'),
+    const inner = el?.querySelector('[data-vprobe]');
+    return { self: probe(id), inner: inner ? probe(inner.dataset.vprobe) : null,
+             icon: pick(el?.querySelector('.nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before'),
              fileIcon: pick(el?.querySelector('.nav-file-title-content'), FILE_ICON_PROPS, '::before') };
   }
   function removeProbes() { document.getElementById('__vprobe')?.remove(); }
