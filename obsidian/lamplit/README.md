@@ -1,5 +1,7 @@
 # Lamplit for Obsidian
 
+![Lamplit: Wonderland Underground and Lab](screenshot.png)
+
 Reading by lamplight (青灯夜读). Lamplit is one Obsidian theme that carries seven palettes as schemes — **Wonderland**, **Merino**, **Big Wave**, **Impression**, **Bauhaus**, **TokyoNight** and **Catppuccin** — so you switch palettes in [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) instead of switching themes. Dark and light mode each get their own scheme, and they can come from different palettes.
 
 ---
@@ -69,6 +71,8 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 
 ## Installation
 
+Once Lamplit is listed in the Obsidian community directory, install it from **Settings → Appearance → Themes → Manage**. To install it by hand:
+
 1. Copy `theme.css` and `manifest.json` to `<your-vault>/.obsidian/themes/Lamplit/`. The folder must be named exactly `Lamplit`: Obsidian silently skips a theme whose folder name differs from the manifest's `name`, even by case
 2. Open **Settings → Appearance → Themes** and select **Lamplit**
 
@@ -79,6 +83,12 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 - Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Wonderland is original
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
 - Icons: [Lucide](https://lucide.dev), the set Obsidian itself uses
+
+---
+
+## Source
+
+The theme files in `agiledolphin/lamplit` are generated. Their sources, and the same palettes for Typora, are in [agiledolphin/themes](https://github.com/agiledolphin/themes).
 
 ---
 

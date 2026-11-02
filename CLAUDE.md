@@ -41,7 +41,7 @@ app.css (e.g. a link rule that silently recolored `a.tag`).
 
 ```
 themes/
-├── obsidian/lamplit/        # theme.css + manifest.json (generated) + README.md
+├── obsidian/lamplit/        # theme.css + manifest.json (generated) + README.md, screenshot.png
 ├── typora/<palette>/        # lamplit-<palette>-<variant>.css (one file per variant) + README.md
 ├── shared/
 │   ├── lamplit.toml            # Lamplit settings — see above (its name is also the Typora prefix)
@@ -53,7 +53,8 @@ themes/
 │   ├── verify-obsidian/     # automated Reading/Live Preview rendering check (see Obsidian)
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
 │   ├── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
-│   └── package-release.sh   # builds the release archives into dist/ (git-ignored)
+│   ├── package-release.sh   # builds the release archives into dist/ (git-ignored)
+│   └── publish-lamplit.sh   # publishes the theme to agiledolphin/lamplit
 ├── .verify/                 # verify-obsidian output (git-ignored)
 ├── install.sh               # installs from the latest GitHub Release, no clone needed
 ├── README.md                # overview, installation (keep palette table and counts current)
@@ -161,6 +162,11 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   `gh release create v<Lamplit version> dist/*.zip …` it prints (ask the user first: it publishes).
   The tag follows Lamplit's version. A Typora-only change has no new Lamplit version: replace the
   archives on the current release with `gh release upload v<version> dist/*.zip --clobber`.
+- Obsidian community directory: it reads `agiledolphin/lamplit`, a publish-only repository with
+  the theme files in its root. `./scripts/publish-lamplit.sh` copies them from here and creates
+  the release; its tag must equal the manifest's version, with no `v`. Run it for every new
+  Lamplit version (ask the user first: it publishes), and never edit that repository directly.
+  Its README is `obsidian/lamplit/README.md`, its screenshot `obsidian/lamplit/screenshot.png`.
 
 ## Tooling
 

@@ -7,10 +7,10 @@
 
 name = "Lamplit"
 prefix = "ll"                     # CSS variable / class prefix
-obsidian_version = "1.6.0"
-min_app_version = "1.0.0"
+obsidian_version = "1.6.1"
+min_app_version = "1.5.0"
 author = "Jiaming Sun"
-author_url = ""
+author_url = "https://github.com/agiledolphin"
 tagline = ["Reading by lamplight (青灯夜读). One theme, several palettes:",
            "pick a dark and a light scheme in Style Settings."]
 

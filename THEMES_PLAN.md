@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含七套配色） | 1.6.0 |
+| Lamplit（含七套配色） | 1.6.1 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -158,15 +158,29 @@
 - Catppuccin 标签：阅读模式蓝色、Live Preview magenta（`.tag` 规则写死颜色只作用于阅读模式）→ 统一为 magenta，标签颜色改由 `--tag-*` 变量驱动（Obsidian 1.3.1）
 - TokyoNight 的 4 个 Typora 文件初版遗留漂移 → 统一：Moon 引用竖线改蓝、Night 的 H4 改绿、Day/Moon 的代码内建函数与目录悬停改冷青（原为 2:2 平局，选冷青以与另两套主题一致）（Typora 1.4.1）
 
-### 阶段 4 — 文档与发布准备（已推迟，等用户提起）
+### 阶段 4 — 文档与发布准备（2026-11-02 启动）
+
+官方流程已改为在 community.obsidian.md 提交并自动审核，不再向 obsidian-releases 提 PR。
 
 | 项目 | 说明 | 状态 |
 |------|------|------|
-| 独立发布仓库 | 社区主题库要求一个主题一个仓库、`theme.css` 与 `manifest.json` 在根目录：为 Lamplit 拆出单独仓库（本仓库继续作为生成源） | ☐ |
-| 截图素材 | Lamplit 各方案效果图（社区库需 `screenshot.png`）+ Typora 各配色效果图（各 README 中的 *coming soon*） | ☐ |
-| manifest.json | 补全 `authorUrl`（GitHub 地址）：改 `shared/lamplit.toml` 的 `author_url` 后重新生成 | ☐ |
-| LICENSE / README | 本仓库已补 MIT LICENSE 与根目录 README（2026-11-02）；拆出发布仓库时另写面向 Obsidian 用户的 README | ☐ |
-| 社区提交 | 按 Obsidian 官方流程向 obsidian-releases 提 PR（只提 Lamplit 一个主题；提交前对照官方文档核实格式） | ☐ |
+| 独立发布仓库 | `agiledolphin/lamplit`：根目录放主题文件，`scripts/publish-lamplit.sh` 从本仓库同步并发版（tag 与 manifest 版本相同，无 `v`）；已发布 `1.6.0` | ☑ |
+| 截图素材 | `obsidian/lamplit/screenshot.png`：Wonderland Underground + Lab 对半，1024×576（16:9），只用示例笔记，不含 vault 文件列表 | ☑ |
+| manifest.json | `authorUrl` 已填 | ☑ |
+| LICENSE / README | 本仓库已补；发布仓库的 README 取自 `obsidian/lamplit/README.md` | ☑ |
+| 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
+| Typora 截图 | 各 Typora README 中的 *coming soon* | ☐ |
+
+**社区目录自动审核**（Lamplit 1.6.0，页面 Scorecard）：0 错误、101 条警告（警告不阻止发布），Health Excellent、Review Caution。
+
+| 数量 | 警告 | 处理 |
+|------|------|------|
+| 68 | 避免 `!important` | 待逐条判断，能改变量的改，每批跑完整核验，不追求清零 |
+| 28 | `text-decoration` 14、`css-masks` 12、`css-boxdecorationbreak` 2 在 Obsidian 1.4.5 上部分支持 | 1.6.1 把 `minAppVersion` 从 1.0.0 提到 1.5.0 试验；扫描器不公开，效果待发布后确认 |
+| 4 | 避免 `:has` | 1.6.1 已清除：H1 行改用 `.HyperMD-header-1`，任务行改用 `data-task` 属性 |
+| 1 | CSS 文件超过建议大小（112KB，19 个方案） | 不处理 |
+
+1.6.1 核验：`:has` 替换前后，编辑视图 H1 与 4 种任务行在光标离开 / 落在行上共 10 个状态样式 0 差异；19 个变体阅读/编辑视图 0 不一致，与基线 0 差异。
 
 ### 阶段 5 — 可选扩展
 
