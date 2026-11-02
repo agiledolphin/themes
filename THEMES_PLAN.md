@@ -299,6 +299,7 @@ Obsidian 列主题时要求 `manifest.json` 的 `name` 与文件夹名完全一�
 - `install.sh`（根目录）：`obsidian <vault>` / `typora [palette …]`，只需 bash、curl、unzip；支持 macOS 与 Linux，兼容系统 bash 3.2；重复运行即更新；自动修正只差大小写的文件夹；整个脚本包在 `main` 里，下载被截断时不会执行半截
 - 测试（管道交给 bash、无 uv、假 HOME、`dist/` 代替 Release）：路径带空格、重复运行、小写文件夹、不影响其他主题、非 vault、缺参数、Typora 目录不存在、全部 / 指定配色、未知配色、下载失败、脚本被截断，共 11 项符合预期
 - README 安装部分改为三种方式（一行命令 / 下载 Release / clone）；CLAUDE.md 记录发版流程。Release 的 tag 跟随 Lamplit 版本；只改 Typora 时用 `gh release upload --clobber` 替换当前 Release 的文件
+- 首个 Release：`v1.4.0`（2026-11-02）。真实链接验证（macOS，无 uv，假 HOME）：一行命令装到临时 vault 与 Typora 目录，Obsidian 2 个文件与 Typora 19 个文件均与仓库逐字节一致；Linux 未实测
 
 ---
 
