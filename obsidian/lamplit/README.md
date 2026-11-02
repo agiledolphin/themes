@@ -65,7 +65,7 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 
 ## Installation
 
-1. Copy `theme.css` and `manifest.json` to `<your-vault>/.obsidian/themes/Lamplit/`
+1. Copy `theme.css` and `manifest.json` to `<your-vault>/.obsidian/themes/Lamplit/`. The folder must be named exactly `Lamplit`: Obsidian silently skips a theme whose folder name differs from the manifest's `name`, even by case
 2. Open **Settings → Appearance → Themes** and select **Lamplit**
 
 ---

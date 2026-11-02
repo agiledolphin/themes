@@ -281,6 +281,15 @@ Typora 菜单里的主题名取自文件名。原先 `tokyonight-mod-storm.css` 
 - 接入：`shared/palettes/bauhaus.toml`（CSS 前缀 `bh`）；schemes 顺序 Wonderland → Merino → Big Wave → Impression → Bauhaus → TokyoNight → Catppuccin；Lamplit 1.4.0，Typora Bauhaus 1.0.0（其余 Typora 主题输出不变，不升版本）
 - 核验：19 个变体阅读/编辑视图 0 不一致；Bauhaus 正文 14.79 / 14.96，最低 H6 4.98 / 4.72
 
+
+### 修复：另一台 Mac 上找不到 Lamplit（2026-11-02）
+
+Obsidian 列主题时要求 `manifest.json` 的 `name` 与文件夹名完全一致（`f.name === 文件夹名`，区分大小写），否则静默跳过、不报错。`sync-obsidian.sh` 原先靠 uv 读主题名，没有 uv 时退回仓库目录名，生成小写的 `themes/lamplit/`，主题因此不出现（用户在那台机器上确认文件夹确为小写，改名后恢复正常）。手动复制仓库的 `lamplit` 目录也有同样的问题。
+
+- 脚本：主题名改用 sed 直接从 `manifest.json` 读取，不再依赖 uv；已存在只有大小写不同的文件夹时自动改名（macOS 磁盘默认不区分大小写，`mkdir -p Lamplit` 不会改变已有的 `lamplit`）
+- 测试（无 uv、系统 bash 3.2）：全新 vault、已有小写文件夹、已是正确文件夹且另有其他主题、空主题目录，四种情况均生成 `Lamplit/`，其他主题不受影响
+- README（根目录与 Lamplit）说明文件夹名必须完全一致，根 README 增加「Lamplit does not show up?」排查说明；CLAUDE.md 记录此规则
+
 ---
 
 ## 三、文件结构（现状）
