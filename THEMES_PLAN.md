@@ -171,7 +171,7 @@
 | 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
 | Typora 截图 | `typora/<配色>/screenshot.png`：深浅对半，1024×576。用 Typora 自带 `base.css` + 主题 CSS 按 Typora 页面结构在无头浏览器渲染（不是 Typora 窗口截图，Typora 无法脚本控制） | ☑ |
 | 中文文档 | `obsidian/lamplit` 和 7 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
-| Typora 主题库 | 向 `typora/theme.typora.io` 提 PR（post + 250×200 缩略图 + 截图，下载地址用 Release 的 `Lamplit-typora.zip`）；材料已准备，等用户确认 | 进行中 |
+| Typora 主题库 | 向 `typora/theme.typora.io` 提 PR（post + 250×200 缩略图 + 截图，下载地址用 Release 的 `Lamplit-typora.zip`）。用户决定暂不提交 | 暂缓 |
 
 **社区目录自动审核**（Lamplit 1.6.0，页面 Scorecard）：0 错误、101 条警告（警告不阻止发布），Health Excellent、Review Caution。
 

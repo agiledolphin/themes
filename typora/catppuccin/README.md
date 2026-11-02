@@ -76,8 +76,6 @@ The script copies the CSS files to Typora's themes directory automatically.
 
 Each flavor is a standalone CSS file. To switch flavors, select a different theme in **Preferences → Appearance**. Typora applies the change immediately without restart.
 
-For automatic dark/light switching, pair a dark flavor with Typora's **Auto** appearance mode and use the OS-level dark/light toggle.
-
 ---
 
 ## Font Recommendations
