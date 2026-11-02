@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含七套配色） | 1.4.0 |
+| Lamplit（含七套配色） | 1.5.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -300,6 +300,18 @@ Obsidian 列主题时要求 `manifest.json` 的 `name` 与文件夹名完全一�
 - 测试（管道交给 bash、无 uv、假 HOME、`dist/` 代替 Release）：路径带空格、重复运行、小写文件夹、不影响其他主题、非 vault、缺参数、Typora 目录不存在、全部 / 指定配色、未知配色、下载失败、脚本被截断，共 11 项符合预期
 - README 安装部分改为三种方式（一行命令 / 下载 Release / clone）；CLAUDE.md 记录发版流程。Release 的 tag 跟随 Lamplit 版本；只改 Typora 时用 `gh release upload --clobber` 替换当前 Release 的文件
 - 首个 Release：`v1.4.0`（2026-11-02）。真实链接验证（macOS，无 uv，假 HOME）：一行命令装到临时 vault 与 Typora 目录，Obsidian 2 个文件与 Typora 19 个文件均与仓库逐字节一致；Linux 未实测
+
+
+### 阶段 14 — 文件列表的文件类型图标（2026-11-02，Lamplit 1.5.0）
+
+文件列表每个文件都带图标（`md` 也有，用户要求），默认显示，Style Settings 的「Hide File Icons」（`ll-hide-file-icons`）可隐藏。
+
+- 按扩展名选图标（大小写不敏感），格式列表取自 Obsidian 程序代码：笔记 `md`、图片 8 种、白板 `canvas`、数据库 `base`、`pdf`、音频 8 种、视频 5 种；其余为普通文件图标。图标数据取自 Obsidian 内置的 Lucide 图标（file-text / image / layout-dashboard / table / file-type / music / film / file）
+- 颜色用 `currentColor` 跟随文字，平时 65% 透明度，悬停与当前文件全色，因此实色填充风格无需单独规则；扩展名小标签保留不动。Typora 不涉及，Typora 主题版本不变
+- 核验工具增加文件图标探针（普通、当前、悬停、重命名状态）
+- 核验：每种扩展名含大写形式在 Obsidian 中实测映射正确，8 种图标互不相同；开关实测可隐藏文件图标且不影响文件夹图标；19 个变体阅读/编辑视图 0 不一致；与基线 95 处差异全部是新增探针（19 × 5，无 → 有值），原有内容 0 变化；悬停与当前文件时图标颜色在 19 个变体中都与文字一致
+- 用户在 Obsidian 中确认显示效果，并手动测试了重命名
+- 目录按用途上色的方案已提出，用户尚在考虑，未实现
 
 ---
 

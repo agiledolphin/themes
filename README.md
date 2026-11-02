@@ -103,6 +103,7 @@ To cut a release, run `./scripts/package-release.sh`, which builds the two archi
 
 - Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
+- Icons: [Lucide](https://lucide.dev), the set Obsidian itself uses
 
 ## License
 
