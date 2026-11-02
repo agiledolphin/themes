@@ -3,19 +3,23 @@
 # directory reads: the theme files in its root and a GitHub release tagged exactly like the
 # manifest's version (no "v"), with manifest.json and theme.css attached. Everything in that
 # repository comes from here; never edit it directly.
-# Usage: ./scripts/publish-lamplit.sh
+# Usage: ./scripts/publish-lamplit.sh          new theme version: files + release
+#        ./scripts/publish-lamplit.sh --docs   README, images and LICENSE only, no release
+#                                              (the directory reads these from the main branch)
 # LAMPLIT_COMMIT_TRAILERS, if set, is appended to the commit message.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
 REPO=agiledolphin/lamplit
 SRC=$PWD
+docs_only=false
+[[ "${1:-}" == "--docs" ]] && docs_only=true
 
 ./scripts/gen-themes.py --check
 
 version=$(sed -n 's/^[[:space:]]*"version":[[:space:]]*"\([^"]*\)".*/\1/p' obsidian/lamplit/manifest.json | head -n 1)
 [[ -n "$version" ]] || { echo "No version in obsidian/lamplit/manifest.json"; exit 1; }
-if gh release view "$version" --repo "$REPO" >/dev/null 2>&1; then
+if ! $docs_only && gh release view "$version" --repo "$REPO" >/dev/null 2>&1; then
     echo "Release $version already exists in $REPO: bump obsidian_version first."
     exit 1
 fi
@@ -26,15 +30,21 @@ gh repo clone "$REPO" "$work" -- --quiet
 cd "$work"
 git checkout -q -B main
 
-cp "$SRC"/obsidian/lamplit/{theme.css,manifest.json,README.md,screenshot.png} "$SRC/LICENSE" .
+cp "$SRC"/obsidian/lamplit/{README.md,screenshot.png,palettes.png} "$SRC/LICENSE" .
+$docs_only || cp "$SRC"/obsidian/lamplit/{theme.css,manifest.json} .
 git add -A
 if ! git diff --cached --quiet; then
     message="Lamplit $version"
+    $docs_only && message="Update README and images"
     [[ -z "${LAMPLIT_COMMIT_TRAILERS:-}" ]] || message+=$'\n\n'"$LAMPLIT_COMMIT_TRAILERS"
     git commit -q -m "$message"
     git push -q origin main
 fi
 
+if $docs_only; then
+    echo "Updated the docs of $REPO"
+    exit 0
+fi
 gh release create "$version" manifest.json theme.css --repo "$REPO" --target main \
     --title "Lamplit $version" --notes "See https://github.com/agiledolphin/themes/releases for what changed."
 echo "Published $REPO $version"
