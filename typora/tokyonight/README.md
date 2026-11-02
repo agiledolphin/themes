@@ -1,12 +1,14 @@
 # Lamplit TokyoNight for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvim) color palette by folke. Four variants are provided as separate CSS files, each with its own full palette.
 
 ---
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit TokyoNight: dark and light](screenshot.png)
 
 ---
 
@@ -34,6 +36,14 @@ A Typora theme based on the [TokyoNight](https://github.com/folke/tokyonight.nvi
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora tokyonight
+```
 
 ### Automatic (sync script)
 

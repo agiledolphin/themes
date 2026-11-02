@@ -1,10 +1,10 @@
 # Lamplit
 
+English · [简体中文](README.zh-CN.md)
+
 **One theme, seven palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
 
 ![Lamplit in Big Wave, Bauhaus, Impression and Wonderland](screenshot.png)
-
-青灯夜读：一个主题，七套配色，深色和浅色模式可以分别选择。[中文说明](https://github.com/agiledolphin/themes/blob/main/README.zh-CN.md)
 
 ## Get started
 

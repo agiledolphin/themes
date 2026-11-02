@@ -1,12 +1,14 @@
 # Lamplit Catppuccin for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A Typora theme based on the [Catppuccin](https://catppuccin.com) color palette. Four flavors are provided as separate CSS files, each with its own complete palette.
 
 ---
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Catppuccin: dark and light](screenshot.png)
 
 ---
 
@@ -34,6 +36,14 @@ A Typora theme based on the [Catppuccin](https://catppuccin.com) color palette. 
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora catppuccin
+```
 
 ### Automatic (sync script)
 

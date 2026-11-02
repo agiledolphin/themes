@@ -73,7 +73,7 @@ slug = "office"
 label = "Office District"
 mode = "dark"
 file_slug = "office-district"   # Typora file name
-character = "Tokyo at night above ground; a shade lighter, warmer"
+character = "Tokyo at night above ground; a shade lighter, neutral charcoal"
 # Surfaces: neutral charcoal (no hue; Underground leans cool at Lab b* -4), one step lighter
 # than before, so the two dark grounds part (ΔE 6.5, was 3.9) while staying clean — warm
 # tints (b* +5, +1.5) read as muddy. Blood lifted to keep 4.3:1.

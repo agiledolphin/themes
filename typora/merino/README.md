@@ -1,5 +1,7 @@
 # Lamplit Merino for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A clean, neutral Typora theme after the **Merino Light** and **Merino Dark** terminal themes: a white or near-black ground, near-black or cool light text, and crisp accents (GitHub Primer colors). The terminal palette has no teal or orange, so teal is the midpoint of its cyan and green, and orange is Primer's orange.
 
 Two variants are provided as separate CSS files. Colors match the Merino scheme in the Obsidian theme Lamplit.
@@ -8,7 +10,7 @@ Two variants are provided as separate CSS files. Colors match the Merino scheme 
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Merino: dark and light](screenshot.png)
 
 ---
 
@@ -48,6 +50,14 @@ Every accent reads at 4.5:1 or better against its background, and look-alike col
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora merino
+```
 
 ### Automatic (sync script)
 

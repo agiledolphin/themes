@@ -42,7 +42,8 @@ app.css (e.g. a link rule that silently recolored `a.tag`).
 ```
 themes/
 ├── obsidian/lamplit/        # theme.css + manifest.json (generated) + README.md, screenshot.png, palettes.png
-├── typora/<palette>/        # lamplit-<palette>-<variant>.css (one file per variant) + README.md
+├── typora/<palette>/        # lamplit-<palette>-<variant>.css (one file per variant), screenshot.png,
+│                            # README.md + README.zh-CN.md (every README has a Chinese twin: change both)
 ├── shared/
 │   ├── lamplit.toml            # Lamplit settings — see above (its name is also the Typora prefix)
 │   ├── palettes/<palette>.toml # SOURCE OF TRUTH per palette (see above)
@@ -166,7 +167,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   the theme files in its root. `./scripts/publish-lamplit.sh` copies them from here and creates
   the release; its tag must equal the manifest's version, with no `v`. Run it for every new
   Lamplit version (ask the user first: it publishes), and never edit that repository directly.
-  Its README and images are in `obsidian/lamplit/` (`README.md`, `screenshot.png`, `palettes.png`);
+  Its READMEs and images are in `obsidian/lamplit/` (`README.md`, `README.zh-CN.md`, `screenshot.png`,
+  `palettes.png`);
   the directory reads those from the main branch, so `--docs` publishes them without a release.
 
 ## Tooling

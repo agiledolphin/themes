@@ -1,5 +1,7 @@
 # Lamplit Bauhaus for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A Typora theme after the Bauhaus (1919–1933): the three primaries on warm paper white or black, flat solid blocks and square corners. Prose uses only red, yellow and blue plus black, white and grey; the secondaries of Johannes Itten's colour wheel (taught in the Bauhaus preliminary course) colour code only.
 
 Two variants are provided as separate CSS files, named after the school's first two homes. Colors match the Bauhaus scheme in the Obsidian theme Lamplit.
@@ -8,7 +10,7 @@ Two variants are provided as separate CSS files, named after the school's first 
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Bauhaus: dark and light](screenshot.png)
 
 ---
 
@@ -52,6 +54,14 @@ Text accents read at 4.6:1 or better against their background, and look-alike co
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora bauhaus
+```
 
 ### Automatic (sync script)
 

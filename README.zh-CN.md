@@ -11,15 +11,17 @@
 
 | 配色 | 深色 | 浅色 | 灵感来源 |
 |------|------|------|----------|
-| [Wonderland](typora/wonderland/README.md) | Underground、Office District | Lab | 原创，灵感来自村上春树《世界尽头与冷酷仙境》 |
-| [Merino](typora/merino/README.md) | Dark | Light | Merino Light / Dark 终端配色（GitHub Primer 色彩） |
-| [Big Wave](typora/big-wave/README.md) | Pipeline | Spray | 山下达郎专辑《Big Wave》（1984）的封面 |
-| [Impression](typora/impression/README.md) | Havre | Brume | 莫奈《印象·日出》（1872） |
-| [Bauhaus](typora/bauhaus/README.md) | Weimar | Dessau | 包豪斯：三原色、平涂色块、直角 |
-| [TokyoNight](typora/tokyonight/README.md) | Storm、Night、Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)（官方配色） |
-| [Catppuccin](typora/catppuccin/README.md) | Mocha、Macchiato、Frappé | Latte | [Catppuccin](https://catppuccin.com)（官方配色） |
+| [Wonderland](typora/wonderland/README.zh-CN.md) | Underground、Office District | Lab | 原创，灵感来自村上春树《世界尽头与冷酷仙境》 |
+| [Merino](typora/merino/README.zh-CN.md) | Dark | Light | Merino Light / Dark 终端配色（GitHub Primer 色彩） |
+| [Big Wave](typora/big-wave/README.zh-CN.md) | Pipeline | Spray | 山下达郎专辑《Big Wave》（1984）的封面 |
+| [Impression](typora/impression/README.zh-CN.md) | Havre | Brume | 莫奈《印象·日出》（1872） |
+| [Bauhaus](typora/bauhaus/README.zh-CN.md) | Weimar | Dessau | 包豪斯：三原色、平涂色块、直角 |
+| [TokyoNight](typora/tokyonight/README.zh-CN.md) | Storm、Night、Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)（官方配色） |
+| [Catppuccin](typora/catppuccin/README.zh-CN.md) | Mocha、Macchiato、Frappé | Latte | [Catppuccin](https://catppuccin.com)（官方配色） |
 
-截图稍后补充。各平台的详细说明（英文）见 [Lamplit for Obsidian](obsidian/lamplit/README.md)，以及上表中各配色链接的 Typora README。
+![七套配色的深色和浅色](obsidian/lamplit/palettes.png)
+
+各平台的详细说明见 [Lamplit for Obsidian](obsidian/lamplit/README.zh-CN.md)，以及上表中各配色的 Typora 说明。
 
 ## 安装
 
