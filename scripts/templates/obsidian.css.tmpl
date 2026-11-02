@@ -240,7 +240,7 @@ body {
     margin-bottom: 0.75em !important;
 }
 
-.markdown-source-view .cm-line:has(.cm-header-1) {
+.markdown-source-view .cm-line.HyperMD-header-1 {
     border-bottom: 2px solid {{c:gutter}};
     padding-bottom: 0.1em;
     margin-bottom: 0.5em;
@@ -553,8 +553,8 @@ input[type="checkbox"][data-task="X"]::before {
     text-decoration: line-through;
     text-decoration-color: {{c:comment}};
 }
-.cm-line:has(input[data-task="x"]),
-.cm-line:has(input[data-task="X"]) {
+.cm-line[data-task="x"],
+.cm-line[data-task="X"] {
     color: {{c:comment}};
     text-decoration: line-through;
     text-decoration-color: {{c:comment}};
@@ -600,7 +600,7 @@ input[type="checkbox"][data-task="-"]::before {
     text-decoration: line-through;
     text-decoration-color: {{c:comment}};
 }
-.cm-line:has(input[data-task="-"]) {
+.cm-line[data-task="-"] {
     color: {{c:comment}};
     text-decoration: line-through;
     text-decoration-color: {{c:comment}};
