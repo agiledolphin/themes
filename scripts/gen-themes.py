@@ -41,7 +41,7 @@ RADII = [2, 3, 4, 6, 8]   # corner radii the templates use, as roles radius_2 â€
 # Top-level folder colors in Lamplit (Style Settings: Color Folders), cool and warm alternating
 # so neighbours part.
 FOLDER_CYCLE = ["blue", "orange", "teal", "red", "green", "magenta", "yellow", "cyan"]
-# Mermaid diagram types the Obsidian template recolors; any other keeps Obsidian's look.
+# Diagram types the Obsidian template recolors on Obsidian before 1.15; any other keeps its look.
 MERMAID_TYPES = ["flowchart", "flowchart-v2", "sequence", "pie", "class", "stateDiagram", "gantt", "er",
                  "gitGraph", "mindmap"]
 
@@ -382,7 +382,7 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
         RULE + " */"])
     extra = {"HEADER": header, "SETTINGS": "\n".join(settings), "PALETTES": "\n".join(blocks), "P": P,
              "MM": f"body:not(.{P}-default-mermaid) .mermaid > svg:is("
-                   + ", ".join(f'[aria-roledescription="{t}"]' for t in MERMAID_TYPES) + "):not(#_)"}
+                   + ", ".join(f'[aria-roledescription="{t}"]' for t in MERMAID_TYPES) + "):not(.pele):not(#_)"}
     css = re.sub(r"\{\{([A-Z_]+)\}\}", lambda m: extra[m.group(1)], body_css)
     if "{{" in css:
         raise ValueError("Lamplit: unresolved placeholder")

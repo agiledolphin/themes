@@ -2585,15 +2585,39 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-cp-mocha, 
 
 /* ============================================================
  * Mermaid
- * Obsidian draws every diagram in Mermaid's light theme and inverts it in dark mode, so its
- * colors ignore the scheme. These rules drop the filter and recolor from the scheme. body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(#_)
- * names the diagram types covered, so an unknown type keeps Obsidian's look, and its :not(#_)
- * outranks the rules Mermaid scopes to each diagram's id. Style Settings: Use Default Mermaid Colors.
- * Everything is nested under body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(#_) so its long selector is written once. Even filter: none is
- * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
+ * Obsidian 1.15 draws diagrams with Pele, which reads its colors from --mermaid-* variables.
+ * Style Settings: Use Default Mermaid Colors keeps Obsidian's own values.
  * ============================================================ */
 
-body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(#_) {
+body:not(.ll-default-mermaid) {
+    --mermaid-background: var(--ll-bg);
+    --mermaid-text-color: var(--ll-fg);
+    --mermaid-muted-color: var(--ll-fg-dim);
+    --mermaid-line-color: var(--ll-fg-dim);
+    --mermaid-surface: color-mix(in srgb, var(--ll-accent) 16%, var(--ll-bg));
+    --mermaid-surface-alt: var(--ll-bg-hl);
+    --mermaid-border-color: var(--ll-accent);
+    --mermaid-accent: var(--ll-accent);
+    --mermaid-critical: var(--ll-red);
+    --mermaid-error: var(--ll-red);
+    --mermaid-color-1: var(--ll-folder-1);
+    --mermaid-color-2: var(--ll-folder-2);
+    --mermaid-color-3: var(--ll-folder-3);
+    --mermaid-color-4: var(--ll-folder-4);
+    --mermaid-color-5: var(--ll-folder-5);
+    --mermaid-color-6: var(--ll-folder-6);
+    --mermaid-color-7: var(--ll-folder-7);
+    --mermaid-color-8: var(--ll-folder-8);
+}
+
+/* Older Obsidian draws diagrams with Mermaid in its light theme and inverts them in dark mode, so
+ * these rules drop the filter and recolor from the scheme. body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) names the diagram types covered,
+ * skips Pele's output, and its :not(#_) outranks the rules Mermaid scopes to each diagram's id.
+ * Everything is nested under body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) so its long selector is written once. Even filter: none is
+ * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
+ */
+
+body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) {
     & {
         filter: none;
         --ll-m-fill: color-mix(in srgb, var(--ll-accent) 16%, var(--ll-bg));

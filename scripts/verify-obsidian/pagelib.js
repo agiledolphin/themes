@@ -95,41 +95,44 @@ window.__V = (() => {
     mermaid: ['mermaidSvg', 'mermaidNode', 'mermaidEdge', 'mermaidLabel', 'mermaidPie', 'mermaidPieText'],
   };
   // One section per diagram type: probe name -> [selector inside that diagram, properties].
-  // Markers have no box of their own, so `hidden` probes skip the on-screen test.
-  const F = ['fill'], FS = ['fill', 'stroke'], S = ['stroke'], C = ['color'];
+  // Pele's class names (Obsidian 1.15+), so an Obsidian update can break them.
+  const F = ['fill'], S = ['stroke'], FS = ['fill', 'stroke'], FO = ['fill', 'stroke', 'fill-opacity', 'opacity'];
+  const PLAIN = ':not(.pele-done):not(.pele-active):not(.pele-crit)';
   const MERMAID = {
-    'mm-flow': { type: 'flowchart-v2', name: 'Flow', probes: {
-      Cluster: ['.cluster rect', FS], ClusterLabel: ['.cluster-label .nodeLabel', C], Node: ['.node rect', FS],
-      NodeLabel: ['.node .nodeLabel', C], EdgeLabel: ['.edgeLabel p', [...C, 'background-color']] } },
+    'mm-flow': { type: 'flowchart', name: 'Flow', probes: {
+      Cluster: ['.pele-cluster rect', FS], ClusterLabel: ['.pele-cluster-label', F], Node: ['.pele-node rect', FS],
+      NodeLabel: ['.pele-node .pele-label', F], EdgeLabelBg: ['.pele-edge-label rect', F], EdgeLabel: ['.pele-edge-label text', F] } },
     'mm-sequence': { type: 'sequence', name: 'Seq', probes: {
-      Actor: ['rect.actor', FS], ActorText: ['text.actor tspan', F], Line: ['.actor-line', S],
-      Number: ['.sequenceNumber', F], NumberDot: ['[id$="-sequencenumber"] circle', FS, 'hidden'], Man: ['.actor-man circle', FS],
-      Message: ['.messageLine0', S], MessageText: ['.messageText', F], Arrow: ['[id$="-arrowhead"] path', FS, 'hidden'],
-      Note: ['rect.note', FS], NoteText: ['.noteText tspan', F], Loop: ['.labelBox', FS], LoopText: ['.labelText', F] } },
+      Actor: ['.pele-actor-participant rect', FS], ActorText: ['.pele-actor-participant text', F], Line: ['.pele-lifeline', S],
+      Number: ['.pele-sequence-number text', F], NumberDot: ['.pele-sequence-number rect', F], Man: ['.pele-actor-actor circle', FS],
+      Message: ['.pele-message path', S], MessageText: ['.pele-edge-label text', F], Arrow: ['.pele-marker', FS],
+      Note: ['.pele-note rect', FS], NoteText: ['.pele-note .pele-label', F], Frame: ['.pele-frame rect', S], FrameText: ['.pele-frame-label', F] } },
     'mm-class': { type: 'class', name: 'Class', probes: {
-      Box: ['.node path', FS], Label: ['.nodeLabel', C], Line: ['.relation', S],
-      Hollow: ['[id*="extensionStart"] path', FS, 'hidden'], Solid: ['[id*="compositionStart"] path', FS, 'hidden'] } },
-    'mm-state': { type: 'stateDiagram', name: 'State', probes: {
-      Node: ['.node rect', FS], Label: ['.node .nodeLabel', C], Line: ['.transition', S],
-      Arrow: ['marker path', FS, 'hidden'] } },
+      Box: ['.pele-node.pele-class rect', FS], Label: ['.pele-node.pele-class .pele-label', F], Member: ['.pele-member', F],
+      Line: ['.pele-relation path', S], Hollow: ['.pele-relation:nth-child(1) .pele-marker', FS], Solid: ['.pele-relation:nth-child(2) .pele-marker', FS] } },
+    'mm-state': { type: 'state', name: 'State', probes: {
+      Node: ['.pele-node.pele-state rect', FS], Label: ['.pele-node.pele-state .pele-label', F], Line: ['.pele-transition path', S],
+      Arrow: ['.pele-marker', FS], Start: ['.pele-state-start circle', F] } },
     'mm-gantt': { type: 'gantt', name: 'Gantt', probes: {
-      Section: ['.section0', F], Today: ['.today', S], Grid: ['.grid line', S], Task: ['.task0, .task1', FS], TaskText: ['[class*="taskText"]:not([class*="taskTextOutside"])', F],
-      Done: ['.done0, .done1', FS], DoneText: ['[class*="doneText"]', F], Active: ['.active0, .active1', FS],
-      ActiveText: ['[class*="activeText"]', F], Crit: ['.crit0, .crit1', FS], CritText: ['[class*="critText"]', F] } },
+      Section: ['.pele-section-0', F], Grid: ['.pele-grid path', S], Axis: ['.pele-axis text', F], SectionLabel: ['.pele-section-label', F],
+      Task: [`.pele-task${PLAIN} rect`, FO], TaskText: [`.pele-task${PLAIN} .pele-label`, F],
+      Done: ['.pele-task.pele-done rect', FO], DoneText: ['.pele-task.pele-done .pele-label', F],
+      Active: ['.pele-task.pele-active rect', FO], ActiveText: ['.pele-task.pele-active .pele-label', F],
+      Crit: ['.pele-task.pele-crit rect', FO], CritText: ['.pele-task.pele-crit .pele-label', F] } },
     'mm-er': { type: 'er', name: 'Er', probes: {
-      Row: [':is(.row-rect-odd, .row-rect-even) path', FS], Label: ['.nodeLabel', C], Line: ['.edgePaths path', S],
-      Circle: ['[id*="zeroOrMore"] circle', FS, 'hidden'] } },
+      Row: ['.pele-entity rect', FS], Stripe: ['.pele-er-stripes rect', F], Label: ['.pele-entity .pele-label', F],
+      Attr: ['.pele-er-name', F], AttrType: ['.pele-er-type', F], Line: ['.pele-edge path', S], Circle: ['circle.pele-marker', FS] } },
     'mm-git': { type: 'gitGraph', name: 'Git', probes: {
-      Commit: ['.commit0', FS], Arrow: ['.arrow', S], BranchBkg: ['.branchLabelBkg', F], BranchText: ['.branchLabel text', F],
-      CommitLabelBkg: ['.commit-label-bkg', F], CommitLabel: ['.commit-label', F], TagBkg: ['.tag-label-bkg', FS], TagText: ['.tag-label', F] } },
+      Commit: ['.pele-commit-normal circle', F], Merge: ['.pele-commit-merge circle', FS], Edge: ['path.pele-edge', S], Lane: ['.pele-lane', S],
+      BranchBkg: ['.pele-branch rect', F], BranchText: ['.pele-branch .pele-label', F], CommitLabelBkg: ['.pele-commit-label rect', F],
+      CommitLabel: ['.pele-commit-label text', F], TagBkg: ['.pele-tag path', FS], TagText: ['.pele-tag text', F] } },
     'mm-mindmap': { type: 'mindmap', name: 'Mind', probes: {
-      Root: ['.section-root .label-container', FS], Node: ['.section-0 .node-bkg', FS], Label: ['.mindmap-node .nodeLabel', C],
-      Edge: ['.section-edge-0', S] } },
+      Root: ['.pele-root circle', FS], Node: ['.pele-shape-branch rect', FO], Label: ['.pele-shape-branch .pele-label', F], Edge: ['path.pele-edge', S] } },
   };
   // Every painted color in a diagram that is not one of the scheme's: what the probes above
   // can't name. fill does nothing on a line or a foreignObject; symbols are unused definitions.
-  function mermaidStrays(svg) {
-    if (!svg) return null;
+  function mermaidStrays(svgs) {
+    if (!svgs.length) return null;
     const dot = document.createElement('i'), cs = getComputedStyle(document.body), ok = new Set();
     document.body.appendChild(dot);
     for (const k of ['accent', 'bg', 'bg-dark', 'bg-hl', 'gutter', 'fg', 'fg-dim', 'comment', 'yellow', 'red', ...[1, 2, 3, 4, 5, 6, 7, 8].map(i => `folder-${i}`)]) {
@@ -137,12 +140,12 @@ window.__V = (() => {
     }
     dot.remove();
     const found = new Set();
-    for (const e of svg.querySelectorAll('*')) {
+    for (const e of svgs.flatMap(s => [...s.querySelectorAll('*')])) {
       if (['style', 'title', 'desc', 'defs', 'marker', 'g', 'symbol', 'foreignObject'].includes(e.localName) || e.closest('symbol')) continue;
       const c = getComputedStyle(e), html = e.namespaceURI?.endsWith('xhtml'), text = ['text', 'tspan'].includes(e.localName);
-      const props = html ? ['color', 'backgroundColor'] : [...(e.localName === 'line' ? [] : ['fill']), ...(text || c.strokeWidth === '0px' ? [] : ['stroke'])];
+      const props = html ? ['color', 'backgroundColor'] : ['fill', ...(text || c.strokeWidth === '0px' ? [] : ['stroke'])];
       for (const p of props) if (!/^none$|^url|rgba\(0, 0, 0, 0\)|^color\(srgb/.test(c[p]) && !ok.has(c[p])) {
-        const where = (e.getAttribute('class') || e.closest('marker')?.id.replace(/^m?[0-9a-f]+[-_]/, '') || '').trim().slice(0, 24);
+        const where = (e.getAttribute('class') || e.parentNode.getAttribute('class') || '').trim().slice(0, 24);
         found.add(`${e.localName}.${where} ${p} ${c[p]}`);
       }
     }
@@ -150,9 +153,8 @@ window.__V = (() => {
   }
   function measureMermaid({ type, name, probes }, q, root) {
     const svg = `.mermaid > svg[aria-roledescription="${type}"]`;
-    const out = { [`mm${name}Svg`]: pick(q(svg), ['filter']), [`mm${name}Strays`]: mermaidStrays(root.querySelector(svg)) };
-    for (const [k, [sel, props, hidden]] of Object.entries(probes))
-      out[`mm${name}${k}`] = pick(hidden ? root.querySelector(`${svg} ${sel}`) : q(sel.split(', ').map(x => `${svg} ${x}`).join(', ')), props);
+    const out = { [`mm${name}Svg`]: pick(q(svg), ['filter']), [`mm${name}Strays`]: mermaidStrays([...root.querySelectorAll(svg)]) };
+    for (const [k, [sel, props]] of Object.entries(probes)) out[`mm${name}${k}`] = pick(q(`${svg} ${sel}`), props);
     return out;
   }
   function measure(section) {
@@ -194,11 +196,11 @@ window.__V = (() => {
       calloutNoteBg: pick(q('.callout[data-callout="note"]'), ['background-color', 'mix-blend-mode', 'border-top-left-radius']),
       calloutBody: pick(q('.callout[data-callout="note"] .callout-content'), P),
       mermaidSvg: pick(q('.mermaid > svg'), ['filter']),
-      mermaidNode: pick(q('.mermaid > svg .node rect'), ['fill', 'stroke']),
-      mermaidEdge: pick(q('.mermaid > svg .flowchart-link'), ['stroke']),
-      mermaidLabel: pick(q('.mermaid > svg .nodeLabel'), ['color']),
-      mermaidPie: pick(q('.mermaid > svg .pieCircle'), ['fill', 'stroke']),
-      mermaidPieText: pick(q('.mermaid > svg text.slice'), ['fill']),
+      mermaidNode: pick(q('.mermaid > svg .pele-node :is(rect, polygon)'), ['fill', 'stroke']),
+      mermaidEdge: pick(q('.mermaid > svg .pele-edge path'), ['stroke']),
+      mermaidLabel: pick(q('.mermaid > svg .pele-node .pele-label'), ['fill']),
+      mermaidPie: pick(q('.mermaid > svg .pele-slice'), ['fill', 'stroke']),
+      mermaidPieText: pick(q('.mermaid > svg .pele-slice-labels text'), ['fill']),
       taskDone: taskBox('x'), taskDoing: taskBox('/'), taskImportant: taskBox('!'),
     };
     return Object.fromEntries((SECTION_KEYS[section] || []).map(k => [k, all[k]]));

@@ -42,7 +42,7 @@ CHECK = {
     "quoteRule": ["border-left-width", "border-left-color"], "quoteText": ["color"],
     "mark": ["color", "background-color"], "link": ["color"], "unresolved": ["color"],
     "calloutNote": ["color"], "calloutNoteBg": ["background-color"],
-    "mermaidSvg": ["filter"], "mermaidNode": ["fill", "stroke"], "mermaidEdge": ["stroke"], "mermaidLabel": ["color"],
+    "mermaidSvg": ["filter"], "mermaidNode": ["fill", "stroke"], "mermaidEdge": ["stroke"], "mermaidLabel": ["fill"],
     "mermaidPie": ["fill", "stroke"], "mermaidPieText": ["fill"],
 }
 LABELS = {"body": "正文", **{f"h{i}": f"H{i}" for i in range(1, 7)}, "link": "链接", "unresolved": "失效链接",
@@ -57,9 +57,10 @@ MM_SECTIONS = {"Flow": "mm-flow", "Seq": "mm-sequence", "Class": "mm-class", "St
 MM_TYPES = [t for t, s in MM_SECTIONS.items() if SCOPE is None or s in SCOPE]
 MM_TEXT = {
     "mermaidLabel": "mermaidNode", "mermaidPieText": "mermaidPie",
-    "mmFlowNodeLabel": "mmFlowNode", "mmFlowClusterLabel": "mmFlowCluster", "mmFlowEdgeLabel": None,
-    "mmSeqActorText": "mmSeqActor", "mmSeqNumber": "mmSeqNumberDot", "mmSeqMessageText": None, "mmSeqNoteText": "mmSeqNote", "mmSeqLoopText": "mmSeqLoop",
-    "mmClassLabel": "mmClassBox", "mmStateLabel": "mmStateNode", "mmErLabel": "mmErRow",
+    "mmFlowNodeLabel": "mmFlowNode", "mmFlowClusterLabel": "mmFlowCluster", "mmFlowEdgeLabel": "mmFlowEdgeLabelBg",
+    "mmSeqActorText": "mmSeqActor", "mmSeqNumber": "mmSeqNumberDot", "mmSeqMessageText": None, "mmSeqNoteText": "mmSeqNote",
+    "mmSeqFrameText": None, "mmClassLabel": "mmClassBox", "mmClassMember": "mmClassBox", "mmStateLabel": "mmStateNode",
+    "mmErLabel": "mmErRow", "mmErAttr": "mmErStripe", "mmErAttrType": "mmErStripe", "mmGanttAxis": None, "mmGanttSectionLabel": "mmGanttSection",
     "mmGanttTaskText": "mmGanttTask", "mmGanttDoneText": "mmGanttDone", "mmGanttActiveText": "mmGanttActive",
     "mmGanttCritText": "mmGanttCrit", "mmGitBranchText": "mmGitBranchBkg", "mmGitCommitLabel": "mmGitCommitLabelBkg",
     "mmGitTagText": "mmGitTagBkg", "mmMindLabel": "mmMindNode",
@@ -157,10 +158,10 @@ for v in [x["id"] for x in RUN["variants"]]:
             if stray := (d.get(f"mm{t}Strays") or {}).get("list"):
                 mermaid_errors.append((v, view, f"{t} colors not from the scheme", stray))
         solid = rgba((d.get("mmClassSolid") or {}).get("fill"))
-        if solid and solid[3] == 0:
+        if "Class" in MM_TYPES and not (solid and solid[3] > 0):
             mermaid_errors.append((v, view, "class composition marker", "hollow, should be solid"))
         fill = rgba((d.get("mmClassHollow") or {}).get("fill"))
-        if fill and fill[3] > 0:
+        if fill and fill[3] > 0 and fill[:3] != page[:3]:
             mermaid_errors.append((v, view, "class arrowhead", "filled, should be hollow"))
         for fg, on in MM_TEXT.items():
             text = d.get(fg) or {}
@@ -168,10 +169,12 @@ for v in [x["id"] for x in RUN["variants"]]:
             if not col:
                 mermaid_errors.append((v, view, fg, "not measured"))
                 continue
-            below = page if on is None else rgba((d.get(on) or {}).get("fill"))
+            box = d.get(on) or {}
+            below = page if on is None else rgba(box.get("fill"))
             if below is None:
                 mermaid_errors.append((v, view, on, "not measured"))
                 continue
+            below[3] *= float(box.get("fill-opacity") or 1) * float(box.get("opacity") or 1)
             below = over(below, page)
             ratio = round(contrast(over(col, below), below), 2)
             if ratio < 3 and view == "reading":
