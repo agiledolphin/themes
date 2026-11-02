@@ -165,7 +165,7 @@
 | 项目 | 说明 | 状态 |
 |------|------|------|
 | 独立发布仓库 | `agiledolphin/lamplit`：根目录放主题文件，`scripts/publish-lamplit.sh` 从本仓库同步并发版（tag 与 manifest 版本相同，无 `v`）；已发布 `1.6.0` | ☑ |
-| 截图素材 | `obsidian/lamplit/screenshot.png`：Wonderland Underground + Lab 对半，1024×576（16:9），只用示例笔记，不含 vault 文件列表 | ☑ |
+| 截图素材 | `screenshot.png`：Big Wave / Bauhaus / Impression / Wonderland 四配色斜切，开启 Color Folders，1024×576；`palettes.png`：七套配色深浅总览，关闭 Color Folders。都用临时 Obsidian 实例（独立 user-data-dir）和虚构演示 vault 真实渲染，不含用户内容 | ☑ |
 | manifest.json | `authorUrl` 已填 | ☑ |
 | LICENSE / README | 本仓库已补；发布仓库的 README 取自 `obsidian/lamplit/README.md` | ☑ |
 | 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
