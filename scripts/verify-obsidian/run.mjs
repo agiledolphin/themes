@@ -94,7 +94,10 @@ async function assertRendering() {
 await ev(fs.readFileSync(path.join(HERE, 'pagelib.js'), 'utf8') + '; return 1;');
 const orig = await ev(`return { theme: app.customCss.theme, mode: app.vault.getConfig('theme'),
   classes: [...document.body.classList], leafId: app.workspace.getMostRecentLeaf()?.id };`);
-const variantClasses = all.map(v => v.cls);
+// Optional Style Settings toggles are switched off for the run (and restored after), so results
+// and baselines never depend on what the user has turned on.
+const TOGGLES = ['hide-folder-icons', 'hide-file-icons', 'color-folders'].map(t => `${LAMPLIT.prefix}-${t}`);
+const variantClasses = [...all.map(v => v.cls), ...TOGGLES];
 try { await assertRendering(); } catch (e) { console.error(e.message); close(); process.exit(3); }
 // Connected and rendering — now start from a clean slate so a report never mixes in screenshots from an earlier run.
 // Only this tool's own outputs are removed; anything else in OUT is left alone.

@@ -977,7 +977,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
     height: 14px;
     margin-right: 6px;
     vertical-align: -2px;
-    background-color: var(--text-accent);
+    background-color: var(--{{P}}-folder-color, var(--text-accent));
     -webkit-mask-size: cover;
     background-repeat: no-repeat;
 }
@@ -995,6 +995,24 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
     display: none !important;
 }
 .{{P}}-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
+
+/* Color Folders (off by default): each top-level folder takes the next color of an 8-color
+   cycle by position, and everything inside inherits it through the variable. "of .nav-folder"
+   skips the explorer's spacer and the root's files. The cycle comes from the scheme, so every
+   mode has its own colors. Known limit, no CSS fix: colors follow the position, so a new top-level
+   folder shifts the ones after it, and in a long list Obsidian drops scrolled-out top-level
+   folders from the page, so the remaining ones renumber and change color while scrolling. */
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 1 of .nav-folder) { --{{P}}-folder-color: {{c:folder_1}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 2 of .nav-folder) { --{{P}}-folder-color: {{c:folder_2}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 3 of .nav-folder) { --{{P}}-folder-color: {{c:folder_3}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 4 of .nav-folder) { --{{P}}-folder-color: {{c:folder_4}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 5 of .nav-folder) { --{{P}}-folder-color: {{c:folder_5}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 6 of .nav-folder) { --{{P}}-folder-color: {{c:folder_6}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 7 of .nav-folder) { --{{P}}-folder-color: {{c:folder_7}}; }
+.{{P}}-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 0 of .nav-folder) { --{{P}}-folder-color: {{c:folder_8}}; }
+.{{P}}-color-folders .nav-folder .nav-folder-children::before {
+    background-color: color-mix(in srgb, var(--{{P}}-folder-color, {{c:gutter}}) 55%, transparent);
+}
 
 /* ============================================================
  * File Icons

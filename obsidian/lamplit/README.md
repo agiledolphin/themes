@@ -59,6 +59,9 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC
 - **File type icons** in the file explorer — notes, images, canvases, bases, PDFs, audio, video and other files each have their own icon
 - **Hide Folder Icons** and **Hide File Icons** toggles in Style Settings
+- **Color Folders** toggle in Style Settings (off by default) — each top-level folder takes the next color of an 8-color cycle from the scheme, and everything inside it inherits that color
+
+> **Note (Color Folders):** colors follow the folder's position, not its name. A new top-level folder shifts the colors after it. In a long file list, Obsidian removes top-level folders that are scrolled out of view, so the remaining folders renumber and can change color while you scroll. A theme cannot avoid this, because it only has CSS.
 
 > **Note (macOS):** Obsidian uses native system menus on macOS by default, and themes cannot style those. To see the themed context menus, turn off **Settings → Interface → Advanced → Native menus**.
 

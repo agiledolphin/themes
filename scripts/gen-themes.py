@@ -38,6 +38,9 @@ PALETTES = ROOT / "shared/palettes"
 TEMPLATES = ROOT / "scripts/templates"
 HEADINGS = ["h1", "h2", "h3", "h4", "h5", "h6"]
 RADII = [2, 3, 4, 6, 8]   # corner radii the templates use, as roles radius_2 … radius_8
+# Top-level folder colors in Lamplit (Style Settings: Color Folders), cool and warm alternating
+# so neighbours part.
+FOLDER_CYCLE = ["blue", "orange", "teal", "red", "green", "magenta", "yellow", "cyan"]
 
 
 def rgb_triple(hex_color: str) -> str:
@@ -65,6 +68,8 @@ class Ctx:
             self.roles.setdefault("mark_text", "bg" if variant["mode"] == "dark" else "fg")
         self.roles.setdefault("mark_fill", "mark-bg")
         self.roles.setdefault("mark_text", "yellow")
+        for i, name in enumerate(FOLDER_CYCLE, 1):
+            self.roles.setdefault(f"folder_{i}", name)
         self.aliases = theme.get("aliases", {})
         self.palette = variant["palette"]
 
@@ -357,6 +362,9 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
                  "    type: class-toggle", "    default: false",
                  "  -", f"    id: {P}-hide-file-icons", "    title: Hide File Icons",
                  "    description: Hide the file type icons in the file explorer",
+                 "    type: class-toggle", "    default: false",
+                 "  -", f"    id: {P}-color-folders", "    title: Color Folders",
+                 "    description: Give each top-level folder and everything inside it a color from the scheme",
                  "    type: class-toggle", "    default: false", "", "*/"]
     header = "\n".join([
         "/* " + "=" * 60, f" * {cfg['name']} — Obsidian Theme",
