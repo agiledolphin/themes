@@ -237,7 +237,7 @@ body {
 .markdown-rendered h1 {
     border-bottom: 2px solid {{c:gutter}};
     padding-bottom: 0.25em;
-    margin-bottom: 0.75em !important;
+    margin-bottom: 0.75em;
 }
 
 .markdown-source-view .cm-line.HyperMD-header-1 {
@@ -334,7 +334,7 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
 
 .markdown-rendered pre,
 .markdown-source-view pre {
-    background: {{c:bg-dark}} !important;
+    background: {{c:bg-dark}};
     padding: 1rem 1.25rem;   /* border + radius: --code-* variables */
     line-height: var(--line-height-normal);   /* 1.75, same as Live Preview lines */
 }
@@ -370,24 +370,24 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
 .callout { border-radius: {{r:radius_8}}; overflow: hidden; }
 
 .callout-title {
-    padding: 0.6rem 1rem !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.4em !important;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
     /* --callout-color holds an RGB triple (for the rgba() backgrounds), so
        app.css's plain `color: var(--callout-color)` would be invalid — wrap it. */
-    color: rgb(var(--callout-color)) !important;
+    color: rgb(var(--callout-color));
 }
-.callout-content { padding: 0.5rem 1rem !important; }
+.callout-content { padding: 0.5rem 1rem; }
 
 body.theme-dark .callout {
-    mix-blend-mode: normal !important;
-    background-color: rgba(var(--callout-color), 0.10) !important;
+    mix-blend-mode: normal;
+    background-color: rgba(var(--callout-color), 0.10);
 }
 
 body.theme-light .callout {
-    mix-blend-mode: normal !important;
-    background-color: rgba(var(--callout-color), 0.12) !important;
+    mix-blend-mode: normal;
+    background-color: rgba(var(--callout-color), 0.12);
 }
 
 .callout[data-callout="note"],
@@ -420,7 +420,7 @@ body.theme-light .callout {
 
 body.theme-light .callout[data-callout="quote"],
 body.theme-light .callout[data-callout="cite"] {
-    background-color: rgba({{rgb:comment}}, 0.20) !important;
+    background-color: rgba({{rgb:comment}}, 0.20);
 }
 
 /* ============================================================
@@ -488,7 +488,7 @@ input[type="checkbox"].task-list-item-checkbox {
     width:  1.2em;
     height: 1.2em;
     border: 1px solid {{c:comment}};
-    border-radius: 50% !important;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -498,19 +498,19 @@ input[type="checkbox"].task-list-item-checkbox {
     margin-right: 0.4em;
     flex-shrink: 0;
     cursor: default;
-    background-color: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
 }
 
 .task-list-item-checkbox:hover,
 input[type="checkbox"].task-list-item-checkbox:hover {
-    border-color: var(--checkbox-color) !important;
+    border-color: var(--checkbox-color);
 }
 
 .task-list-item-checkbox::after,
 input[type="checkbox"].task-list-item-checkbox::after {
-    display: none !important;
+    display: none;
 }
 
 /* ── [x] Checked ── */
@@ -518,16 +518,16 @@ input[type="checkbox"].task-list-item-checkbox::after {
 .task-list-item[data-task="X"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="x"],
 input[type="checkbox"][data-task="X"] {
-    background-color: var(--checkbox-color) !important;
-    background-image: none !important;
-    border-color: var(--checkbox-color) !important;
+    background-color: var(--checkbox-color);
+    background-image: none;
+    border-color: var(--checkbox-color);
 }
 .task-list-item[data-task="x"] .task-list-item-checkbox:hover,
 .task-list-item[data-task="X"] .task-list-item-checkbox:hover,
 input[type="checkbox"][data-task="x"]:hover,
 input[type="checkbox"][data-task="X"]:hover {
-    background-color: var(--checkbox-color-hover) !important;
-    border-color: var(--checkbox-color-hover) !important;
+    background-color: var(--checkbox-color-hover);
+    border-color: var(--checkbox-color-hover);
 }
 .task-list-item[data-task="x"] .task-list-item-checkbox::before,
 .task-list-item[data-task="X"] .task-list-item-checkbox::before,
@@ -559,9 +559,9 @@ input[type="checkbox"][data-task="X"]::before {
 /* ── [/] In-progress ── */
 .task-list-item[data-task="/"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="/"] {
-    background-color: transparent !important;
-    background-image: none !important;
-    border-color: {{c:yellow}} !important;
+    background-color: transparent;
+    background-image: none;
+    border-color: {{c:yellow}};
 }
 .task-list-item[data-task="/"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task="/"]::before {
@@ -575,9 +575,9 @@ input[type="checkbox"][data-task="/"]::before {
 /* ── [-] Cancelled ── */
 .task-list-item[data-task="-"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="-"] {
-    background-color: transparent !important;
-    background-image: none !important;
-    border-color: {{c:comment}} !important;
+    background-color: transparent;
+    background-image: none;
+    border-color: {{c:comment}};
 }
 .task-list-item[data-task="-"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task="-"]::before {
@@ -605,9 +605,9 @@ input[type="checkbox"][data-task="-"]::before {
 /* ── [>] Rescheduled ── */
 .task-list-item[data-task=">"] .task-list-item-checkbox,
 input[type="checkbox"][data-task=">"] {
-    background-color: transparent !important;
-    background-image: none !important;
-    border-color: {{c:cyan}} !important;
+    background-color: transparent;
+    background-image: none;
+    border-color: {{c:cyan}};
 }
 .task-list-item[data-task=">"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task=">"]::before {
@@ -625,9 +625,9 @@ input[type="checkbox"][data-task=">"]::before {
 /* ── [?] Questionable ── */
 .task-list-item[data-task="?"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="?"] {
-    background-color: {{c:yellow}} !important;
-    background-image: none !important;
-    border-color: {{c:yellow}} !important;
+    background-color: {{c:yellow}};
+    background-image: none;
+    border-color: {{c:yellow}};
 }
 .task-list-item[data-task="?"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task="?"]::before {
@@ -645,9 +645,9 @@ input[type="checkbox"][data-task="?"]::before {
 /* ── [!] Important ── */
 .task-list-item[data-task="!"] .task-list-item-checkbox,
 input[type="checkbox"][data-task="!"] {
-    background-color: {{c:red}} !important;
-    background-image: none !important;
-    border-color: {{c:red}} !important;
+    background-color: {{c:red}};
+    background-image: none;
+    border-color: {{c:red}};
 }
 .task-list-item[data-task="!"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task="!"]::before {
@@ -797,9 +797,9 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
  * ============================================================ */
 
 .workspace-tab-header-container,
-.workspace-tab-header-container-inner { background-color: {{c:bg}} !important; }
-.workspace-tab-header                 { background-color: {{c:bg}} !important; }
-.workspace-tab-header.is-active       { background-color: {{c:bg}} !important; color: {{c:fg}}; }
+.workspace-tab-header-container-inner { background-color: {{c:bg}}; }
+.workspace-tab-header                 { background-color: {{c:bg}}; }
+.workspace-tab-header.is-active       { background-color: {{c:bg}}; color: {{c:fg}}; }
 .workspace-tab-header:hover           { background-color: {{c:bg-hl}} !important; }
 
 /* ============================================================
@@ -810,14 +810,14 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 
 .workspace-ribbon,
 .workspace-ribbon.mod-left,
-.side-dock-ribbon { background-color: {{c:bg}} !important; }
+.side-dock-ribbon { background-color: {{c:bg}}; }
 
 /* ============================================================
  * Status bar
  * ============================================================ */
 
 .status-bar {
-    background-color: {{c:bg}} !important;
+    background-color: {{c:bg}};
     border-top: 1px solid {{c:gutter}};
     color: {{c:comment}};
 }
@@ -827,8 +827,8 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
  * ============================================================ */
 
 .tooltip {
-    background-color: {{c:bg-dark}} !important;
-    color:            rgba({{rgb:tooltip}}, {{r:tooltip_text_alpha}}) !important;
+    background-color: {{c:bg-dark}};
+    color:            rgba({{rgb:tooltip}}, {{r:tooltip_text_alpha}});
     border:           1px solid rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}});
     box-shadow:       {{r:tooltip_shadow}};
 }
@@ -863,7 +863,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 ::selection { background: {{c:selection}}; color: {{c:fg}}; }
 
 .cm-editor .cm-selectionBackground,
-.cm-editor.cm-focused .cm-selectionBackground { background: {{c:selection}} !important; }
+.cm-editor.cm-focused .cm-selectionBackground { background: {{c:selection}}; }
 
 .cm-editor .cm-cursor { border-left-color: {{c:highlight}}; }
 
@@ -952,8 +952,8 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
  * ============================================================ */
 
 .notice {
-    background: {{c:bg-hl}} !important;
-    color: {{c:fg}} !important;
+    background: {{c:bg-hl}};
+    color: {{c:fg}};
     border: 1px solid {{c:gutter}};
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
@@ -988,7 +988,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 
 .{{P}}-hide-folder-icons .nav-folder .nav-folder-title .nav-folder-title-content::before,
 .{{P}}-hide-folder-icons .nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
-    display: none !important;
+    display: none;
 }
 .{{P}}-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
 
