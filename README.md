@@ -21,51 +21,62 @@ Screenshots are still to come. Details for each platform: [Lamplit for Obsidian]
 
 ## Installation
 
-The themes are not in the Obsidian or Typora theme galleries yet, so install them from this repository:
+The themes are not in the Obsidian or Typora theme galleries yet. There are three ways to install them, and none of them needs an account.
+
+### Option 1: one command (macOS, Linux)
+
+Needs `curl` and `unzip`. Run the same command again to update.
+
+```bash
+# Obsidian: pass the path to your vault
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- obsidian /path/to/your/vault
+
+# Typora: every theme
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora
+
+# Typora: only some palettes
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora big-wave impression
+```
+
+The script installs the latest release. It only writes to the theme folders, and it is short enough to [read first](install.sh).
+
+### Option 2: download a release
+
+From the [latest release](https://github.com/agiledolphin/themes/releases/latest):
+
+- **Obsidian**: unzip `Lamplit-obsidian.zip` into `<your-vault>/.obsidian/themes/`, so that you get `themes/Lamplit/theme.css`. In Finder, press Cmd+Shift+. to show the hidden `.obsidian` folder.
+- **Typora**: unzip `Lamplit-typora.zip` and copy the `.css` files you want directly into Typora's themes folder, without a subfolder:
+  - **macOS**: `~/Library/Application Support/abnerworks.Typora/themes/`
+  - **Windows**: `%APPDATA%\Typora\themes\`
+  - **Linux**: `~/.config/Typora/themes/`
+
+### Option 3: from a clone
 
 ```bash
 git clone https://github.com/agiledolphin/themes.git
 cd themes
-```
-
-`sync-typora.sh` only knows Typora's macOS folder; on other systems, use the manual steps.
-
-### Obsidian
-
-```bash
 ./scripts/sync-obsidian.sh /path/to/your/vault
+./scripts/sync-typora.sh              # every theme (macOS only)
+./scripts/sync-typora.sh big-wave     # one palette (a folder name under typora/)
 ```
 
-Or copy `theme.css` and `manifest.json` from `obsidian/lamplit/` to `<your-vault>/.obsidian/themes/Lamplit/`. The folder must be named exactly `Lamplit`, capital L included: copying the repository's lowercase `lamplit` folder as it is will not work.
+This installs the current `main`. To update, run `git pull` and the sync scripts again.
 
-Then:
+### After installing
 
-1. Open **Settings → Appearance → Themes** and select **Lamplit**.
+**Obsidian**
+
+1. Restart Obsidian, open **Settings → Appearance → Themes** and select **Lamplit**.
 2. Install **Style Settings** from the Community Plugins list.
 3. Open **Settings → Style Settings → Lamplit** and pick a **Dark Mode Scheme** and a **Light Mode Scheme**.
 
 Without Style Settings, Lamplit uses Wonderland · Underground in dark mode and Wonderland · Lab in light mode.
 
-**Lamplit does not show up?** It is listed in the theme dropdown under **Settings → Appearance → Themes**, not under **Manage**, which only searches the community gallery. Obsidian silently skips a theme whose folder name differs from the `name` in its `manifest.json`, even by case, so check that the folder is `Lamplit`, and that it holds `theme.css` and `manifest.json` directly. If Obsidian was open during the install, restart it.
+**Lamplit does not show up?** It is listed in the theme dropdown under **Settings → Appearance → Themes**, not under **Manage**, which only searches the community gallery. Obsidian silently skips a theme whose folder name differs from the `name` in its `manifest.json`, even by case, so check that the folder is exactly `Lamplit`, and that it holds `theme.css` and `manifest.json` directly.
 
-### Typora
+**Typora**
 
-```bash
-./scripts/sync-typora.sh              # every theme
-./scripts/sync-typora.sh big-wave     # one palette (a folder name under typora/)
-```
-
-Or copy the `lamplit-*.css` files from `typora/<palette>/` directly into Typora's themes folder, without a subfolder:
-
-- **macOS**: `~/Library/Application Support/abnerworks.Typora/themes/`
-- **Windows**: `%APPDATA%\Typora\themes\`
-- **Linux**: `~/.config/Typora/themes/`
-
-Then restart Typora and choose a **Lamplit …** theme from the **Themes** menu. Each variant is a separate theme, so Typora does not switch between dark and light by itself.
-
-### Updating
-
-Run `git pull`, then the sync scripts again. Reload the theme in Obsidian and reselect it in Typora.
+Restart Typora and choose a **Lamplit …** theme from the **Themes** menu. Each variant is a separate theme, so Typora does not switch between dark and light by itself.
 
 ## Development
 
@@ -83,6 +94,8 @@ Every theme file is generated. Do not edit `obsidian/lamplit/theme.css`, `obsidi
 ```
 
 To add a palette, create `shared/palettes/<palette>.toml`, add its name to `schemes` in `shared/lamplit.toml`, and run the generator.
+
+To cut a release, run `./scripts/package-release.sh`, which builds the two archives into `dist/` and prints the `gh release create` command.
 
 `scripts/verify-obsidian/` checks the real rendering in Obsidian: Reading view against Live Preview, text contrast, and differences from an earlier run. See [CLAUDE.md](CLAUDE.md) for the conventions and the verification workflow, and [THEMES_PLAN.md](THEMES_PLAN.md) for status and current versions.
 

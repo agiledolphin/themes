@@ -52,8 +52,10 @@ themes/
 │   ├── templates/           # obsidian.css.tmpl, typora.css.tmpl
 │   ├── verify-obsidian/     # automated Reading/Live Preview rendering check (see Obsidian)
 │   ├── sync-obsidian.sh     # ./scripts/sync-obsidian.sh <vault-path> [theme]
-│   └── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
+│   ├── sync-typora.sh       # ./scripts/sync-typora.sh [theme]
+│   └── package-release.sh   # builds the release archives into dist/ (git-ignored)
 ├── .verify/                 # verify-obsidian output (git-ignored)
+├── install.sh               # installs from the latest GitHub Release, no clone needed
 ├── README.md                # overview, installation (keep palette table and counts current)
 ├── LICENSE
 └── THEMES_PLAN.md
@@ -148,6 +150,11 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   feature batches) and update the table in `THEMES_PLAN.md`. A pure refactor that renders
   identically does not bump.
 - Commit style: `feat(obsidian): …`, `fix(typora): …`, `docs: …`, `chore: …`.
+- Releases: `install.sh` and the README download from the latest GitHub Release, so theme changes
+  reach users only when released. After pushing, run `./scripts/package-release.sh`, then the
+  `gh release create v<Lamplit version> dist/*.zip …` it prints (ask the user first: it publishes).
+  The tag follows Lamplit's version. A Typora-only change has no new Lamplit version: replace the
+  archives on the current release with `gh release upload v<version> dist/*.zip --clobber`.
 
 ## Tooling
 
