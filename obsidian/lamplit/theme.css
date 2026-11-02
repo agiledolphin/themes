@@ -96,6 +96,12 @@ settings:
     description: Hide the file type icons in the file explorer
     type: class-toggle
     default: false
+  -
+    id: ll-color-folders
+    title: Color Folders
+    description: Give each top-level folder and everything inside it a color from the scheme
+    type: class-toggle
+    default: false
 
 */
 
@@ -139,6 +145,14 @@ body.theme-dark.ll-wl-underground {
     --ll-accent-rgb:           195, 154, 95;
     --ll-accent-hover:         #d8c27a;
     --ll-callout-note-rgb:     125, 154, 196;
+    --ll-folder-1:             #7d9ac4;
+    --ll-folder-2:             #c47a4a;
+    --ll-folder-3:             #6ca59d;
+    --ll-folder-4:             #c25a50;
+    --ll-folder-5:             #7c9a74;
+    --ll-folder-6:             #9a8cc0;
+    --ll-folder-7:             #d8c27a;
+    --ll-folder-8:             #7fcfcf;
     --ll-graph-tag:            #c39a5f;
     --ll-h1:                   #7fcfcf;
     --ll-h2:                   #c39a5f;
@@ -203,6 +217,14 @@ body.theme-dark.ll-wl-office {
     --ll-accent-rgb:           212, 168, 94;
     --ll-accent-hover:         #e9d184;
     --ll-callout-note-rgb:     138, 160, 196;
+    --ll-folder-1:             #8aa0c4;
+    --ll-folder-2:             #cf8350;
+    --ll-folder-3:             #78a499;
+    --ll-folder-4:             #cc6155;
+    --ll-folder-5:             #869f78;
+    --ll-folder-6:             #a493c4;
+    --ll-folder-7:             #e9d184;
+    --ll-folder-8:             #86cccb;
     --ll-graph-tag:            #d4a85e;
     --ll-h1:                   #86cccb;
     --ll-h2:                   #d4a85e;
@@ -267,6 +289,14 @@ body.theme-dark.ll-mr-dark {
     --ll-accent-rgb:           88, 166, 255;
     --ll-accent-hover:         #39c5cf;
     --ll-callout-note-rgb:     88, 166, 255;
+    --ll-folder-1:             #58a6ff;
+    --ll-folder-2:             #f0883e;
+    --ll-folder-3:             #3cbf90;
+    --ll-folder-4:             #ff7b72;
+    --ll-folder-5:             #3fb950;
+    --ll-folder-6:             #bc8cff;
+    --ll-folder-7:             #d29922;
+    --ll-folder-8:             #39c5cf;
     --ll-graph-tag:            #3cbf90;
     --ll-h1:                   #58a6ff;
     --ll-h2:                   #bc8cff;
@@ -331,6 +361,14 @@ body.theme-dark.ll-bw-pipeline {
     --ll-accent-rgb:           110, 160, 255;
     --ll-accent-hover:         #5fd4e0;
     --ll-callout-note-rgb:     110, 160, 255;
+    --ll-folder-1:             #6ea0ff;
+    --ll-folder-2:             #ff9f5a;
+    --ll-folder-3:             #4cc7a8;
+    --ll-folder-4:             #ff6b6b;
+    --ll-folder-5:             #8fd18a;
+    --ll-folder-6:             #ff8fa3;
+    --ll-folder-7:             #e6cf7e;
+    --ll-folder-8:             #5fd4e0;
     --ll-graph-tag:            #5fd4e0;
     --ll-h1:                   #ff8fa3;
     --ll-h2:                   #6ea0ff;
@@ -395,6 +433,14 @@ body.theme-dark.ll-im-havre {
     --ll-accent-rgb:           240, 122, 69;
     --ll-accent-hover:         #dcb27a;
     --ll-callout-note-rgb:     130, 163, 200;
+    --ll-folder-1:             #82a3c8;
+    --ll-folder-2:             #f07a45;
+    --ll-folder-3:             #6dbb9c;
+    --ll-folder-4:             #e86060;
+    --ll-folder-5:             #a6bd7e;
+    --ll-folder-6:             #aa9ad6;
+    --ll-folder-7:             #dcb27a;
+    --ll-folder-8:             #6cbcc4;
     --ll-graph-tag:            #6cbcc4;
     --ll-h1:                   #f07a45;
     --ll-h2:                   #82a3c8;
@@ -459,6 +505,14 @@ body.theme-dark.ll-bh-weimar {
     --ll-accent-rgb:           255, 90, 78;
     --ll-accent-hover:         #6f9dff;
     --ll-callout-note-rgb:     111, 157, 255;
+    --ll-folder-1:             #6f9dff;
+    --ll-folder-2:             #ff9a3c;
+    --ll-folder-3:             #4fc1b8;
+    --ll-folder-4:             #ff5a4e;
+    --ll-folder-5:             #6cc070;
+    --ll-folder-6:             #b48cff;
+    --ll-folder-7:             #ffd23f;
+    --ll-folder-8:             #4fc1b8;
     --ll-graph-tag:            #ff5a4e;
     --ll-h1:                   #ff5a4e;
     --ll-h2:                   #6f9dff;
@@ -532,6 +586,14 @@ body.theme-dark.ll-tn-storm {
     --ll-accent-rgb:           122, 162, 247;
     --ll-accent-hover:         #7dcfff;
     --ll-callout-note-rgb:     122, 162, 247;
+    --ll-folder-1:             #7aa2f7;
+    --ll-folder-2:             #ff9e64;
+    --ll-folder-3:             #1abc9c;
+    --ll-folder-4:             #f7768e;
+    --ll-folder-5:             #9ece6a;
+    --ll-folder-6:             #bb9af7;
+    --ll-folder-7:             #e0af68;
+    --ll-folder-8:             #7dcfff;
     --ll-graph-tag:            #bb9af7;
     --ll-h1:                   #7aa2f7;
     --ll-h2:                   #7dcfff;
@@ -596,6 +658,14 @@ body.theme-dark.ll-tn-night {
     --ll-accent-rgb:           122, 162, 247;
     --ll-accent-hover:         #7dcfff;
     --ll-callout-note-rgb:     122, 162, 247;
+    --ll-folder-1:             #7aa2f7;
+    --ll-folder-2:             #ff9e64;
+    --ll-folder-3:             #1abc9c;
+    --ll-folder-4:             #f7768e;
+    --ll-folder-5:             #9ece6a;
+    --ll-folder-6:             #bb9af7;
+    --ll-folder-7:             #e0af68;
+    --ll-folder-8:             #7dcfff;
     --ll-graph-tag:            #bb9af7;
     --ll-h1:                   #7aa2f7;
     --ll-h2:                   #7dcfff;
@@ -660,6 +730,14 @@ body.theme-dark.ll-tn-moon {
     --ll-accent-rgb:           130, 170, 255;
     --ll-accent-hover:         #86e1fc;
     --ll-callout-note-rgb:     130, 170, 255;
+    --ll-folder-1:             #82aaff;
+    --ll-folder-2:             #ff966c;
+    --ll-folder-3:             #4fd6be;
+    --ll-folder-4:             #ff757f;
+    --ll-folder-5:             #c3e88d;
+    --ll-folder-6:             #c099ff;
+    --ll-folder-7:             #ffc777;
+    --ll-folder-8:             #86e1fc;
     --ll-graph-tag:            #c099ff;
     --ll-h1:                   #82aaff;
     --ll-h2:                   #86e1fc;
@@ -724,6 +802,14 @@ body.theme-dark.ll-cp-mocha {
     --ll-accent-rgb:           180, 190, 254;
     --ll-accent-hover:         #cba6f7;
     --ll-callout-note-rgb:     180, 190, 254;
+    --ll-folder-1:             #89b4fa;
+    --ll-folder-2:             #fab387;
+    --ll-folder-3:             #94e2d5;
+    --ll-folder-4:             #f38ba8;
+    --ll-folder-5:             #a6e3a1;
+    --ll-folder-6:             #cba6f7;
+    --ll-folder-7:             #f9e2af;
+    --ll-folder-8:             #89dceb;
     --ll-graph-tag:            #cba6f7;
     --ll-h1:                   #b4befe;
     --ll-h2:                   #cba6f7;
@@ -790,6 +876,14 @@ body.theme-dark.ll-cp-macchiato {
     --ll-accent-rgb:           183, 189, 248;
     --ll-accent-hover:         #c6a0f6;
     --ll-callout-note-rgb:     183, 189, 248;
+    --ll-folder-1:             #8aadf4;
+    --ll-folder-2:             #f5a97f;
+    --ll-folder-3:             #8bd5ca;
+    --ll-folder-4:             #ed8796;
+    --ll-folder-5:             #a6da95;
+    --ll-folder-6:             #c6a0f6;
+    --ll-folder-7:             #eed49f;
+    --ll-folder-8:             #91d7e3;
     --ll-graph-tag:            #c6a0f6;
     --ll-h1:                   #b7bdf8;
     --ll-h2:                   #c6a0f6;
@@ -856,6 +950,14 @@ body.theme-dark.ll-cp-frappe {
     --ll-accent-rgb:           186, 187, 241;
     --ll-accent-hover:         #ca9ee6;
     --ll-callout-note-rgb:     186, 187, 241;
+    --ll-folder-1:             #8caaee;
+    --ll-folder-2:             #ef9f76;
+    --ll-folder-3:             #81c8be;
+    --ll-folder-4:             #e78284;
+    --ll-folder-5:             #a6d189;
+    --ll-folder-6:             #ca9ee6;
+    --ll-folder-7:             #e5c890;
+    --ll-folder-8:             #99d1db;
     --ll-graph-tag:            #ca9ee6;
     --ll-h1:                   #babbf1;
     --ll-h2:                   #ca9ee6;
@@ -923,6 +1025,14 @@ body.theme-light.ll-wl-lab {
     --ll-accent-rgb:           136, 92, 32;
     --ll-accent-hover:         #6d5d00;
     --ll-callout-note-rgb:     58, 94, 148;
+    --ll-folder-1:             #3a5e94;
+    --ll-folder-2:             #a8521e;
+    --ll-folder-3:             #2e7567;
+    --ll-folder-4:             #a8323a;
+    --ll-folder-5:             #4a7140;
+    --ll-folder-6:             #6a5596;
+    --ll-folder-7:             #6d5d00;
+    --ll-folder-8:             #007784;
     --ll-graph-tag:            #885c20;
     --ll-h1:                   #007784;
     --ll-h2:                   #885c20;
@@ -987,6 +1097,14 @@ body.theme-light.ll-mr-light {
     --ll-accent-rgb:           9, 105, 218;
     --ll-accent-hover:         #1b7c83;
     --ll-callout-note-rgb:     9, 105, 218;
+    --ll-folder-1:             #0969da;
+    --ll-folder-2:             #bc4c00;
+    --ll-folder-3:             #167056;
+    --ll-folder-4:             #cf222e;
+    --ll-folder-5:             #116329;
+    --ll-folder-6:             #8250df;
+    --ll-folder-7:             #9d5c00;
+    --ll-folder-8:             #1b7c83;
     --ll-graph-tag:            #167056;
     --ll-h1:                   #0969da;
     --ll-h2:                   #8250df;
@@ -1051,6 +1169,14 @@ body.theme-light.ll-bw-spray {
     --ll-accent-rgb:           31, 79, 191;
     --ll-accent-hover:         #007283;
     --ll-callout-note-rgb:     31, 79, 191;
+    --ll-folder-1:             #1f4fbf;
+    --ll-folder-2:             #b8500f;
+    --ll-folder-3:             #0f7a63;
+    --ll-folder-4:             #c0303a;
+    --ll-folder-5:             #2f7a2a;
+    --ll-folder-6:             #bd4762;
+    --ll-folder-7:             #7e6200;
+    --ll-folder-8:             #007283;
     --ll-graph-tag:            #007283;
     --ll-h1:                   #bd4762;
     --ll-h2:                   #1f4fbf;
@@ -1115,6 +1241,14 @@ body.theme-light.ll-im-brume {
     --ll-accent-rgb:           180, 71, 31;
     --ll-accent-hover:         #835e1d;
     --ll-callout-note-rgb:     53, 95, 134;
+    --ll-folder-1:             #355f86;
+    --ll-folder-2:             #b4471f;
+    --ll-folder-3:             #2f6e58;
+    --ll-folder-4:             #b2373b;
+    --ll-folder-5:             #4f6b2c;
+    --ll-folder-6:             #62538f;
+    --ll-folder-7:             #835e1d;
+    --ll-folder-8:             #1f6f7a;
     --ll-graph-tag:            #1f6f7a;
     --ll-h1:                   #b4471f;
     --ll-h2:                   #355f86;
@@ -1179,6 +1313,14 @@ body.theme-light.ll-bh-dessau {
     --ll-accent-rgb:           196, 38, 46;
     --ll-accent-hover:         #1f4f9c;
     --ll-callout-note-rgb:     31, 79, 156;
+    --ll-folder-1:             #1f4f9c;
+    --ll-folder-2:             #ad5106;
+    --ll-folder-3:             #00756e;
+    --ll-folder-4:             #c4262e;
+    --ll-folder-5:             #2e7d32;
+    --ll-folder-6:             #6a3fa0;
+    --ll-folder-7:             #876700;
+    --ll-folder-8:             #00756e;
     --ll-graph-tag:            #c4262e;
     --ll-h1:                   #c4262e;
     --ll-h2:                   #1f4f9c;
@@ -1252,6 +1394,14 @@ body.theme-light.ll-tn-day {
     --ll-accent-rgb:           46, 125, 233;
     --ll-accent-hover:         #007197;
     --ll-callout-note-rgb:     46, 125, 233;
+    --ll-folder-1:             #2e7de9;
+    --ll-folder-2:             #b15c00;
+    --ll-folder-3:             #118c74;
+    --ll-folder-4:             #c64343;
+    --ll-folder-5:             #587539;
+    --ll-folder-6:             #9854f1;
+    --ll-folder-7:             #8c6c3e;
+    --ll-folder-8:             #007197;
     --ll-graph-tag:            #9854f1;
     --ll-h1:                   #2e7de9;
     --ll-h2:                   #007197;
@@ -1316,6 +1466,14 @@ body.theme-light.ll-cp-latte {
     --ll-accent-rgb:           114, 135, 253;
     --ll-accent-hover:         #8839ef;
     --ll-callout-note-rgb:     114, 135, 253;
+    --ll-folder-1:             #1e66f5;
+    --ll-folder-2:             #fe640b;
+    --ll-folder-3:             #179299;
+    --ll-folder-4:             #d20f39;
+    --ll-folder-5:             #40a02b;
+    --ll-folder-6:             #8839ef;
+    --ll-folder-7:             #df8e1d;
+    --ll-folder-8:             #04a5e5;
     --ll-graph-tag:            #8839ef;
     --ll-h1:                   #7287fd;
     --ll-h2:                   #8839ef;
@@ -2298,7 +2456,7 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-cp-mocha, 
     height: 14px;
     margin-right: 6px;
     vertical-align: -2px;
-    background-color: var(--text-accent);
+    background-color: var(--ll-folder-color, var(--text-accent));
     -webkit-mask-size: cover;
     background-repeat: no-repeat;
 }
@@ -2316,6 +2474,24 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-cp-mocha, 
     display: none !important;
 }
 .ll-hide-folder-icons .nav-folder-collapse-indicator { display: unset; }
+
+/* Color Folders (off by default): each top-level folder takes the next color of an 8-color
+   cycle by position, and everything inside inherits it through the variable. "of .nav-folder"
+   skips the explorer's spacer and the root's files. The cycle comes from the scheme, so every
+   mode has its own colors. Known limit, no CSS fix: colors follow the position, so a new top-level
+   folder shifts the ones after it, and in a long list Obsidian drops scrolled-out top-level
+   folders from the page, so the remaining ones renumber and change color while scrolling. */
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 1 of .nav-folder) { --ll-folder-color: var(--ll-folder-1); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 2 of .nav-folder) { --ll-folder-color: var(--ll-folder-2); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 3 of .nav-folder) { --ll-folder-color: var(--ll-folder-3); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 4 of .nav-folder) { --ll-folder-color: var(--ll-folder-4); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 5 of .nav-folder) { --ll-folder-color: var(--ll-folder-5); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 6 of .nav-folder) { --ll-folder-color: var(--ll-folder-6); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 7 of .nav-folder) { --ll-folder-color: var(--ll-folder-7); }
+.ll-color-folders .nav-files-container > div > .nav-folder:nth-child(8n + 0 of .nav-folder) { --ll-folder-color: var(--ll-folder-8); }
+.ll-color-folders .nav-folder .nav-folder-children::before {
+    background-color: color-mix(in srgb, var(--ll-folder-color, var(--ll-gutter)) 55%, transparent);
+}
 
 /* ============================================================
  * File Icons

@@ -68,8 +68,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 
 - Style Settings: `ll-dark-scheme` (every dark variant of every palette) and `ll-light-scheme`
   (every light variant), class values `ll-<palette prefix>-<variant>` (e.g. `ll-cp-latte`),
-  plus `ll-hide-folder-icons` and `ll-hide-file-icons`. These ids are users' saved choices — never
-  rename them.
+  plus `ll-hide-folder-icons`, `ll-hide-file-icons` and `ll-color-folders`. These ids are users'
+  saved choices — never rename them.
 - One block per variant: `body.theme-dark.ll-wl-office { … }` (the default variant's block also
   matches plain `body.theme-dark`). Each block defines the semantic variables the rules use
   (`--ll-accent`, `--ll-h2`, `--ll-search-rgb`, …); the generator turns every template
@@ -84,6 +84,10 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   elements solid: `--text-highlight-bg` stays the faint tint, because Obsidian reuses it
   (link flashes, search) under normal text. `corners = "square"` also zeroes Obsidian's own
   UI radii (`--radius-s/m/l/xl`, `--input-radius`, `--tab-radius-active`).
+- `ll-color-folders` colors top-level folders by `:nth-child`; children inherit `--ll-folder-color`.
+  The 8 colors are `FOLDER_CYCLE` in `gen-themes.py`. Known limit, measured: the file explorer
+  virtualizes, so scrolled-out top-level folders leave the DOM and the rest renumber (Blue Topaz's
+  by-order mode does the same).
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different
