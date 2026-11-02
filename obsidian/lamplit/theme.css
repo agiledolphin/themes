@@ -1811,10 +1811,6 @@ a.is-unresolved:hover         { color: var(--ll-comment); text-decoration-color:
 }
 /* Live Preview code-block language label: keep its default small radius. */
 .markdown-source-view.mod-cm6 .code-block-flair { --code-radius: var(--ll-radius-4); }
-.cm-inline-code {
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-}
 
 /* ============================================================
  * Code Blocks
