@@ -184,6 +184,7 @@ window.__V = (() => {
   }
   const PROBE_PROPS = ['color', 'background-color', 'background-image', 'box-shadow', 'font-weight',
     'border-top-color', 'border-top-width', 'border-left-color', 'border-bottom-color', 'opacity', 'z-index'];
+  const FILE_ICON_PROPS = ['display', 'width', 'opacity', 'background-color', '-webkit-mask-image'];
   function probe(id, pseudo) {
     const el = ensureProbes().querySelector(`[data-vprobe="${id}"]`);
     return pick(el, pseudo ? [...PROBE_PROPS, 'content', 'width'] : PROBE_PROPS, pseudo);
@@ -199,12 +200,15 @@ window.__V = (() => {
       if (/^(folder|root|children)$|^task-\d-box$/.test(id)) out.probes[`${id}::before`] = probe(id, '::before');
     }
     out.probes['folder-icon::before'] = pick(box.querySelector('[data-vprobe="folder"] .nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before');
+    for (const id of ['file', 'active'])
+      out.probes[`${id}-icon::before`] = pick(box.querySelector(`[data-vprobe="${id}"] .nav-file-title-content`), FILE_ICON_PROPS, '::before');
     return out;
   }
   // used by run.mjs after it forces :hover / :focus-within on a probe through CDP
   function probeState(id) {
     const box = ensureProbes(), el = box.querySelector(`[data-vprobe="${id}"]`);
-    return { self: probe(id), icon: pick(el?.querySelector('.nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before') };
+    return { self: probe(id), icon: pick(el?.querySelector('.nav-folder-title-content'), [...PROBE_PROPS, 'content'], '::before'),
+             fileIcon: pick(el?.querySelector('.nav-file-title-content'), FILE_ICON_PROPS, '::before') };
   }
   function removeProbes() { document.getElementById('__vprobe')?.remove(); }
 

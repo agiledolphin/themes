@@ -57,7 +57,8 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 - **Search highlights** — one dedicated search color per palette (Wonderland cyan, Merino orange, Big Wave sunset orange, Impression lilac, Bauhaus orange, TokyoNight orange, Catppuccin peach), distinct from highlighted text and the selection
 - **Context menus** — a darker surface than the editor; destructive items such as Delete turn red when selected
 - **Chinese-first typography** — PingFang SC → Hiragino Sans GB → Noto Serif SC
-- **Hide Folder Icons** toggle in Style Settings
+- **File type icons** in the file explorer — notes, images, canvases, bases, PDFs, audio, video and other files each have their own icon
+- **Hide Folder Icons** and **Hide File Icons** toggles in Style Settings
 
 > **Note (macOS):** Obsidian uses native system menus on macOS by default, and themes cannot style those. To see the themed context menus, turn off **Settings → Interface → Advanced → Native menus**.
 
@@ -74,6 +75,7 @@ Without Style Settings, Lamplit uses **Wonderland · Underground** in dark mode 
 
 - Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Wonderland is original
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
+- Icons: [Lucide](https://lucide.dev), the set Obsidian itself uses
 
 ---
 

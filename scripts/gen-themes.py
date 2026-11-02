@@ -354,6 +354,9 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
                      *option_lines(mode)]
     settings += ["  -", f"    id: {P}-hide-folder-icons", "    title: Hide Folder Icons",
                  "    description: Hide the folder icons in the file explorer",
+                 "    type: class-toggle", "    default: false",
+                 "  -", f"    id: {P}-hide-file-icons", "    title: Hide File Icons",
+                 "    description: Hide the file type icons in the file explorer",
                  "    type: class-toggle", "    default: false", "", "*/"]
     header = "\n".join([
         "/* " + "=" * 60, f" * {cfg['name']} — Obsidian Theme",
