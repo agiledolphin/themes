@@ -1,5 +1,7 @@
 # Lamplit Impression for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A misty Typora theme after Claude Monet's *Impression, Sunrise* (1872): the harbour of Le Havre at dawn, cool grey-blue and grey-green haze, dark boats, and one orange sun with its reflection on the water. As in the painting, the sun is the only warm, saturated color; everything else is cool and muted. The light variant is kept airy: a grey-green white ground, surfaces that differ by a breath of mist, slate (not black) text and pale tints.
 
 Two variants are provided as separate CSS files. Colors match the Impression scheme in the Obsidian theme Lamplit.
@@ -8,7 +10,7 @@ Two variants are provided as separate CSS files. Colors match the Impression sch
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Impression: dark and light](screenshot.png)
 
 ---
 
@@ -50,6 +52,14 @@ Every accent reads at 4.5:1 or better against its background, and look-alike col
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora impression
+```
 
 ### Automatic (sync script)
 

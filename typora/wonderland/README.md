@@ -1,5 +1,7 @@
 # Lamplit Wonderland for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A Typora theme inspired by the **Hard-Boiled Wonderland** half of Haruki Murakami's *Hard-Boiled Wonderland and the End of the World* (《世界尽头与冷酷仙境》): a cold, deadpan, faintly surreal Tokyo — rain-dark streets, the INKlings' flooded underground, skull-lined laboratories — where the warm brass of a desk lamp or a whisky bar is the only warmth in the room.
 
 Three variants are provided as separate CSS files. Colors match the Wonderland scheme in the Obsidian theme Lamplit.
@@ -8,7 +10,7 @@ Three variants are provided as separate CSS files. Colors match the Wonderland s
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Wonderland: dark and light](screenshot.png)
 
 ---
 
@@ -17,7 +19,7 @@ Three variants are provided as separate CSS files. Colors match the Wonderland s
 | File | Mode | Background | Character |
 |------|------|------------|-----------|
 | `lamplit-wonderland-underground.css`     | Dark  | `#121218` | The INKlings' sewers — darkest, coldest |
-| `lamplit-wonderland-office-district.css` | Dark  | `#1d1d1d` | Tokyo at night above ground — a shade lighter, warmer |
+| `lamplit-wonderland-office-district.css` | Dark  | `#1d1d1d` | Tokyo at night above ground — a shade lighter, neutral charcoal |
 | `lamplit-wonderland-lab.css`             | Light | `#eef0f2` | The System's sterile laboratory — cold white |
 
 ## Color roles
@@ -46,6 +48,14 @@ Three variants are provided as separate CSS files. Colors match the Wonderland s
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora wonderland
+```
 
 ### Automatic (sync script)
 

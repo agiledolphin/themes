@@ -1,5 +1,7 @@
 # Lamplit Big Wave for Typora
 
+English · [简体中文](README.zh-CN.md)
+
 A summer-ocean Typora theme after the cover of Tatsuro Yamashita's *Big Wave* (1984): the deep-navy tube of a breaking wave, white spray, a cobalt sky, the coral script of the title and a yellow surfboard. The cover gives blue, white, coral and yellow; palm green, sunset orange and red come from the same 80s city-pop summer.
 
 Two variants are provided as separate CSS files. Colors match the Big Wave scheme in the Obsidian theme Lamplit.
@@ -8,7 +10,7 @@ Two variants are provided as separate CSS files. Colors match the Big Wave schem
 
 ## Screenshots
 
-> *(coming soon)*
+![Lamplit Big Wave: dark and light](screenshot.png)
 
 ---
 
@@ -49,6 +51,14 @@ Every accent reads at 4.6:1 or better against its background, and look-alike col
 ---
 
 ## Installation
+
+### One command (macOS, Linux)
+
+No clone needed. Run it again to update.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/agiledolphin/themes/main/install.sh | bash -s -- typora big-wave
+```
 
 ### Automatic (sync script)
 

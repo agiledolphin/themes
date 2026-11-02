@@ -169,7 +169,9 @@
 | manifest.json | `authorUrl` 已填 | ☑ |
 | LICENSE / README | 本仓库已补；发布仓库的 README 取自 `obsidian/lamplit/README.md` | ☑ |
 | 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
-| Typora 截图 | 各 Typora README 中的 *coming soon* | ☐ |
+| Typora 截图 | `typora/<配色>/screenshot.png`：深浅对半，1024×576。用 Typora 自带 `base.css` + 主题 CSS 按 Typora 页面结构在无头浏览器渲染（不是 Typora 窗口截图，Typora 无法脚本控制） | ☑ |
+| 中文文档 | `obsidian/lamplit` 和 7 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
+| Typora 主题库 | 向 `typora/theme.typora.io` 提 PR（post + 250×200 缩略图 + 截图，下载地址用 Release 的 `Lamplit-typora.zip`）；材料已准备，等用户确认 | 进行中 |
 
 **社区目录自动审核**（Lamplit 1.6.0，页面 Scorecard）：0 错误、101 条警告（警告不阻止发布），Health Excellent、Review Caution。
 
@@ -182,7 +184,7 @@
 
 1.6.1 扫描结果：97 条。`:has` 已清除；提高 `minAppVersion` 对兼容性警告没有作用（仍为 28 条），保留 1.5.0，因 1.0.0 本来不准确（Color Folders 用到较新的 CSS）。
 
-逐条检查（2026-11-02）：`text-decoration` 14 条与 `css-masks` 12 条保留（基本写法 / 图标实现，app.css 同样使用）。`box-decoration-break` 2 条多余，已删除模板规则（app.css 的 `.cm-s-obsidian span.cm-inline-code` 已设置），1.6.2 生效。`!important`：先补核验工具（探针 72→134 个，新增边距、布局、`mix-blend-mode`、圆角、文字装饰等属性，编辑视图复选框 / 链接 / 选区，标签页、侧边栏；强制状态 5→17 种；真实笔记里的 callout 布局与复选框也进入测量），再逐组去掉实测：高亮 5 行、链接 8 行（未解析链接的下划线与悬停色）、`.app-container` 与标签页悬停背景 2 行确有依赖，保留；callout 11、任务复选框 26、其余界面背景 9、H1 / 代码块 / 选区 / 隐藏文件夹图标 4，共 50 行去掉。核验：19 个变体阅读/编辑视图 0 不一致，与基线 0 差异；Hide Folder / File Icons 开关实测正常。`tab-idle` 探针的文字色在不同运行间不稳定（与主题改动无关），分组对比时已排除；完整运行之间未出现。
+逐条检查（2026-11-02）：`text-decoration` 14 条与 `css-masks` 12 条保留（基本写法 / 图标实现，app.css 同样使用）。`box-decoration-break` 2 条多余，已删除模板规则（app.css 的 `.cm-s-obsidian span.cm-inline-code` 已设置），1.6.2 生效。`!important`：先补核验工具（探针 72→134 个，新增边距、布局、`mix-blend-mode`、圆角、文字装饰等属性，编辑视图复选框 / 链接 / 选区，标签页、侧边栏；强制状态 5→17 种；真实笔记里的 callout 布局与复选框也进入测量），再逐组去掉实测：高亮 5 行、链接 8 行（未解析链接的下划线与悬停色）、`.app-container` 与标签页悬停背景 2 行确有依赖，保留；callout 11、任务复选框 26、其余界面背景 9、H1 / 代码块 / 选区 / 隐藏文件夹图标 4，共 50 行去掉。核验：19 个变体阅读/编辑视图 0 不一致，与基线 0 差异；Hide Folder / File Icons 开关实测正常。`tab-idle` 探针的文字色随窗口焦点变化（app.css 的 `body.is-focused`），分组对比时已排除；核验工具现在测量时固定 `is-focused`，结果不再受窗口焦点影响。
 
 1.6.1 核验：`:has` 替换前后，编辑视图 H1 与 4 种任务行在光标离开 / 落在行上共 10 个状态样式 0 差异；19 个变体阅读/编辑视图 0 不一致，与基线 0 差异。
 

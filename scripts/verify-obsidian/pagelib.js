@@ -214,7 +214,14 @@ window.__V = (() => {
     return pick(el, pseudo ? [...PROBE_PROPS, 'content', 'width'] : PROBE_PROPS, pseudo);
   }
   // Every probe in its resting state, plus the resolved Obsidian variables the theme maps.
-  function measureUI(varNames) {
+  // Tab colors depend on body.is-focused, i.e. on whether the window has focus: fix it while measuring.
+  function focused(fn) {
+    const had = document.body.classList.contains('is-focused');
+    document.body.classList.add('is-focused');
+    try { return fn(); } finally { document.body.classList.toggle('is-focused', had); }
+  }
+  function measureUI(varNames) { return focused(() => readUI(varNames)); }
+  function readUI(varNames) {
     const box = ensureProbes(), out = { vars: {}, probes: {} };
     const bs = getComputedStyle(document.body);
     for (const n of varNames) out.vars[n] = bs.getPropertyValue(n).trim();
@@ -230,7 +237,8 @@ window.__V = (() => {
     return out;
   }
   // used by run.mjs after it forces :hover / :focus-within on a probe through CDP
-  function probeState(id) {
+  function probeState(id) { return focused(() => readState(id)); }
+  function readState(id) {
     const box = ensureProbes(), el = box.querySelector(`[data-vprobe="${id}"]`);
     const inner = el?.querySelector('[data-vprobe]');
     return { self: probe(id), inner: inner ? probe(inner.dataset.vprobe) : null,

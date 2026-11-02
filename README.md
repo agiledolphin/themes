@@ -19,7 +19,9 @@ Reading by lamplight (青灯夜读). Seven color palettes for [Obsidian](https:/
 | [TokyoNight](typora/tokyonight/README.md) | Storm, Night, Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) (official palette) |
 | [Catppuccin](typora/catppuccin/README.md) | Mocha, Macchiato, Frappé | Latte | [Catppuccin](https://catppuccin.com) (official palette) |
 
-Screenshots are still to come. Details for each platform: [Lamplit for Obsidian](obsidian/lamplit/README.md) and the Typora README linked from each palette above.
+![The seven palettes, each in dark and light](obsidian/lamplit/palettes.png)
+
+Details for each platform: [Lamplit for Obsidian](obsidian/lamplit/README.md) and the Typora README linked from each palette above.
 
 ## Installation
 
