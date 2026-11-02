@@ -1100,13 +1100,37 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 
 /* ============================================================
  * Mermaid
- * Obsidian draws every diagram in Mermaid's light theme and inverts it in dark mode, so its
- * colors ignore the scheme. These rules drop the filter and recolor from the scheme. {{MM}}
- * names the diagram types covered, so an unknown type keeps Obsidian's look, and its :not(#_)
- * outranks the rules Mermaid scopes to each diagram's id. Style Settings: Use Default Mermaid Colors.
+ * Obsidian 1.15 draws diagrams with Pele, which reads its colors from --mermaid-* variables.
+ * Style Settings: Use Default Mermaid Colors keeps Obsidian's own values.
+ * ============================================================ */
+
+body:not(.{{P}}-default-mermaid) {
+    --mermaid-background: {{c:bg}};
+    --mermaid-text-color: {{c:fg}};
+    --mermaid-muted-color: {{c:fg-dim}};
+    --mermaid-line-color: {{c:fg-dim}};
+    --mermaid-surface: color-mix(in srgb, {{c:accent}} 16%, {{c:bg}});
+    --mermaid-surface-alt: {{c:bg-hl}};
+    --mermaid-border-color: {{c:accent}};
+    --mermaid-accent: {{c:accent}};
+    --mermaid-critical: {{c:red}};
+    --mermaid-error: {{c:red}};
+    --mermaid-color-1: {{c:folder_1}};
+    --mermaid-color-2: {{c:folder_2}};
+    --mermaid-color-3: {{c:folder_3}};
+    --mermaid-color-4: {{c:folder_4}};
+    --mermaid-color-5: {{c:folder_5}};
+    --mermaid-color-6: {{c:folder_6}};
+    --mermaid-color-7: {{c:folder_7}};
+    --mermaid-color-8: {{c:folder_8}};
+}
+
+/* Older Obsidian draws diagrams with Mermaid in its light theme and inverts them in dark mode, so
+ * these rules drop the filter and recolor from the scheme. {{MM}} names the diagram types covered,
+ * skips Pele's output, and its :not(#_) outranks the rules Mermaid scopes to each diagram's id.
  * Everything is nested under {{MM}} so its long selector is written once. Even filter: none is
  * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
- * ============================================================ */
+ */
 
 {{MM}} {
     & {

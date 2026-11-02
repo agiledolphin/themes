@@ -91,13 +91,13 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   The 8 colors are `FOLDER_CYCLE` in `gen-themes.py`. Known limit, measured: the file explorer
   virtualizes, so scrolled-out top-level folders leave the DOM and the rest renumber (Blue Topaz's
   by-order mode does the same).
-- Mermaid: Obsidian renders every diagram in Mermaid's light theme and inverts it in dark mode. The
-  template drops that filter and recolors from the scheme, all nested under one `{{MM}}` block (an
-  app without CSS nesting ignores it and keeps its look). `{{MM}}` expands to a selector limited
-  to `MERMAID_TYPES` in `gen-themes.py`, so an unknown diagram type keeps Obsidian's look, and its
-  `:not(#_)` outranks Mermaid's id-scoped rules without `!important`. The rules depend on Mermaid's
-  class names: after an Obsidian update, run the verification; the test note has one section per
-  diagram type (`MERMAID` in `pagelib.js` lists them), so a new type needs a heading there too.
+- Mermaid: since 1.15 Obsidian draws diagrams with Pele, whose colors come from the `--mermaid-*`
+  variables, so the template only maps those (and `ll-default-mermaid` skips the mapping). Lamplit's
+  `minAppVersion` is older, so the rules for Mermaid itself stay, all nested under one `{{MM}}` block
+  (an app without CSS nesting ignores it). `{{MM}}` expands to a selector limited to `MERMAID_TYPES`
+  in `gen-themes.py`, skips Pele's output with `:not(.pele)`, and its `:not(#_)` outranks Mermaid's
+  id-scoped rules. Those rules can no longer be tested: the verification measures Pele only, with one
+  section per diagram type in the test note (`MERMAID` in `pagelib.js`, built on Pele's class names).
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different
