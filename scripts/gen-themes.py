@@ -26,6 +26,12 @@ Optional style switches (palette [roles]; omitted = the original look):
     corners    = "round" | "square"   square: every corner radius 0 (roles radius_2 … radius_8)
     mark_style = "tint"  | "solid"    solid: ==mark== as a block of mark_fill (default: the
                                       yellow) with dark text (mark_text: bg / fg by mode)
+    outline    = "none"  | "bold"     bold: a 2px outline_color frame (default fg) on code,
+                                      callouts, tables, menus and modals; tags become solid
+                                      blocks of tag_fill / tag_fill_hover with tag_text
+    shadow     = "none"  | "hard"     hard: unblurred offset shadows (hard_shadow, hard_shadow_l)
+                                      on callouts, menus, modals and popovers (Typora: code
+                                      blocks and tables)
 """
 import json
 import re
@@ -71,6 +77,17 @@ class Ctx:
             self.roles.setdefault("mark_text", "bg" if variant["mode"] == "dark" else "fg")
         self.roles.setdefault("mark_fill", "mark-bg")
         self.roles.setdefault("mark_text", "yellow")
+        # outline = "bold" / shadow = "hard": a drawn frame and unblurred offset shadows.
+        # Off, their roles stay "" so Lamplit emits no variables for them.
+        bold = self.roles.setdefault("outline", "none") == "bold"
+        hard = self.roles.setdefault("shadow", "none") == "hard"
+        self.roles.setdefault("tag_fill", "tag" if bold else "")
+        self.roles.setdefault("tag_fill_hover", "tag_hover" if bold else "")
+        self.roles.setdefault("tag_text", ("bg" if variant["mode"] == "dark" else "fg") if bold else "")
+        if hard:
+            self.roles.setdefault("hard_shadow", "3px 3px 0 {{c:outline_color}}")
+            self.roles.setdefault("hard_shadow_l", "6px 6px 0 {{c:outline_color}}")
+        self.roles.setdefault("outline_color", "fg" if bold or hard else "")
         for i, name in enumerate(FOLDER_CYCLE, 1):
             self.roles.setdefault(f"folder_{i}", name)
         self.aliases = theme.get("aliases", {})

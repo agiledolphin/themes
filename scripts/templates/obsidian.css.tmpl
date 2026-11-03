@@ -124,6 +124,30 @@ body.theme-light {
     --callout-border-opacity: 0;
     --callout-padding:        0.75rem 1rem;
     --callout-radius:         {{r:radius_6}};
+{{#outline=bold}}
+    /* outline "bold": a drawn frame (callouts get their color in the Callouts rules) and solid tags */
+    --code-border-width:    2px;
+    --code-border-color:    {{c:outline_color}};
+    --callout-border-width: 2px;
+    --tag-border-width:     1.5px;
+    --tag-border-color:     {{c:outline_color}};
+    --tag-color:            {{c:tag_text}};
+    --tag-color-hover:      {{c:tag_text}};
+    --tag-background:       {{c:tag_fill}};
+    --tag-background-hover: {{c:tag_fill_hover}};
+    --table-border-color:   {{c:outline_color}};
+    --table-header-border-color: {{c:outline_color}};
+    --menu-border-width:    2px;
+    --modal-border-width:   2px;
+    --modal-border-color:   {{c:outline_color}};
+{{/outline}}
+{{#shadow=hard}}
+    /* shadow "hard": unblurred offset shadows on menus, modals, popovers, suggestion lists */
+    --shadow-s:     {{r:hard_shadow}};
+    --shadow-l:     {{r:hard_shadow_l}};
+    --menu-shadow:  {{r:hard_shadow}};
+    --modal-shadow: {{r:hard_shadow_l}};
+{{/shadow}}
 
     /* --- Scrollbars --- */
     --scrollbar-bg:              transparent;
@@ -195,6 +219,9 @@ body.theme-light {
        tooltips, so a menu no longer blends into the editor behind it. */
     --menu-background:   {{c:bg-dark}};
     --menu-border-color: {{c:gutter}};
+{{#outline=bold}}
+    --menu-border-color: {{c:outline_color}};
+{{/outline}}
 
     /* --- Tooltips --- */
     --tooltip-background: {{c:bg-dark}};
@@ -325,6 +352,16 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
     /* padding: left to app.css (0.15em 0.3em), the value Live Preview uses too */
     font-size: 0.875em;
 }
+{{#outline=bold}}
+/* outline "bold": a 1.5px frame on inline code. Live Preview draws it from --code-border-*
+   (like the radius above), so set those here too, on the element itself. */
+.markdown-rendered code,
+.cm-inline-code {
+    border: 1.5px solid {{c:outline_color}};
+    --code-border-width: 1.5px;
+    --code-border-color: {{c:outline_color}};
+}
+{{/outline}}
 /* Live Preview code-block language label: keep its default small radius. */
 .markdown-source-view.mod-cm6 .code-block-flair { --code-radius: {{r:radius_4}}; }
 
@@ -368,6 +405,12 @@ a.is-unresolved:hover         { color: {{c:comment}}; text-decoration-color: {{c
  * ============================================================ */
 
 .callout { border-radius: {{r:radius_8}}; overflow: hidden; }
+{{#outline=bold}}
+.callout { border-color: {{c:outline_color}}; }
+{{/outline}}
+{{#shadow=hard}}
+.callout { box-shadow: {{r:hard_shadow}}; }
+{{/shadow}}
 
 .callout-title {
     padding: 0.6rem 1rem;
@@ -465,6 +508,14 @@ body.theme-light .callout[data-callout="cite"] {
 }
 
 .markdown-rendered td { color: {{c:fg}}; }
+{{#outline=bold}}
+.markdown-rendered table { border: 2px solid {{c:outline_color}}; }
+.markdown-rendered th,
+.markdown-rendered td { border-right-color: {{c:outline_color}}; border-bottom-color: {{c:outline_color}}; }
+{{/outline}}
+{{#shadow=hard}}
+.markdown-rendered table { box-shadow: {{r:hard_shadow}}; }
+{{/shadow}}
 
 /* Inline code in cells: same size as the (already smaller) cell text, not a
    further 0.875× step — mirrors app.css's own rule for source-mode tables. */
