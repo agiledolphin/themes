@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-**One theme, seven palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
+**One theme, eight palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
 
 ![Lamplit in Big Wave, Bauhaus, Impression and Wonderland](screenshot.png)
 
@@ -16,7 +16,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 
 ## Palettes
 
-![The seven palettes, each in dark and light](palettes.png)
+![The eight palettes, each in dark and light](palettes.png)
 
 | Palette | Dark | Light | After |
 |---------|------|-------|-------|
@@ -25,6 +25,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 | **Big Wave** | Pipeline | Spray | Tatsuro Yamashita's *Big Wave*: ocean navy, spray white, a coral title |
 | **Impression** | Havre | Brume | Monet's *Impression, Sunrise*: grey-green mist and one orange sun |
 | **Bauhaus** | Weimar | Dessau | The Bauhaus: three primaries, solid blocks, square corners |
+| **Shanghai** | Bund | Wukang | Shanghai across the Huangpu: river-ink ground, the Bund's gold, the Pearl's magenta |
 | **TokyoNight** | Storm, Night, Moon | Day | The official [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) palette |
 | **Catppuccin** | Mocha, Macchiato, Frappé | Latte | The official [Catppuccin](https://catppuccin.com) palette |
 

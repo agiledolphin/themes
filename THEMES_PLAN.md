@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含七套配色） | 1.7.3 |
+| Lamplit（含八套配色） | 1.8.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -93,6 +93,7 @@
 | Lamplit Big Wave | 1.0.1 |
 | Lamplit Impression | 1.0.0 |
 | Lamplit Bauhaus | 1.0.0 |
+| Lamplit Shanghai | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -165,12 +166,12 @@
 | 项目 | 说明 | 状态 |
 |------|------|------|
 | 独立发布仓库 | `agiledolphin/lamplit`：根目录放主题文件，`scripts/publish-lamplit.sh` 从本仓库同步并发版（tag 与 manifest 版本相同，无 `v`）；已发布 `1.6.0` | ☑ |
-| 截图素材 | `screenshot.png`：Big Wave / Bauhaus / Impression / Wonderland 四配色斜切，开启 Color Folders，1024×576；`palettes.png`：七套配色深浅总览，关闭 Color Folders。都用临时 Obsidian 实例（独立 user-data-dir）和虚构演示 vault 真实渲染，不含用户内容 | ☑ |
+| 截图素材 | `screenshot.png`：Big Wave / Bauhaus / Impression / Wonderland 四配色斜切，开启 Color Folders，1024×576；`palettes.png`：八套配色深浅总览（3×3，第 9 格写方案总数），关闭 Color Folders。都用临时 Obsidian 实例（独立 user-data-dir）和虚构演示 vault 真实渲染，不含用户内容 | ☑ |
 | manifest.json | `authorUrl` 已填 | ☑ |
 | LICENSE / README | 本仓库已补；发布仓库的 README 取自 `obsidian/lamplit/README.md` | ☑ |
 | 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
 | Typora 截图 | `typora/<配色>/screenshot.png`：深浅对半，1024×576。用 Typora 自带 `base.css` + 主题 CSS 按 Typora 页面结构在无头浏览器渲染（不是 Typora 窗口截图，Typora 无法脚本控制） | ☑ |
-| 中文文档 | `obsidian/lamplit` 和 7 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
+| 中文文档 | `obsidian/lamplit` 和 8 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
 | Typora 主题库 | 向 `typora/theme.typora.io` 提 PR（post + 250×200 缩略图 + 截图，下载地址用 Release 的 `Lamplit-typora.zip`）。用户决定暂不提交 | 暂缓 |
 
 **社区目录自动审核**（Lamplit 1.6.0，页面 Scorecard）：0 错误、101 条警告（警告不阻止发布），Health Excellent、Review Caution。
@@ -189,6 +190,8 @@
 1.6.1 核验：`:has` 替换前后，编辑视图 H1 与 4 种任务行在光标离开 / 落在行上共 10 个状态样式 0 差异；19 个变体阅读/编辑视图 0 不一致，与基线 0 差异。
 
 1.6.2 扫描结果：45 条（`!important` 18、`text-decoration` 14、`css-masks` 12、文件大小 1），符合预期，其余不再处理。
+
+1.7.3 扫描结果：36 条（`!important` 21、`text-decoration` 14、文件大小 1）。`minAppVersion` 升到 1.14.4 后，对照版本从 1.4.5 变为 1.11.4，`css-masks` 12 条消失；1.6.1 升到 1.5.0 时没有这个效果。`text-decoration` 14 条都是 `text-decoration-color`，基本写法，保留。`!important` 中 3 处是旧版 Mermaid 规则，其余见上。
 
 ### 阶段 5 — 可选扩展
 
@@ -364,8 +367,21 @@ Obsidian 一律用 Mermaid 的浅色主题，深色模式靠 `filter: invert(100
 - 核验工具：每类图一个分段（`MERMAID` in `pagelib.js`），`analyze.py` 检查每类图已渲染且去掉滤镜、实心/空心标记、图中所有实际绘制的颜色都来自方案（不属于方案即失败），文字对比度低于 3:1 时报告。用注入旧错误验证过这些检查确实会报
 - 1.7.2（2026-11-03）：Obsidian 1.15 把 Mermaid 换成 Pele，class 全变，1.7.x 的规则基本失效，图回到 Obsidian 默认配色（`--mermaid-*` 映射 `--color-*`）。改为只设置官方变量 `--mermaid-*`：表面为强调色 16% 淡底，线条用次要文字色，8 色循环接方案。旧规则加 `:not(.pele)`，留给 1.15 之前的 Obsidian；用临时实例在 1.14.5 上实测，4 个方案 9 类图全部去掉滤镜、颜色都来自方案。核验工具只测 Pele。核验探针全部改成 Pele 的 class。Pele 的备注没有单独的颜色变量，不再是黄色调
 - Catppuccin Latte 在 Pele 下的甘特图普通任务文字 2.81（背景色字压强调色），与时序图编号同为官方配色所致，保留
-- 1.7.3（2026-11-03）：`minAppVersion` 从 1.5.0 升到 1.14.4（1.14 系列第一个公开版本），渲染不变。实测过的最低版本是 1.14.5，1.14.4 未单独测试。之后再升到 1.15.0，并删除 `{{MM}}` 旧规则（约 8.8KB、5 处 `!important`）
+- 1.7.3（2026-11-03）：`minAppVersion` 从 1.5.0 升到 1.14.4（1.14 系列第一个公开版本），渲染不变。实测过的最低版本是 1.14.5，1.14.4 未单独测试。之后再升到 1.15.0，并删除 `{{MM}}` 旧规则（约 8.8KB、3 处 `!important`）
 - 已知（官方配色，保留）：Catppuccin Latte 的时序图编号 2.81；饼图百分比用背景色，在 Latte 的黄、青、橙、绿上为 2.31–2.96，其余 18 个方案 ≥ 3。工具只测第一块扇形，这项是按配色算的。规则依赖 Mermaid 的 class 名，Obsidian 升级后可能部分失效
+
+
+### 阶段 17 — 新增 Shanghai 配色（2026-11-03，Lamplit 1.8.0）
+
+用户请 Gemini 出了一版上海主题的思路（外滩暖金 × 陆家嘴冷青，Bund / Mist / Wukang 三个变体）。评审结论：保留「黄浦江两岸冷暖对冲」的概念，色值重做。它是按代码编辑器的语法分工设计的，不对应 Lamplit 的角色（强调色、H1–H6、标签、8 色循环）；Mist 和 Bund 只差一点亮度，去掉。
+
+- 判断撞色的标准按用户意见改为看整体：比较「底色 + 强调色 + H1」的组合和大面积观感，单个颜色与其他配色相同不要紧（外滩金几乎等于 TokyoNight 的黄，但在那里只是配角）。配色内部仍要求相近颜色分得开（8 色循环、饼图）
+- 按这个标准，初稿 Bund 的近中性黑底 + 暖金强调与 Wonderland Office 太像；改为看得出的江水青蓝底 `#0f2329`（用户选的 B 方案）
+- 角色：西岸外滩金为强调色（H2、光标、当前文件、复选框、表头、引用竖线）；东岸玻璃青管标签和行内代码；东方明珠品红只作 H1。链接沿用模板的蓝（江水蓝），不是金色
+- Wukang（浅色）：水刷石灰米底，强调色换成梧桐绿，红瓦作 H1，以区别于 Bauhaus Dessau 的暖白底 + 红。核验发现高亮文字 3.97，把金色从 `#7f6214` 压深到 `#755910`（4.50）
+- 对比度：点缀色全部 ≥ 4.3（最低 Wukang 琥珀 4.38），Bund 注释 3.92；相近颜色 ΔE ≥ 21
+- 核验：只跑 sh-bund、sh-wukang（新配色的范围），阅读/编辑视图 0 不一致，Mermaid 0 问题，对比度全部达标
+- 文档：新增 Typora README 中英文和截图，根目录与 Lamplit README 改为八套配色，`palettes.png` 改为 3×3（21 个方案）
 
 ---
 
