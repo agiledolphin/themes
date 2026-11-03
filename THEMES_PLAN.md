@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含八套配色） | 1.8.0 |
+| Lamplit（含九套配色） | 1.9.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -94,6 +94,7 @@
 | Lamplit Impression | 1.0.0 |
 | Lamplit Bauhaus | 1.0.0 |
 | Lamplit Shanghai | 1.0.0 |
+| Lamplit Tuttomondo | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -166,12 +167,12 @@
 | 项目 | 说明 | 状态 |
 |------|------|------|
 | 独立发布仓库 | `agiledolphin/lamplit`：根目录放主题文件，`scripts/publish-lamplit.sh` 从本仓库同步并发版（tag 与 manifest 版本相同，无 `v`）；已发布 `1.6.0` | ☑ |
-| 截图素材 | `screenshot.png`：Big Wave / Bauhaus / Impression / Wonderland 四配色斜切，开启 Color Folders，1024×576；`palettes.png`：八套配色深浅总览（3×3，第 9 格写方案总数），关闭 Color Folders。都用临时 Obsidian 实例（独立 user-data-dir）和虚构演示 vault 真实渲染，不含用户内容 | ☑ |
+| 截图素材 | `screenshot.png`：Tuttomondo Subway / Shanghai Wukang / Big Wave Pipeline / Bauhaus Dessau 四配色斜切（1.9.0 起，之前是 Big Wave / Bauhaus / Impression / Wonderland），开启 Color Folders，1024×576；`palettes.png`：九套配色深浅总览（5×2，第 10 格写方案总数），关闭 Color Folders。都用临时 Obsidian 实例（独立 user-data-dir）和虚构演示 vault 真实渲染，不含用户内容 | ☑ |
 | manifest.json | `authorUrl` 已填 | ☑ |
 | LICENSE / README | 本仓库已补；发布仓库的 README 取自 `obsidian/lamplit/README.md` | ☑ |
 | 社区提交 | 用户本人登录 community.obsidian.md 提交并发布，已上架 | ☑ |
 | Typora 截图 | `typora/<配色>/screenshot.png`：深浅对半，1024×576。用 Typora 自带 `base.css` + 主题 CSS 按 Typora 页面结构在无头浏览器渲染（不是 Typora 窗口截图，Typora 无法脚本控制） | ☑ |
-| 中文文档 | `obsidian/lamplit` 和 8 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
+| 中文文档 | `obsidian/lamplit` 和 9 个 `typora/<配色>` 都有 `README.zh-CN.md`，互相切换；英文版补一行命令安装 | ☑ |
 | Typora 主题库 | 向 `typora/theme.typora.io` 提 PR（post + 250×200 缩略图 + 截图，下载地址用 Release 的 `Lamplit-typora.zip`）。用户决定暂不提交 | 暂缓 |
 
 **社区目录自动审核**（Lamplit 1.6.0，页面 Scorecard）：0 错误、101 条警告（警告不阻止发布），Health Excellent、Review Caution。
@@ -382,6 +383,20 @@ Obsidian 一律用 Mermaid 的浅色主题，深色模式靠 `filter: invert(100
 - 对比度：点缀色全部 ≥ 4.3（最低 Wukang 琥珀 4.38），Bund 注释 3.92；相近颜色 ΔE ≥ 21
 - 核验：只跑 sh-bund、sh-wukang（新配色的范围），阅读/编辑视图 0 不一致，Mermaid 0 问题，对比度全部达标
 - 文档：新增 Typora README 中英文和截图，根目录与 Lamplit README 改为八套配色，`palettes.png` 改为 3×3（21 个方案）
+
+
+### 阶段 18 — 新增 Tuttomondo 配色与描边、硬阴影开关（2026-11-04，Lamplit 1.9.0）
+
+用户想要一套彩色鲜艳风格，参考了新粗野主义、多巴胺、酸性、孟菲斯、欧普、波普六种流派。评估后选「新粗野主义的结构 + 多巴胺的配色」：酸性与流体渐变不适合长时间阅读，波普与 Bauhaus 重叠，孟菲斯的纹样干扰正文。名称由用户从几个艺术方向中选定：致敬 1989 年比萨的壁画 *Tuttomondo*，深色 Subway（地铁站黑色广告板上的粉笔画）、浅色 Pisa（日光下的壁画墙）。文档只用作品名和地名，不写艺术家名字；配色是自己调的，不从画作取色。
+
+- 颜色主要用作色块：实心标签（`tag_fill` + 深色字）、实色高亮（复用 `mark_style = "solid"`）、当前文件用色块（复用 `nav_style = "fill"`）；正文保持中性。Pisa 分两组颜色：压深的文字色（标题、链接，≥ 5.15）和明亮的填充色（配黑字 ≥ 8.5）；Subway 两组相同（≥ 5.77）。强调色为粉，配色内部最近 ΔE 24
+- 新增两个风格开关（`gen-themes.py`，Obsidian 与 Typora 模板都支持），关闭时现有 8 套配色的所有生成文件逐字节不变：
+  - `outline = "bold"`：2px `outline_color`（默认 fg：Subway 粉笔白，Pisa 黑）描边，作用于代码块、Callout、表格、标签、菜单与弹窗，行内代码 1.5px；尽量走 Obsidian 变量（`--code-border-*`、`--tag-*`、`--table-border-color`、`--menu-border-*`、`--modal-border-*`），Callout 边框色与表格网格线各一条规则
+  - `shadow = "hard"`：不羽化偏移阴影（`hard_shadow` 3px、`hard_shadow_l` 6px），作用于 Callout、表格、菜单、弹窗与浮层（`--shadow-s/l`、`--menu-shadow`、`--modal-shadow`）。Obsidian 的代码块不加：编辑视图按行拼出代码块，没有整块元素，只能阅读视图有阴影；Typora 的代码块是单一元素，加了
+- 核验（tm-subway、tm-pisa，对照 bw-pipeline）：首次发现行内代码在编辑视图读 `--code-border-*`（2px 描边），阅读视图仍是 Lamplit 的 1px 灰线，在行内代码元素上局部设置这两个变量后 0 不一致。描边与阴影工具不测量，在临时实例里逐项读了 Callout 与表格两视图的计算样式，一致。bw-pipeline 与基线的 9 处差异都是新增变量名带来的「原来未测、现在测到 Obsidian 默认值」，无渲染变化；`.verify` 基线需在下次全量时更新
+- 与 Bauhaus（近黑底 / 暖白底、实色黄高亮）对比：Tuttomondo 有描边、硬阴影、粉色强调和实心彩色标签，整体可明显区分
+- 文档：新增 Typora README 中英文和截图（无头浏览器渲染），根目录与 Lamplit README 改为九套配色，`palettes.png` 改为 5×2（23 个方案）
+- 社区介绍页：主图换成 Tuttomondo Subway / Shanghai Wukang / Big Wave Pipeline / Bauhaus Dessau（用户选的 B 版，以新配色开头）；演示笔记里的「seven palettes」改为「nine palettes」后重拍主图和总览图；致谢补上 1.8.0 时漏掉的 Shanghai 和 Tuttomondo；特性加一条「有些配色连形状也变」
 
 ---
 

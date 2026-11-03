@@ -2,9 +2,9 @@
 
 English · [简体中文](README.zh-CN.md)
 
-**One theme, eight palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
+**One theme, nine palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
 
-![Lamplit in Big Wave, Bauhaus, Impression and Wonderland](screenshot.png)
+![Lamplit in Tuttomondo, Shanghai, Big Wave and Bauhaus](screenshot.png)
 
 ## Get started
 
@@ -16,7 +16,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 
 ## Palettes
 
-![The eight palettes, each in dark and light](palettes.png)
+![The nine palettes, each in dark and light](palettes.png)
 
 | Palette | Dark | Light | After |
 |---------|------|-------|-------|
@@ -26,11 +26,13 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 | **Impression** | Havre | Brume | Monet's *Impression, Sunrise*: grey-green mist and one orange sun |
 | **Bauhaus** | Weimar | Dessau | The Bauhaus: three primaries, solid blocks, square corners |
 | **Shanghai** | Bund | Wukang | Shanghai across the Huangpu: river-ink ground, the Bund's gold, the Pearl's magenta |
+| **Tuttomondo** | Subway | Pisa | After the 1989 mural *Tuttomondo* in Pisa: heavy outlines, hard shadows, solid tags and highlights |
 | **TokyoNight** | Storm, Night, Moon | Day | The official [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) palette |
 | **Catppuccin** | Mocha, Macchiato, Frappé | Latte | The official [Catppuccin](https://catppuccin.com) palette |
 
 ## Features
 
+- **Some palettes change shape, not just color**: Bauhaus has square corners and solid highlights; Tuttomondo draws heavy outlines and hard shadows, with solid tags and highlights
 - **Same look in Reading view and Live Preview**: headings, code, tables, quotes, tags, highlights and links match
 - **File type icons** in the file explorer: notes, images, canvases, bases, PDFs, audio and video
 - **Mermaid diagrams in your scheme's colors**, in dark and light mode: flowcharts, sequence, pie, class, state, Gantt, ER, git and mindmap diagrams
@@ -59,7 +61,7 @@ The files in `agiledolphin/lamplit` are generated. Their sources, and the same p
 
 ## Credits
 
-- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Wonderland is original
+- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Shanghai after the two banks of the Huangpu; Tuttomondo in the spirit of the 1989 mural *Tuttomondo* in Pisa, with colors of our own; Wonderland is original
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
 - Icons: [Lucide](https://lucide.dev), the set Obsidian itself uses
 

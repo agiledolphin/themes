@@ -1,0 +1,109 @@
+# Tuttomondo — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/tuttomondo/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+short_name = "Tuttomondo"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "tm"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["A vivid, outlined palette in the spirit of the 1989 mural Tuttomondo in Pisa:",
+           "flat bright colors inside heavy outlines. Our own colors, not sampled from the work."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["blue", "orange", "teal", "red", "green", "magenta", "yellow", "cyan", "comment"]
+
+# Canonical names throughout. The fill-* colors are the bright blocks with dark text
+# (tags, ==mark==); in Subway they equal the text colors, in Pisa they are lighter.
+[aliases]
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Color sits in blocks with a drawn outline and a hard shadow (outline / shadow switches):
+# solid tags, solid ==mark==, the open file as a solid block. Pink is the accent.
+[roles]
+accent = "magenta"
+accent_hover = "red"
+highlight = "magenta"
+table_header = "blue"
+table_hover_alpha = "0.12"
+tag = "cyan"
+tag_hover = "blue"
+tag_fill = "fill-cyan"
+tag_fill_hover = "fill-blue"
+search = "orange"
+callout_note = "blue"
+graph_tag = "cyan"
+quote_nested = "green"
+tooltip = "blue"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "3px 3px 0 {{c:outline_color}}"
+nav_style = "fill"
+nav_hover = "yellow"
+nav_active = "magenta"
+menu_style = "fill"
+mark_style = "solid"
+mark_fill = "fill-yellow"
+mark_alpha = "0.18"                  # the faint tint Obsidian still uses (e.g. link flashes)
+outline = "bold"
+shadow = "hard"
+headings = ["magenta", "yellow", "cyan", "green", "orange", "comment"]   # H1..H6
+
+# Text colors read at >= 5.1:1 on bg; fills carry dark text at >= 8.5:1.
+# Look-alike pairs stay at ΔE >= 24 (closest: orange / red in Pisa).
+
+[[variants]]
+slug = "subway"
+label = "Subway"
+mode = "dark"
+character = "chalk lines on black subway ad panels; near-black, chalk-white outlines"
+[variants.palette]
+bg          = "#141414"
+bg-dark     = "#0c0c0c"
+bg-hl       = "#232323"
+gutter      = "#3a3a3a"
+fg          = "#f3f0e8"
+fg-dim      = "#c8c4ba"
+comment     = "#8d8a82"
+blue        = "#5b93ff"
+orange      = "#ff8c33"
+teal        = "#2fd3a4"
+red         = "#ff5252"
+green       = "#a2e35e"
+magenta     = "#ff6ec7"
+yellow      = "#ffd84d"
+cyan        = "#46cfff"
+fill-yellow = "#ffd84d"
+fill-cyan   = "#46cfff"
+fill-blue   = "#5b93ff"
+selection   = "#4a2340"
+
+[[variants]]
+slug = "pisa"
+label = "Pisa"
+mode = "light"
+character = "the mural wall in daylight; warm white, black outlines, bright blocks"
+[variants.overrides]
+nav_hover = "blue"
+h2 = "blue"
+h3 = "green"
+h4 = "orange"
+h5 = "teal"
+mark_alpha = "0.15"
+[variants.palette]
+bg          = "#fffaf0"
+bg-dark     = "#f6efe0"
+bg-hl       = "#efe6d3"
+gutter      = "#d6cbb5"
+fg          = "#171717"
+fg-dim      = "#3f3b35"
+comment     = "#6f6a60"
+blue        = "#1f55d6"
+orange      = "#b54800"
+teal        = "#00785e"
+red         = "#c81e1e"
+green       = "#2c7a12"
+magenta     = "#c0187a"
+yellow      = "#866300"
+cyan        = "#00739a"
+fill-yellow = "#ffd84d"
+fill-cyan   = "#6fd6ff"
+fill-blue   = "#8fb2ff"
+selection   = "#ffd6ee"

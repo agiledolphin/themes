@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-青灯夜读（Reading by lamplight）。八套配色，用于 [Obsidian](https://obsidian.md) 和 [Typora](https://typora.io)，都由同一套源文件生成。
+青灯夜读（Reading by lamplight）。九套配色，用于 [Obsidian](https://obsidian.md) 和 [Typora](https://typora.io)，都由同一套源文件生成。
 
 - **Obsidian**：只有一个主题 **Lamplit**，所有配色都是它的方案。深色和浅色模式可以在 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 里分别选择。
 - **Typora**：每个配色变体是一个主题文件，命名为 `lamplit-<配色>-<变体>.css`。
@@ -17,10 +17,11 @@
 | [Impression](typora/impression/README.zh-CN.md) | Havre | Brume | 莫奈《印象·日出》（1872） |
 | [Bauhaus](typora/bauhaus/README.zh-CN.md) | Weimar | Dessau | 包豪斯：三原色、平涂色块、直角 |
 | [Shanghai](typora/shanghai/README.zh-CN.md) | Bund | Wukang | 黄浦江两岸的上海：外滩的金、东岸的玻璃青、梧桐和红瓦 |
+| [Tuttomondo](typora/tuttomondo/README.zh-CN.md) | Subway | Pisa | 致敬 1989 年比萨的壁画《Tuttomondo》：粗黑轮廓里的平涂亮色，加上硬阴影 |
 | [TokyoNight](typora/tokyonight/README.zh-CN.md) | Storm、Night、Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)（官方配色） |
 | [Catppuccin](typora/catppuccin/README.zh-CN.md) | Mocha、Macchiato、Frappé | Latte | [Catppuccin](https://catppuccin.com)（官方配色） |
 
-![八套配色的深色和浅色](obsidian/lamplit/palettes.png)
+![九套配色的深色和浅色](obsidian/lamplit/palettes.png)
 
 各平台的详细说明见 [Lamplit for Obsidian](obsidian/lamplit/README.zh-CN.md)，以及上表中各配色的 Typora 说明。
 

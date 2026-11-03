@@ -2,9 +2,9 @@
 
 [English](README.md) · 简体中文
 
-青灯夜读。**一个主题，八套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
+青灯夜读。**一个主题，九套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
 
-![Lamplit 的 Big Wave、Bauhaus、Impression 和 Wonderland 方案](screenshot.png)
+![Lamplit 的 Tuttomondo、Shanghai、Big Wave 和 Bauhaus 方案](screenshot.png)
 
 ## 开始使用
 
@@ -16,7 +16,7 @@
 
 ## 配色
 
-![八套配色的深色和浅色](palettes.png)
+![九套配色的深色和浅色](palettes.png)
 
 | 配色 | 深色 | 浅色 | 灵感来源 |
 |------|------|------|----------|
@@ -26,11 +26,13 @@
 | **Impression** | Havre | Brume | 莫奈《印象·日出》：灰绿晨雾和一轮橙红的太阳 |
 | **Bauhaus** | Weimar | Dessau | 包豪斯：三原色、平涂色块、直角 |
 | **Shanghai** | Bund | Wukang | 黄浦江两岸的上海：江水底色、外滩的金、东方明珠的品红 |
+| **Tuttomondo** | Subway | Pisa | 致敬 1989 年比萨的壁画《Tuttomondo》：粗描边、硬阴影、实心标签和高亮 |
 | **TokyoNight** | Storm、Night、Moon | Day | 官方 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) 配色 |
 | **Catppuccin** | Mocha、Macchiato、Frappé | Latte | 官方 [Catppuccin](https://catppuccin.com) 配色 |
 
 ## 特性
 
+- **有些配色连形状也变**：Bauhaus 是直角和实色高亮；Tuttomondo 有粗描边和硬阴影，标签和高亮都是实心色块
 - **阅读视图和实时预览外观一致**：标题、代码、表格、引用、标签、高亮和链接都相同
 - **文件类型图标**：文件列表里的笔记、图片、白板、数据库、PDF、音频和视频各有图标
 - **Mermaid 图使用方案的配色**，深浅模式都适配：流程图、时序图、饼图、类图、状态图、甘特图、ER 图、Git 图和思维导图
@@ -59,7 +61,7 @@ Style Settings 页面还有四个开关：**Hide Folder Icons**（隐藏文件�
 
 ## 致谢
 
-- 配色：[@folke](https://github.com/folke) 的 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)；Catppuccin 组织的 [Catppuccin](https://catppuccin.com)；Merino 来自 Merino Light / Dark 终端配色（GitHub Primer 色彩）；Big Wave 来自山下达郎《Big Wave》的封面；Impression 来自莫奈《印象·日出》；Bauhaus 来自包豪斯；Wonderland 为原创
+- 配色：[@folke](https://github.com/folke) 的 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)；Catppuccin 组织的 [Catppuccin](https://catppuccin.com)；Merino 来自 Merino Light / Dark 终端配色（GitHub Primer 色彩）；Big Wave 来自山下达郎《Big Wave》的封面；Impression 来自莫奈《印象·日出》；Bauhaus 来自包豪斯；Shanghai 来自黄浦江两岸的上海；Tuttomondo 致敬 1989 年比萨的壁画《Tuttomondo》，配色为自己调制；Wonderland 为原创
 - 设计参考：[@kepano](https://github.com/kepano) 的 [Minimal](https://github.com/kepano/obsidian-minimal)
 - 图标：[Lucide](https://lucide.dev)，也是 Obsidian 自身使用的图标集
 

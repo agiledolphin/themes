@@ -242,6 +242,18 @@ th {
 }
 
 td { padding: 6px 12px; color: {{c:fg}}; vertical-align: top; }
+{{#outline=bold}}
+
+/* outline "bold": a drawn frame on code and tables (matches the Obsidian version) */
+code { border: 1.5px solid {{c:outline_color}}; }
+pre, .md-fences, table { border: 2px solid {{c:outline_color}}; }
+th, td { border-right-color: {{c:outline_color}}; border-bottom-color: {{c:outline_color}}; }
+{{/outline}}
+{{#shadow=hard}}
+
+/* shadow "hard": unblurred offset shadows (Typora has no callouts; code blocks and tables instead) */
+pre, .md-fences, table { box-shadow: {{r:hard_shadow}}; }
+{{/shadow}}
 
 tr:hover td { background: rgba({{rgb:accent}}, {{r:table_hover_alpha}}); }
 
