@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-青灯夜读。**一个主题，七套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
+青灯夜读。**一个主题，八套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
 
 ![Lamplit 的 Big Wave、Bauhaus、Impression 和 Wonderland 方案](screenshot.png)
 
@@ -16,7 +16,7 @@
 
 ## 配色
 
-![七套配色的深色和浅色](palettes.png)
+![八套配色的深色和浅色](palettes.png)
 
 | 配色 | 深色 | 浅色 | 灵感来源 |
 |------|------|------|----------|
@@ -25,6 +25,7 @@
 | **Big Wave** | Pipeline | Spray | 山下达郎《Big Wave》：海军蓝、浪花白和珊瑚粉标题 |
 | **Impression** | Havre | Brume | 莫奈《印象·日出》：灰绿晨雾和一轮橙红的太阳 |
 | **Bauhaus** | Weimar | Dessau | 包豪斯：三原色、平涂色块、直角 |
+| **Shanghai** | Bund | Wukang | 黄浦江两岸的上海：江水底色、外滩的金、东方明珠的品红 |
 | **TokyoNight** | Storm、Night、Moon | Day | 官方 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) 配色 |
 | **Catppuccin** | Mocha、Macchiato、Frappé | Latte | 官方 [Catppuccin](https://catppuccin.com) 配色 |
 

@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-Reading by lamplight (青灯夜读). Seven color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
+Reading by lamplight (青灯夜读). Eight color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
 
 - **Obsidian**: one theme, **Lamplit**, that carries every palette as a scheme. Dark and light mode each pick their own scheme in [Style Settings](https://github.com/mgmeyers/obsidian-style-settings).
 - **Typora**: one theme file per palette variant, named `lamplit-<palette>-<variant>.css`.
@@ -16,10 +16,11 @@ Reading by lamplight (青灯夜读). Seven color palettes for [Obsidian](https:/
 | [Big Wave](typora/big-wave/README.md) | Pipeline | Spray | The cover of Tatsuro Yamashita's *Big Wave* (1984) |
 | [Impression](typora/impression/README.md) | Havre | Brume | Claude Monet's *Impression, Sunrise* (1872) |
 | [Bauhaus](typora/bauhaus/README.md) | Weimar | Dessau | The Bauhaus school: three primaries, solid blocks, square corners |
+| [Shanghai](typora/shanghai/README.md) | Bund | Wukang | Shanghai across the Huangpu: the Bund's gold, the east bank's glass, plane trees and brick lanes |
 | [TokyoNight](typora/tokyonight/README.md) | Storm, Night, Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) (official palette) |
 | [Catppuccin](typora/catppuccin/README.md) | Mocha, Macchiato, Frappé | Latte | [Catppuccin](https://catppuccin.com) (official palette) |
 
-![The seven palettes, each in dark and light](obsidian/lamplit/palettes.png)
+![The eight palettes, each in dark and light](obsidian/lamplit/palettes.png)
 
 Details for each platform: [Lamplit for Obsidian](obsidian/lamplit/README.md) and the Typora README linked from each palette above.
 

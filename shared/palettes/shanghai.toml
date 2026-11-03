@@ -1,0 +1,110 @@
+# Shanghai — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/shanghai/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+short_name = "Shanghai"              # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "sh"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["Shanghai across the Huangpu: the Bund's gilded Art Deco on the west bank, the glass",
+           "towers and the Pearl's magenta on the east, plane trees and brick lanes in between."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["river", "glass", "copper", "plane", "gold", "amber", "tile", "pearl", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map any that this palette names differently.
+[aliases]
+blue = "river"
+cyan = "glass"
+teal = "copper"
+green = "plane"
+yellow = "gold"
+orange = "amber"
+red = "tile"
+magenta = "pearl"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# West bank leads: the Bund's floodlit gold is the accent (links, H2, cursor, the open file).
+# East bank answers in cool glass (tags, code); the Pearl's magenta is one landmark, H1 only.
+# Wukang (light) turns to the plane trees: their green takes the accent, brick tile takes H1.
+[roles]
+accent = "gold"
+accent_hover = "amber"
+highlight = "gold"
+table_header = "gold"
+table_hover_alpha = "0.12"
+tag = "glass"
+tag_hover = "river"
+search = "amber"
+callout_note = "river"
+graph_tag = "glass"
+quote_nested = "copper"
+tooltip = "river"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.25)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["pearl", "gold", "glass", "copper", "plane", "comment"]   # H1..H6
+
+# Accents read at >= 4.3:1 on bg (Wukang's amber is the lowest, 4.38), comments >= 4.0.
+# Look-alike pairs stay at ΔE >= 21 (closest: amber / tile in Bund, amber / gold in Wukang).
+
+[[variants]]
+slug = "bund"
+label = "Bund"
+mode = "dark"
+character = "the Bund at eight; river-ink teal, floodlit gold, warm magnolia text"
+[variants.palette]
+bg        = "#0f2329"
+bg-dark   = "#0a1a1f"
+bg-hl     = "#173039"
+gutter    = "#234049"
+fg        = "#ddd8cc"
+fg-dim    = "#aeb3ab"
+comment   = "#6f807e"
+river     = "#78a6d8"
+glass     = "#6cc3cf"
+copper    = "#62b89a"
+plane     = "#a3c27a"
+gold      = "#dcaa5e"
+amber     = "#e88a58"
+tile      = "#e66a5f"
+pearl     = "#e27aa8"
+selection = "#1f4652"
+
+[[variants]]
+slug = "wukang"
+label = "Wukang"
+mode = "light"
+character = "an afternoon on Wukang Road; grey-beige pebble-dash, coffee text, plane-tree green"
+[variants.overrides]
+accent = "plane"
+accent_hover = "copper"
+highlight = "plane"
+table_header = "plane"
+h1 = "tile"
+h2 = "plane"
+h3 = "river"
+h4 = "copper"
+h5 = "gold"
+mark_alpha = "0.15"
+[variants.palette]
+bg        = "#eeebe3"
+bg-dark   = "#e5e1d7"
+bg-hl     = "#dfdace"
+gutter    = "#cdc6b8"
+fg        = "#2c2623"
+fg-dim    = "#4f4640"
+comment   = "#776d66"
+river     = "#37529a"
+glass     = "#186a80"
+copper    = "#2b6f55"
+plane     = "#4a6a26"
+gold      = "#755910"   # darker than the first draft so ==mark== text stays above 4.3:1
+amber     = "#a35a10"
+tile      = "#b03a36"
+pearl     = "#a2366e"
+selection = "#d6e2d4"
