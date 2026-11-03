@@ -96,8 +96,10 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   `minAppVersion` is older, so the rules for Mermaid itself stay, all nested under one `{{MM}}` block
   (an app without CSS nesting ignores it). `{{MM}}` expands to a selector limited to `MERMAID_TYPES`
   in `gen-themes.py`, skips Pele's output with `:not(.pele)`, and its `:not(#_)` outranks Mermaid's
-  id-scoped rules. Those rules can no longer be tested: the verification measures Pele only, with one
-  section per diagram type in the test note (`MERMAID` in `pagelib.js`, built on Pele's class names).
+  id-scoped rules. The verification measures Pele only, with one section per diagram type in the test
+  note (`MERMAID` in `pagelib.js`, built on Pele's class names). To check the Mermaid rules, start a
+  temporary instance (`--user-data-dir`) without the update's `obsidian-<version>.asar`: it runs the
+  installer's version.
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different
