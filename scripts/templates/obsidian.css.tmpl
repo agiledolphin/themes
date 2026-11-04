@@ -49,6 +49,33 @@ body.theme-light {
     --interactive-accent:       {{c:accent}};
     --interactive-accent-hover: {{c:accent_hover}};
     --interactive-accent-rgb:   {{rgb:accent}};
+
+    /* --- Obsidian's own palette ---
+       Behind colored highlights, canvas cards, Sync avatars and Bases, so they take the scheme's
+       colors. Obsidian has purple and pink, the scheme one magenta: both map to it. The accent
+       is rebuilt from H/S/L (accent_h/s/l, derived from the accent by gen-themes.py), so
+       --color-accent and the -1 / -2 steps app.css derives from it follow too. */
+    --color-red:         {{c:red}};
+    --color-red-rgb:     {{rgb:red}};
+    --color-orange:      {{c:orange}};
+    --color-orange-rgb:  {{rgb:orange}};
+    --color-yellow:      {{c:yellow}};
+    --color-yellow-rgb:  {{rgb:yellow}};
+    --color-green:       {{c:green}};
+    --color-green-rgb:   {{rgb:green}};
+    --color-cyan:        {{c:cyan}};
+    --color-cyan-rgb:    {{rgb:cyan}};
+    --color-blue:        {{c:blue}};
+    --color-blue-rgb:    {{rgb:blue}};
+    --color-purple:      {{c:magenta}};
+    --color-purple-rgb:  {{rgb:magenta}};
+    --color-pink:        {{c:magenta}};
+    --color-pink-rgb:    {{rgb:magenta}};
+    --accent-h:          {{r:accent_h}};
+    --accent-s:          {{r:accent_s}};
+    --accent-l:          {{r:accent_l}};
+    /* the PDF viewer's own focus ring (pdf.js); Obsidian's uses --background-modifier-border-focus */
+    --focus-ring-outline: 2px solid {{c:accent}};
     --interactive-success:      {{c:green}};
 
     /* --- Blockquote ---
@@ -181,16 +208,14 @@ body.theme-light {
 {{/nav_style}}
     --nav-heading-color:           {{c:fg}};
 
-    /* --- Graph --- */
-    --graph-color-line:             {{c:gutter}};
-    --graph-color-text:             {{c:fg-dim}};
-    --graph-color-fill:             {{c:bg}};
-    --graph-color-fill-tag:         {{c:graph_tag}};
-    --graph-color-fill-attachment:  {{c:cyan}};
-    --graph-color-fill-unresolved:  {{c:comment}};
-    --graph-color-fill-focused:     {{c:blue}};
-    --graph-color-arrow:            {{c:gutter}};
-    --graph-color-node:             {{c:fg-dim}};
+    /* --- Graph --- (the names app.css reads; arrows use --text-normal at half opacity) */
+    --graph-line:            {{c:comment}};   /* gutter was too faint on the dark grounds */
+    --graph-text:            {{c:fg-dim}};
+    --graph-node:            {{c:fg-dim}};
+    --graph-node-tag:        {{c:graph_tag}};
+    --graph-node-attachment: {{c:cyan}};
+    --graph-node-unresolved: {{c:comment}};
+    --graph-node-focused:    {{c:blue}};
 
     /* --- Ribbon --- */
     --ribbon-background:           {{c:bg}};
@@ -281,8 +306,11 @@ body {
 .markdown-rendered em,     .cm-em     { color: inherit; }
 .markdown-rendered del,    .cm-strikethrough { color: {{c:comment}}; }
 
-.markdown-rendered mark,
-.cm-highlight {
+/* Plain ==highlights== only: a colored one (==🔴…==, Obsidian 1.15+) keeps Obsidian's own tint,
+   which is built from --color-red … and so already takes the scheme's colors. Reading view
+   marks a plain one with an empty data-highlight. */
+.markdown-rendered mark:is(:not([data-highlight]), [data-highlight=""]),
+.cm-highlight:not([class*="cm-highlight-"]) {
     background: {{c:mark_fill}} !important;
     color: {{c:mark_text}} !important;
     border-radius: {{r:radius_3}};

@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含九套配色） | 1.9.0 |
+| Lamplit（含九套配色） | 1.9.1 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -397,6 +397,19 @@ Obsidian 一律用 Mermaid 的浅色主题，深色模式靠 `filter: invert(100
 - 与 Bauhaus（近黑底 / 暖白底、实色黄高亮）对比：Tuttomondo 有描边、硬阴影、粉色强调和实心彩色标签，整体可明显区分
 - 文档：新增 Typora README 中英文和截图（无头浏览器渲染），根目录与 Lamplit README 改为九套配色，`palettes.png` 改为 5×2（23 个方案）
 - 社区介绍页：主图换成 Tuttomondo Subway / Shanghai Wukang / Big Wave Pipeline / Bauhaus Dessau（用户选的 B 版，以新配色开头）；演示笔记里的「seven palettes」改为「nine palettes」后重拍主图和总览图；致谢补上 1.8.0 时漏掉的 Shanghai 和 Tuttomondo；特性加一条「有些配色连形状也变」
+
+
+### 阶段 19 — Obsidian 自带颜色跟随方案（2026-11-04，Lamplit 1.9.1）
+
+用户问哪些样式没用主题配色。方法：在临时实例（Obsidian 1.15.0）里，逐个比较 app.css 的 330 个颜色变量在 Lamplit 与默认主题下的计算值，相同即未受影响（Big Wave 深色 93 个、浅色 96 个）。修复其中四项：
+
+- 关系图：Lamplit 一直设置的 9 个 `--graph-color-*` 在 app.css 里没有任何引用，实际读的是 `--graph-line` / `--graph-node*` / `--graph-text`；改为这些名字。此前连线、标签节点、附件节点是 Obsidian 默认色，其余碰巧跟着文字色。原定的连线色 gutter 第一次生效后在深色底上太淡（Big Wave Pipeline），按用户意见改为注释色
+- Obsidian 调色板 `--color-red` … `--color-pink`（含 `-rgb`）映射到方案的 8 色（purple 与 pink 都映射到 magenta）：彩色高亮、白板卡片 6 色、Sync 头像、错误 / 成功 / 警告状态色随之跟方案
+- 紫色强调色：app.css 有 35 处直接用 `--color-accent`（多选文件、表格选区、面板分隔线拖动、弹窗主按钮、标签页切换器）。生成器把强调色换算为 `accent_h/s/l`（一位小数，换算回去与原色一致），设置 `--accent-h/s/l`，派生的 `-1` / `-2` 也跟着变
+- 焦点环：`#0df` 只在 PDF 阅读器（pdf.js 的提示栏和对话框）里；Obsidian 自己的键盘焦点用 `--background-modifier-border-focus`，本来就跟方案。设置 `--focus-ring-outline`
+- 测试中发现：Lamplit 的高亮规则用 `!important` 把 1.15 新增的彩色高亮（`==🔴…==`）全部盖成方案黄。改为只作用于普通高亮；阅读视图给普通高亮加了空的 `data-highlight`，选择器按「无属性或值为空」判断。两视图一致（临时实例实测 Big Wave Pipeline、Tuttomondo Pisa）
+- 未处理：Obsidian 灰阶 `--color-base-*`（需先查清用在哪些元素上）、阴影与遮罩（中性色）
+- 核验补充：样例笔记「Text Styles」加一行 6 种彩色高亮（只新增）；新探针 `markRed` … `markPurple`、`calloutFrame`、`tableFrame`、`tagFrame`，两视图比较；`analyze.py` 另查彩色高亮都测到、不与普通高亮或彼此同色（注入同色确实报出）。临时实例里用样例副本试跑 bw-pipeline、tm-pisa 通过；副本缺 `[[README]]`，阅读视图的链接探针为空，只是环境差异。新探针在 1.9.1 的全量核验里生成基线
 
 ---
 

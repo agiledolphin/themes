@@ -93,7 +93,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   draws inline code from `--code-border-*`, so those are set on the inline-code element too.
   `shadow = "hard"` puts unblurred offset shadows on callouts, tables, menus and modals, not on code
   blocks: Live Preview builds them from one element per line, so only Reading view could show one.
-  The verification does not measure borders or shadows; check both views by hand.
+  The verification compares the frame and shadow of callouts, tables and tags between the views
+  (`calloutFrame`, `tableFrame`, `tagFrame`); menus and modals are not measured.
 - `ll-color-folders` colors top-level folders by `:nth-child`; children inherit `--ll-folder-color`.
   The 8 colors are `FOLDER_CYCLE` in `gen-themes.py`. Known limit, measured: the file explorer
   virtualizes, so scrolled-out top-level folders leave the DOM and the rest renumber (Blue Topaz's
@@ -107,6 +108,14 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   note (`MERMAID` in `pagelib.js`, built on Pele's class names). To check the Mermaid rules, start a
   temporary instance (`--user-data-dir`) without the update's `obsidian-<version>.asar`: it runs the
   installer's version.
+- Obsidian's own palette is mapped too: `--color-red` … `--color-pink` (+ `-rgb`) to the scheme's
+  colors (purple and pink both to magenta), and `--accent-h/s/l` from the accent (`accent_h/s/l`,
+  computed in `gen-themes.py`), so colored highlights (`==🔴…==`), canvas cards, Sync avatars,
+  state colors and every `--color-accent` use follow the scheme. Plain `==mark==` rules skip colored
+  ones (`[data-highlight]` with a value, `.cm-highlight-<color>`); Reading view gives a plain one an
+  empty `data-highlight`. The graph reads `--graph-line`, `--graph-node*`, `--graph-text`.
+  To find what still ignores the scheme, compare every color variable's computed value under
+  Lamplit with the default theme in a temporary instance: equal values are untouched.
 - Below the variant blocks, one `body.theme-dark, body.theme-light` block maps the semantic
   variables onto Obsidian's own variables. Prefer setting Obsidian variables over styling a
   selector: Reading view and Live Preview often read the same variable through different
@@ -134,7 +143,8 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   3. `uv run scripts/verify-obsidian/analyze.py .verify [--baseline <earlier run>]` — every
      Reading/Live mismatch, contrast per variant, Mermaid (every diagram type rendered without the
      inversion filter, solid and hollow markers, any painted color not from the scheme; text on
-     its fill below 3:1 is reported), and with `--baseline` every difference from
+     its fill below 3:1 is reported), colored highlights (each measured, none the plain mark's or
+     another's color), and with `--baseline` every difference from
      an earlier run (styles, mapped Obsidian variables, UI probes incl. forced :hover); exit 1
      on any. Writes `.verify/index.html` with screenshots. For a refactor: copy `.verify` to
      `.verify-baseline` first, then compare — a refactor must show 0 differences.
