@@ -22,6 +22,26 @@
     --control-text-hover-color:  {{hex:fg}};
     --text-color:                {{hex:fg}};   /* Typora's own UI text: menus, inputs, focus mode */
 
+    /* The rest of Typora's own UI variables (base-control.css, window.css, megamenu.css):
+       left unset they keep Typora's light defaults, which show up in the dark variants. */
+    --select-text-bg-color:      {{hex:selection}};   /* selection in code blocks and source mode */
+    --primary-color:             {{hex:accent}};      /* file list selection, focused inputs */
+    --focus-ring-color:          {{hex:accent}};
+    --primary-btn-border-color:  {{hex:accent}};
+    --primary-btn-text-color:    {{hex:bg}};
+    --side-bar-menu-active-tint: {{hex:accent}};
+    --window-border:             1px solid {{hex:gutter}};   /* menu dividers, sidebar tabs, quick open */
+    --border-color:              {{hex:gutter}};
+    --panel-border-color:        {{hex:gutter}};
+    --table-border-color:        {{hex:gutter}};
+    --rawblock-edit-panel-bd:    {{hex:bg-hl}};       /* math / diagram / HTML source panels */
+    --active-toggle-btn-color:   {{hex:bg-hl}};       /* search panel option buttons */
+    --drag-placeholder-color:    {{hex:bg-hl}};
+    --md-char-color:             {{hex:comment}};     /* Markdown syntax shown while editing */
+    --heading-char-color:        {{hex:comment}};
+    --meta-content-color:        {{hex:fg-dim}};
+    --blur-text-color:           {{hex:comment}};     /* focus and typewriter mode */
+
     /* Mermaid (Typora reads these). An empty --mermaid-theme makes Typora derive a theme from
        --node-fill (an accent tint, written as rgb(): Typora's hex check misreads the blue
        channel, rgb() makes it take light/dark mode from the page background instead). */
@@ -31,6 +51,12 @@
     /* palette */
 {{PALETTE}}
 }
+
+
+/* Scrollbars: Typora's thumb is translucent black, close to invisible on the dark grounds. */
+::-webkit-scrollbar-thumb { background: {{hex:gutter}}; }
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active { background: {{hex:comment}}; }
 
 /* ============================================================
  * Sidebar / Outline Panel

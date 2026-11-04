@@ -4,7 +4,7 @@
 
 short_name = "Bauhaus"               # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "bh"                        # CSS variable / class prefix
-typora_version = "1.0.0"
+typora_version = "1.0.1"
 tagline = ["After the Bauhaus (1919-1933): the three primaries on paper white or black,",
            "flat solid blocks, square corners. Itten's secondaries appear in code only."]
 

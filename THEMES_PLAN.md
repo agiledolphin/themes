@@ -86,15 +86,15 @@
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
-| Lamplit TokyoNight | 1.4.5 |
-| Lamplit Catppuccin | 1.3.4 |
-| Lamplit Wonderland | 1.1.6 |
-| Lamplit Merino | 1.0.3 |
-| Lamplit Big Wave | 1.0.1 |
-| Lamplit Impression | 1.0.0 |
-| Lamplit Bauhaus | 1.0.0 |
-| Lamplit Shanghai | 1.0.0 |
-| Lamplit Tuttomondo | 1.0.0 |
+| Lamplit TokyoNight | 1.4.6 |
+| Lamplit Catppuccin | 1.3.5 |
+| Lamplit Wonderland | 1.1.7 |
+| Lamplit Merino | 1.0.4 |
+| Lamplit Big Wave | 1.0.2 |
+| Lamplit Impression | 1.0.1 |
+| Lamplit Bauhaus | 1.0.1 |
+| Lamplit Shanghai | 1.0.1 |
+| Lamplit Tuttomondo | 1.0.1 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -416,6 +416,16 @@ Obsidian 一律用 Mermaid 的浅色主题，深色模式靠 `filter: invert(100
 
 - 灰阶 `--color-base-*`：app.css 里只有 19 处引用，18 处用于派生变量（背景、边框、文字、表单等，Lamplit 都已覆盖，只有白板网格点 `--canvas-dot-pattern` 没覆盖），1 处是深色 PDF 弹出框的阴影。用户 vault 的插件里只有 Excalidraw 用了 1 处（插件大多写死十六进制颜色，主题改不了）。结论：整套灰阶不映射
 - 白板 `--canvas-color`（不是灰阶，但同为中性灰：深色 `#7e7e7e`、浅色 `#c0c0c0`）用于无色卡片边框、连线和箭头、分组标签、小地图，改为方案的注释色；网格点改为边框色。彩色卡片在自身元素上设置 `--canvas-color`，不受影响。临时实例实测 Big Wave Pipeline、Wonderland Lab（核验工具不测白板）
+
+
+### 阶段 21 — Typora 界面变量跟随方案（2026-11-04，各配色 Typora 补丁版本）
+
+Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging-port`），改为静态排查：Typora 界面样式（base-control / window / megamenu / mac / electron.css）引用 34 个变量，Lamplit 设置了 13 个；未设置的 18 个与颜色有关，退回 Typora 的浅色默认值，深色变体最明显。另外对照 Typora 自带深色主题 night.css 覆盖的界面选择器：对话框、右键菜单、快速打开、弹出框、自动补全、输入框在 Typora 基础样式里已读取 `--bg-color` / `--side-bar-bg-color` / `--text-color`，本来就跟方案。
+
+- 在 `:root` 补设这 18 个变量：代码块与源码模式的选区 → 方案选区色；`--primary-color`（文件列表选中框、输入框聚焦）、焦点框、主按钮 → 强调色；`--window-border`（菜单分隔线、侧栏标签、快速打开）与各类边框 → 边框色；源码编辑面板（公式、图表、HTML）、搜索面板选项按钮、拖动占位 → 高亮背景色；编辑时的 Markdown 符号、标题标记、专注 / 打字机模式的淡化文字 → 注释色
+- 滚动条：Typora 的滑块是半透明黑，深色底上几乎看不见；改为边框色，悬浮时注释色
+- 版本：9 个配色各升一个 Typora 补丁版本；Obsidian 不变，所以不发 Lamplit 新版本，发布时替换当前 Release 的压缩包
+- 核验：只能在 Typora 里看（菜单、快速打开、滚动条、源码面板、专注模式）；仍写死在 Typora 基础样式里的文件菜单面板白底、macOS 主按钮系统蓝等未处理
 
 ---
 
