@@ -177,6 +177,10 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 - One standalone CSS file per variant, named `lamplit-<palette>-<variant>.css` (Typora's menu
   shows the file name: prefix from `shared/lamplit.toml` `name`, palette from `short_name`); the palette is
   declared in that file's `:root`. `--bg-color` must be set in `:root` (it drives `#write`).
+- Typora's own UI reads ~30 variables from its base CSS (`base-control.css`, `window.css`,
+  `megamenu.css` in `/Applications/Typora.app/Contents/Resources/TypeMark/style/`); unset ones keep
+  Typora's light defaults, so the template sets them all in `:root`, plus the scrollbar thumb.
+  Typora ignores `--remote-debugging-port`: its UI can only be checked by looking at it.
 - After syncing, reselect the theme in Preferences → Appearance (or restart Typora).
 
 ## Design conventions
