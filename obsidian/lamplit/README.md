@@ -37,6 +37,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 - **File type icons** in the file explorer: notes, images, canvases, bases, PDFs, audio and video
 - **Mermaid diagrams in your scheme's colors**, in dark and light mode: flowcharts, sequence, pie, class, state, Gantt, ER, git and mindmap diagrams
 - **Callouts**: all 13 official types, each with its own color
+- **Obsidian's own colors follow the scheme too**: colored highlights, canvas cards, the graph view and the accent color in menus and buttons
 - **Task states**: `x`, `/`, `-`, `>`, `?`, `!`, drawn as round checkboxes
 - **Search highlights** in a color of their own, apart from highlighted text and the selection
 - **Chinese-first typography**: PingFang SC → Hiragino Sans GB → Noto Serif SC

@@ -42,6 +42,10 @@ CHECK = {
     "quoteRule": ["border-left-width", "border-left-color"], "quoteText": ["color"],
     "mark": ["color", "background-color"], "link": ["color"], "unresolved": ["color"],
     "calloutNote": ["color"], "calloutNoteBg": ["background-color"],
+    **{f"mark{c}": ["color", "background-color"] for c in ("Red", "Orange", "Yellow", "Green", "Blue", "Purple")},
+    "calloutFrame": ["border-top-width", "border-top-color", "box-shadow"],
+    "tableFrame": ["border-top-width", "border-top-color", "box-shadow"],
+    "tagFrame": ["border-top-width", "border-top-color"],
     "mermaidSvg": ["filter"], "mermaidNode": ["fill", "stroke"], "mermaidEdge": ["stroke"], "mermaidLabel": ["fill"],
     "mermaidPie": ["fill", "stroke"], "mermaidPieText": ["fill"],
 }
@@ -180,6 +184,26 @@ for v in [x["id"] for x in RUN["variants"]]:
             if ratio < 3 and view == "reading":
                 mermaid_low.append((v, fg, ratio))
 
+# --- 4. colored highlights (==🔴…==): each one measured, none the plain mark's or another's color
+highlight_errors = []
+for v in [x["id"] for x in RUN["variants"]]:
+    if SCOPE is not None and "text" not in SCOPE:
+        break
+    for view in ("reading", "live"):
+        d = DATA[f"{v}/{view}"]
+        plain = (d.get("mark") or {}).get("background-color")
+        seen = {}
+        for c in ("Red", "Orange", "Yellow", "Green", "Blue", "Purple"):
+            bg = (d.get(f"mark{c}") or {}).get("background-color")
+            if bg is None:
+                highlight_errors.append((v, view, c.lower(), "not measured"))
+            elif bg == plain:
+                highlight_errors.append((v, view, c.lower(), "same as a plain highlight"))
+            elif bg in seen:
+                highlight_errors.append((v, view, c.lower(), f"same as {seen[bg]}"))
+            else:
+                seen[bg] = c.lower()
+
 # --- text report
 print(f"Reading vs Live Preview: {len(mismatches)} mismatch(es) across {len(RUN['variants'])} variant(s)")
 for v, el, p, a, b in mismatches:
@@ -189,6 +213,9 @@ for v, view, what, why in mermaid_errors:
     print(f"  {v:16} {view:8} {what}: {why}")
 for v, what, ratio in mermaid_low:
     print(f"  {v:16} {what} {ratio}")
+print(f"Colored highlights: {len(highlight_errors)} problem(s)")
+for v, view, c, why in highlight_errors:
+    print(f"  {v:16} {view:8} {c}: {why}")
 print("\nContrast (Reading view):")
 for v, theme, label, body, (mk, mv), low in contrast_rows:
     print(f"  {v:16} body {body}  min {LABELS[mk]} {mv}  " + (", ".join(f"{LABELS[k]} {x}" for k, x in low) or "ok"))
@@ -297,4 +324,4 @@ if BASELINE:
     if len(baseline_diffs) > 200:
         print(f"  … {len(baseline_diffs) - 200} more")
 
-sys.exit(1 if mismatches or baseline_diffs or mermaid_errors else 0)
+sys.exit(1 if mismatches or baseline_diffs or mermaid_errors or highlight_errors else 0)

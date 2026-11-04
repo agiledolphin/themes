@@ -33,6 +33,7 @@ Optional style switches (palette [roles]; omitted = the original look):
                                       on callouts, menus, modals and popovers (Typora: code
                                       blocks and tables)
 """
+import colorsys
 import json
 import re
 import sys
@@ -92,6 +93,11 @@ class Ctx:
             self.roles.setdefault(f"folder_{i}", name)
         self.aliases = theme.get("aliases", {})
         self.palette = variant["palette"]
+        # The accent as H / S / L parts: Obsidian builds --color-accent and its steps from them.
+        h, l, s = colorsys.rgb_to_hls(*(int(self.hex("accent")[i:i + 2], 16) / 255 for i in (1, 3, 5)))
+        self.roles.setdefault("accent_h", f"{h * 360:.1f}")
+        self.roles.setdefault("accent_s", f"{s * 100:.1f}%")
+        self.roles.setdefault("accent_l", f"{l * 100:.1f}%")
 
     def color(self, name: str) -> str:
         """Role / canonical / palette name -> palette color name."""
