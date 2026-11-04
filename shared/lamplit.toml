@@ -7,7 +7,7 @@
 
 name = "Lamplit"
 prefix = "ll"                     # CSS variable / class prefix
-obsidian_version = "1.9.1"
+obsidian_version = "1.9.2"
 min_app_version = "1.14.4"
 author = "Jiaming Sun"
 author_url = "https://github.com/agiledolphin"

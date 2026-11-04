@@ -74,6 +74,10 @@ body.theme-light {
     --accent-h:          {{r:accent_h}};
     --accent-s:          {{r:accent_s}};
     --accent-l:          {{r:accent_l}};
+    /* Canvas: uncolored cards, connectors, group labels and the minimap; the background dots
+       (Obsidian's grey --color-base-30). Colored cards set --canvas-color on themselves. */
+    --canvas-color:       {{c:comment}};
+    --canvas-dot-pattern: {{c:gutter}};
     /* the PDF viewer's own focus ring (pdf.js); Obsidian's uses --background-modifier-border-focus */
     --focus-ring-outline: 2px solid {{c:accent}};
     --interactive-success:      {{c:green}};
