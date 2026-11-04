@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含九套配色） | 1.9.1 |
+| Lamplit（含九套配色） | 1.9.2 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -410,6 +410,12 @@ Obsidian 一律用 Mermaid 的浅色主题，深色模式靠 `filter: invert(100
 - 测试中发现：Lamplit 的高亮规则用 `!important` 把 1.15 新增的彩色高亮（`==🔴…==`）全部盖成方案黄。改为只作用于普通高亮；阅读视图给普通高亮加了空的 `data-highlight`，选择器按「无属性或值为空」判断。两视图一致（临时实例实测 Big Wave Pipeline、Tuttomondo Pisa）
 - 未处理：Obsidian 灰阶 `--color-base-*`（需先查清用在哪些元素上）、阴影与遮罩（中性色）
 - 核验补充：样例笔记「Text Styles」加一行 6 种彩色高亮（只新增）；新探针 `markRed` … `markPurple`、`calloutFrame`、`tableFrame`、`tagFrame`，两视图比较；`analyze.py` 另查彩色高亮都测到、不与普通高亮或彼此同色（注入同色确实报出）。临时实例里用样例副本试跑 bw-pipeline、tm-pisa 通过；副本缺 `[[README]]`，阅读视图的链接探针为空，只是环境差异。新探针在 1.9.1 的全量核验里生成基线
+
+
+### 阶段 20 — 灰阶排查与白板默认色（2026-11-04，Lamplit 1.9.2）
+
+- 灰阶 `--color-base-*`：app.css 里只有 19 处引用，18 处用于派生变量（背景、边框、文字、表单等，Lamplit 都已覆盖，只有白板网格点 `--canvas-dot-pattern` 没覆盖），1 处是深色 PDF 弹出框的阴影。用户 vault 的插件里只有 Excalidraw 用了 1 处（插件大多写死十六进制颜色，主题改不了）。结论：整套灰阶不映射
+- 白板 `--canvas-color`（不是灰阶，但同为中性灰：深色 `#7e7e7e`、浅色 `#c0c0c0`）用于无色卡片边框、连线和箭头、分组标签、小地图，改为方案的注释色；网格点改为边框色。彩色卡片在自身元素上设置 `--canvas-color`，不受影响。临时实例实测 Big Wave Pipeline、Wonderland Lab（核验工具不测白板）
 
 ---
 
