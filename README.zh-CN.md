@@ -4,6 +4,8 @@
 
 青灯夜读（Reading by lamplight）。九套配色，用于 [Obsidian](https://obsidian.md) 和 [Typora](https://typora.io)，都由同一套源文件生成。
 
+![Lamplit：各套配色、描边风格，以及跟着配色走的 Mermaid 图](obsidian/lamplit/highlights.gif)
+
 - **Obsidian**：只有一个主题 **Lamplit**，所有配色都是它的方案。深色和浅色模式可以在 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) 里分别选择。
 - **Typora**：每个配色变体是一个主题文件，命名为 `lamplit-<配色>-<变体>.css`。
 

@@ -427,6 +427,12 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 版本：9 个配色各升一个 Typora 补丁版本；Obsidian 不变，所以不发 Lamplit 新版本，发布时替换当前 Release 的压缩包
 - 核验：只能在 Typora 里看（菜单、快速打开、滚动条、源码面板、专注模式）；仍写死在 Typora 基础样式里的文件菜单面板白底、macOS 主按钮系统蓝等未处理
 
+
+### 阶段 22 — 推广准备：README 动图（2026-11-06）
+
+- 动图 `obsidian/lamplit/highlights.gif`（800×450，2.7 MB，约 19 秒循环）：6 套配色深浅交替（Wonderland Underground、Impression Brume、Big Wave Pipeline、Bauhaus Dessau、Shanghai Bund、Tuttomondo Pisa，开启目录上色）→ Tuttomondo 描边与硬阴影（Subway、Pisa）→ 4 张 Mermaid（流程图 Big Wave Pipeline、时序图 Shanghai Wukang、思维导图 Tuttomondo Subway、甘特图 Impression Brume）。临时实例 + 虚构演示 vault 截图后用 Pillow 合成；Mermaid 帧关闭了可读行宽、隐藏了 Pele 缩放按钮。另有 960×540 GIF（6.2 MB）与 1280×720 MP4（1.2 MB），在用户的 ~/Downloads
+- 根目录 README 中英文在介绍之后放动图；Lamplit 社区页 README 中英文用动图替换开头的静态主图（`screenshot.png` 仍是社区目录卡片图）；`publish-lamplit.sh` 同步复制 `highlights.gif`
+
 ---
 
 ## 三、文件结构（现状）

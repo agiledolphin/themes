@@ -4,7 +4,7 @@
 
 青灯夜读。**一个主题，九套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
 
-![Lamplit 的 Tuttomondo、Shanghai、Big Wave 和 Bauhaus 方案](screenshot.png)
+![Lamplit：各套配色、描边风格，以及跟着配色走的 Mermaid 图](highlights.gif)
 
 ## 开始使用
 

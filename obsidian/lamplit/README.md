@@ -4,7 +4,7 @@ English · [简体中文](README.zh-CN.md)
 
 **One theme, nine palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
 
-![Lamplit in Tuttomondo, Shanghai, Big Wave and Bauhaus](screenshot.png)
+![Lamplit: palettes, outlines and Mermaid diagrams in each scheme's colors](highlights.gif)
 
 ## Get started
 
