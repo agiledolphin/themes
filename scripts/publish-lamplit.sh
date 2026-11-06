@@ -30,7 +30,7 @@ gh repo clone "$REPO" "$work" -- --quiet
 cd "$work"
 git checkout -q -B main
 
-cp "$SRC"/obsidian/lamplit/{README.md,README.zh-CN.md,screenshot.png,palettes.png} "$SRC/LICENSE" .
+cp "$SRC"/obsidian/lamplit/{README.md,README.zh-CN.md,screenshot.png,palettes.png,highlights.gif} "$SRC/LICENSE" .
 $docs_only || cp "$SRC"/obsidian/lamplit/{theme.css,manifest.json} .
 git add -A
 if ! git diff --cached --quiet; then
