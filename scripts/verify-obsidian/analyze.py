@@ -42,6 +42,7 @@ CHECK = {
     "quoteRule": ["border-left-width", "border-left-color"], "quoteText": ["color"],
     "mark": ["color", "background-color"], "link": ["color"], "unresolved": ["color"],
     "calloutNote": ["color"], "calloutNoteBg": ["background-color"],
+    "markLink": ["color", "text-decoration-color"], "markCode": ["color"],
     **{f"mark{c}": ["color", "background-color"] for c in ("Red", "Orange", "Yellow", "Green", "Blue", "Purple")},
     "calloutFrame": ["border-top-width", "border-top-color", "box-shadow"],
     "tableFrame": ["border-top-width", "border-top-color", "box-shadow"],
@@ -51,7 +52,7 @@ CHECK = {
 }
 LABELS = {"body": "正文", **{f"h{i}": f"H{i}" for i in range(1, 7)}, "link": "链接", "unresolved": "失效链接",
           "quoteText": "引用", "inlineCode": "行内代码", "codeText": "代码块", "mark": "高亮", "tag": "标签",
-          "th": "表头", "td": "表格", "calloutNote": "Note 标题"}
+          "th": "表头", "td": "表格", "calloutNote": "Note 标题", "markLink": "高亮里的链接"}
 FAINT = {"unresolved", "h6"}          # de-emphasized text: flag below 3.0 instead of 4.3
 
 # Mermaid: diagram types that must render without Obsidian's inversion filter, and
@@ -141,7 +142,8 @@ for v in [x["id"] for x in RUN["variants"]]:
             "unresolved": c("unresolved"), "quoteText": c("quoteText"),
             "inlineCode": c("inlineCode", ("inlineCode", "background-color")),
             "codeText": c("codeText", ("codeFrame", "background-color")),
-            "mark": c("mark", ("mark", "background-color")), "tag": c("tag", ("tag", "background-color")),
+            "mark": c("mark", ("mark", "background-color")), "markLink": c("markLink", ("mark", "background-color")),
+            "tag": c("tag", ("tag", "background-color")),
             "th": c("th"), "td": c("td"), "calloutNote": c("calloutNote", ("calloutNoteBg", "background-color"))}
     vals = {k: x for k, x in vals.items() if x}
     if not vals:                      # a narrowed run may measure no text at all

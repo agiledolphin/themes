@@ -3,7 +3,7 @@
 #   typora/tuttomondo/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 short_name = "Tuttomondo"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "tm"                        # CSS variable / class prefix
-typora_version = "1.0.1"
+typora_version = "1.0.2"
 tagline = ["A vivid, outlined palette in the spirit of the 1989 mural Tuttomondo in Pisa:",
            "flat bright colors inside heavy outlines. Our own colors, not sampled from the work."]
 

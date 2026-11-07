@@ -2250,8 +2250,8 @@ body {
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .markdown-rendered a:not(.tag):hover { color: var(--ll-cyan); text-decoration-color: var(--ll-cyan); }
-a.is-unresolved               { color: var(--ll-comment); opacity: 1; text-decoration-color: transparent !important; }
-a.is-unresolved:hover         { color: var(--ll-comment); text-decoration-color: var(--ll-comment) !important; }
+a.is-unresolved:not(mark *)       { color: var(--ll-comment); opacity: 1; text-decoration-color: transparent !important; }
+a.is-unresolved:not(mark *):hover { color: var(--ll-comment); text-decoration-color: var(--ll-comment) !important; }
 
 /* Editor mode — internal links */
 .cm-hmd-internal-link .cm-underline {
@@ -2263,10 +2263,10 @@ a.is-unresolved:hover         { color: var(--ll-comment); text-decoration-color:
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .cm-hmd-internal-link { text-decoration: none !important; }
-.cm-hmd-internal-link:hover .cm-underline { color: var(--ll-cyan) !important; text-decoration-color: var(--ll-cyan) !important; }
+.cm-hmd-internal-link:not(.cm-highlight):hover .cm-underline { color: var(--ll-cyan) !important; text-decoration-color: var(--ll-cyan) !important; }
 .is-unresolved { text-decoration: none !important; }
-.is-unresolved .cm-underline { color: var(--ll-comment) !important; text-decoration-color: transparent !important; }
-.is-unresolved:hover .cm-underline { color: var(--ll-comment) !important; text-decoration-color: var(--ll-comment) !important; }
+.is-unresolved:not(.cm-highlight *) .cm-underline { color: var(--ll-comment) !important; text-decoration-color: transparent !important; }
+.is-unresolved:not(.cm-highlight *):hover .cm-underline { color: var(--ll-comment) !important; text-decoration-color: var(--ll-comment) !important; }
 
 /* Editor mode — external links and markdown links */
 .markdown-source-view.mod-cm6 .cm-url .cm-underline,
@@ -2277,6 +2277,21 @@ a.is-unresolved:hover         { color: var(--ll-comment); text-decoration-color:
 }
 .markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
 .markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
+
+/* Inside a highlight (plain or colored), a link takes the highlight's text color with an
+   underline: its own color can vanish on a solid fill (Tuttomondo Subway: 2.1:1). The rules
+   above that need !important skip highlighted links instead of being overridden. */
+.markdown-rendered mark a:not(.tag),
+.markdown-rendered mark a:not(.tag):hover,
+.markdown-source-view.mod-cm6 .cm-highlight .cm-underline {
+    color: inherit;
+    text-decoration-color: currentColor;
+}
+/* app.css colors unresolved links from this variable in both views */
+.markdown-rendered mark,
+.markdown-source-view.mod-cm6 .cm-highlight { --link-unresolved-color: currentColor; }
+/* ... and so does inline code, as Live Preview draws it (the highlight's span carries both). */
+.markdown-rendered mark code { color: inherit; background: transparent; }
 
 /* ============================================================
  * Inline Code

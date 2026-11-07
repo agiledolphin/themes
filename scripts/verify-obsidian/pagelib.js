@@ -85,7 +85,7 @@ window.__V = (() => {
   // (lazily rendered) view happened to have in the DOM.
   const SECTION_KEYS = {
     top: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    text: ['body', 'mark', 'markRed', 'markOrange', 'markYellow', 'markGreen', 'markBlue', 'markPurple', 'link', 'unresolved'],
+    text: ['body', 'mark', 'markLink', 'markCode', 'markRed', 'markOrange', 'markYellow', 'markGreen', 'markBlue', 'markPurple', 'link', 'unresolved'],
     'quote-code': ['quoteRule', 'quoteText', 'inlineCode', 'codeFrame', 'codeText'],
     tables: ['table', 'tableFrame', 'th', 'td', 'cellPad'],
     tasks: ['taskDone', 'taskDoing', 'taskImportant'],
@@ -178,10 +178,13 @@ window.__V = (() => {
       hr: pick(q(live ? '.markdown-source-view hr' : '.markdown-preview-view hr'), ['border-top-width', 'border-top-color']),
       // plain ==mark== (Reading view gives it an empty data-highlight) and the colored ones (==🔴…==)
       mark: pick(q(live ? '.cm-highlight:not([class*="cm-highlight-"])' : '.markdown-preview-view mark:is(:not([data-highlight]), [data-highlight=""])'), T),
+      // a link and inline code inside a plain highlight take the highlight's text color
+      markLink: pick(q(live ? '.cm-highlight .cm-underline' : '.markdown-preview-view mark a.internal-link'), ['color', 'text-decoration-color']),
+      markCode: pick(q(live ? '.cm-highlight.cm-inline-code' : '.markdown-preview-view mark code'), ['color']),
       ...Object.fromEntries(['red', 'orange', 'yellow', 'green', 'blue', 'purple'].map(c => [`mark${c[0].toUpperCase()}${c.slice(1)}`,
         pick(q(live ? `.cm-highlight-${c}` : `.markdown-preview-view mark[data-highlight="${c}"]`), ['color', 'background-color'])])),
-      link: pick(q(live ? '.cm-hmd-internal-link:not(.is-unresolved) .cm-underline' : 'a.internal-link:not(.is-unresolved)'), T),
-      unresolved: pick(q(live ? '.is-unresolved .cm-underline' : 'a.is-unresolved'), T),
+      link: pick(q(live ? '.cm-hmd-internal-link:not(.cm-highlight) .cm-underline:not(.is-unresolved *)' : 'a.internal-link:not(.is-unresolved):not(mark *)'), T),
+      unresolved: pick(q(live ? '.is-unresolved:not(.cm-highlight *) .cm-underline' : 'a.is-unresolved:not(mark *)'), T),
       inlineCode: pick(q(live ? '.cm-line:not(.HyperMD-codeblock):not(.HyperMD-header) .cm-inline-code:not(.cm-formatting)' : '.markdown-preview-view p code'), [...T, ...B, ...P]),
       codeFrame: pick(q(live ? '.HyperMD-codeblock-begin-bg' : '.markdown-preview-view pre'), ['background-color', ...B]),
       codeText: pick(q(live ? '.cm-line.HyperMD-codeblock:not(.HyperMD-codeblock-begin):not(.HyperMD-codeblock-end)' : '.markdown-preview-view pre code'), T),
