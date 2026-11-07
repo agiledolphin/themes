@@ -82,19 +82,19 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含九套配色） | 1.9.2 |
+| Lamplit（含九套配色） | 1.9.3 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
-| Lamplit TokyoNight | 1.4.6 |
-| Lamplit Catppuccin | 1.3.5 |
-| Lamplit Wonderland | 1.1.7 |
-| Lamplit Merino | 1.0.4 |
-| Lamplit Big Wave | 1.0.2 |
-| Lamplit Impression | 1.0.1 |
-| Lamplit Bauhaus | 1.0.1 |
-| Lamplit Shanghai | 1.0.1 |
-| Lamplit Tuttomondo | 1.0.1 |
+| Lamplit TokyoNight | 1.4.7 |
+| Lamplit Catppuccin | 1.3.6 |
+| Lamplit Wonderland | 1.1.8 |
+| Lamplit Merino | 1.0.5 |
+| Lamplit Big Wave | 1.0.3 |
+| Lamplit Impression | 1.0.2 |
+| Lamplit Bauhaus | 1.0.2 |
+| Lamplit Shanghai | 1.0.2 |
+| Lamplit Tuttomondo | 1.0.2 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -430,8 +430,19 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 
 ### 阶段 22 — 推广准备：README 动图（2026-11-06）
 
-- 动图 `obsidian/lamplit/highlights.gif`（800×450，2.7 MB，约 19 秒循环）：6 套配色深浅交替（Wonderland Underground、Impression Brume、Big Wave Pipeline、Bauhaus Dessau、Shanghai Bund、Tuttomondo Pisa，开启目录上色）→ Tuttomondo 描边与硬阴影（Subway、Pisa）→ 4 张 Mermaid（流程图 Big Wave Pipeline、时序图 Shanghai Wukang、思维导图 Tuttomondo Subway、甘特图 Impression Brume）。临时实例 + 虚构演示 vault 截图后用 Pillow 合成；Mermaid 帧关闭了可读行宽、隐藏了 Pele 缩放按钮。另有 960×540 GIF（6.2 MB）与 1280×720 MP4（1.2 MB），在用户的 ~/Downloads
+- 动图 `obsidian/lamplit/highlights.gif`（800×450，2.7 MB，约 19 秒循环）：6 套配色深浅交替（Wonderland Underground、Impression Brume、Big Wave Pipeline、Bauhaus Dessau、Shanghai Bund、Tuttomondo Pisa，开启目录上色）→ Tuttomondo 描边与硬阴影（Subway、Pisa）→ 4 张 Mermaid（流程图 Big Wave Pipeline、时序图 Shanghai Wukang、思维导图 Tuttomondo Subway、甘特图 Impression Brume）。临时实例 + 虚构演示 vault 截图后用 Pillow 合成；Mermaid 帧关闭了可读行宽、隐藏了 Pele 缩放按钮。另有 960×540 GIF（6.2 MB）与 1280×720 MP4（1.2 MB）。推广材料（动图、视频、配色总览图、论坛帖文稿）在用户的 `~/study/repo/themes/lamplit/`；论坛 Share & showcase 帖已于 2026-11-06 审核通过并公开，其他渠道暂缓
 - 根目录 README 中英文在介绍之后放动图；Lamplit 社区页 README 中英文用动图替换开头的静态主图（`screenshot.png` 仍是社区目录卡片图）；`publish-lamplit.sh` 同步复制 `highlights.gif`
+
+
+### 阶段 23 — 高亮里的链接与行内代码（2026-11-07，Lamplit 1.9.3，各配色 Typora 补丁版本）
+
+论坛回帖问到实色高亮遇到彩色文字时的可读性。实测：高亮里的链接在两个视图都保留链接色，实色高亮上只有 1.8–3.9:1（Bauhaus Weimar 外部链接 1.8，Tuttomondo Subway 2.1）；行内代码在阅读视图保留代码框，编辑视图则随高亮，两视图不一致。
+
+- 高亮内（普通与彩色）的链接、行内代码一律取高亮的文字色，链接显示同色下划线。失效链接由 app.css 读 `--link-unresolved-color`，在高亮内设为 `currentColor`
+- 不新增 `!important`（仍 21 处）：原有带 `!important` 的链接规则改为跳过高亮内的链接——阅读视图 `a.is-unresolved:not(mark *)`，编辑视图 `.cm-hmd-internal-link:not(.cm-highlight)`、`.is-unresolved:not(.cm-highlight *)`（`.is-unresolved` 在内层元素上，只排除自身不够）
+- 结果：Tuttomondo Pisa 13.0、Bauhaus Weimar 12.5、Dessau 10.0，两视图一致；Typora 同样修复
+- 核验：样例笔记「Text Styles」加一行高亮内的链接与代码（只新增）；新探针 `markLink`、`markCode`，两视图比较，`markLink` 计入对比度表
+- 过程中的一次误判：最初只测了编辑视图链接的外层元素，以为编辑视图已是深色；文字实际在内层 `.cm-underline` 上，重测后更正
 
 ---
 

@@ -161,6 +161,10 @@ mark   {
     border-radius: {{r:radius_3}};
     padding: 0 3px;
 }
+/* A link or inline code inside a highlight takes its text color (as in Obsidian): a link's own
+   color can vanish on a solid fill. */
+mark a, mark a:hover { color: inherit; text-decoration-color: currentColor; }
+mark code { color: inherit; background: transparent; }
 
 /* ============================================================
  * Code

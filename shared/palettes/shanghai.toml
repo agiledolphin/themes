@@ -3,7 +3,7 @@
 #   typora/shanghai/*.css, and this palette's schemes in obsidian/lamplit/theme.css
 short_name = "Shanghai"              # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "sh"                        # CSS variable / class prefix
-typora_version = "1.0.1"
+typora_version = "1.0.2"
 tagline = ["Shanghai across the Huangpu: the Bund's gilded Art Deco on the west bank, the glass",
            "towers and the Pearl's magenta on the east, plane trees and brick lanes in between."]
 

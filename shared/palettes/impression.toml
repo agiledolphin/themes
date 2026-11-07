@@ -4,7 +4,7 @@
 
 short_name = "Impression"            # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
 prefix = "im"                        # CSS variable / class prefix
-typora_version = "1.0.1"
+typora_version = "1.0.2"
 tagline = ["After Monet's \"Impression, Sunrise\" (1872): the harbour of Le Havre at dawn,",
            "cool grey-blue and grey-green mist, and one orange sun with its reflection."]
 

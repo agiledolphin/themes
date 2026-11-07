@@ -114,7 +114,9 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   computed in `gen-themes.py`), so colored highlights (`==🔴…==`), canvas cards, Sync avatars,
   state colors and every `--color-accent` use follow the scheme. Plain `==mark==` rules skip colored
   ones (`[data-highlight]` with a value, `.cm-highlight-<color>`); Reading view gives a plain one an
-  empty `data-highlight`. The graph reads `--graph-line`, `--graph-node*`, `--graph-text`. Canvas:
+  empty `data-highlight`. Inside any highlight, links (incl. unresolved: `--link-unresolved-color`
+  is set to `currentColor` there) and inline code take the highlight's text color in both views;
+  the `!important` link rules skip highlighted ones (`:not(mark *)`, `:not(.cm-highlight *)`). The graph reads `--graph-line`, `--graph-node*`, `--graph-text`. Canvas:
   `--canvas-color` (uncolored cards, connectors) is the comment color, the dots the gutter. Obsidian's
   grey scale `--color-base-*` stays: Lamplit overrides everything app.css derives from it.
   To find what still ignores the scheme, compare every color variable's computed value under
