@@ -461,6 +461,11 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 核验（`fc-shengshan,fc-wuyong,bw-pipeline`）：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题；Shengshan 正文 12.98、最低 H6 3.46，Wuyong 正文 12.77、最低 H6 3.45；`bw-pipeline` 与基线除新增映射变量 `--blockquote-border-color` 及 1.9.1 后已合入的阶段 19/20/23 变更外 0 差异
 - 文档与素材：新增 `typora/fuchun/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；根目录与 Lamplit README 中英文更新为十套配色；`obsidian/lamplit/palettes.png` 更新为 5×2 十格全部展示配色
 
+### 维护 — 全量基线刷新与调色板速查（2026-11-11）
+
+- 全量核验（25 个变体）作为新的 `.verify` 基线：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题；对比度偏低项仍只有已记录的上游配色（Catppuccin Latte、TokyoNight Day / Storm / Night）。此后可用 `--baseline .verify` 对比，应为 0 差异
+- 第四节补上 Shanghai、Tuttomondo 的调色板速查表
+
 ---
 
 ## 三、文件结构（现状）
@@ -612,6 +617,43 @@ themes/
 | 绿 green | `#6cc070` | `#2e7d32` | 字符串 |
 | 紫 violet | `#b48cff` | `#6a3fa0` | 关键字 |
 | 青 teal | `#4fc1b8` | `#00756e` | 行内代码 |
+
+### Shanghai
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Bund | `#0f2329` | `#ddd8cc` |
+| Wukang | `#eeebe3` | `#2c2623` |
+
+| 角色 | Bund | Wukang | 用途 |
+|------|------|--------|------|
+| 外滩金 gold | `#dcaa5e` | `#755910` | Bund 强调色、H2、表头、高亮；Wukang H5 |
+| 梧桐绿 plane | `#a3c27a` | `#4a6a26` | Wukang 强调色、H2、表头、高亮；Bund H5 |
+| 东方明珠品红 pearl | `#e27aa8` | `#a2366e` | Bund H1 |
+| 红瓦 tile | `#e66a5f` | `#b03a36` | Wukang H1、错误 |
+| 玻璃青 glass | `#6cc3cf` | `#186a80` | 标签、行内代码、H3（Bund） |
+| 江水蓝 river | `#78a6d8` | `#37529a` | 链接、Note callout、H3（Wukang） |
+| 铜绿 copper | `#62b89a` | `#2b6f55` | H4、嵌套引用 |
+| 琥珀 amber | `#e88a58` | `#a35a10` | 搜索、数字 |
+
+### Tuttomondo
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Subway | `#141414` | `#f3f0e8` |
+| Pisa | `#fffaf0` | `#171717` |
+
+| 角色 | Subway | Pisa | 用途 |
+|------|--------|------|------|
+| 粉 magenta | `#ff6ec7` | `#c0187a` | 强调色、H1、当前文件 |
+| 黄 yellow | `#ffd84d` | `#866300` | H2（Subway）、导航悬停（Subway） |
+| 蓝 blue | `#5b93ff` | `#1f55d6` | 链接、表头、H2（Pisa） |
+| 青 cyan | `#46cfff` | `#00739a` | 标签、H3（Subway） |
+| 绿 green | `#a2e35e` | `#2c7a12` | H3（Pisa）、H4（Subway）、嵌套引用 |
+| 橙 orange | `#ff8c33` | `#b54800` | 搜索、H4（Pisa）、H5（Subway） |
+| 青绿 teal | `#2fd3a4` | `#00785e` | H5（Pisa） |
+| 红 red | `#ff5252` | `#c81e1e` | 错误、强调悬停 |
+| 填充黄 / 青 / 蓝 | `#ffd84d` / `#46cfff` / `#5b93ff` | `#ffd84d` / `#6fd6ff` / `#8fb2ff` | 实色高亮、标签与导航色块（配黑字） |
 
 ### Fuchun
 
