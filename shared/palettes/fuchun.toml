@@ -1,0 +1,120 @@
+# Fuchun — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/fuchun/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+short_name = "Fuchun"                # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "fc"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["Chinese ink painting, after Huang Gongwang's Dwelling in the Fuchun Mountains (1350): ink in",
+           "five shades, a cinnabar seal, and the painter's mineral and plant pigments, used sparingly."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["huaqing", "shiqing", "shilv", "zhilv", "tenghuang", "zheshi", "zhusha", "yanzhi", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map them to the painter's pigments.
+[aliases]
+blue = "huaqing"       # 花青 indigo
+cyan = "shiqing"       # 石青 azurite
+teal = "shilv"         # 石绿 malachite
+green = "zhilv"        # 汁绿 sap green
+yellow = "tenghuang"   # 藤黄 gamboge
+orange = "zheshi"      # 赭石 ochre
+red = "zhusha"         # 朱砂 cinnabar
+magenta = "yanzhi"     # 胭脂 carmine
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Ink carries the page: headings step through the five shades of ink (墨分五色: 焦 浓 重 淡 清),
+# table headers are ink too. Cinnabar is the seal: the accent, and tags drawn as seals.
+[roles]
+accent = "zhusha"
+accent_hover = "yanzhi"
+highlight = "zhusha"
+table_header = "nong"
+table_hover_alpha = "0.08"
+tag = "zhusha"
+tag_hover = "zhusha"
+search = "zheshi"
+callout_note = "huaqing"
+graph_tag = "shiqing"
+quote_nested = "shilv"
+quote_rule = "dan"                   # the quote rule in pale ink, so cinnabar stays rare
+tooltip = "huaqing"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.18)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_style = "brush"                 # a gamboge wash behind the lower half of the text
+mark_fill = "wash"
+mark_text = "fg"
+mark_alpha = "0.18"
+tag_style = "seal"
+heading_font = "kai"
+rule_style = "brush"
+checkbox_style = "seal"
+headings = ["jiao", "nong", "zhong", "dan", "qing", "comment"]   # H1..H6
+
+# Ink shades step by ΔE 6-12; H1-H5 read at >= 4.7:1, H6 (the comment) at >= 3.4:1.
+# Pigments read at >= 5.1:1; look-alike pairs stay at ΔE >= 21 (closest: ochre / gamboge).
+
+[[variants]]
+slug = "shengshan"
+label = "Shengshan"
+mode = "dark"
+character = "a rubbing: paper-white strokes on warm ink black, after the scroll's first part, Remaining Mountain"
+[variants.palette]
+bg        = "#1a1815"
+bg-dark   = "#13110f"
+bg-hl     = "#25221e"
+gutter    = "#36322c"
+fg        = "#e3dccd"
+fg-dim    = "#bcb4a5"
+comment   = "#736d63"
+jiao      = "#f1eadb"
+nong      = "#d6cebf"
+zhong     = "#bcb4a5"
+dan       = "#a29b8e"
+qing      = "#8e877b"
+huaqing   = "#86a3dc"
+shiqing   = "#63b2c6"
+shilv     = "#69b996"
+zhilv     = "#a4ba6b"
+tenghuang = "#d8bd5c"
+zheshi    = "#d39760"
+zhusha    = "#e3664f"
+yanzhi    = "#da7397"
+wash      = "#62501e"
+selection = "#3a3328"
+
+[[variants]]
+slug = "wuyong"
+label = "Wuyong"
+mode = "light"
+character = "ink on aged xuan paper, after the scroll's second part, the Master Wuyong Scroll"
+[variants.overrides]
+mark_alpha = "0.15"
+[variants.palette]
+bg        = "#f3ecdc"
+bg-dark   = "#ebe3d0"
+bg-hl     = "#e4dbc6"
+gutter    = "#d3c8b0"
+fg        = "#2a2621"
+fg-dim    = "#4b463e"
+comment   = "#857d70"
+jiao      = "#1b1916"
+nong      = "#36322c"
+zhong     = "#4b463e"
+dan       = "#5f594f"
+qing      = "#6e675c"
+huaqing   = "#2f4b80"
+shiqing   = "#1b6478"
+shilv     = "#2d6c55"
+zhilv     = "#556626"
+tenghuang = "#7a6000"
+zheshi    = "#8d5424"
+zhusha    = "#b2361f"
+yanzhi    = "#9d2d55"
+wash      = "#f0d98a"
+selection = "#dfe3df"

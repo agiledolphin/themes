@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-Reading by lamplight (青灯夜读). Nine color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
+Reading by lamplight (青灯夜读). Ten color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
 
 ![Lamplit: palettes, outlines and Mermaid diagrams in each scheme's colors](obsidian/lamplit/highlights.gif)
 
@@ -20,10 +20,11 @@ Reading by lamplight (青灯夜读). Nine color palettes for [Obsidian](https://
 | [Bauhaus](typora/bauhaus/README.md) | Weimar | Dessau | The Bauhaus school: three primaries, solid blocks, square corners |
 | [Shanghai](typora/shanghai/README.md) | Bund | Wukang | Shanghai across the Huangpu: the Bund's gold, the east bank's glass, plane trees and brick lanes |
 | [Tuttomondo](typora/tuttomondo/README.md) | Subway | Pisa | In the spirit of the 1989 mural *Tuttomondo* in Pisa: bright flat colors inside heavy outlines, with hard shadows |
+| [Fuchun](typora/fuchun/README.md) | Shengshan | Wuyong | Huang Gongwang's *Dwelling in the Fuchun Mountains* (1350): five shades of ink, a cinnabar seal, Kaiti headings and brush-stroke rules |
 | [TokyoNight](typora/tokyonight/README.md) | Storm, Night, Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) (official palette) |
 | [Catppuccin](typora/catppuccin/README.md) | Mocha, Macchiato, Frappé | Latte | [Catppuccin](https://catppuccin.com) (official palette) |
 
-![The nine palettes, each in dark and light](obsidian/lamplit/palettes.png)
+![The ten palettes, each in dark and light](obsidian/lamplit/palettes.png)
 
 Details for each platform: [Lamplit for Obsidian](obsidian/lamplit/README.md) and the Typora README linked from each palette above.
 

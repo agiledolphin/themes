@@ -126,6 +126,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
 }
+{{#heading_font=kai}}
+/* heading_font "kai": Latin in a book serif, Chinese in Kaiti (Songti where Kaiti is missing) */
+h1, h2, h3, h4, h5, h6 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Kaiti SC", STKaiti, KaiTi, "Songti SC", STSong, "Noto Serif SC", serif; }
+{{/heading_font}}
 
 h1 {
     font-size: 1.75em;
@@ -156,11 +160,14 @@ strong { font-weight: 700; }
 em     { font-style: italic; }
 del    { color: {{c:comment}}; text-decoration: line-through; }
 mark   {
-    background: {{c:mark_fill}};
+    background: {{#mark_style=tint}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=solid}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=brush}}linear-gradient(to bottom, transparent 52%, {{c:mark_fill}} 52%, {{c:mark_fill}} 94%, transparent 94%){{/mark_style}};
     color: {{c:mark_text}};
     border-radius: {{r:radius_3}};
     padding: 0 3px;
 }
+{{#mark_style=brush}}
+mark { border-radius: 0; padding: 0 2px; }   /* mark_style "brush": a brush pass behind the lower half */
+{{/mark_style}}
 /* A link or inline code inside a highlight takes its text color (as in Obsidian): a link's own
    color can vanish on a solid fill. */
 mark a, mark a:hover { color: inherit; text-decoration-color: currentColor; }
@@ -215,7 +222,7 @@ pre code, .md-fences code {
 blockquote {
     margin: 1rem 0;
     padding: 0.75rem 1.25rem;
-    border-left: 3px solid {{c:accent}};
+    border-left: 3px solid {{c:quote_rule}};
     background: transparent;
     color: {{c:fg-dim}};
     border-radius: 0 {{r:radius_6}} {{r:radius_6}} 0;
@@ -236,6 +243,11 @@ hr {
     border-top: 1px solid {{c:gutter}};
     margin: 2rem 0;
 }
+{{#rule_style=brush}}
+/* rule_style "brush": the H1 underline and horizontal rules as a stroke of ink that fades out */
+h1 { border-image: linear-gradient(to right, {{c:rule_ink}}, {{c:rule_ink}} 25%, transparent) 1; }
+hr { border-top-width: 2px; border-image: linear-gradient(to right, transparent, {{c:rule_ink}} 12%, {{c:rule_ink}} 45%, transparent) 1; }
+{{/rule_style}}
 
 /* ============================================================
  * Tables

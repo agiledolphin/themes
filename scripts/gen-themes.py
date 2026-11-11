@@ -24,14 +24,24 @@ Template placeholders:
 
 Optional style switches (palette [roles]; omitted = the original look):
     corners    = "round" | "square"   square: every corner radius 0 (roles radius_2 … radius_8)
-    mark_style = "tint"  | "solid"    solid: ==mark== as a block of mark_fill (default: the
-                                      yellow) with dark text (mark_text: bg / fg by mode)
+    mark_style = "tint"  | "solid" | "brush"
+                                      solid: ==mark== as a block of mark_fill (default: the
+                                      yellow) with dark text (mark_text: bg / fg by mode);
+                                      brush: mark_fill only behind the lower half of the text
     outline    = "none"  | "bold"     bold: a 2px outline_color frame (default fg) on code,
                                       callouts, tables, menus and modals; tags become solid
                                       blocks of tag_fill / tag_fill_hover with tag_text
     shadow     = "none"  | "hard"     hard: unblurred offset shadows (hard_shadow, hard_shadow_l)
                                       on callouts, menus, modals and popovers (Typora: code
                                       blocks and tables)
+    tag_style  = "pill"  | "seal"     seal: tags as a thin square frame in the tag color, stamped
+                                      solid on hover (Obsidian only: Typora has no tags)
+    heading_font = "default" | "kai"  kai: headings in a book serif for Latin and Kaiti for Chinese
+                                      (falling back to Songti)
+    rule_style = "line"  | "brush"    brush: the H1 underline and horizontal rules as a stroke of
+                                      ink (rule_ink, default comment) that fades out
+    checkbox_style = "round" | "seal" seal: a checked task box turns into a small square seal
+                                      (Obsidian only: Typora keeps native checkboxes)
 """
 import colorsys
 import json
@@ -89,6 +99,12 @@ class Ctx:
             self.roles.setdefault("hard_shadow", "3px 3px 0 {{c:outline_color}}")
             self.roles.setdefault("hard_shadow_l", "6px 6px 0 {{c:outline_color}}")
         self.roles.setdefault("outline_color", "fg" if bold or hard else "")
+        self.roles.setdefault("quote_rule", "accent")
+        self.roles.setdefault("tag_style", "pill")
+        self.roles.setdefault("heading_font", "default")
+        brush = self.roles.setdefault("rule_style", "line") == "brush"
+        self.roles.setdefault("rule_ink", "comment" if brush else "")
+        self.roles.setdefault("checkbox_style", "round")
         for i, name in enumerate(FOLDER_CYCLE, 1):
             self.roles.setdefault(f"folder_{i}", name)
         self.aliases = theme.get("aliases", {})

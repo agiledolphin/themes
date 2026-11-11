@@ -86,6 +86,7 @@ body.theme-light {
        Shared by Reading mode (.markdown-rendered blockquote) and Live
        Preview (.HyperMD-quote), so both modes stay consistent. */
     --blockquote-background-color: transparent;
+    --blockquote-border-color:     {{c:quote_rule}};
     --blockquote-color:            {{c:fg-dim}};
 
     /* --- Horizontal rule ---
@@ -179,6 +180,28 @@ body.theme-light {
     --menu-shadow:  {{r:hard_shadow}};
     --modal-shadow: {{r:hard_shadow_l}};
 {{/shadow}}
+{{#tag_style=seal}}
+    /* tag_style "seal": a tag is a small seal, a thin square frame in the tag color; hover stamps it */
+    --tag-color:            {{c:tag}};
+    --tag-color-hover:      {{c:bg}};
+    --tag-background:       transparent;
+    --tag-background-hover: {{c:tag}};
+    --tag-border-width:     1px;
+    --tag-border-color:     {{c:tag}};
+    --tag-radius:           {{r:radius_2}};
+{{/tag_style}}
+{{#heading_font=kai}}
+    /* heading_font "kai": Latin in a book serif, Chinese in Kaiti (Songti where Kaiti is missing) */
+    --h1-font: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Kaiti SC", STKaiti, KaiTi, "Songti SC", STSong, "Noto Serif SC", serif;
+    --h2-font: var(--h1-font);
+    --h3-font: var(--h1-font);
+    --h4-font: var(--h1-font);
+    --h5-font: var(--h1-font);
+    --h6-font: var(--h1-font);
+{{/heading_font}}
+{{#rule_style=brush}}
+    --hr-thickness: 2px;
+{{/rule_style}}
 
     /* --- Scrollbars --- */
     --scrollbar-bg:              transparent;
@@ -301,6 +324,18 @@ body {
     padding-bottom: 0.1em;
     margin-bottom: 0.5em;
 }
+{{#rule_style=brush}}
+/* rule_style "brush": the H1 underline and horizontal rules as a stroke of ink that fades out.
+   border-image paints over the border, so its width and color (what both views share) stay. */
+.markdown-rendered h1,
+.markdown-source-view .cm-line.HyperMD-header-1 {
+    border-image: linear-gradient(to right, {{c:rule_ink}}, {{c:rule_ink}} 25%, transparent) 1;
+}
+.markdown-rendered hr,
+.markdown-source-view.mod-cm6 hr {
+    border-image: linear-gradient(to right, transparent, {{c:rule_ink}} 12%, {{c:rule_ink}} 45%, transparent) 1;
+}
+{{/rule_style}}
 
 /* ============================================================
  * Inline emphasis
@@ -315,11 +350,19 @@ body {
    marks a plain one with an empty data-highlight. */
 .markdown-rendered mark:is(:not([data-highlight]), [data-highlight=""]),
 .cm-highlight:not([class*="cm-highlight-"]) {
-    background: {{c:mark_fill}} !important;
+    background: {{#mark_style=tint}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=solid}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=brush}}linear-gradient(to bottom, transparent 52%, {{c:mark_fill}} 52%, {{c:mark_fill}} 94%, transparent 94%){{/mark_style}} !important;
     color: {{c:mark_text}} !important;
     border-radius: {{r:radius_3}};
     padding: 0 3px;
 }
+{{#mark_style=brush}}
+/* mark_style "brush": the wash sits behind the lower half of the text, like a brush pass */
+.markdown-rendered mark:is(:not([data-highlight]), [data-highlight=""]),
+.cm-highlight:not([class*="cm-highlight-"]) {
+    border-radius: 0;
+    padding: 0 2px;
+}
+{{/mark_style}}
 
 /* ============================================================
  * Links
@@ -436,7 +479,7 @@ a.is-unresolved:not(mark *):hover { color: {{c:comment}}; text-decoration-color:
  * ============================================================ */
 
 .markdown-rendered blockquote {
-    border-left: 2px solid {{c:accent}};
+    border-left: 2px solid var(--blockquote-border-color);
     border-right: none;
     background: var(--blockquote-background-color);
     border-radius: 0 {{r:radius_6}} {{r:radius_6}} 0;
@@ -627,6 +670,15 @@ input[type="checkbox"][data-task="X"]:hover {
     background-color: var(--checkbox-color-hover);
     border-color: var(--checkbox-color-hover);
 }
+{{#checkbox_style=seal}}
+/* checkbox_style "seal": a checked box turns into a small square seal */
+.task-list-item[data-task="x"] .task-list-item-checkbox,
+.task-list-item[data-task="X"] .task-list-item-checkbox,
+input[type="checkbox"][data-task="x"],
+input[type="checkbox"][data-task="X"] {
+    border-radius: {{r:radius_2}};
+}
+{{/checkbox_style}}
 .task-list-item[data-task="x"] .task-list-item-checkbox::before,
 .task-list-item[data-task="X"] .task-list-item-checkbox::before,
 input[type="checkbox"][data-task="x"]::before,

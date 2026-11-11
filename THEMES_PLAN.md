@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含九套配色） | 1.9.3 |
+| Lamplit（含十套配色） | 1.10.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -95,6 +95,7 @@
 | Lamplit Bauhaus | 1.0.2 |
 | Lamplit Shanghai | 1.0.2 |
 | Lamplit Tuttomondo | 1.0.2 |
+| Lamplit Fuchun | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -444,6 +445,22 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 核验：样例笔记「Text Styles」加一行高亮内的链接与代码（只新增）；新探针 `markLink`、`markCode`，两视图比较，`markLink` 计入对比度表
 - 过程中的一次误判：最初只测了编辑视图链接的外层元素，以为编辑视图已是深色；文字实际在内层 `.cm-underline` 上，重测后更正
 
+
+### 阶段 24 — 新增 Fuchun 配色与四个水墨风格开关（2026-11-11，Lamplit 1.10.0）
+
+致敬黄公望《富春山居图》（1350）与中国水墨画，两个变体取名自画卷火烧后分藏两地的两段：**Shengshan**（深色，剩山图，如碑拓：暖墨黑底上的纸白笔迹，背景 `#1a1815` / 文字 `#e3dccd`）与 **Wuyong**（浅色，无用师卷，旧宣纸上的水墨，背景 `#f3ecdc` / 文字 `#2a2621`）。
+
+- 角色：页面由墨色统领，标题按「墨分五色（焦、浓、重、淡、清）」递进（H1–H5，H6 用注释墨色），表头取浓墨，引用竖线取淡墨（新增 `quote_rule` 角色，默认等于 `accent`）；朱砂作全页唯一的印章色（强调色、复选框、当前文件、标签、错误）；传统国画颜料（花青、石青、石绿、汁绿、藤黄、赭石、胭脂）用于链接、行内代码、搜索、Callout 与代码高亮
+- 对比度：墨色相邻阶差 ΔE 6–12，H1–H5 ≥ 4.7:1，H6 ≥ 3.45:1；国画颜料均 ≥ 5.1:1，易混淆色 ΔE ≥ 21（最近：赭石 / 藤黄）
+- 新增四个风格开关（`gen-themes.py`，关闭时现有 9 套配色的 Typora 文件逐字节不变）：
+  - `mark_style = "brush"`：`==高亮==` 用 `linear-gradient` 在文字下半部（52%–94%）铺一道藤黄水色（`wash`），圆角归零
+  - `tag_style = "seal"`（Obsidian）：标签做成朱砂细方框闲章（1px 边框、2px 圆角、透明底），悬停实心钤印
+  - `heading_font = "kai"`：H1–H6 拉丁文用书籍衬线体，中文用楷体（缺失时回退宋体）
+  - `rule_style = "brush"`：H1 下划线与分割线 `hr` 用 `border-image` 渐变为透明，如水墨飞白收笔
+  - `checkbox_style = "seal"`（Obsidian）：已完成任务复选框（`[x]` / `[X]`）改为 2px 圆角的小方印
+- 核验（`fc-shengshan,fc-wuyong,bw-pipeline`）：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题；Shengshan 正文 12.98、最低 H6 3.46，Wuyong 正文 12.77、最低 H6 3.45；`bw-pipeline` 与基线除新增映射变量 `--blockquote-border-color` 及 1.9.1 后已合入的阶段 19/20/23 变更外 0 差异
+- 文档与素材：新增 `typora/fuchun/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；根目录与 Lamplit README 中英文更新为十套配色；`obsidian/lamplit/palettes.png` 更新为 5×2 十格全部展示配色
+
 ---
 
 ## 三、文件结构（现状）
@@ -459,37 +476,29 @@ themes/
 │   │   ├── merino.toml
 │   │   ├── big-wave.toml
 │   │   ├── impression.toml
-│   │   └── bauhaus.toml
+│   │   ├── bauhaus.toml
+│   │   ├── shanghai.toml
+│   │   ├── tuttomondo.toml
+│   │   └── fuchun.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
 │       ├── theme.css          ✓（生成）
-│       ├── manifest.json      ✓（生成，需补 authorUrl）
-│       └── README.md          ✓
+│       ├── manifest.json      ✓（生成）
+│       └── README.md / README.zh-CN.md / screenshot.png / palettes.png / highlights.gif
 ├── install.sh                 # 从最新 Release 安装，无需 clone
 ├── README.md / README.zh-CN.md / LICENSE   # 总览与安装（英文 / 中文）/ MIT
 ├── typora/
-│   ├── tokyonight/            # 各配色目录：lamplit-<配色>-<变体>.css（生成）+ README.md
-│   │   ├── lamplit-tokyonight-{storm,night,moon,day}.css
-│   │   └── README.md
+│   ├── tokyonight/            # 各配色目录：lamplit-<配色>-<变体>.css（生成）+ README.md / README.zh-CN.md / screenshot.png
 │   ├── catppuccin/
-│   │   ├── lamplit-catppuccin-{mocha,macchiato,frappe,latte}.css
-│   │   └── README.md
 │   ├── wonderland/
-│   │   ├── lamplit-wonderland-{underground,office-district,lab}.css
-│   │   └── README.md
 │   ├── merino/
-│   │   ├── lamplit-merino-{light,dark}.css
-│   │   └── README.md
 │   ├── big-wave/
-│   │   ├── lamplit-big-wave-{pipeline,spray}.css
-│   │   └── README.md
 │   ├── impression/
-│   │   ├── lamplit-impression-{havre,brume}.css
-│   │   └── README.md
-│   └── bauhaus/
-│       ├── lamplit-bauhaus-{weimar,dessau}.css
-│       └── README.md
+│   ├── bauhaus/
+│   ├── shanghai/
+│   ├── tuttomondo/
+│   └── fuchun/
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
     ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
@@ -603,3 +612,26 @@ themes/
 | 绿 green | `#6cc070` | `#2e7d32` | 字符串 |
 | 紫 violet | `#b48cff` | `#6a3fa0` | 关键字 |
 | 青 teal | `#4fc1b8` | `#00756e` | 行内代码 |
+
+### Fuchun
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Shengshan | `#1a1815` | `#e3dccd` |
+| Wuyong | `#f3ecdc` | `#2a2621` |
+
+| 角色 | Shengshan | Wuyong | 用途 |
+|------|-----------|--------|------|
+| 焦 jiao | `#f1eadb` | `#1b1916` | H1 |
+| 浓 nong | `#d6cebf` | `#36322c` | H2、表头 |
+| 重 zhong | `#bcb4a5` | `#4b463e` | H3 |
+| 淡 dan | `#a29b8e` | `#5f594f` | H4、引用竖线 |
+| 清 qing | `#8e877b` | `#6e675c` | H5 |
+| 朱砂 zhusha | `#e3664f` | `#b2361f` | 强调色、标签印章、复选框、错误 |
+| 花青 huaqing | `#86a3dc` | `#2f4b80` | 链接、Note callout、函数 |
+| 石青 shiqing | `#63b2c6` | `#1b6478` | 行内代码、类型 |
+| 石绿 shilv | `#69b996` | `#2d6c55` | 嵌套引用、代码 teal |
+| 汁绿 zhilv | `#a4ba6b` | `#556626` | 字符串 |
+| 藤黄 tenghuang / wash | `#d8bd5c` / `#62501e` | `#7a6000` / `#f0d98a` | 代码属性 / 笔刷高亮底色 |
+| 赭石 zheshi | `#d39760` | `#8d5424` | 搜索、数字 |
+| 胭脂 yanzhi | `#da7397` | `#9d2d55` | 关键字 |
