@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-青灯夜读。**一个主题，十套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
+青灯夜读。**一个主题，十一套配色。** 深色模式和浅色模式可以分别选择方案，也可以来自不同的配色。
 
 ![Lamplit：各套配色、描边风格，以及跟着配色走的 Mermaid 图](highlights.gif)
 
@@ -16,7 +16,7 @@
 
 ## 配色
 
-![十套配色的深色和浅色](palettes.png)
+![十一套配色的深色和浅色](palettes.png)
 
 | 配色 | 深色 | 浅色 | 灵感来源 |
 |------|------|------|----------|
@@ -28,6 +28,7 @@
 | **Shanghai** | Bund | Wukang | 黄浦江两岸的上海：江水底色、外滩的金、东方明珠的品红 |
 | **Tuttomondo** | Subway | Pisa | 致敬 1989 年比萨的壁画《Tuttomondo》：粗描边、硬阴影、实心标签和高亮 |
 | **Fuchun** | Shengshan | Wuyong | 黄公望《富春山居图》：墨分五色、朱砂印章、楷体标题与飞白分割线 |
+| **Walden** | Woods | Herbarium | 梭罗《瓦尔登湖》：冷杉深林绿、蕨叶绿、浆果红 H1 与标本纸 |
 | **TokyoNight** | Storm、Night、Moon | Day | 官方 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) 配色 |
 | **Catppuccin** | Mocha、Macchiato、Frappé | Latte | 官方 [Catppuccin](https://catppuccin.com) 配色 |
 
@@ -63,7 +64,7 @@ Style Settings 页面还有四个开关：**Hide Folder Icons**（隐藏文件�
 
 ## 致谢
 
-- 配色：[@folke](https://github.com/folke) 的 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)；Catppuccin 组织的 [Catppuccin](https://catppuccin.com)；Merino 来自 Merino Light / Dark 终端配色（GitHub Primer 色彩）；Big Wave 来自山下达郎《Big Wave》的封面；Impression 来自莫奈《印象·日出》；Bauhaus 来自包豪斯；Shanghai 来自黄浦江两岸的上海；Tuttomondo 致敬 1989 年比萨的壁画《Tuttomondo》，配色为自己调制；Fuchun 来自黄公望《富春山居图》；Wonderland 为原创
+- 配色：[@folke](https://github.com/folke) 的 [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)；Catppuccin 组织的 [Catppuccin](https://catppuccin.com)；Merino 来自 Merino Light / Dark 终端配色（GitHub Primer 色彩）；Big Wave 来自山下达郎《Big Wave》的封面；Impression 来自莫奈《印象·日出》；Bauhaus 来自包豪斯；Shanghai 来自黄浦江两岸的上海；Tuttomondo 致敬 1989 年比萨的壁画《Tuttomondo》，配色为自己调制；Fuchun 来自黄公望《富春山居图》；Walden 来自梭罗《瓦尔登湖》；Wonderland 为原创
 - 设计参考：[@kepano](https://github.com/kepano) 的 [Minimal](https://github.com/kepano/obsidian-minimal)
 - 图标：[Lucide](https://lucide.dev)，也是 Obsidian 自身使用的图标集
 

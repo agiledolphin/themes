@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-**One theme, ten palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
+**One theme, eleven palettes.** Pick a scheme for dark mode and another for light mode, from any palette you like.
 
 ![Lamplit: palettes, outlines and Mermaid diagrams in each scheme's colors](highlights.gif)
 
@@ -16,7 +16,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 
 ## Palettes
 
-![The ten palettes, each in dark and light](palettes.png)
+![The eleven palettes, each in dark and light](palettes.png)
 
 | Palette | Dark | Light | After |
 |---------|------|-------|-------|
@@ -28,6 +28,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 | **Shanghai** | Bund | Wukang | Shanghai across the Huangpu: river-ink ground, the Bund's gold, the Pearl's magenta |
 | **Tuttomondo** | Subway | Pisa | After the 1989 mural *Tuttomondo* in Pisa: heavy outlines, hard shadows, solid tags and highlights |
 | **Fuchun** | Shengshan | Wuyong | Huang Gongwang's *Dwelling in the Fuchun Mountains*: five shades of ink, a cinnabar seal, Kaiti headings and brush-stroke rules |
+| **Walden** | Woods | Herbarium | Henry David Thoreau's *Walden*: deep pine and fern green, wild berry H1, herbarium paper |
 | **TokyoNight** | Storm, Night, Moon | Day | The official [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) palette |
 | **Catppuccin** | Mocha, Macchiato, Frappé | Latte | The official [Catppuccin](https://catppuccin.com) palette |
 
@@ -63,7 +64,7 @@ The files in `agiledolphin/lamplit` are generated. Their sources, and the same p
 
 ## Credits
 
-- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Shanghai after the two banks of the Huangpu; Tuttomondo in the spirit of the 1989 mural *Tuttomondo* in Pisa, with colors of our own; Fuchun after Huang Gongwang's *Dwelling in the Fuchun Mountains*; Wonderland is original
+- Palettes: [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) by [@folke](https://github.com/folke); [Catppuccin](https://catppuccin.com) by the Catppuccin org; Merino after the Merino Light / Dark terminal themes (GitHub Primer colors); Big Wave after the cover of Tatsuro Yamashita's *Big Wave*; Impression after Claude Monet's *Impression, Sunrise*; Bauhaus after the Bauhaus school; Shanghai after the two banks of the Huangpu; Tuttomondo in the spirit of the 1989 mural *Tuttomondo* in Pisa, with colors of our own; Fuchun after Huang Gongwang's *Dwelling in the Fuchun Mountains*; Walden after Thoreau's *Walden*; Wonderland is original
 - Design reference: [Minimal](https://github.com/kepano/obsidian-minimal) by [@kepano](https://github.com/kepano)
 - Icons: [Lucide](https://lucide.dev), the set Obsidian itself uses
 

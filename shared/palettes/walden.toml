@@ -1,0 +1,101 @@
+# Walden — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/walden/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+short_name = "Walden"                # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "wd"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["After Henry David Thoreau's Walden (1854): deep pine and fern green,",
+           "a touch of wild berry, and aged herbarium paper."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["fern", "berry", "pond", "lichen", "moss", "amber", "autumn", "heather", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map them to the woodland palette.
+[aliases]
+blue = "pond"
+cyan = "lichen"
+teal = "moss"
+green = "fern"
+yellow = "amber"
+orange = "autumn"
+red = "berry"
+magenta = "heather"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Fern green leads the accent, H2 and table headers; wild berry marks H1;
+# pond blue carries links and note callouts.
+[roles]
+accent = "fern"
+accent_hover = "moss"
+highlight = "amber"
+table_header = "fern"
+table_hover_alpha = "0.12"
+tag = "moss"
+tag_hover = "pond"
+search = "autumn"
+callout_note = "pond"
+graph_tag = "lichen"
+quote_nested = "heather"
+tooltip = "pond"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.2)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["berry", "fern", "pond", "lichen", "amber", "comment"]   # H1..H6
+
+# All accents read at >= 4.5:1 on bg (Herbarium mark 4.53:1), comments >= 3.89:1.
+# Look-alike pairs stay at ΔE >= 21 (closest: fern / moss in Herbarium, 21.8).
+
+[[variants]]
+slug = "woods"
+label = "Woods"
+mode = "dark"
+character = "deep pine forest at dusk; fir-needle green, birch-white text"
+[variants.palette]
+bg        = "#131d17"
+bg-dark   = "#0d1510"
+bg-hl     = "#1c2b22"
+gutter    = "#2b3e33"
+fg        = "#dce4dc"
+fg-dim    = "#adc0b1"
+comment   = "#6e8575"
+fern      = "#82cc82"
+berry     = "#eb6e68"
+pond      = "#78aad8"
+lichen    = "#5ec2cc"
+moss      = "#4ebf9e"
+amber     = "#dfc068"
+autumn    = "#e89254"
+heather   = "#c48ed8"
+selection = "#243d2d"
+
+[[variants]]
+slug = "herbarium"
+label = "Herbarium"
+mode = "light"
+character = "botanical specimen paper; warm cotton-linen cream, forest ink"
+[variants.overrides]
+mark_alpha = "0.15"
+[variants.palette]
+bg        = "#f4f2ea"
+bg-dark   = "#eae7dc"
+bg-hl     = "#e1ddd0"
+gutter    = "#cfc9b8"
+fg        = "#222c25"
+fg-dim    = "#435348"
+comment   = "#6d7d71"
+fern      = "#2d6d32"
+berry     = "#b23430"
+pond      = "#2b5888"
+lichen    = "#156878"
+moss      = "#186e58"
+amber     = "#785d08"
+autumn    = "#a24e10"
+heather   = "#724288"
+selection = "#d5e4d8"

@@ -1,13 +1,14 @@
 # Themes Workspace
 
-Design workspace for Typora and Obsidian themes built from ten palettes: TokyoNight
+Design workspace for Typora and Obsidian themes built from eleven palettes: TokyoNight
 (`tn-`), Catppuccin (`cp-`), Merino (`mr-`, after the Merino Light/Dark terminal themes — GitHub
 Primer colors), Big Wave (`bw-`, after the cover of Tatsuro Yamashita's "Big Wave"), Impression
 (`im-`, after Monet's "Impression, Sunrise"), Bauhaus (`bh-`, the three primaries, solid blocks,
 square corners), Shanghai (`sh-`, the two banks of the Huangpu), Tuttomondo (`tm-`, after the 1989
 mural in Pisa: outlines, hard shadows, color in blocks), Fuchun (`fc-`, after Huang Gongwang's
 "Dwelling in the Fuchun Mountains": five shades of ink, a cinnabar seal, Kaiti headings and brush
-strokes) and Wonderland (`wl-`, original, inspired by Murakami's "Hard-Boiled Wonderland").
+strokes), Walden (`wd-`, after Thoreau's "Walden": deep pine and fern green, wild berry H1,
+herbarium paper) and Wonderland (`wl-`, original, inspired by Murakami's "Hard-Boiled Wonderland").
 A new palette is just a new `shared/palettes/<palette>.toml` (plus its name in
 `shared/lamplit.toml` → `schemes`); the generator does the rest. The file name is the palette
 slug and shows up in Typora's menu, so use hyphens between words (`big-wave` → "Big Wave").

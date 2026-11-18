@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含十套配色） | 1.10.0 |
+| Lamplit（含十一套配色） | 1.11.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -96,6 +96,7 @@
 | Lamplit Shanghai | 1.0.2 |
 | Lamplit Tuttomondo | 1.0.2 |
 | Lamplit Fuchun | 1.0.0 |
+| Lamplit Walden | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -466,6 +467,17 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 全量核验（25 个变体）作为新的 `.verify` 基线：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题；对比度偏低项仍只有已记录的上游配色（Catppuccin Latte、TokyoNight Day / Storm / Night）。此后可用 `--baseline .verify` 对比，应为 0 差异
 - 第四节补上 Shanghai、Tuttomondo 的调色板速查表
 
+
+### 阶段 25 — 新增 Walden 配色（2026-11-18，Lamplit 1.11.0）
+
+补齐深色方案中「深林墨绿底 + 绿色主强调色」的空白，致敬梭罗《瓦尔登湖》（1854）与植物志标本传统：
+
+- 变体：**Woods**（深色，冷杉深林墨绿 `#131d17` / 桦木白文字 `#dce4dc`）、**Herbarium**（浅色，植物标本台纸暖棉麻白 `#f4f2ea` / 森林墨文字 `#222c25`）
+- 角色：蕨叶绿 `fern` 作主强调色、H2 与表头、引用竖线、光标与当前文件；浆果红 `berry` 作 H1（万绿丛中一点红）与错误；湖水蓝 `pond` 作链接、H3 与 Note callout；地衣青 `lichen` 作 H4 与行内代码；苔藓绿 `moss` 作标签；松脂琥珀 `amber` 作高亮与 H5；秋叶橙 `autumn` 作搜索命中；石楠紫 `heather` 作代码关键字与嵌套引用；造型保持默认干净圆角与淡底高亮
+- 对比度：所有点缀色对背景 ≥ 5.16:1，高亮与带底色元素 ≥ 4.53:1，Woods 注释 4.34、Herbarium 注释 3.89；相近色差 ΔE ≥ 21.8（最近：Herbarium `fern / moss`）
+- 核验（`wd-woods,wd-herbarium`）：阅读/编辑视图 0 不一致（首次运行 `live` 的 `tdCode` 漏测，复测表格章节后 0 不一致），彩色高亮 0 问题，正文对比度 13.30 / 12.88；Pele 甘特图 `mmGanttTaskText`（1.48 / 2.30）与 `mmGanttCritText`（2.32 / 2.36）低于 3:1，系 Pele 直接把 `--mermaid-text-color` 叠在 `--mermaid-accent` / `--mermaid-critical` 上所致（同 `cp-latte`），保持原色
+- 文档与素材：新增 `typora/walden/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；根目录与 Lamplit README 中英文更新为十一套配色；`obsidian/lamplit/palettes.png` 改为 4×3 网格（前 11 格展示全部配色，第 12 格展示「27 schemes」）
+
 ---
 
 ## 三、文件结构（现状）
@@ -484,7 +496,8 @@ themes/
 │   │   ├── bauhaus.toml
 │   │   ├── shanghai.toml
 │   │   ├── tuttomondo.toml
-│   │   └── fuchun.toml
+│   │   ├── fuchun.toml
+│   │   └── walden.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -503,7 +516,8 @@ themes/
 │   ├── bauhaus/
 │   ├── shanghai/
 │   ├── tuttomondo/
-│   └── fuchun/
+│   ├── fuchun/
+│   └── walden/
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
     ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
@@ -677,3 +691,21 @@ themes/
 | 藤黄 tenghuang / wash | `#d8bd5c` / `#62501e` | `#7a6000` / `#f0d98a` | 代码属性 / 笔刷高亮底色 |
 | 赭石 zheshi | `#d39760` | `#8d5424` | 搜索、数字 |
 | 胭脂 yanzhi | `#da7397` | `#9d2d55` | 关键字 |
+
+### Walden
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Woods | `#131d17` | `#dce4dc` |
+| Herbarium | `#f4f2ea` | `#222c25` |
+
+| 角色 | Woods | Herbarium | 用途 |
+|------|-------|-----------|------|
+| 浆果红 berry | `#eb6e68` | `#b23430` | H1、错误 |
+| 蕨叶绿 fern | `#82cc82` | `#2d6d32` | 强调色、H2、表头、引用竖线、字符串 |
+| 湖水蓝 pond | `#78aad8` | `#2b5888` | 链接、H3、Note callout |
+| 地衣青 lichen | `#5ec2cc` | `#156878` | H4、行内代码 |
+| 苔藓绿 moss | `#4ebf9e` | `#186e58` | 标签 |
+| 松脂琥珀 amber | `#dfc068` | `#785d08` | 高亮、H5 |
+| 秋叶橙 autumn | `#e89254` | `#a24e10` | 搜索、数字 |
+| 石楠紫 heather | `#c48ed8` | `#724288` | 关键字、嵌套引用 |
