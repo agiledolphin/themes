@@ -34,6 +34,8 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 
 ## Features
 
+![Shape differences across Bauhaus, Tuttomondo and Fuchun](shapes.png)
+
 - **Some palettes change shape, not just color**: Bauhaus has square corners and solid highlights; Tuttomondo draws heavy outlines and hard shadows, with solid tags and highlights; Fuchun sets headings in Kaiti, draws rules and highlights like brush strokes, and stamps tags and checked tasks as cinnabar seals
 - **Same look in Reading view and Live Preview**: headings, code, tables, quotes, tags, highlights and links match
 - **File type icons** in the file explorer: notes, images, canvases, bases, PDFs, audio and video

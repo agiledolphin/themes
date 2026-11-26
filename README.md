@@ -27,6 +27,10 @@ Reading by lamplight (青灯夜读). Eleven color palettes for [Obsidian](https:
 
 ![The eleven palettes, each in dark and light](obsidian/lamplit/palettes.png)
 
+Some palettes change shape, not just color — square corners in Bauhaus, bold outlines and hard shadows in Tuttomondo, Kaiti headings, brush strokes and cinnabar seals in Fuchun:
+
+![Shape differences across Bauhaus, Tuttomondo and Fuchun](obsidian/lamplit/shapes.png)
+
 Details for each platform: [Lamplit for Obsidian](obsidian/lamplit/README.md) and the Typora README linked from each palette above.
 
 ## Installation

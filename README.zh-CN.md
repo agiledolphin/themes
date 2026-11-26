@@ -27,6 +27,10 @@
 
 ![十一套配色的深色和浅色](obsidian/lamplit/palettes.png)
 
+有些配色连形状也变——Bauhaus 的直角与实色高亮、Tuttomondo 的粗描边与硬阴影、Fuchun 的楷体标题、飞白笔刷与朱砂印章：
+
+![Bauhaus、Tuttomondo 与 Fuchun 的造型差异](obsidian/lamplit/shapes.png)
+
 各平台的详细说明见 [Lamplit for Obsidian](obsidian/lamplit/README.zh-CN.md)，以及上表中各配色的 Typora 说明。
 
 ## 安装

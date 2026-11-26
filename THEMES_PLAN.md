@@ -478,6 +478,15 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 核验（`wd-woods,wd-herbarium`）：阅读/编辑视图 0 不一致（首次运行 `live` 的 `tdCode` 漏测，复测表格章节后 0 不一致），彩色高亮 0 问题，正文对比度 13.30 / 12.88；Pele 甘特图 `mmGanttTaskText`（1.48 / 2.30）与 `mmGanttCritText`（2.32 / 2.36）低于 3:1，系 Pele 直接把 `--mermaid-text-color` 叠在 `--mermaid-accent` / `--mermaid-critical` 上所致（同 `cp-latte`），保持原色
 - 文档与素材：新增 `typora/walden/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；根目录与 Lamplit README 中英文更新为十一套配色；`obsidian/lamplit/palettes.png` 改为 4×3 网格（前 11 格展示全部配色，第 12 格展示「27 schemes」）
 
+
+### 维护 — 27 变体全量基线与展示素材升级（2026-11-26）
+
+- 全量核验（27 个变体，Obsidian 1.15.1）刷新 `.verify` 基线：阅读/编辑视图 0 不一致，Mermaid 0 问题（仅 `cp-latte` 甘特图文字 2.81 低于 3:1，Walden 在 1.15.1 下不再触发低对比度），彩色高亮 0 问题
+- 升级 `obsidian/lamplit/screenshot.png`（1024×576 四斜切改用 Tuttomondo Subway / Fuchun Wuyong / Walden Woods / Big Wave Spray，正文更新为 `eleven palettes`）
+- 新增 `obsidian/lamplit/shapes.png`（1420×488 三联特写，并排展示 Bauhaus / Tuttomondo / Fuchun 的造型差异）并嵌入中英文 README；`scripts/publish-lamplit.sh` 同步复制 `shapes.png`
+- 重制 `obsidian/lamplit/highlights.gif`（960×540，11 帧，600 KB）：加入圆角窗口外框与柔和阴影底板、右下角方案角标，补充 Walden、Fuchun 造型与最新 Mermaid 帧
+- 更新 `agiledolphin/themes` 与 `agiledolphin/lamplit` 的 GitHub 仓库简介为 11 套配色 / 27 个方案
+
 ---
 
 ## 三、文件结构（现状）
