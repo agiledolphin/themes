@@ -482,7 +482,7 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 ### 维护 — 27 变体全量基线与展示素材升级（2026-11-26）
 
 - 全量核验（27 个变体，Obsidian 1.15.1）刷新 `.verify` 基线：阅读/编辑视图 0 不一致，Mermaid 0 问题（仅 `cp-latte` 甘特图文字 2.81 低于 3:1，Walden 在 1.15.1 下不再触发低对比度），彩色高亮 0 问题
-- 升级 `obsidian/lamplit/screenshot.png`（1024×576 四斜切改用 Tuttomondo Subway / Fuchun Wuyong / Walden Woods / Big Wave Spray，正文更新为 `eleven palettes`）
+- 升级 `obsidian/lamplit/screenshot.png`（1024×576，零重叠 `1 + 2×5` 网格：左侧 `Wonderland · Underground` 完整工作区 + 右侧其余 10 套配色深/浅双列样本卡，全部 11 套配色各出现一次）
 - 新增 `obsidian/lamplit/shapes.png`（1420×488 三联特写，并排展示 Bauhaus / Tuttomondo / Fuchun 的造型差异）并嵌入中英文 README；`scripts/publish-lamplit.sh` 同步复制 `shapes.png`
 - 重制 `obsidian/lamplit/highlights.gif`（960×540，11 帧，600 KB）：加入圆角窗口外框与柔和阴影底板、右下角方案角标，补充 Walden、Fuchun 造型与最新 Mermaid 帧
 - 更新 `agiledolphin/themes` 与 `agiledolphin/lamplit` 的 GitHub 仓库简介为 11 套配色 / 27 个方案
