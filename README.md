@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-Reading by lamplight (青灯夜读). Eleven color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
+Reading by lamplight (青灯夜读). Twelve color palettes for [Obsidian](https://obsidian.md) and [Typora](https://typora.io), generated from one set of sources.
 
 ![Lamplit: palettes, outlines and Mermaid diagrams in each scheme's colors](obsidian/lamplit/highlights.gif)
 
@@ -22,10 +22,11 @@ Reading by lamplight (青灯夜读). Eleven color palettes for [Obsidian](https:
 | [Tuttomondo](typora/tuttomondo/README.md) | Subway | Pisa | In the spirit of the 1989 mural *Tuttomondo* in Pisa: bright flat colors inside heavy outlines, with hard shadows |
 | [Fuchun](typora/fuchun/README.md) | Shengshan | Wuyong | Huang Gongwang's *Dwelling in the Fuchun Mountains* (1350): five shades of ink, a cinnabar seal, Kaiti headings and brush-stroke rules |
 | [Walden](typora/walden/README.md) | Woods | Herbarium | Henry David Thoreau's *Walden* (1854): deep pine and fern green, a touch of wild berry, and herbarium paper |
+| [Himalaya](typora/himalaya/README.md) | Everest, Moraine | Snowline | High Himalaya & Roerich's mountain canvases: slate night, twilight moraine rock, summit gold and glacier ice |
 | [TokyoNight](typora/tokyonight/README.md) | Storm, Night, Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) (official palette) |
 | [Catppuccin](typora/catppuccin/README.md) | Mocha, Macchiato, Frappé | Latte | [Catppuccin](https://catppuccin.com) (official palette) |
 
-![The eleven palettes, each in dark and light](obsidian/lamplit/palettes.png)
+![The twelve palettes, each in dark and light](obsidian/lamplit/palettes.png)
 
 Some palettes change shape, not just color — square corners in Bauhaus, bold outlines and hard shadows in Tuttomondo, Kaiti headings, brush strokes and cinnabar seals in Fuchun:
 

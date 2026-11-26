@@ -1,0 +1,124 @@
+# Himalaya — single source of truth for both platforms.
+# Generated from this file by scripts/gen-themes.py (never edit the outputs):
+#   typora/himalaya/*.css, and this palette's schemes in obsidian/lamplit/theme.css
+
+short_name = "Himalaya"              # Lamplit's scheme dropdowns; Typora: "Lamplit <short_name> <label>"
+prefix = "hm"                        # CSS variable / class prefix
+typora_version = "1.0.0"
+tagline = ["After the high Himalaya and Nicholas Roerich's mountain canvases: thin-air",
+           "slate night, twilight moraine rock, sunlit snowfields, summit gold and glacier ice."]
+
+# Palette colors that also get a --<prefix>-<name>-rgb triple (for rgba()).
+rgb = ["summit", "glacier", "lapis", "turquoise", "tundra", "ochre", "crimson", "rhododendron", "comment"]
+
+# Templates use canonical color names (blue, magenta, orange, green, red, cyan,
+# yellow, teal, comment); map them to the high-mountain mineral palette.
+[aliases]
+blue = "lapis"
+cyan = "glacier"
+teal = "turquoise"
+green = "tundra"
+yellow = "summit"
+orange = "ochre"
+red = "crimson"
+magenta = "rhododendron"
+
+# Roles: palette color names (or literal values) the templates plug in.
+# Summit gold crowns H1 and ==highlights==; glacier cyan leads the accent, H2,
+# table headers and inline code; lapis carries links and note callouts.
+[roles]
+accent = "glacier"
+accent_hover = "lapis"
+highlight = "glacier"
+table_header = "glacier"
+table_hover_alpha = "0.12"
+tag = "turquoise"
+tag_hover = "lapis"
+search = "ochre"
+callout_note = "lapis"
+graph_tag = "turquoise"
+quote_nested = "rhododendron"
+tooltip = "lapis"
+tooltip_text_alpha = "0.85"
+tooltip_border_alpha = "0.45"
+tooltip_shadow = "0 2px 8px rgba(0, 0, 0, 0.22)"
+nav_style = "tint"
+nav_hover = ""
+nav_active = ""
+menu_style = "tint"
+mark_alpha = "0.18"
+headings = ["summit", "glacier", "lapis", "turquoise", "rhododendron", "comment"]   # H1..H6
+
+# All accents read at >= 5.29:1 on bg (Snowline mark 4.83:1), comments >= 4.01:1.
+# Look-alike pairs stay at ΔE >= 24.0 (closest: summit / ochre).
+
+[[variants]]
+slug = "everest"
+label = "Everest"
+mode = "dark"
+character = "8,848m stratosphere night; cold shale-slate black, crystalline snow text"
+[variants.palette]
+bg           = "#121822"
+bg-dark      = "#0c1118"
+bg-hl        = "#1b2432"
+gutter       = "#2a374b"
+fg           = "#dfe7f0"
+fg-dim       = "#aebcd0"
+comment      = "#6c7f99"
+summit       = "#f2c166"
+glacier      = "#5ad0e6"
+lapis        = "#7ca4f2"
+turquoise    = "#4cc4a4"
+tundra       = "#92cc7a"
+ochre        = "#f09456"
+crimson      = "#ee6868"
+rhododendron = "#cc8ae6"
+selection    = "#1e3548"
+
+[[variants]]
+slug = "moraine"
+label = "Moraine"
+mode = "dark"
+character = "twilight over violet-plum moraine rock, after Roerich's dusk peaks"
+[variants.palette]
+bg           = "#261d24"
+bg-dark      = "#1c151a"
+bg-hl        = "#332831"
+gutter       = "#483a45"
+fg           = "#eae3e8"
+fg-dim       = "#bfb4bc"
+comment      = "#877a84"
+summit       = "#f5c872"
+glacier      = "#66d6ea"
+lapis        = "#8aadf7"
+turquoise    = "#58ccad"
+tundra       = "#9cd282"
+ochre        = "#f49d62"
+crimson      = "#f27476"
+rhododendron = "#d898ee"
+selection    = "#3f2e3b"
+
+[[variants]]
+slug = "snowline"
+label = "Snowline"
+mode = "light"
+character = "sunlit snowfield under thin sapphire sky; crisp glacial white, basalt ink"
+[variants.overrides]
+mark_alpha = "0.15"
+[variants.palette]
+bg           = "#f3f6f9"
+bg-dark      = "#e7edf3"
+bg-hl        = "#dce5ee"
+gutter       = "#c4d1df"
+fg           = "#1c2530"
+fg-dim       = "#3f4e60"
+comment      = "#69798c"
+summit       = "#7d5700"
+glacier      = "#0b697d"
+lapis        = "#2452a6"
+turquoise    = "#136e57"
+tundra       = "#366e28"
+ochre        = "#a64c0c"
+crimson      = "#b82c36"
+rhododendron = "#7c3b96"
+selection    = "#cde2ec"

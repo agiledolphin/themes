@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-青灯夜读（Reading by lamplight）。十一套配色，用于 [Obsidian](https://obsidian.md) 和 [Typora](https://typora.io)，都由同一套源文件生成。
+青灯夜读（Reading by lamplight）。十二套配色，用于 [Obsidian](https://obsidian.md) 和 [Typora](https://typora.io)，都由同一套源文件生成。
 
 ![Lamplit：各套配色、描边风格，以及跟着配色走的 Mermaid 图](obsidian/lamplit/highlights.gif)
 
@@ -22,10 +22,11 @@
 | [Tuttomondo](typora/tuttomondo/README.zh-CN.md) | Subway | Pisa | 致敬 1989 年比萨的壁画《Tuttomondo》：粗黑轮廓里的平涂亮色，加上硬阴影 |
 | [Fuchun](typora/fuchun/README.zh-CN.md) | Shengshan | Wuyong | 黄公望《富春山居图》（1350）：墨分五色、朱砂印章、楷体标题与飞白分割线 |
 | [Walden](typora/walden/README.zh-CN.md) | Woods | Herbarium | 梭罗《瓦尔登湖》（1854）：冷杉深林绿、蕨叶绿、一点浆果红与植物标本纸 |
+| [Himalaya](typora/himalaya/README.zh-CN.md) | Everest、Moraine | Snowline | 喜马拉雅与罗里奇山岳画：极夜页岩、暮色冰碛岩、日照金山与冰川青 |
 | [TokyoNight](typora/tokyonight/README.zh-CN.md) | Storm、Night、Moon | Day | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)（官方配色） |
 | [Catppuccin](typora/catppuccin/README.zh-CN.md) | Mocha、Macchiato、Frappé | Latte | [Catppuccin](https://catppuccin.com)（官方配色） |
 
-![十一套配色的深色和浅色](obsidian/lamplit/palettes.png)
+![十二套配色的深色和浅色](obsidian/lamplit/palettes.png)
 
 有些配色连形状也变——Bauhaus 的直角与实色高亮、Tuttomondo 的粗描边与硬阴影、Fuchun 的楷体标题、飞白笔刷与朱砂印章：
 

@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含十一套配色） | 1.11.0 |
+| Lamplit（含十二套配色） | 1.12.0 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -97,6 +97,7 @@
 | Lamplit Tuttomondo | 1.0.2 |
 | Lamplit Fuchun | 1.0.0 |
 | Lamplit Walden | 1.0.0 |
+| Lamplit Himalaya | 1.0.0 |
 
 （合并前各 Obsidian 主题的最终版本：TokyoNight Mod 1.5.2、Catppuccin Mod 1.3.3、Wonderland Mod 1.1.3）
 
@@ -487,6 +488,17 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 重制 `obsidian/lamplit/highlights.gif`（960×540，11 帧，600 KB）：加入圆角窗口外框与柔和阴影底板、右下角方案角标，补充 Walden、Fuchun 造型与最新 Mermaid 帧
 - 更新 `agiledolphin/themes` 与 `agiledolphin/lamplit` 的 GitHub 仓库简介为 11 套配色 / 27 个方案
 
+
+### 阶段 26 — 新增 Himalaya 配色（2026-11-26，Lamplit 1.12.0）
+
+致敬喜马拉雅与罗里奇（Nicholas Roerich）的山岳画，补齐全库「日照金山 H1 + 冰川青主强调色 + 暮色紫岩深色底」：
+
+- 变体：**Everest**（深色，8848 米极夜页岩 `#121822` / 冰雪白文字 `#dfe7f0`）、**Moraine**（深色，暮色紫褐冰碛岩 `#261d24` / 文字 `#eae3e8`）、**Snowline**（浅色，晴空雪线 `#f3f6f9` / 深玄武岩文字 `#1c2530`）
+- 角色：日照金山 `summit` 作 H1 与 `==高亮==`；冰川青 `glacier` 作主强调色、H2、表头、引用竖线与行内代码；青金石 `lapis` 作链接、H3 与 Note callout；松石绿 `turquoise` 作 H4 与标签；高山杜鹃 `rhododendron` 作 H5、代码关键字与嵌套引用；岩赭 `ochre` 作搜索命中；苔原绿 `tundra` 作字符串；风马绛红 `crimson` 作错误；造型保持默认圆角与淡底高亮
+- 对比度：所有点缀色对背景 ≥ 5.29:1，高亮与带底色元素 ≥ 4.83:1，注释 4.35 / 4.01 / 4.11；相近色差 ΔE ≥ 24.0（最近：`summit / ochre`）
+- 核验（`hm-everest,hm-moraine,hm-snowline`）：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题，对比度全部达标
+- 文档与素材：新增 `typora/himalaya/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；`obsidian/lamplit/palettes.png` 填满 4×3 全部 12 格（`Himalaya` 插入第 10 格）；`obsidian/lamplit/screenshot.png` 升级为 `1 + 1 + 2×5` 零重叠网格（完整展示全部 12 套配色）；根目录、Lamplit README、`AGENTS.md` 与仓库描述同步为 12 套配色 / 30 个方案
+
 ---
 
 ## 三、文件结构（现状）
@@ -506,7 +518,8 @@ themes/
 │   │   ├── shanghai.toml
 │   │   ├── tuttomondo.toml
 │   │   ├── fuchun.toml
-│   │   └── walden.toml
+│   │   ├── walden.toml
+│   │   └── himalaya.toml
 │   └── tokens/base.css        # 仅参考，未被导入
 ├── obsidian/
 │   └── lamplit/
@@ -526,7 +539,8 @@ themes/
 │   ├── shanghai/
 │   ├── tuttomondo/
 │   ├── fuchun/
-│   └── walden/
+│   ├── walden/
+│   └── himalaya/
 └── scripts/
     ├── gen-themes.py      ✓  # 生成全部主题文件
     ├── templates/         ✓  # obsidian.css.tmpl, typora.css.tmpl
@@ -718,3 +732,22 @@ themes/
 | 松脂琥珀 amber | `#dfc068` | `#785d08` | 高亮、H5 |
 | 秋叶橙 autumn | `#e89254` | `#a24e10` | 搜索、数字 |
 | 石楠紫 heather | `#c48ed8` | `#724288` | 关键字、嵌套引用 |
+
+### Himalaya
+
+| 变体 | 背景色 | 文字 |
+|------|--------|------|
+| Everest | `#121822` | `#dfe7f0` |
+| Moraine | `#261d24` | `#eae3e8` |
+| Snowline | `#f3f6f9` | `#1c2530` |
+
+| 角色 | Everest | Moraine | Snowline | 用途 |
+|------|---------|---------|----------|------|
+| 日照金山 summit | `#f2c166` | `#f5c872` | `#7d5700` | H1、高亮、警告 |
+| 冰川青 glacier | `#5ad0e6` | `#66d6ea` | `#0b697d` | 强调色、H2、表头、引用竖线、行内代码 |
+| 青金石 lapis | `#7ca4f2` | `#8aadf7` | `#2452a6` | 链接、H3、Note callout |
+| 松石绿 turquoise | `#4cc4a4` | `#58ccad` | `#136e57` | H4、标签 |
+| 苔原绿 tundra | `#92cc7a` | `#9cd282` | `#366e28` | 字符串 |
+| 岩赭 ochre | `#f09456` | `#f49d62` | `#a64c0c` | 搜索、数字 |
+| 风马绛红 crimson | `#ee6868` | `#f27476` | `#b82c36` | 错误 |
+| 高山杜鹃 rhododendron | `#cc8ae6` | `#d898ee` | `#7c3b96` | H5、关键字、嵌套引用 |
