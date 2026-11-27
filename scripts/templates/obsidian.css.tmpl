@@ -172,6 +172,10 @@ body.theme-light {
     --menu-border-width:    2px;
     --modal-border-width:   2px;
     --modal-border-color:   {{c:outline_color}};
+    --bases-table-container-border-width: 2px;
+    --bases-cards-border-width: 2px;
+    --bases-cards-shadow:       0 0 0 2px {{c:outline_color}};
+    --bases-cards-shadow-hover: 0 0 0 2px {{c:outline_color}};
 {{/outline}}
 {{#shadow=hard}}
     /* shadow "hard": unblurred offset shadows on menus, modals, popovers, suggestion lists */
@@ -179,6 +183,8 @@ body.theme-light {
     --shadow-l:     {{r:hard_shadow_l}};
     --menu-shadow:  {{r:hard_shadow}};
     --modal-shadow: {{r:hard_shadow_l}};
+    --bases-kanban-card-shadow:       0 0 0 2px {{c:outline_color}}, {{r:hard_shadow}};
+    --bases-kanban-card-shadow-hover: 0 0 0 2px {{c:outline_color}}, {{r:hard_shadow}};
 {{/shadow}}
 {{#tag_style=seal}}
     /* tag_style "seal": a tag is a small seal, a thin square frame in the tag color; hover stamps it */
@@ -206,13 +212,16 @@ body.theme-light {
     /* --- Scrollbars --- */
     --scrollbar-bg:              transparent;
 {{#corners=square}}
-    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs) */
-    --radius-s:          0;
-    --radius-m:          0;
-    --radius-l:          0;
-    --radius-xl:         0;
-    --input-radius:      0;
-    --tab-radius-active: 0;
+    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs, bases, properties) */
+    --radius-s:                       0;
+    --radius-m:                       0;
+    --radius-l:                       0;
+    --radius-xl:                      0;
+    --input-radius:                   0;
+    --tab-radius-active:              0;
+    --table-selection-border-radius:  0;
+    --metadata-property-radius-hover: 0;
+    --bases-table-cell-radius-active: 0;
 {{/corners}}
     --scrollbar-thumb-bg:        {{c:gutter}};
     --scrollbar-active-thumb-bg: {{c:fg-dim}};
@@ -252,6 +261,7 @@ body.theme-light {
     --ribbon-tab-background-hover: {{c:bg-hl}};
     --tab-background-active:       {{c:bg}};
     --tab-background-hover:        {{c:bg-hl}};
+    --workspace-background-translucent: {{c:bg}};
 
     /* --- Tables ---
        Zebra off; column-alt forced transparent so app.css's td-level column
@@ -351,9 +361,9 @@ body {
    which is built from --color-red … and so already takes the scheme's colors. Reading view
    marks a plain one with an empty data-highlight. */
 .markdown-rendered mark:is(:not([data-highlight]), [data-highlight=""]),
-.cm-highlight:not([class*="cm-highlight-"]) {
-    background: {{#mark_style=tint}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=solid}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=brush}}linear-gradient(to bottom, transparent 52%, {{c:mark_fill}} 52%, {{c:mark_fill}} 94%, transparent 94%){{/mark_style}} !important;
-    color: {{c:mark_text}} !important;
+.cm-s-obsidian span.cm-highlight:not([class*="cm-highlight-"]) {
+    background: {{#mark_style=tint}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=solid}}{{c:mark_fill}}{{/mark_style}}{{#mark_style=brush}}linear-gradient(to bottom, transparent 52%, {{c:mark_fill}} 52%, {{c:mark_fill}} 94%, transparent 94%){{/mark_style}};
+    color: {{c:mark_text}};
     border-radius: {{r:radius_3}};
     padding: 0 3px;
 }
@@ -382,8 +392,8 @@ body {
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .markdown-rendered a:not(.tag):hover { color: {{c:cyan}}; text-decoration-color: {{c:cyan}}; }
-a.is-unresolved:not(mark *)       { color: {{c:comment}}; opacity: 1; text-decoration-color: transparent !important; }
-a.is-unresolved:not(mark *):hover { color: {{c:comment}}; text-decoration-color: {{c:comment}} !important; }
+.markdown-rendered a.internal-link.is-unresolved:not(mark *)       { color: {{c:comment}}; opacity: 1; text-decoration-color: transparent; }
+.markdown-rendered a.internal-link.is-unresolved:not(mark *):hover { color: {{c:comment}}; text-decoration-color: {{c:comment}}; }
 
 /* Editor mode — internal links */
 .cm-hmd-internal-link .cm-underline {
@@ -394,11 +404,13 @@ a.is-unresolved:not(mark *):hover { color: {{c:comment}}; text-decoration-color:
     transition: color var(--anim-fast) var(--anim-smooth),
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
-.cm-hmd-internal-link { text-decoration: none !important; }
-.cm-hmd-internal-link:not(.cm-highlight):hover .cm-underline { color: {{c:cyan}} !important; text-decoration-color: {{c:cyan}} !important; }
-.is-unresolved { text-decoration: none !important; }
-.is-unresolved:not(.cm-highlight *) .cm-underline { color: {{c:comment}} !important; text-decoration-color: transparent !important; }
-.is-unresolved:not(.cm-highlight *):hover .cm-underline { color: {{c:comment}} !important; text-decoration-color: {{c:comment}} !important; }
+.cm-s-obsidian span.cm-hmd-internal-link,
+.cm-s-obsidian span.cm-hmd-internal-link:hover { text-decoration: none; }
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link:not(.cm-highlight):hover .cm-underline { color: {{c:cyan}}; text-decoration-color: {{c:cyan}}; }
+.markdown-source-view.mod-cm6 .is-unresolved,
+.markdown-source-view.mod-cm6 .is-unresolved:hover { text-decoration: none; }
+.markdown-source-view.mod-cm6 .is-unresolved:not(.cm-highlight *) .cm-underline { color: {{c:comment}}; text-decoration-color: transparent; }
+.markdown-source-view.mod-cm6 .is-unresolved:not(.cm-highlight *):hover .cm-underline { color: {{c:comment}}; text-decoration-color: {{c:comment}}; }
 
 /* Editor mode — external links and markdown links */
 .markdown-source-view.mod-cm6 .cm-url .cm-underline,
@@ -408,11 +420,11 @@ a.is-unresolved:not(mark *):hover { color: {{c:comment}}; text-decoration-color:
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
-.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
+.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit; }
 
 /* Inside a highlight (plain or colored), a link takes the highlight's text color with an
-   underline: its own color can vanish on a solid fill (Tuttomondo Subway: 2.1:1). The rules
-   above that need !important skip highlighted links instead of being overridden. */
+   underline: its own color can vanish on a solid fill (Tuttomondo Subway: 2.1:1). The higher-
+   specificity link rules above skip highlighted links so this rule stays clean. */
 .markdown-rendered mark a:not(.tag),
 .markdown-rendered mark a:not(.tag):hover,
 .markdown-source-view.mod-cm6 .cm-highlight .cm-underline {
@@ -952,7 +964,7 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .workspace-tab-header-container-inner { background-color: {{c:bg}}; }
 .workspace-tab-header                 { background-color: {{c:bg}}; }
 .workspace-tab-header.is-active       { background-color: {{c:bg}}; color: {{c:fg}}; }
-.workspace-tab-header:not(.is-active):hover { background-color: {{c:bg-hl}} !important; }
+.workspace-tab-header-container .workspace-tab-header:not(.is-active):hover { background-color: {{c:bg-hl}}; }
 
 /* Auto-hide the note breadcrumb path until the tab bar or header is hovered (phones stay visible) */
 body:not(.{{P}}-show-note-path):not(.is-phone) .view-header-title-container {
@@ -969,7 +981,7 @@ body:not(.{{P}}-show-note-path):not(.is-phone) .view-header:hover .view-header-t
  * Ribbon
  * ============================================================ */
 
-.app-container { background-color: {{c:bg}} !important; }
+.app-container { background-color: {{c:bg}}; }
 
 .workspace-ribbon,
 .workspace-ribbon.mod-left,
@@ -1084,16 +1096,16 @@ body:not(.{{P}}-show-note-path):not(.is-phone) .view-header:hover .view-header-t
     background-color: rgba({{rgb:search}}, 0.18);
     box-shadow:       0 0 0 1px rgba({{rgb:search}}, 0.60);
 }
-/* A match inside ==highlighted== text: beat the mark rule's !important. */
+/* A match inside ==highlighted== text (same specificity as the mark rule above, later in file). */
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: rgba({{rgb:search}}, 0.25) !important;
+    background-color: rgba({{rgb:search}}, 0.25);
 }
 {{#mark_style=solid}}
 /* mark_style "solid": keep the mark's solid fill under the match (its dark text would
    vanish on a plain tint) and lay the search tint over it. */
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: {{c:mark_fill}} !important;
-    background-image: linear-gradient(rgba({{rgb:search}}, 0.35), rgba({{rgb:search}}, 0.35)) !important;
+    background-color: {{c:mark_fill}};
+    background-image: linear-gradient(rgba({{rgb:search}}, 0.35), rgba({{rgb:search}}, 0.35));
 }
 {{/mark_style}}
 
@@ -1286,139 +1298,4 @@ body:not(.{{P}}-default-mermaid) {
     --mermaid-color-6: {{c:folder_6}};
     --mermaid-color-7: {{c:folder_7}};
     --mermaid-color-8: {{c:folder_8}};
-}
-
-/* Older Obsidian draws diagrams with Mermaid in its light theme and inverts them in dark mode, so
- * these rules drop the filter and recolor from the scheme. {{MM}} names the diagram types covered,
- * skips Pele's output, and its :not(#_) outranks the rules Mermaid scopes to each diagram's id.
- * Everything is nested under {{MM}} so its long selector is written once. Even filter: none is
- * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
- */
-
-{{MM}} {
-    & {
-        filter: none;
-        --{{P}}-m-fill: color-mix(in srgb, {{c:accent}} 16%, {{c:bg}});
-        --{{P}}-m-c: {{c:accent}};
-    }
-
-    /* Nodes, actors, boxes */
-    & .node :is(rect, polygon, circle, ellipse, path:not(.divider)),
-    & .actor,
-    & :is(.row-rect-odd, .row-rect-even) path,
-    & .divider {
-        fill: var(--{{P}}-m-fill);
-        stroke: {{c:accent}};
-    }
-    /* Mermaid's fallback for lines without a class: before .actor-man, which must win */
-    & line:not([class]) { stroke: {{c:fg-dim}}; }
-    & .actor-man :is(line, circle) { fill: var(--{{P}}-m-fill); stroke: {{c:accent}}; }
-    & .cluster rect { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
-    & .labelBox { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
-    & :is(rect.note, .note rect) {
-        fill: color-mix(in srgb, {{c:yellow}} 18%, {{c:bg}});
-        stroke: {{c:yellow}};
-    }
-
-    /* Lines and arrowheads */
-    & :is(.flowchart-link, .edgePath path, .edgePaths path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
-        stroke: {{c:fg-dim}};
-    }
-    /* Only solid arrowheads get a fill: class and ER markers are hollow by meaning. The second
-       :not() outranks the rules Mermaid scopes to the marker's own id as well. */
-    &:not(#__) marker :is(path, circle) { stroke: {{c:fg-dim}}; }
-    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="solidTopArrowHead"], [id*="solidBottomArrowHead"],
-        [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="circleStart"], [id*="crossEnd"], [id*="crossStart"], [id*="barbEnd"],
-        [id*="compositionStart"], [id*="compositionEnd"], [id*="dependencyStart"], [id*="dependencyEnd"]) :is(path, circle) { fill: {{c:fg-dim}}; }
-    /* Mermaid fills the ER "zero" circle white to read as hollow: on any scheme that is the page color */
-    &:not(#__) [id*="zeroOr"] circle { fill: {{c:bg}}; }
-    &:not(#__) [id$="-sequencenumber"] circle { fill: {{c:accent}}; stroke: {{c:accent}}; }
-    &:not(#__) .sequenceNumber { fill: {{c:bg}}; }
-
-    /* Text */
-    & :is(text, text.actor tspan, .noteText tspan, .loopText tspan, [class*="taskText"]) { fill: {{c:fg}}; }
-    /* Mermaid marks the Gantt status text !important */
-    & :is([class*="doneText"], [class*="activeText"], [class*="critText"], [class*="CritText"]) { fill: {{c:fg}} !important; }
-    & :is(.nodeLabel, .edgeLabel, .label, .cluster-label, .labelBkg, p, span) { color: {{c:fg}}; }
-    & :is(.edgeLabel, .labelBkg, .edgeLabel p, .edgeLabel rect) {
-        background-color: {{c:bg}};
-        fill: {{c:bg}};
-    }
-
-    /* Pie: the folder cycle; legend swatches carry inline styles, hence !important */
-    & .pieCircle { stroke: {{c:bg}}; stroke-width: 2px; opacity: 1; }
-    & .pieOuterCircle { stroke: {{c:gutter}}; }
-    &:not(#__) text.slice { fill: {{c:bg}}; }
-    & .pieCircle:nth-of-type(8n + 1) { fill: {{c:folder_1}}; }
-    & .legend:nth-of-type(8n + 1) { --{{P}}-m-c: {{c:folder_1}}; }
-    & .pieCircle:nth-of-type(8n + 2) { fill: {{c:folder_2}}; }
-    & .legend:nth-of-type(8n + 2) { --{{P}}-m-c: {{c:folder_2}}; }
-    & .pieCircle:nth-of-type(8n + 3) { fill: {{c:folder_3}}; }
-    & .legend:nth-of-type(8n + 3) { --{{P}}-m-c: {{c:folder_3}}; }
-    & .pieCircle:nth-of-type(8n + 4) { fill: {{c:folder_4}}; }
-    & .legend:nth-of-type(8n + 4) { --{{P}}-m-c: {{c:folder_4}}; }
-    & .pieCircle:nth-of-type(8n + 5) { fill: {{c:folder_5}}; }
-    & .legend:nth-of-type(8n + 5) { --{{P}}-m-c: {{c:folder_5}}; }
-    & .pieCircle:nth-of-type(8n + 6) { fill: {{c:folder_6}}; }
-    & .legend:nth-of-type(8n + 6) { --{{P}}-m-c: {{c:folder_6}}; }
-    & .pieCircle:nth-of-type(8n + 7) { fill: {{c:folder_7}}; }
-    & .legend:nth-of-type(8n + 7) { --{{P}}-m-c: {{c:folder_7}}; }
-    & .pieCircle:nth-of-type(8n + 0) { fill: {{c:folder_8}}; }
-    & .legend:nth-of-type(8n + 0) { --{{P}}-m-c: {{c:folder_8}}; }
-    & .legend rect { fill: var(--{{P}}-m-c) !important; stroke: var(--{{P}}-m-c) !important; }
-
-    /* Gantt */
-    & :is(.section0, .section2) { fill: {{c:bg-hl}}; }
-    & :is(.section1, .section3) { fill: {{c:bg}}; }
-    & :is(.grid line, .grid path) { stroke: {{c:gutter}}; }
-    & .today { stroke: {{c:red}}; }
-    & :is(.task0, .task1, .task2, .task3) { fill: var(--{{P}}-m-fill); stroke: {{c:accent}}; }
-    & :is(.done0, .done1, .done2, .done3) { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
-    & :is(.active0, .active1, .active2, .active3) {
-        fill: color-mix(in srgb, {{c:accent}} 35%, {{c:bg}});
-        stroke: {{c:accent}};
-    }
-    & :is(.crit0, .crit1, .crit2, .crit3, .activeCrit0, .activeCrit1, .activeCrit2, .activeCrit3, .doneCrit0, .doneCrit1, .doneCrit2, .doneCrit3) {
-        fill: color-mix(in srgb, {{c:red}} 25%, {{c:bg}});
-        stroke: {{c:red}};
-    }
-
-    /* Git graph: one color per branch */
-    & :is(.commit0, .arrow0, .label0) { --{{P}}-m-c: {{c:folder_1}}; }
-    & :is(.commit1, .arrow1, .label1) { --{{P}}-m-c: {{c:folder_2}}; }
-    & :is(.commit2, .arrow2, .label2) { --{{P}}-m-c: {{c:folder_3}}; }
-    & :is(.commit3, .arrow3, .label3) { --{{P}}-m-c: {{c:folder_4}}; }
-    & :is(.commit4, .arrow4, .label4) { --{{P}}-m-c: {{c:folder_5}}; }
-    & :is(.commit5, .arrow5, .label5) { --{{P}}-m-c: {{c:folder_6}}; }
-    & :is(.commit6, .arrow6, .label6) { --{{P}}-m-c: {{c:folder_7}}; }
-    & :is(.commit7, .arrow7, .label7) { --{{P}}-m-c: {{c:folder_8}}; }
-    & .commit { fill: var(--{{P}}-m-c); stroke: var(--{{P}}-m-c); }
-    & .commit-merge { fill: {{c:bg}}; stroke: var(--{{P}}-m-c); }
-    & .arrow { stroke: var(--{{P}}-m-c); }
-    & .branch { stroke: {{c:gutter}}; }
-    & .branchLabelBkg { fill: var(--{{P}}-m-c); }
-    &:not(#__) .branchLabel text { fill: {{c:bg}}; }
-    & .commit-label-bkg { fill: {{c:bg-hl}}; opacity: 1; }
-    & .tag-label-bkg { fill: {{c:bg-hl}}; stroke: {{c:gutter}}; }
-    & .tag-hole { fill: {{c:bg}}; }
-
-    /* Mindmap: one color per branch */
-    & :is(.section-0, .section-edge-0) { --{{P}}-m-c: {{c:folder_1}}; }
-    & :is(.section-1, .section-edge-1) { --{{P}}-m-c: {{c:folder_2}}; }
-    & :is(.section-2, .section-edge-2) { --{{P}}-m-c: {{c:folder_3}}; }
-    & :is(.section-3, .section-edge-3) { --{{P}}-m-c: {{c:folder_4}}; }
-    & :is(.section-4, .section-edge-4) { --{{P}}-m-c: {{c:folder_5}}; }
-    & :is(.section-5, .section-edge-5) { --{{P}}-m-c: {{c:folder_6}}; }
-    & :is(.section-6, .section-edge-6) { --{{P}}-m-c: {{c:folder_7}}; }
-    & :is(.section-7, .section-edge-7) { --{{P}}-m-c: {{c:folder_8}}; }
-    & :is(.section-8, .section-edge-8) { --{{P}}-m-c: {{c:folder_1}}; }
-    & :is(.section-9, .section-edge-9) { --{{P}}-m-c: {{c:folder_2}}; }
-    & :is(.section-10, .section-edge-10) { --{{P}}-m-c: {{c:folder_3}}; }
-    & :is(.section-11, .section-edge-11) { --{{P}}-m-c: {{c:folder_4}}; }
-    & .mindmap-node :is(.node-bkg, .label-container) {
-        fill: color-mix(in srgb, var(--{{P}}-m-c) 22%, {{c:bg}});
-        stroke: var(--{{P}}-m-c);
-    }
-    & .mindmap-node line { stroke: var(--{{P}}-m-c); }
-    & .edge[class*="section-edge-"] { stroke: var(--{{P}}-m-c); }
 }

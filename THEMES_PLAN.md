@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含十二套配色） | 1.12.1 |
+| Lamplit（含十二套配色） | 1.12.2 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -507,6 +507,16 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - **错误型 tooltip**：`.tooltip` 与 `.tooltip-arrow` 规则排除 `.mod-error`，避免覆盖 Obsidian 的错误红底
 - **笔记路径悬停显示**：参考 Minimal 主题，桌面端默认隐藏 `.view-header-title-container`（`opacity: 0`），悬停标签栏/顶栏或聚焦编辑时平滑显现（手机端常显）；Style Settings 新增 `Always Show Note Path`（`ll-show-note-path`，默认关闭）可切回常显
 - Typora 无变更，不升版本
+
+
+### 维护 — 提升 `minAppVersion` 至 1.15.0、清零 `!important` 与 1.15+ 组件适配（2026-11-27，Lamplit 1.12.2）
+
+- **`minAppVersion` 与 Mermaid 清理**：`shared/lamplit.toml` 将 `min_app_version` 由 `1.14.4` 升至 `1.15.0`（Obsidian 1.15+ 全面使用 Pele 渲染 Mermaid），`obsidian_version` 升至 `1.12.2`；移除 `scripts/templates/obsidian.css.tmpl` 中的 `{{MM}}` 旧版 Mermaid 兼容块（135 行）及 `scripts/gen-themes.py` 中的 `MERMAID_TYPES` / `MM`
+- **全量清零 `!important`（21 处 → 0 处）**：通过匹配 `app.css` 选择器优先级与原生变量（含补设 `--workspace-background-translucent: {{c:bg}}` 替代 `.app-container` 的 `!important`），移除高亮、链接、标签页悬停、搜索命中与工作区背景上的全部 `!important`；顺带修复了阅读视图失效链接悬停时误变链接色且无下划线的问题（原裸 `.is-unresolved { text-decoration: none !important; }` 误伤阅读视图，现与编辑视图一致保持注释色 + 悬停下划线）
+- **Obsidian 1.15+ Bases / Properties 适配**：排查 `app.css` 中 `--bases-*`、`--metadata-*`、`--canvas-*`、`--pdf-*` 变量，色彩均已通过基础变量自动跟随方案；补齐 `corners = "square"` 下的 `--bases-table-cell-radius-active`、`--metadata-property-radius-hover`、`--table-selection-border-radius`（归零），以及 `outline = "bold"` / `shadow = "hard"` 下的 Bases 表格框线、卡片描边与看板卡片硬阴影
+- **产物**：`obsidian/lamplit/theme.css` 由 `178,911 B` 降至 `171,371 B`（**−7,540 B**），**0 处 `!important`**；全部 30 个 Typora CSS 文件逐字节不变，不升版本
+- **核验与全量基线刷新**：全量 30 变体（Obsidian 1.15.1）刷新 `.verify` 基线——阅读/编辑视图 **0 不一致**，Mermaid **0 问题**（仅已记录的上游 `cp-latte` 甘特图文字 2.81 低于 3:1），彩色高亮 **0 问题**，全部非上游 26 个变体对比度 `ok`
+- 同步更新 `AGENTS.md` 中的 Mermaid 与链接说明
 
 ---
 

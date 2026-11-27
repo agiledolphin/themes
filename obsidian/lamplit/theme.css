@@ -623,13 +623,16 @@ body.theme-dark.ll-bh-weimar {
     --ll-tooltip-text-alpha:   0.90;
     --ll-cond-1:               var(--ll-mark-fill);
     --ll-cond-2:               -1;
-    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs) */
-    --radius-s:          0;
-    --radius-m:          0;
-    --radius-l:          0;
-    --radius-xl:         0;
-    --input-radius:      0;
-    --tab-radius-active: 0;
+    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs, bases, properties) */
+    --radius-s:                       0;
+    --radius-m:                       0;
+    --radius-l:                       0;
+    --radius-xl:                      0;
+    --input-radius:                   0;
+    --tab-radius-active:              0;
+    --table-selection-border-radius:  0;
+    --metadata-property-radius-hover: 0;
+    --bases-table-cell-radius-active: 0;
     --nav-item-color-hover:        var(--ll-bg-dark);
     --nav-item-color-active:       var(--ll-bg-dark);
     --nav-item-background-hover:   var(--ll-nav-hover);
@@ -809,11 +812,17 @@ body.theme-dark.ll-tm-subway {
     --menu-border-width:    2px;
     --modal-border-width:   2px;
     --modal-border-color:   var(--ll-outline-color);
+    --bases-table-container-border-width: 2px;
+    --bases-cards-border-width: 2px;
+    --bases-cards-shadow:       0 0 0 2px var(--ll-outline-color);
+    --bases-cards-shadow-hover: 0 0 0 2px var(--ll-outline-color);
     /* shadow "hard": unblurred offset shadows on menus, modals, popovers, suggestion lists */
     --shadow-s:     var(--ll-hard-shadow);
     --shadow-l:     var(--ll-hard-shadow-l);
     --menu-shadow:  var(--ll-hard-shadow);
     --modal-shadow: var(--ll-hard-shadow-l);
+    --bases-kanban-card-shadow:       0 0 0 2px var(--ll-outline-color), var(--ll-hard-shadow);
+    --bases-kanban-card-shadow-hover: 0 0 0 2px var(--ll-outline-color), var(--ll-hard-shadow);
     --nav-item-color-hover:        var(--ll-bg-dark);
     --nav-item-color-active:       var(--ll-bg-dark);
     --nav-item-background-hover:   var(--ll-nav-hover);
@@ -2011,13 +2020,16 @@ body.theme-light.ll-bh-dessau {
     --ll-tooltip-text-alpha:   0.90;
     --ll-cond-1:               var(--ll-mark-fill);
     --ll-cond-2:               -1;
-    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs) */
-    --radius-s:          0;
-    --radius-m:          0;
-    --radius-l:          0;
-    --radius-xl:         0;
-    --input-radius:      0;
-    --tab-radius-active: 0;
+    /* corners "square": Obsidian's own UI radii too (menus, buttons, modals, tabs, inputs, bases, properties) */
+    --radius-s:                       0;
+    --radius-m:                       0;
+    --radius-l:                       0;
+    --radius-xl:                      0;
+    --input-radius:                   0;
+    --tab-radius-active:              0;
+    --table-selection-border-radius:  0;
+    --metadata-property-radius-hover: 0;
+    --bases-table-cell-radius-active: 0;
     --nav-item-color-hover:        var(--ll-bg-dark);
     --nav-item-color-active:       var(--ll-bg-dark);
     --nav-item-background-hover:   var(--ll-nav-hover);
@@ -2197,11 +2209,17 @@ body.theme-light.ll-tm-pisa {
     --menu-border-width:    2px;
     --modal-border-width:   2px;
     --modal-border-color:   var(--ll-outline-color);
+    --bases-table-container-border-width: 2px;
+    --bases-cards-border-width: 2px;
+    --bases-cards-shadow:       0 0 0 2px var(--ll-outline-color);
+    --bases-cards-shadow-hover: 0 0 0 2px var(--ll-outline-color);
     /* shadow "hard": unblurred offset shadows on menus, modals, popovers, suggestion lists */
     --shadow-s:     var(--ll-hard-shadow);
     --shadow-l:     var(--ll-hard-shadow-l);
     --menu-shadow:  var(--ll-hard-shadow);
     --modal-shadow: var(--ll-hard-shadow-l);
+    --bases-kanban-card-shadow:       0 0 0 2px var(--ll-outline-color), var(--ll-hard-shadow);
+    --bases-kanban-card-shadow-hover: 0 0 0 2px var(--ll-outline-color), var(--ll-hard-shadow);
     --nav-item-color-hover:        var(--ll-bg-dark);
     --nav-item-color-active:       var(--ll-bg-dark);
     --nav-item-background-hover:   var(--ll-nav-hover);
@@ -2799,6 +2817,7 @@ body.theme-light {
     --ribbon-tab-background-hover: var(--ll-bg-hl);
     --tab-background-active:       var(--ll-bg);
     --tab-background-hover:        var(--ll-bg-hl);
+    --workspace-background-translucent: var(--ll-bg);
 
     /* --- Tables ---
        Zebra off; column-alt forced transparent so app.css's td-level column
@@ -2894,9 +2913,9 @@ body {
    which is built from --color-red … and so already takes the scheme's colors. Reading view
    marks a plain one with an empty data-highlight. */
 .markdown-rendered mark:is(:not([data-highlight]), [data-highlight=""]),
-.cm-highlight:not([class*="cm-highlight-"]) {
-    background: var(--ll-cond-1) !important;
-    color: var(--ll-mark-text) !important;
+.cm-s-obsidian span.cm-highlight:not([class*="cm-highlight-"]) {
+    background: var(--ll-cond-1);
+    color: var(--ll-mark-text);
     border-radius: var(--ll-radius-3);
     padding: 0 3px;
 }
@@ -2924,8 +2943,8 @@ body {
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .markdown-rendered a:not(.tag):hover { color: var(--ll-cyan); text-decoration-color: var(--ll-cyan); }
-a.is-unresolved:not(mark *)       { color: var(--ll-comment); opacity: 1; text-decoration-color: transparent !important; }
-a.is-unresolved:not(mark *):hover { color: var(--ll-comment); text-decoration-color: var(--ll-comment) !important; }
+.markdown-rendered a.internal-link.is-unresolved:not(mark *)       { color: var(--ll-comment); opacity: 1; text-decoration-color: transparent; }
+.markdown-rendered a.internal-link.is-unresolved:not(mark *):hover { color: var(--ll-comment); text-decoration-color: var(--ll-comment); }
 
 /* Editor mode — internal links */
 .cm-hmd-internal-link .cm-underline {
@@ -2936,11 +2955,13 @@ a.is-unresolved:not(mark *):hover { color: var(--ll-comment); text-decoration-co
     transition: color var(--anim-fast) var(--anim-smooth),
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
-.cm-hmd-internal-link { text-decoration: none !important; }
-.cm-hmd-internal-link:not(.cm-highlight):hover .cm-underline { color: var(--ll-cyan) !important; text-decoration-color: var(--ll-cyan) !important; }
-.is-unresolved { text-decoration: none !important; }
-.is-unresolved:not(.cm-highlight *) .cm-underline { color: var(--ll-comment) !important; text-decoration-color: transparent !important; }
-.is-unresolved:not(.cm-highlight *):hover .cm-underline { color: var(--ll-comment) !important; text-decoration-color: var(--ll-comment) !important; }
+.cm-s-obsidian span.cm-hmd-internal-link,
+.cm-s-obsidian span.cm-hmd-internal-link:hover { text-decoration: none; }
+.markdown-source-view.mod-cm6 .cm-hmd-internal-link:not(.cm-highlight):hover .cm-underline { color: var(--ll-cyan); text-decoration-color: var(--ll-cyan); }
+.markdown-source-view.mod-cm6 .is-unresolved,
+.markdown-source-view.mod-cm6 .is-unresolved:hover { text-decoration: none; }
+.markdown-source-view.mod-cm6 .is-unresolved:not(.cm-highlight *) .cm-underline { color: var(--ll-comment); text-decoration-color: transparent; }
+.markdown-source-view.mod-cm6 .is-unresolved:not(.cm-highlight *):hover .cm-underline { color: var(--ll-comment); text-decoration-color: var(--ll-comment); }
 
 /* Editor mode — external links and markdown links */
 .markdown-source-view.mod-cm6 .cm-url .cm-underline,
@@ -2950,11 +2971,11 @@ a.is-unresolved:not(mark *):hover { color: var(--ll-comment); text-decoration-co
                 text-decoration-color var(--anim-fast) var(--anim-smooth);
 }
 .markdown-source-view.mod-cm6 .cm-url:hover .cm-underline,
-.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit !important; }
+.markdown-source-view.mod-cm6 .cm-link:hover .cm-underline { text-decoration-color: inherit; }
 
 /* Inside a highlight (plain or colored), a link takes the highlight's text color with an
-   underline: its own color can vanish on a solid fill (Tuttomondo Subway: 2.1:1). The rules
-   above that need !important skip highlighted links instead of being overridden. */
+   underline: its own color can vanish on a solid fill (Tuttomondo Subway: 2.1:1). The higher-
+   specificity link rules above skip highlighted links so this rule stays clean. */
 .markdown-rendered mark a:not(.tag),
 .markdown-rendered mark a:not(.tag):hover,
 .markdown-source-view.mod-cm6 .cm-highlight .cm-underline {
@@ -3486,7 +3507,7 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-tm-subway,
 .workspace-tab-header-container-inner { background-color: var(--ll-bg); }
 .workspace-tab-header                 { background-color: var(--ll-bg); }
 .workspace-tab-header.is-active       { background-color: var(--ll-bg); color: var(--ll-fg); }
-.workspace-tab-header:not(.is-active):hover { background-color: var(--ll-bg-hl) !important; }
+.workspace-tab-header-container .workspace-tab-header:not(.is-active):hover { background-color: var(--ll-bg-hl); }
 
 /* Auto-hide the note breadcrumb path until the tab bar or header is hovered (phones stay visible) */
 body:not(.ll-show-note-path):not(.is-phone) .view-header-title-container {
@@ -3503,7 +3524,7 @@ body:not(.ll-show-note-path):not(.is-phone) .view-header:hover .view-header-titl
  * Ribbon
  * ============================================================ */
 
-.app-container { background-color: var(--ll-bg) !important; }
+.app-container { background-color: var(--ll-bg); }
 
 .workspace-ribbon,
 .workspace-ribbon.mod-left,
@@ -3616,15 +3637,15 @@ body:not(.ll-show-note-path):not(.is-phone) .view-header:hover .view-header-titl
     background-color: rgba(var(--ll-search-rgb), 0.18);
     box-shadow:       0 0 0 1px rgba(var(--ll-search-rgb), 0.60);
 }
-/* A match inside ==highlighted== text: beat the mark rule's !important. */
+/* A match inside ==highlighted== text (same specificity as the mark rule above, later in file). */
 .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: rgba(var(--ll-search-rgb), 0.25) !important;
+    background-color: rgba(var(--ll-search-rgb), 0.25);
 }
 /* mark_style "solid": keep the mark's solid fill under the match (its dark text would
    vanish on a plain tint) and lay the search tint over it. */
 :where(body.theme-dark.ll-bh-weimar, body.theme-dark.ll-tm-subway, body.theme-light.ll-bh-dessau, body.theme-light.ll-tm-pisa) .cm-s-obsidian span.cm-highlight.obsidian-search-match-highlight {
-    background-color: var(--ll-mark-fill) !important;
-    background-image: linear-gradient(rgba(var(--ll-search-rgb), 0.35), rgba(var(--ll-search-rgb), 0.35)) !important;
+    background-color: var(--ll-mark-fill);
+    background-image: linear-gradient(rgba(var(--ll-search-rgb), 0.35), rgba(var(--ll-search-rgb), 0.35));
 }
 
 
@@ -3817,139 +3838,4 @@ body:not(.ll-default-mermaid) {
     --mermaid-color-6: var(--ll-folder-6);
     --mermaid-color-7: var(--ll-folder-7);
     --mermaid-color-8: var(--ll-folder-8);
-}
-
-/* Older Obsidian draws diagrams with Mermaid in its light theme and inverts them in dark mode, so
- * these rules drop the filter and recolor from the scheme. body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) names the diagram types covered,
- * skips Pele's output, and its :not(#_) outranks the rules Mermaid scopes to each diagram's id.
- * Everything is nested under body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) so its long selector is written once. Even filter: none is
- * nested: an app too old for nesting then ignores the whole block and keeps Obsidian's look.
- */
-
-body:not(.ll-default-mermaid) .mermaid > svg:is([aria-roledescription="flowchart"], [aria-roledescription="flowchart-v2"], [aria-roledescription="sequence"], [aria-roledescription="pie"], [aria-roledescription="class"], [aria-roledescription="stateDiagram"], [aria-roledescription="gantt"], [aria-roledescription="er"], [aria-roledescription="gitGraph"], [aria-roledescription="mindmap"]):not(.pele):not(#_) {
-    & {
-        filter: none;
-        --ll-m-fill: color-mix(in srgb, var(--ll-accent) 16%, var(--ll-bg));
-        --ll-m-c: var(--ll-accent);
-    }
-
-    /* Nodes, actors, boxes */
-    & .node :is(rect, polygon, circle, ellipse, path:not(.divider)),
-    & .actor,
-    & :is(.row-rect-odd, .row-rect-even) path,
-    & .divider {
-        fill: var(--ll-m-fill);
-        stroke: var(--ll-accent);
-    }
-    /* Mermaid's fallback for lines without a class: before .actor-man, which must win */
-    & line:not([class]) { stroke: var(--ll-fg-dim); }
-    & .actor-man :is(line, circle) { fill: var(--ll-m-fill); stroke: var(--ll-accent); }
-    & .cluster rect { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
-    & .labelBox { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
-    & :is(rect.note, .note rect) {
-        fill: color-mix(in srgb, var(--ll-yellow) 18%, var(--ll-bg));
-        stroke: var(--ll-yellow);
-    }
-
-    /* Lines and arrowheads */
-    & :is(.flowchart-link, .edgePath path, .edgePaths path, .relation, .transition, .messageLine0, .messageLine1, .loopLine, .actor-line) {
-        stroke: var(--ll-fg-dim);
-    }
-    /* Only solid arrowheads get a fill: class and ER markers are hollow by meaning. The second
-       :not() outranks the rules Mermaid scopes to the marker's own id as well. */
-    &:not(#__) marker :is(path, circle) { stroke: var(--ll-fg-dim); }
-    &:not(#__) :is([id$="-arrowhead"], [id$="-crosshead"], [id$="-filled-head"], [id*="solidTopArrowHead"], [id*="solidBottomArrowHead"],
-        [id*="pointEnd"], [id*="pointStart"], [id*="circleEnd"], [id*="circleStart"], [id*="crossEnd"], [id*="crossStart"], [id*="barbEnd"],
-        [id*="compositionStart"], [id*="compositionEnd"], [id*="dependencyStart"], [id*="dependencyEnd"]) :is(path, circle) { fill: var(--ll-fg-dim); }
-    /* Mermaid fills the ER "zero" circle white to read as hollow: on any scheme that is the page color */
-    &:not(#__) [id*="zeroOr"] circle { fill: var(--ll-bg); }
-    &:not(#__) [id$="-sequencenumber"] circle { fill: var(--ll-accent); stroke: var(--ll-accent); }
-    &:not(#__) .sequenceNumber { fill: var(--ll-bg); }
-
-    /* Text */
-    & :is(text, text.actor tspan, .noteText tspan, .loopText tspan, [class*="taskText"]) { fill: var(--ll-fg); }
-    /* Mermaid marks the Gantt status text !important */
-    & :is([class*="doneText"], [class*="activeText"], [class*="critText"], [class*="CritText"]) { fill: var(--ll-fg) !important; }
-    & :is(.nodeLabel, .edgeLabel, .label, .cluster-label, .labelBkg, p, span) { color: var(--ll-fg); }
-    & :is(.edgeLabel, .labelBkg, .edgeLabel p, .edgeLabel rect) {
-        background-color: var(--ll-bg);
-        fill: var(--ll-bg);
-    }
-
-    /* Pie: the folder cycle; legend swatches carry inline styles, hence !important */
-    & .pieCircle { stroke: var(--ll-bg); stroke-width: 2px; opacity: 1; }
-    & .pieOuterCircle { stroke: var(--ll-gutter); }
-    &:not(#__) text.slice { fill: var(--ll-bg); }
-    & .pieCircle:nth-of-type(8n + 1) { fill: var(--ll-folder-1); }
-    & .legend:nth-of-type(8n + 1) { --ll-m-c: var(--ll-folder-1); }
-    & .pieCircle:nth-of-type(8n + 2) { fill: var(--ll-folder-2); }
-    & .legend:nth-of-type(8n + 2) { --ll-m-c: var(--ll-folder-2); }
-    & .pieCircle:nth-of-type(8n + 3) { fill: var(--ll-folder-3); }
-    & .legend:nth-of-type(8n + 3) { --ll-m-c: var(--ll-folder-3); }
-    & .pieCircle:nth-of-type(8n + 4) { fill: var(--ll-folder-4); }
-    & .legend:nth-of-type(8n + 4) { --ll-m-c: var(--ll-folder-4); }
-    & .pieCircle:nth-of-type(8n + 5) { fill: var(--ll-folder-5); }
-    & .legend:nth-of-type(8n + 5) { --ll-m-c: var(--ll-folder-5); }
-    & .pieCircle:nth-of-type(8n + 6) { fill: var(--ll-folder-6); }
-    & .legend:nth-of-type(8n + 6) { --ll-m-c: var(--ll-folder-6); }
-    & .pieCircle:nth-of-type(8n + 7) { fill: var(--ll-folder-7); }
-    & .legend:nth-of-type(8n + 7) { --ll-m-c: var(--ll-folder-7); }
-    & .pieCircle:nth-of-type(8n + 0) { fill: var(--ll-folder-8); }
-    & .legend:nth-of-type(8n + 0) { --ll-m-c: var(--ll-folder-8); }
-    & .legend rect { fill: var(--ll-m-c) !important; stroke: var(--ll-m-c) !important; }
-
-    /* Gantt */
-    & :is(.section0, .section2) { fill: var(--ll-bg-hl); }
-    & :is(.section1, .section3) { fill: var(--ll-bg); }
-    & :is(.grid line, .grid path) { stroke: var(--ll-gutter); }
-    & .today { stroke: var(--ll-red); }
-    & :is(.task0, .task1, .task2, .task3) { fill: var(--ll-m-fill); stroke: var(--ll-accent); }
-    & :is(.done0, .done1, .done2, .done3) { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
-    & :is(.active0, .active1, .active2, .active3) {
-        fill: color-mix(in srgb, var(--ll-accent) 35%, var(--ll-bg));
-        stroke: var(--ll-accent);
-    }
-    & :is(.crit0, .crit1, .crit2, .crit3, .activeCrit0, .activeCrit1, .activeCrit2, .activeCrit3, .doneCrit0, .doneCrit1, .doneCrit2, .doneCrit3) {
-        fill: color-mix(in srgb, var(--ll-red) 25%, var(--ll-bg));
-        stroke: var(--ll-red);
-    }
-
-    /* Git graph: one color per branch */
-    & :is(.commit0, .arrow0, .label0) { --ll-m-c: var(--ll-folder-1); }
-    & :is(.commit1, .arrow1, .label1) { --ll-m-c: var(--ll-folder-2); }
-    & :is(.commit2, .arrow2, .label2) { --ll-m-c: var(--ll-folder-3); }
-    & :is(.commit3, .arrow3, .label3) { --ll-m-c: var(--ll-folder-4); }
-    & :is(.commit4, .arrow4, .label4) { --ll-m-c: var(--ll-folder-5); }
-    & :is(.commit5, .arrow5, .label5) { --ll-m-c: var(--ll-folder-6); }
-    & :is(.commit6, .arrow6, .label6) { --ll-m-c: var(--ll-folder-7); }
-    & :is(.commit7, .arrow7, .label7) { --ll-m-c: var(--ll-folder-8); }
-    & .commit { fill: var(--ll-m-c); stroke: var(--ll-m-c); }
-    & .commit-merge { fill: var(--ll-bg); stroke: var(--ll-m-c); }
-    & .arrow { stroke: var(--ll-m-c); }
-    & .branch { stroke: var(--ll-gutter); }
-    & .branchLabelBkg { fill: var(--ll-m-c); }
-    &:not(#__) .branchLabel text { fill: var(--ll-bg); }
-    & .commit-label-bkg { fill: var(--ll-bg-hl); opacity: 1; }
-    & .tag-label-bkg { fill: var(--ll-bg-hl); stroke: var(--ll-gutter); }
-    & .tag-hole { fill: var(--ll-bg); }
-
-    /* Mindmap: one color per branch */
-    & :is(.section-0, .section-edge-0) { --ll-m-c: var(--ll-folder-1); }
-    & :is(.section-1, .section-edge-1) { --ll-m-c: var(--ll-folder-2); }
-    & :is(.section-2, .section-edge-2) { --ll-m-c: var(--ll-folder-3); }
-    & :is(.section-3, .section-edge-3) { --ll-m-c: var(--ll-folder-4); }
-    & :is(.section-4, .section-edge-4) { --ll-m-c: var(--ll-folder-5); }
-    & :is(.section-5, .section-edge-5) { --ll-m-c: var(--ll-folder-6); }
-    & :is(.section-6, .section-edge-6) { --ll-m-c: var(--ll-folder-7); }
-    & :is(.section-7, .section-edge-7) { --ll-m-c: var(--ll-folder-8); }
-    & :is(.section-8, .section-edge-8) { --ll-m-c: var(--ll-folder-1); }
-    & :is(.section-9, .section-edge-9) { --ll-m-c: var(--ll-folder-2); }
-    & :is(.section-10, .section-edge-10) { --ll-m-c: var(--ll-folder-3); }
-    & :is(.section-11, .section-edge-11) { --ll-m-c: var(--ll-folder-4); }
-    & .mindmap-node :is(.node-bkg, .label-container) {
-        fill: color-mix(in srgb, var(--ll-m-c) 22%, var(--ll-bg));
-        stroke: var(--ll-m-c);
-    }
-    & .mindmap-node line { stroke: var(--ll-m-c); }
-    & .edge[class*="section-edge-"] { stroke: var(--ll-m-c); }
 }

@@ -1,7 +1,7 @@
 {
   "name": "Lamplit",
-  "version": "1.12.1",
-  "minAppVersion": "1.14.4",
+  "version": "1.12.2",
+  "minAppVersion": "1.15.0",
   "author": "Jiaming Sun",
   "authorUrl": "https://github.com/agiledolphin"
 }

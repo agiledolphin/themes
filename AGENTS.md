@@ -106,14 +106,9 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   virtualizes, so scrolled-out top-level folders leave the DOM and the rest renumber (Blue Topaz's
   by-order mode does the same).
 - Mermaid: since 1.15 Obsidian draws diagrams with Pele, whose colors come from the `--mermaid-*`
-  variables, so the template only maps those (and `ll-default-mermaid` skips the mapping). Lamplit's
-  `minAppVersion` is older, so the rules for Mermaid itself stay, all nested under one `{{MM}}` block
-  (an app without CSS nesting ignores it). `{{MM}}` expands to a selector limited to `MERMAID_TYPES`
-  in `gen-themes.py`, skips Pele's output with `:not(.pele)`, and its `:not(#_)` outranks Mermaid's
-  id-scoped rules. The verification measures Pele only, with one section per diagram type in the test
-  note (`MERMAID` in `pagelib.js`, built on Pele's class names). To check the Mermaid rules, start a
-  temporary instance (`--user-data-dir`) without the update's `obsidian-<version>.asar`: it runs the
-  installer's version.
+  variables, so the template only maps those (and `ll-default-mermaid` skips the mapping; `minAppVersion`
+  is `1.15.0`). The verification measures Pele with one section per diagram type in the test note
+  (`MERMAID` in `pagelib.js`, built on Pele's class names).
 - Obsidian's own palette is mapped too: `--color-red` … `--color-pink` (+ `-rgb`) to the scheme's
   colors (purple and pink both to magenta), and `--accent-h/s/l` from the accent (`accent_h/s/l`,
   computed in `gen-themes.py`), so colored highlights (`==🔴…==`), canvas cards, Sync avatars,
@@ -121,7 +116,7 @@ Typora files are copied flat into Typora's themes directory, so relative imports
   ones (`[data-highlight]` with a value, `.cm-highlight-<color>`); Reading view gives a plain one an
   empty `data-highlight`. Inside any highlight, links (incl. unresolved: `--link-unresolved-color`
   is set to `currentColor` there) and inline code take the highlight's text color in both views;
-  the `!important` link rules skip highlighted ones (`:not(mark *)`, `:not(.cm-highlight *)`). The graph reads `--graph-line`, `--graph-node*`, `--graph-text`. Canvas:
+  the higher-specificity link rules skip highlighted ones (`:not(mark *)`, `:not(.cm-highlight *)`). The graph reads `--graph-line`, `--graph-node*`, `--graph-text`. Canvas:
   `--canvas-color` (uncolored cards, connectors) is the comment color, the dots the gutter. Obsidian's
   grey scale `--color-base-*` stays: Lamplit overrides everything app.css derives from it.
   To find what still ignores the scheme, compare every color variable's computed value under
