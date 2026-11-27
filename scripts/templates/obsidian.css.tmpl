@@ -250,6 +250,8 @@ body.theme-light {
     --ribbon-tab-color:            {{c:comment}};
     --ribbon-tab-color-hover:      {{c:fg}};
     --ribbon-tab-background-hover: {{c:bg-hl}};
+    --tab-background-active:       {{c:bg}};
+    --tab-background-hover:        {{c:bg-hl}};
 
     /* --- Tables ---
        Zebra off; column-alt forced transparent so app.css's td-level column
@@ -291,7 +293,7 @@ body.theme-light {
 
 body {
     --font-text-theme:      "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", Georgia, serif;
-    --font-interface-theme: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
+    --font-interface-theme: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
     --font-monospace-theme: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
     --line-height-normal:   1.75;
     --font-text-size:       16px;
@@ -950,7 +952,18 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
 .workspace-tab-header-container-inner { background-color: {{c:bg}}; }
 .workspace-tab-header                 { background-color: {{c:bg}}; }
 .workspace-tab-header.is-active       { background-color: {{c:bg}}; color: {{c:fg}}; }
-.workspace-tab-header:hover           { background-color: {{c:bg-hl}} !important; }
+.workspace-tab-header:not(.is-active):hover { background-color: {{c:bg-hl}} !important; }
+
+/* Auto-hide the note breadcrumb path until the tab bar or header is hovered (phones stay visible) */
+body:not(.{{P}}-show-note-path):not(.is-phone) .view-header-title-container {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+body:not(.{{P}}-show-note-path):not(.is-phone) .view-header-title-container:focus-within,
+body:not(.{{P}}-show-note-path):not(.is-phone) .workspace-tab-header-container:hover + .workspace-tab-container .view-header-title-container,
+body:not(.{{P}}-show-note-path):not(.is-phone) .view-header:hover .view-header-title-container {
+    opacity: 1;
+}
 
 /* ============================================================
  * Ribbon
@@ -976,16 +989,16 @@ body:not(.is-grabbing) .nav-folder.mod-root > .nav-folder-title:hover {
  * Tooltip
  * ============================================================ */
 
-.tooltip {
+.tooltip:not(.mod-error) {
     background-color: {{c:bg-dark}};
     color:            rgba({{rgb:tooltip}}, {{r:tooltip_text_alpha}});
     border:           1px solid rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}});
     box-shadow:       {{r:tooltip_shadow}};
 }
-.tooltip .tooltip-arrow              { border-bottom-color: rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); }
-.tooltip.mod-right .tooltip-arrow   { border-right-color:  rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
-.tooltip.mod-left  .tooltip-arrow   { border-left-color:   rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
-.tooltip.mod-top   .tooltip-arrow   { border-top-color:    rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
+.tooltip:not(.mod-error) .tooltip-arrow              { border-bottom-color: rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); }
+.tooltip:not(.mod-error).mod-right .tooltip-arrow   { border-right-color:  rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
+.tooltip:not(.mod-error).mod-left  .tooltip-arrow   { border-left-color:   rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
+.tooltip:not(.mod-error).mod-top   .tooltip-arrow   { border-top-color:    rgba({{rgb:tooltip}}, {{r:tooltip_border_alpha}}); border-bottom-color: transparent; }
 
 /* ============================================================
  * Search / Quick switcher / Modal

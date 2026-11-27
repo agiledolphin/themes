@@ -410,6 +410,9 @@ def lamplit_outputs(themes: list[dict]) -> dict[Path, str]:
                  "    type: class-toggle", "    default: false",
                  "  -", f"    id: {P}-default-mermaid", "    title: Use Default Mermaid Colors",
                  "    description: Keep Obsidian's own Mermaid colors instead of the scheme's",
+                 "    type: class-toggle", "    default: false",
+                 "  -", f"    id: {P}-show-note-path", "    title: Always Show Note Path",
+                 "    description: Keep the note path in the header visible instead of showing it on hover",
                  "    type: class-toggle", "    default: false", "", "*/"]
     header = "\n".join([
         "/* " + "=" * 60, f" * {cfg['name']} — Obsidian Theme",

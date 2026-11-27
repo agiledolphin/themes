@@ -47,7 +47,7 @@ Without Style Settings you get Wonderland, and no way to switch palettes.
 - **Search highlights** in a color of their own, apart from highlighted text and the selection
 - **Chinese-first typography**: PingFang SC → Hiragino Sans GB → Noto Serif SC
 
-The Style Settings page also has four toggles: **Hide Folder Icons**, **Hide File Icons**, **Color Folders** and **Use Default Mermaid Colors**.
+The Style Settings page also has five toggles: **Hide Folder Icons**, **Hide File Icons**, **Color Folders**, **Use Default Mermaid Colors** and **Always Show Note Path** (by default the header note path appears when hovering the tab bar or header).
 
 ## Good to know
 

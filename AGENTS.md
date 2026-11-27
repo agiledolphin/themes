@@ -79,7 +79,7 @@ Typora files are copied flat into Typora's themes directory, so relative imports
 
 - Style Settings: `ll-dark-scheme` (every dark variant of every palette) and `ll-light-scheme`
   (every light variant), class values `ll-<palette prefix>-<variant>` (e.g. `ll-cp-latte`),
-  plus `ll-hide-folder-icons`, `ll-hide-file-icons`, `ll-color-folders` and `ll-default-mermaid`.
+  plus `ll-hide-folder-icons`, `ll-hide-file-icons`, `ll-color-folders`, `ll-default-mermaid` and `ll-show-note-path`.
   These ids are users' saved choices — never rename them.
 - One block per variant: `body.theme-dark.ll-wl-office { … }` (the default variant's block also
   matches plain `body.theme-dark`). Each block defines the semantic variables the rules use

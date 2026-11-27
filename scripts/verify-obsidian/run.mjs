@@ -109,7 +109,7 @@ const orig = await ev(`return { theme: app.customCss.theme, mode: app.vault.getC
   classes: [...document.body.classList], leafId: app.workspace.getMostRecentLeaf()?.id };`);
 // Optional Style Settings toggles are switched off for the run (and restored after), so results
 // and baselines never depend on what the user has turned on.
-const TOGGLES = ['hide-folder-icons', 'hide-file-icons', 'color-folders', 'default-mermaid'].map(t => `${LAMPLIT.prefix}-${t}`);
+const TOGGLES = ['hide-folder-icons', 'hide-file-icons', 'color-folders', 'default-mermaid', 'show-note-path'].map(t => `${LAMPLIT.prefix}-${t}`);
 const variantClasses = [...all.map(v => v.cls), ...TOGGLES];
 try { await assertRendering(); } catch (e) { console.error(e.message); close(); process.exit(3); }
 // Connected and rendering — now start from a clean slate so a report never mixes in screenshots from an earlier run.

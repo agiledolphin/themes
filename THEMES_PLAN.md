@@ -82,7 +82,7 @@
 
 | Obsidian | 版本 |
 |----------|------|
-| Lamplit（含十二套配色） | 1.12.0 |
+| Lamplit（含十二套配色） | 1.12.1 |
 
 | Typora（Lamplit + 配色，文件 `lamplit-<配色>-<变体>.css`） | 版本 |
 |--------|------|
@@ -498,6 +498,15 @@ Typora 1.14.15 无法用调试端口自动检查（不接受 `--remote-debugging
 - 对比度：所有点缀色对背景 ≥ 5.29:1，高亮与带底色元素 ≥ 4.83:1，注释 4.35 / 4.01 / 4.11；相近色差 ΔE ≥ 24.0（最近：`summit / ochre`）
 - 核验（`hm-everest,hm-moraine,hm-snowline`）：阅读/编辑视图 0 不一致，Mermaid 0 问题，彩色高亮 0 问题，对比度全部达标
 - 文档与素材：新增 `typora/himalaya/README.md`、`README.zh-CN.md` 与 `screenshot.png`（1024×576）；`obsidian/lamplit/palettes.png` 填满 4×3 全部 12 格（`Himalaya` 插入第 10 格）；`obsidian/lamplit/screenshot.png` 升级为 `1 + 1 + 2×5` 零重叠网格（完整展示全部 12 套配色）；根目录、Lamplit README、`AGENTS.md` 与仓库描述同步为 12 套配色 / 30 个方案
+
+
+### 修复 — 标签页悬停背景缺口与误触发 tooltip（2026-11-27，Lamplit 1.12.1）
+
+- **激活标签页悬停缺口**：Obsidian 激活标签页（`.workspace-tab-header.is-active`）通过 `::before` / `::after` 伪元素读取 `--tab-background-active` 绘制底部左右内凹圆角，默认主题只在非激活标签页上做悬停背景。悬停规则收窄为 `.workspace-tab-header:not(.is-active):hover`，并补设 `--tab-background-active: {{c:bg}}` 与 `--tab-background-hover: {{c:bg-hl}}`，激活与非激活标签页的悬停均无底角缺口
+- **未截断标签页误弹 tooltip**：Obsidian 仅在标签标题溢出（`scrollWidth > clientWidth || scrollHeight > clientHeight`）时弹 tooltip；此前 `--font-interface-theme` 把 `PingFang SC` 排在系统字体之前，其垂直行盒高度略高于 `SF Pro`，导致未截断的标签页也触发 `scrollHeight > clientHeight`。改为 `-apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif`，中文仍走苹方、界面行盒回归原生，仅截断时弹 tooltip
+- **错误型 tooltip**：`.tooltip` 与 `.tooltip-arrow` 规则排除 `.mod-error`，避免覆盖 Obsidian 的错误红底
+- **笔记路径悬停显示**：参考 Minimal 主题，桌面端默认隐藏 `.view-header-title-container`（`opacity: 0`），悬停标签栏/顶栏或聚焦编辑时平滑显现（手机端常显）；Style Settings 新增 `Always Show Note Path`（`ll-show-note-path`，默认关闭）可切回常显
+- Typora 无变更，不升版本
 
 ---
 

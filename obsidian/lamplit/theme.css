@@ -141,6 +141,12 @@ settings:
     description: Keep Obsidian's own Mermaid colors instead of the scheme's
     type: class-toggle
     default: false
+  -
+    id: ll-show-note-path
+    title: Always Show Note Path
+    description: Keep the note path in the header visible instead of showing it on hover
+    type: class-toggle
+    default: false
 
 */
 
@@ -2791,6 +2797,8 @@ body.theme-light {
     --ribbon-tab-color:            var(--ll-comment);
     --ribbon-tab-color-hover:      var(--ll-fg);
     --ribbon-tab-background-hover: var(--ll-bg-hl);
+    --tab-background-active:       var(--ll-bg);
+    --tab-background-hover:        var(--ll-bg-hl);
 
     /* --- Tables ---
        Zebra off; column-alt forced transparent so app.css's td-level column
@@ -2829,7 +2837,7 @@ body.theme-light {
 
 body {
     --font-text-theme:      "PingFang SC", "Hiragino Sans GB", "Noto Serif SC", Georgia, serif;
-    --font-interface-theme: "PingFang SC", "Hiragino Sans GB", "SF Pro Display", system-ui, sans-serif;
+    --font-interface-theme: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
     --font-monospace-theme: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
     --line-height-normal:   1.75;
     --font-text-size:       16px;
@@ -3478,7 +3486,18 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-tm-subway,
 .workspace-tab-header-container-inner { background-color: var(--ll-bg); }
 .workspace-tab-header                 { background-color: var(--ll-bg); }
 .workspace-tab-header.is-active       { background-color: var(--ll-bg); color: var(--ll-fg); }
-.workspace-tab-header:hover           { background-color: var(--ll-bg-hl) !important; }
+.workspace-tab-header:not(.is-active):hover { background-color: var(--ll-bg-hl) !important; }
+
+/* Auto-hide the note breadcrumb path until the tab bar or header is hovered (phones stay visible) */
+body:not(.ll-show-note-path):not(.is-phone) .view-header-title-container {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+body:not(.ll-show-note-path):not(.is-phone) .view-header-title-container:focus-within,
+body:not(.ll-show-note-path):not(.is-phone) .workspace-tab-header-container:hover + .workspace-tab-container .view-header-title-container,
+body:not(.ll-show-note-path):not(.is-phone) .view-header:hover .view-header-title-container {
+    opacity: 1;
+}
 
 /* ============================================================
  * Ribbon
@@ -3504,16 +3523,16 @@ body:not(.is-grabbing):where(.theme-dark.ll-bh-weimar, .theme-dark.ll-tm-subway,
  * Tooltip
  * ============================================================ */
 
-.tooltip {
+.tooltip:not(.mod-error) {
     background-color: var(--ll-bg-dark);
     color:            rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-text-alpha));
     border:           1px solid rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha));
     box-shadow:       var(--ll-tooltip-shadow);
 }
-.tooltip .tooltip-arrow              { border-bottom-color: rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); }
-.tooltip.mod-right .tooltip-arrow   { border-right-color:  rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
-.tooltip.mod-left  .tooltip-arrow   { border-left-color:   rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
-.tooltip.mod-top   .tooltip-arrow   { border-top-color:    rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
+.tooltip:not(.mod-error) .tooltip-arrow              { border-bottom-color: rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); }
+.tooltip:not(.mod-error).mod-right .tooltip-arrow   { border-right-color:  rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
+.tooltip:not(.mod-error).mod-left  .tooltip-arrow   { border-left-color:   rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
+.tooltip:not(.mod-error).mod-top   .tooltip-arrow   { border-top-color:    rgba(var(--ll-tooltip-rgb), var(--ll-tooltip-border-alpha)); border-bottom-color: transparent; }
 
 /* ============================================================
  * Search / Quick switcher / Modal

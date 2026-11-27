@@ -47,7 +47,7 @@
 - **搜索高亮**有独立的颜色，和高亮文字、选区都不同
 - **中文优先的排版**：PingFang SC → Hiragino Sans GB → Noto Serif SC
 
-Style Settings 页面还有四个开关：**Hide Folder Icons**（隐藏文件夹图标）、**Hide File Icons**（隐藏文件图标）、**Color Folders**（目录上色）和 **Use Default Mermaid Colors**（使用 Obsidian 默认的 Mermaid 颜色）。
+Style Settings 页面还有五个开关：**Hide Folder Icons**（隐藏文件夹图标）、**Hide File Icons**（隐藏文件图标）、**Color Folders**（目录上色）、**Use Default Mermaid Colors**（使用 Obsidian 默认的 Mermaid 颜色）和 **Always Show Note Path**（常显笔记路径，默认在悬停标签栏或顶栏时显示）。
 
 ## 须知
 
